@@ -24,33 +24,22 @@
   </header>
 
   <!-- navigation bar with links -->
-  <nav class="navbar navbar-expand-lg navbar-light">
+  <nav class="navbar navbar-expand-lg">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav p-2 m-auto">
+      <ul class="navbar-nav p-1 m-auto">
         <li class="nav-item">
-          <a class="list-group-item" href="#"><i class="fa-sharp fa-solid fa-font-awesome" aria-hidden="true"></i>&nbsp; Home</a>
+          <a class="nav-link" href="">Home</a>
         </li>
         <li class="nav-item mx-2">
-          <a class="nav-link" href="">About zero-waste</a>
+          <a class="nav-link" href="">Something</a>
         </li>
         <li class="nav-item mx-2">
-          <a class="nav-link" href="">Advice</a>
+          <a class="nav-link" href="">Something else..</a>
         </li>
-        <li class="nav-item mx-2">
-          <a class="nav-link" href="">Products</a>
-        </li>
-        <li class="nav-item mx-2">
-          <a class="nav-link" href="">Shopping guide</a>
-        </li>
-        <li class="nav-item mx-2">
-          <a class="nav-link" href="">Carbon footprint calculator</a>
-        </li>
-        <li class="nav-item mx-2">
-          <a class="nav-link" href="">Helpful places in Dundee</a>
-        </li>
+        
 
       </ul>
     </div>
@@ -58,76 +47,73 @@
 
   <main class="container-fluid p-5">
 
+    <!-- Headings -->
     <div class="row">
-
-      <div class="col-lg">
-
+      <div class="col-lg-7"> 
         <h3>Compliance Rules</h3>
+      </div>
+      <div class="col-lg-4">
+        <h3>Overall Compliance</h3>
+      </div>
+    </div>
 
-        <div class="col p-1">
+    <div class="row">
+      <div class="col-lg">
+          
+          <!-- Complaince Rule and Status -->
           <div class = "row"> 
             <div class="col-lg">
-              <!-- Cards with images -->
-              <div class="card cardColor text-center">
-                <div class="card-body ">
-                  <p class="card-text pb-1"> Compliance Rule #1</p>
+              <!-- Compliance Rule Card -->
+              <div class="card cardColor text-center m-auto">
+                <div class="card-body m-1 p-1">
+                  <p class="card-text pb-1 m-auto"> Compliance Rule #1</p>
+                  <div>Compliance Status: <div class="active-status"></div></div>
+                </div>
+                
+                <button class="btn btn-outline-warning m-1" type="button" data-toggle="collapse" data-target="#detailsX" aria-expanded="false" aria-controls="collapseExample">
+                  View details
+                </button>
+                <div class="collapse" id="detailsX">
+                  <div class="card-body">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                  </div>
+                  <button type="button" class="btn btn-outline-warning float-right m-1">Add Exception</button>
+                  <button type="button" class="btn btn-outline-warning float-right m-1">View Exception History</button>
                 </div>
               </div>
             </div>
             
-            <div class="col-lg-1">
-              <div class="my-auto bg-success text-white">.bg-success</div>
+          </div>
+
+          <!-- Complaince Rule and Status -->
+          <!-- <div class = "row"> 
+            <div class="col-lg">
+              <div class="card cardColor text-center">
+                <div class="card-body ">
+                  <p class="card-text pb-1"> Compliance Rule #2</p>
+                </div>
+                <button class="btn btn-outline-warning m-1" type="button" data-toggle="collapse" data-target="#detailsY" aria-expanded="false">
+                  View details
+                </button>
+                <div class="collapse" id="detailsY">
+                  <div class="card-body">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                  </div>
+                  <button type="button" class="btn btn-outline-warning float-right m-1">Add Exception</button>
+                  <button type="button" class="btn btn-outline-warning float-right m-1">View Exception History</button>
+                </div>
+              </div>
             </div>
-
-            <!-- Status Box -->
             
-          </div>
-        </div>
+          </div> -->
 
       </div>
 
-      <!-- Section about the store -->
-      <div class="col-lg">
-
-        <h3>Visual of how compliant your web app is</h3>
-        <p> Imagine there's a pie chart here. There isn't one yet but if you focus really hard and squint your eyes, there still isn't one but there could be. Imagine the possibilites of what this visual could look like a week from now when we manage to slap a sexy wee pie chart in here. Do not worry, this shall be gone by the time we actually implement the chart   </p>
-
-
-      </div>
+      <!-- Placeholder for pie chart when we get it working -->
+      <div class="col-lg-5">
+        <p> The objective is to get a pie chart display in here similar to the interface on our university attendance tracker "SEATs", which visualises a percentage of how many rules are compliant, those that have exceptions and those that are non-compliant</div>
 
     </div>
-<!-- 
-    -- Button that leads to the product page --
-    <div class="row pt-4 px-3">
-
-      <button type="button" class="btn btn-lg btn-block" onclick="location.href = 'menu.html';">Available products in the shop</button>
-
-    </div>
-
-    <div class="row py-5">
-
-      <div class="col-lg pb-2">
-
-        -- Cards with images --
-        <div class="card cardColor text-center">
-          <div class="card-body">
-            <p class="card-text pb-4"> Meet Jillian - The Little Green Blogger</p>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="col-lg">
-
-        <div class="card cardColor text-center">
-          <div class="card-body">
-            <p class="card-text">The Little Green Larder provides a wide range of zero-waste products</p>
-          </div>
-        </div>
-      </div>
-
-
-    </div> -->
 
   </main>
 
@@ -137,16 +123,8 @@
       <div class="col-lg-4">
 
         <!-- Store description -->
-        <h6 class="mt-3">About</h6>
-        <p>The Little Green Larder offers a plastic free shopping experience, with zero waste alternatives to inspire us to create a greener future.</p>
-
-      </div>
-
-      <div class="col-lg ">
-
-        <!-- Address -->
-        <h6 class="mt-3">Address</h6>
-        <p>272 Perth Road, Dundee</p>
+        <h6 class="mt-3">Footer Heading 1</h6>
+        <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sit amet leo nunc. Aliquam augue nulla, ullamcorper in fringilla eget, pulvinar id tellus. Vestibulum eros tortor, porttitor a tortor sit amet, consectetur auctor nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Ut lacinia sagittis sapien id cursus.</p>
       </div>
 
     </div>
@@ -156,19 +134,18 @@
 
       <div class="col font-italic text-justify mt-2">
 
-        <p>The webpage was made by Gerda Ugnė Pupelytė, Andrew Studders, Neil McGuigan, Edward Houghton. </p>
+        <p>This web app was developed by Stuart Florence, Neil McGuigan, Laura Naslenaite, Gregor Davis and Euan Storrie. </p>
 
       </div>
 
     </div>
 
   </footer>
-  <!-- import bootstrap JS, Popper.js, and jQuery 
+  <!-- import bootstrap JS, Popper.js, and jQuery  -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <script src="web-app/registerSW.js"></script>
--->
 
 </body>
 
