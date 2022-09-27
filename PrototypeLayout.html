@@ -24,7 +24,7 @@
   </header>
 
   <!-- navigation bar with links -->
-  <nav class="navbar navbar-expand-lg">
+  <nav class="navbar navbar-expand-lg navbar-light">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -61,13 +61,38 @@
       <div class="col-lg">
           
           <!-- Complaince Rule and Status -->
-          <div class = "row"> 
+          <div class = "row mb-2"> 
             <div class="col-lg">
               <!-- Compliance Rule Card -->
               <div class="card cardColor text-center m-auto">
                 <div class="card-body m-1 p-1">
                   <p class="card-text pb-1 m-auto"> Compliance Rule #1</p>
                   <div>Compliance Status: <div class="active-status"></div></div>
+                </div>
+                
+                <button class="btn btn-outline-warning m-1" type="button" data-toggle="collapse" data-target="#detailsX" aria-expanded="false" aria-controls="collapseExample">
+                  View details
+                </button>
+                <div class="collapse" id="detailsX">
+                  <div class="card-body">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                  </div>
+                  <button type="button" class="btn btn-outline-warning float-right m-1">Add Exception</button>
+                  <button type="button" class="btn btn-outline-warning float-right m-1">View Exception History</button>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+
+          <!-- Complaince Rule and Status -->
+          <div class = "row mb-2"> 
+            <div class="col-lg">
+              <!-- Compliance Rule Card -->
+              <div class="card cardColor text-center m-auto">
+                <div class="card-body m-1 p-1">
+                  <p class="card-text pb-1 m-auto"> Compliance Rule #2</p>
+                  <div>Compliance Status: <div class="exception-status"></div></div>
                 </div>
                 
                 <button class="btn btn-outline-warning m-1" type="button" data-toggle="collapse" data-target="#detailsX" aria-expanded="false" aria-controls="collapseExample">
