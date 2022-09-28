@@ -1,0 +1,192 @@
+/* Font for the page */
+body {
+    font-family: 'Bahnschrift';
+    color: white;
+    background-color: #115e67;
+  }
+  
+  /* Fonts for headings */
+  h1, h2 {
+    font-size: 24px;
+    font-family: 'Bahnschrift', cursive;
+    color: #2e2e2e;
+  }
+  
+  h3, h4, h5, h6 {
+    font-size: 24px;
+    font-family: 'Bahnschrift', cursive;
+    color: white;
+
+    padding-left: 1px;
+  }
+  
+  /* Styling for header image */
+  #headerImg {
+    height: 250px;
+    display: block;
+    margin: 0px auto;
+  }
+  
+  /* Styling for links */
+  a{
+    color:green;
+  }
+  
+  a:hover
+  {
+    color:#00a3ad;
+    
+  }
+  
+  /* Background color of header */
+  header {
+    background-color: #115e67;
+  }
+  
+  /* Styling for the navigation bar */
+  nav {
+    background-color: #f1b434;
+    text-align: center;
+  }
+  
+  /* Styling for the links in the navigation bar */
+  nav a {
+    color: #2e2e2e !important;
+    border-radius: 10px;
+    /* Fade effect when hovered */
+    transition: .5s;
+    /* Support for other browsers*/
+    -o-transition: .5s;
+    -ms-transition: .5s;
+    -moz-transition: .5s;
+    -webkit-transition: .5s;
+  }
+  
+  /* Styling for the links when they are hovered on */
+  nav a:hover {
+    color: white !important;
+    background-color: #115e67;
+  }
+  
+  /* Styling for the buttons */
+  main button {
+    background-color: #2e2e2e !important;
+    color: white !important;
+    font-family: 'Bahnschrift', cursive;
+  }
+  
+  /* Styling for the buttons when hovered on */
+  main button:hover {
+    background-color: #f1b434 !important;
+    color: #34252f !important;
+  }
+
+  .card {
+    margin: 10px 0px;
+    position: relative;
+    width: 100%
+  }
+  
+  /* Sets the colors for cards */
+  .cardColor {
+    background: #2e2e2e;
+    color: white;
+  }
+
+  .active-status {
+    background-color: #40b640;
+    margin: 0px 10px;
+    width: 150px;
+    height: 25px;
+    border-radius: 5px;
+    display: inline-block;
+    color: black;
+    font-weight: bolder;
+  }
+
+  .exception-status {
+    background-color: #d63030;
+    margin: 0px 10px;
+    width: 150px;
+    height: 25px;
+    border-radius: 5px;
+    display: inline-block;
+    color: black;
+    font-weight: bolder;
+  }
+  
+  /* Styling for footer */
+  footer {
+    font-size: 13px;
+    background-color: #2e2e2e;
+    color: white;
+  }
+  
+  /* Styling for footer headlines */
+  footer h6 {
+    font-weight: bold;
+    color: white;
+  }
+  
+  /* Styling for links in the footer */
+  footer a {
+    color: white;
+    /* Fade effect when hovered */
+    transition: .5s;
+    /* Support for other browsers*/
+    -o-transition: .5s;
+    -ms-transition: .5s;
+    -moz-transition: .5s;
+    -webkit-transition: .5s;
+  }
+  
+  /* Styling for links in the footer when hovered */
+  footer a:hover {
+    color: lightgray;
+    text-decoration: none;
+  }
+  
+  /* Styling for the questions in about page */
+  .questions {
+    font-size: 40px;
+    font-family: 'Bahnschrift', cursive;
+    color: black;
+    text-decoration: none;
+    /* Fade effect when hovered */
+    transition: .5s;
+    /* Support for other browsers*/
+    -o-transition: .5s;
+    -ms-transition: .5s;
+    -moz-transition: .5s;
+    -webkit-transition: .5s;
+  }
+  
+  /* Styling when hovered on questions */
+  .questions:hover {
+    color: #7a566e;
+    text-decoration: none;
+  }
+  
+  /* css required to filter shop */
+  .filter {
+    display: none;
+  }
+  
+  .show {
+    display: block;
+  }
+  
+  /* Styling for calculator  score */
+  #disp {
+    font-size: 200px;
+  }
+  
+  #dispText {
+    font-family: 'Bahnschrift', cursive;
+    font-size: 50px;
+  }
+  
+  /* Styling for forms of type number */
+  input[type=number] {
+    width: 50%;
+  }
