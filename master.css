@@ -96,19 +96,23 @@ body {
   .active-status {
     background-color: #40b640;
     margin: 0px 10px;
-    width: 50px;
+    width: 150px;
     height: 25px;
     border-radius: 5px;
     display: inline-block;
+    color: black;
+    font-weight: bolder;
   }
 
   .exception-status {
-    background-color: #ce2222;
+    background-color: #d63030;
     margin: 0px 10px;
-    width: 50px;
+    width: 150px;
     height: 25px;
     border-radius: 5px;
     display: inline-block;
+    color: black;
+    font-weight: bolder;
   }
   
   /* Styling for footer */
