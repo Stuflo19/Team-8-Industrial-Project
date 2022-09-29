@@ -103,7 +103,7 @@ LOCK TABLE exception WRITE;
 
 UNLOCK TABLES;
 CREATE TABLE resource(
-    id VARCHAR(500) NOT NULL,
+    id VARCHAR(200) NOT NULL,
     account_id INT(4) NOT NULL,
     resource_type_id INT(4) NOT NULL,
     resource_name VARCHAR(100) NOT NULL,
@@ -118,7 +118,7 @@ LOCK TABLE resource WRITE;
 UNLOCK TABLES;
 CREATE TABLE non_compliance (
     id INT(4) NOT NULL,
-    resource_id VARCHAR(500) NOT NULL,
+    resource_id VARCHAR(200) NOT NULL,
     rule_id INT(4) NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (resource_id) REFERENCES resource(id),
@@ -132,7 +132,7 @@ UNLOCK TABLES;
 CREATE TABLE non_compliance_audit (
     id INT(4) NOT NULL,
     non_compliance_id INT(4) NOT NULL,
-    resource_id VARCHAR(500) NOT NULL, 
+    resource_id VARCHAR(200) NOT NULL, 
     rule_id INT(4) NOT NULL,
     user_id INT(4) NOT NULL,
     action VARCHAR(20) NOT NULL,
