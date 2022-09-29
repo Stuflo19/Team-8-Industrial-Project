@@ -168,22 +168,18 @@
           <table class="table table-striped" style= "width:100%; color: white; background-color: #333333">
             <thead class="thead-dark">
               <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
-                <th scope="col">Handle</th>
-                <th scope="col">Handle</th>
-                <th scope="col">Handle</th>
-                <th scope="col">Handle</th>
+                <th scope="col">Exception ID</th>
+                <th scope="col">Created By</th>
+                <th scope="col">Justification</th>
+                <th scope="col">Review Date</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <th scope="row">1</th>
-                <td>Mark</td>
+                <td>Mr Crabbs</td>
                 <td>This is a reason to check if it expands fully</td>
-                <td>@mdo</td>
+                <td>24/06/2026</td>
               </tr>
             </tbody>
           </table>
