@@ -81,11 +81,24 @@
                 </button>
                 <div class="collapse" id="RuleID">
                   <div class="card-body">
-                    <?php
+                  <table class="table table-striped" style= "width:100%; color: white; background-color: #333333">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Resource</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <?php
                       while($row = $result->fetch_assoc()) {
-                        echo "Resource: " . $row["resource_name"]. "<br>";
+                        echo "<td>$row['resource_name']</td>";
                       }
                     ?>
+              </tr>
+            </tbody>
+          </table>
                   </div>
                   <button type="button" id="RuleID" class="btn btn-outline-warning float-right m-1" data-toggle="modal" data-target="#newExcModal">Add Exception</button>
                   <button type="button" class="btn btn-outline-warning float-right m-1" data-toggle="modal" data-target="#historyModal">View Exception History</button>
