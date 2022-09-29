@@ -33,7 +33,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav p-1 m-auto">
         <li class="nav-item">
-          <a class="nav-link" href="">Home</a>
+          <a class="nav-link" href="">Home1</a>
         </li>
         <li class="nav-item mx-2">
           <a class="nav-link" href="">Something</a>
@@ -55,6 +55,12 @@
           <h3>Compliance Rules</h3>
         </div>
           <!-- Complaince Rule and Status -->
+          <?php 
+            $statement = "SELECT * FROM TABLE 'resource'";
+            $query = mysql_query($statement);
+            $row1 = mysql_fetch_array($query);
+            echo $row1['id'];
+          ?>
           <div class = "row mb-2"> 
             <div class="col-lg">
               <!-- Compliance Rule Card -->
