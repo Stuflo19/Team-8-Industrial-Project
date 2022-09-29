@@ -86,6 +86,7 @@
               <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Resource</th>
+                <th scope="col">Status</th>
               </tr>
             </thead>
             <tbody>
@@ -95,6 +96,7 @@
                     <tr>
                     <th scope="row">'.$row["id"].'</th>
                     <td>'.$row["resource_name"].'</td>
+                    <td><div class="active-status">Compliant</div></td>
                     </tr>';
                   }
                 ?>
