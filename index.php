@@ -157,9 +157,9 @@
     <!-- View History Modal -->
     <div class="modal fade modal-lg" id="historyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
       <div class="modal-dialog" role="document">
-        <div class="modal-content">
+        <div class="modal-content bg-dark" style="background-color: #115e67">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+            <h3 class="modal-title" id="exampleModalLongTitle">Exception History</h3>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -178,7 +178,7 @@
               <tr>
                 <th scope="row">1</th>
                 <td>Mark</td>
-                <td>Reasons</td>
+                <td>This is the reason for the exception being made</td>
                 <td>24/06/26</td>
               </tr>
             </tbody>
