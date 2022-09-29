@@ -90,10 +90,10 @@
             </thead>
             <tbody>
               <tr>
-                <th scope="row">1</th>
                 <?php
                       while($row = $result->fetch_assoc()) {
-                        echo "<td>$row['resource_name']</td>";
+                        echo '<th scope="row">1</th>';
+                        echo '<td>$row["resource_name"]</td>';
                       }
                     ?>
               </tr>
