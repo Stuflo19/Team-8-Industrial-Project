@@ -142,7 +142,7 @@
               </div>
               <div class="form-group">
                 <label for="message-text" class="col-form-label">Justification:</label>
-                <textarea class="form-control" id="message-text" style="color: white; background-color: #333333""></textarea>
+                <textarea class="form-control" id="message-text" style="color: white; background-color: #333333"></textarea>
               </div>
             </form>
           </div>
@@ -164,7 +164,7 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body">
+          <div class="modal-body" style="color: white; background-color: #333333">
           <table class="table table-striped">
             <thead class="thead-dark">
               <tr>
