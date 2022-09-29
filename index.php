@@ -155,11 +155,11 @@
     </div>
 
     <!-- View History Modal -->
-    <div class="modal fade bd-example-modal-lg" id="historyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
+    <div class="modal fade bd-example-modal-lg" id="historyModal" tabindex="-1" role="dialog" aria-labelledby="historyModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content bg-dark" style="background-color: #115e67">
           <div class="modal-header">
-            <h3 class="modal-title" id="exampleModalLabel">Exception History</h3>
+            <h3 class="modal-title" id="historyModalLabel">Exception History</h3>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
