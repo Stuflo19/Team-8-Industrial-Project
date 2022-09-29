@@ -72,7 +72,7 @@
                     Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
                   </div>
                   <button type="button" id="RuleID" class="btn btn-outline-warning float-right m-1" data-toggle="modal" data-target="#newExcModal">Add Exception</button>
-                  <button type="button" class="btn btn-outline-warning float-right m-1">View Exception History</button>
+                  <button type="button" data-toggle="modal" data-target="#historyModal" class="btn btn-outline-warning float-right m-1">View Exception History</button>
                 </div>
               </div>
             </div>
@@ -97,7 +97,7 @@
                     Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
                   </div>
                   <button type="button" class="btn btn-outline-warning float-right m-1" data-toggle="modal" data-target="#newExcModal">Add Exception</button>
-                  <button type="button" class="btn btn-outline-warning float-right m-1">View Exception History</button>
+                  <button type="button" data-toggle="modal" data-target="#historyModal" class="btn btn-outline-warning float-right m-1">View Exception History</button>
                 </div>
               </div>
             </div>
@@ -118,7 +118,7 @@
         </div>
 
     </div>
-
+    <!-- Add exception Modal -->
     <div class="modal fade" id="newExcModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content bg-dark" style="background-color: #115e67">
@@ -149,6 +149,43 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
             <button type="button" class="btn btn-primary">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- View History Modal -->
+    <div class="modal fade modal-lg" id="historyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+          <table class="table table-striped">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Exception ID</th>
+                <th scope="col">Created by</th>
+                <th scope="col">Justification</th>
+                <th scope="col">Review Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Reasons</td>
+                <td>24/06/26</td>
+              </tr>
+            </tbody>
+          </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           </div>
         </div>
       </div>
