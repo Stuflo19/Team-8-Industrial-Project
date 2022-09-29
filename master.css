@@ -12,13 +12,26 @@ body {
     color: #2e2e2e;
   }
   
-  h3, h4, h5, h6 {
+  h3, h4 {
     font-size: 24px;
     font-family: 'Bahnschrift', cursive;
     color: white;
 
     padding-left: 1px;
   }
+  h5, h6 {
+    font-size: 16px;
+    font-family: 'Bahnschrift', cursive;
+    color: white;
+  }
+
+
+  option {
+    color: white;
+  }
+  /* label {
+    color: white;
+  } */
   
   /* Styling for header image */
   #headerImg {
