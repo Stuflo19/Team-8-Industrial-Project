@@ -119,25 +119,7 @@
                 </button>
                 <div class="collapse" id="detailsY">
                   <div class="card-body">
-                    <table class="table table-striped" style= "width:100%; color: white; background-color: #333333">
-                      <thead class="thead-dark">
-                        <tr>
-                          <th scope="col">Resource</th>
-                          <th scope="col">Status</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                          <?php
-                            while($row = $result->fetch_assoc()) {
-                              echo '
-                              <tr>
-                              <td>'.$row["resource_name"].'</td>
-                              <td><div class="active-status">Compliant</div></td>
-                              </tr>';
-                            }
-                          ?>
-                      </tbody>
-                    </table>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sit amet leo nunc. Aliquam augue nulla, ullamcorper in fringilla eget, pulvinar id tellus. Vestibulum eros tortor, porttitor a tortor sit amet, consectetur auctor nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Ut lacinia sagittis sapien id cursus.
                   </div>
                   <button type="button" class="btn btn-outline-warning float-right m-1" data-toggle="modal" data-target="#newExcModal">Add Exception</button>
                   <button type="button" class="btn btn-outline-warning float-right m-1" data-toggle="modal" data-target="#historyModal">View Exception History</button>
