@@ -89,14 +89,15 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
                 <?php
-                      while($row = $result->fetch_assoc()) {
-                        echo '<th scope="row">1</th>';
-                        echo '<td>$row["resource_name"]</td>';
-                      }
-                    ?>
-              </tr>
+                  while($row = $result->fetch_assoc()) {
+                    echo '
+                    <tr>
+                    <th scope="row">1</th>
+                    <td>'.$row["resource_name"].'</td>
+                    </tr>';
+                  }
+                ?>
             </tbody>
           </table>
                   </div>
