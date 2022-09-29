@@ -2,21 +2,12 @@
   include 'dbconnect.php';
 
   if ($conn->connect_error) {
+    echo("Error connecting to database");
     die("Connection failed: " . $conn->connect_error);
   }
   
-  $sql = "SELECT * FROM account";
+  $sql = "SELECT * FROM resource";
   $result = $conn->query($sql);
-  
-  if ($result->num_rows > 0) {
-    // output data of each row
-    while($row = $result->fetch_assoc()) {
-      echo "id: " . $row["id"]. " - Account ref: " . $row["account_ref"]. " Platform ID: " . $row["platform_id"]. " Customer ID: ". $row["customer_id"]. "<br>";
-    }
-  } else {
-    echo "0 results";
-  }
-  $conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -94,7 +85,11 @@
                 </button>
                 <div class="collapse" id="detailsX">
                   <div class="card-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                    <?php
+                      while($row = $result->fetch_assoc()) {
+                        echo "Resource: " . $row["resource_name"]. "<br>";
+                      }
+                    ?>
                   </div>
                   <button type="button" class="btn btn-outline-warning float-right m-1">Add Exception</button>
                   <button type="button" class="btn btn-outline-warning float-right m-1">View Exception History</button>
