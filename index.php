@@ -1,7 +1,7 @@
 <?php
   include 'dbconnect.php';
   
-  $sql = "SELECT * FROM resource WHERE account_id = 11072135518";
+  $sql = "SELECT * FROM resource WHERE account_id = 1";
   $result = $conn->query($sql);
 ?>
 
