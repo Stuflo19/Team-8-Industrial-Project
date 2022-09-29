@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-
-<?php 
-  echo "Hello World"; 
-?>
-
+  
 <head>
   <meta charset="utf-8">
   <!-- page title -->
