@@ -93,7 +93,7 @@
                   while($row = $result->fetch_assoc()) {
                     echo '
                     <tr>
-                    <th scope="row">1</th>
+                    <th scope="row">'.$row["id"].'</th>
                     <td>'.$row["resource_name"].'</td>
                     </tr>';
                   }
