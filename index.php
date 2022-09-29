@@ -1,10 +1,5 @@
 <?php
   include 'dbconnect.php';
-
-  if ($conn->connect_error) {
-    echo("Error connecting to database");
-    die("Connection failed: " . $conn->connect_error);
-  }
   
   $sql = "SELECT * FROM resource";
   $result = $conn->query($sql);
@@ -81,27 +76,25 @@
                 </button>
                 <div class="collapse" id="RuleID">
                   <div class="card-body">
-                  <table class="table table-striped" style= "width:100%; color: white; background-color: #333333">
-            <thead class="thead-dark">
-              <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Resource</th>
-                <th scope="col">Status</th>
-              </tr>
-            </thead>
-            <tbody>
-                <?php
-                  while($row = $result->fetch_assoc()) {
-                    echo '
-                    <tr>
-                    <th scope="row">'.$row["id"].'</th>
-                    <td>'.$row["resource_name"].'</td>
-                    <td><div class="active-status">Compliant</div></td>
-                    </tr>';
-                  }
-                ?>
-            </tbody>
-          </table>
+                    <table class="table table-striped" style= "width:100%; color: white; background-color: #333333">
+                      <thead class="thead-dark">
+                        <tr>
+                          <th scope="col">Resource</th>
+                          <th scope="col">Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                          <?php
+                            while($row = $result->fetch_assoc()) {
+                              echo '
+                              <tr>
+                              <td>'.$row["resource_name"].'</td>
+                              <td><div class="active-status">Compliant</div></td>
+                              </tr>';
+                            }
+                          ?>
+                      </tbody>
+                    </table>
                   </div>
                   <button type="button" id="RuleID" class="btn btn-outline-warning float-right m-1" data-toggle="modal" data-target="#newExcModal">Add Exception</button>
                   <button type="button" class="btn btn-outline-warning float-right m-1" data-toggle="modal" data-target="#historyModal">View Exception History</button>
@@ -126,7 +119,25 @@
                 </button>
                 <div class="collapse" id="detailsY">
                   <div class="card-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                    <table class="table table-striped" style= "width:100%; color: white; background-color: #333333">
+                      <thead class="thead-dark">
+                        <tr>
+                          <th scope="col">Resource</th>
+                          <th scope="col">Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                          <?php
+                            while($row = $result->fetch_assoc()) {
+                              echo '
+                              <tr>
+                              <td>'.$row["resource_name"].'</td>
+                              <td><div class="active-status">Compliant</div></td>
+                              </tr>';
+                            }
+                          ?>
+                      </tbody>
+                    </table>
                   </div>
                   <button type="button" class="btn btn-outline-warning float-right m-1" data-toggle="modal" data-target="#newExcModal">Add Exception</button>
                   <button type="button" class="btn btn-outline-warning float-right m-1" data-toggle="modal" data-target="#historyModal">View Exception History</button>
