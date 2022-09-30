@@ -42,13 +42,14 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="col-xs-2">
+    <div class="collapse navbar-collapse d-flex justify-content-around" id="navbarNav">
+      <ul class=mb-auto>
         <li>Username: Customer Name</li>
         <li>Role: Customer Role</li>
       </ul>
+      <br>
       <h1 class=m-auto> Company Name </h1>
-      <h2 class="float-right">Last checked: date</h2>
+      <h2>Last checked: date</h2>
     </div>
   </nav>
 

@@ -210,9 +210,7 @@ input[type=number] {
 ul{
   list-style-type: none;
   text-align: left;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  position: relative;
 }
 
 li{
