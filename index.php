@@ -95,7 +95,9 @@
                 </button>
                 <div class="collapse" id="<?php echo 'Rule' . $result_rule['id'];?>">
                   <div class="card-body">
-                    <table class="table table-striped" style= "width:100%; color: white; background-color: #333333">
+                    <?php echo $result_rule['description']; ?>
+
+                    <!--<table class="table table-striped" style= "width:100%; color: white; background-color: #333333">
                       <thead class="thead-dark">
                         <tr>
                           <th scope="col">Resource</th>
@@ -103,17 +105,17 @@
                         </tr>
                       </thead>
                       <tbody>
-                          <?php
-                            while($row = $result->fetch_assoc()) {
-                              echo '
-                              <tr>
-                              <td>'.$row["resource_name"].'</td>
-                              <td><div class="active-status">Compliant</div></td>
-                              </tr>';
-                            }
-                          ?>
+
+                           // while($row = $result->fetch_assoc()) {
+                            //  echo '
+                            //  <tr>
+                            // <td>'.$row["resource_name"].'</td>
+                            //  <td><div class="active-status">Compliant</div></td>
+                            //  </tr>';
+                            //}
+                          
                       </tbody>
-                    </table>
+                    </table> -->
                   </div>
                   <button type="button" id="<?php echo 'Rule' . $result_rule['id'];?>" class="btn btn-outline-warning float-right m-1" data-toggle="modal" data-target="#newExcModal">Add Exception</button>
                   <button type="button" class="btn btn-outline-warning float-right m-1" data-toggle="modal" data-target="#historyModal">View Exception History</button>
