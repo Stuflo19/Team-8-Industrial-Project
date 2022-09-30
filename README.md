@@ -16,7 +16,7 @@
 
 ### 03/10/2022 Meeting with Management (lenght 10min)
 
-## Sprint Retrospective
+## Sprint 1  Retrospective
 
 # SPRINT 2 (26/09 - 30/09 - Week 2)
 
