@@ -62,19 +62,38 @@
           <h3>Compliance Rules</h3>
         </div>
           <!-- Complaince Rule and Status -->
+          <?php 
+            $query = mysqli_query($conn,"SELECT * FROM rule");
+            while($result_rule=mysqli_fetch_array($query))
+            {
+          ?>
           <div class = "row mb-2"> 
             <div class="col-lg">
               <!-- Compliance Rule Card -->
               <div class="card cardColor text-center m-auto">
                 <div class="card-body m-1 p-1">
-                  <p class="card-text pb-1 m-auto"> Compliance Rule #1</p>
-                  <div class="active-status">Compliant</div>
+                  <p class="card-text pb-1 m-auto"> <?php echo $result_rule["name"];?> </p>
+                  <?php 
+                      $query1=mysqli_query($conn,"SELECT * FROM non_compliance");
+                      $status ="active-status"; // compliant
+                      $status_text ="Compliant";
+                      while($result_non_compl = mysqli_fetch_array($query1))
+                      {
+                        if ($result_rule['id'] == $result_non_compl['rule_id'])
+                        {
+                          $status ="exception-status";
+                          $status_text ="Non-Compliant";
+                          break;
+                        }
+                      }
+                  ?>
+                  <div class="<?php echo $status;?>"> <?php echo $status_text;?></div>
                 </div>
                 
-                <button class="btn btn-outline-warning m-1" type="button" data-toggle="collapse" data-target="#RuleID" aria-expanded="false" aria-controls="collapseExample">
+                <button class="btn btn-outline-warning m-1" type="button"  data-toggle="collapse" data-target="#Rule<?php echo $result_rule['id'];?>" aria-expanded="false" aria-controls="collapseExample">
                   View details
                 </button>
-                <div class="collapse" id="RuleID">
+                <div class="collapse" id="<?php echo 'Rule' . $result_rule['id'];?>">
                   <div class="card-body">
                     <table class="table table-striped" style= "width:100%; color: white; background-color: #333333">
                       <thead class="thead-dark">
@@ -96,39 +115,13 @@
                       </tbody>
                     </table>
                   </div>
-                  <button type="button" id="RuleID" class="btn btn-outline-warning float-right m-1" data-toggle="modal" data-target="#newExcModal">Add Exception</button>
+                  <button type="button" id="<?php echo 'Rule' . $result_rule['id'];?>" class="btn btn-outline-warning float-right m-1" data-toggle="modal" data-target="#newExcModal">Add Exception</button>
                   <button type="button" class="btn btn-outline-warning float-right m-1" data-toggle="modal" data-target="#historyModal">View Exception History</button>
                 </div>
               </div>
             </div>
-            
           </div>
-
-          <!-- Complaince Rule and Status -->
-          <div class = "row mb-2"> 
-            <div class="col-lg">
-              <!-- Compliance Rule Card -->
-              <div class="card cardColor text-center m-auto">
-                <div class="card-body m-1 p-1">
-                  <p class="card-text pb-1 m-auto"> Compliance Rule #2</p>
-                  <div class="exception-status"> Non-Compliant</div>
-                </div>
-                
-                <button class="btn btn-outline-warning m-1" type="button" data-toggle="collapse" data-target="#detailsY" aria-expanded="false" aria-controls="collapseExample">
-                  View details
-                </button>
-                <div class="collapse" id="detailsY">
-                  <div class="card-body">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sit amet leo nunc. Aliquam augue nulla, ullamcorper in fringilla eget, pulvinar id tellus. Vestibulum eros tortor, porttitor a tortor sit amet, consectetur auctor nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Ut lacinia sagittis sapien id cursus.
-                  </div>
-                  <button type="button" class="btn btn-outline-warning float-right m-1" data-toggle="modal" data-target="#newExcModal">Add Exception</button>
-                  <button type="button" class="btn btn-outline-warning float-right m-1" data-toggle="modal" data-target="#historyModal">View Exception History</button>
-                </div>
-              </div>
-            </div>
-            
-          </div>
-
+          <?php } ?>
       </div>
 
       <!-- Placeholder for pie chart when we get it working -->
@@ -251,4 +244,3 @@
   
 
 </body>
->>>>>>> a03194c1763061e3db33520cc44430e6b7ff2b21
