@@ -78,7 +78,7 @@ CREATE TABLE rule(
     id INT(4) NOT NULL,
     name VARCHAR(100) NOT NULL,
     resource_type_id INT(4) NOT NULL,
-    description VARCHAR(100),
+    description VARCHAR(1000),
     PRIMARY KEY (id),
     FOREIGN KEY (resource_type_id) REFERENCES resource_type(id)
 );
@@ -109,7 +109,7 @@ CREATE TABLE resource(
     resource_type_id INT(4) NOT NULL,
     resource_name VARCHAR(100) NOT NULL,
     last_updated TIMESTAMP NOT NULL,
-    resource_metadata VARCHAR(500) NOT NULL, 
+    resource_metadata VARCHAR(1000) NOT NULL, 
     PRIMARY KEY (id),
     FOREIGN KEY (account_id) REFERENCES account(id),
     FOREIGN KEY (resource_type_id) REFERENCES resource_type(id)
