@@ -1,5 +1,5 @@
 <?php
-  include 'dbconnect.php';
+  include 'dbconnectlocal.php';
   
   $sql = "SELECT * FROM resource WHERE account_id = 1";
   $result = mysqli_query($conn, $sql);
@@ -71,15 +71,14 @@
             $query = mysqli_query($conn,"SELECT * FROM rule");
             while($result_rule=mysqli_fetch_array($query))
             {
-            ?>
-
-            <div class = "row mb-2"> 
-              <div class="col-lg">
-                <!-- Compliance Rule Card -->
-                <div class="card cardColor text-center m-auto">
-                  <div class="card-body m-1 p-1">
-                    <p class="card-text pb-1 m-auto"> <?php echo $result_rule["name"];?> </p>
-                    <?php 
+          ?>
+          <div class = "row mb-2"> 
+            <div class="col-lg">
+              <!-- Compliance Rule Card -->
+              <div class="card cardColor text-center m-auto">
+                <div class="card-body m-1 p-1">
+                  <p class="card-text pb-1 m-auto"> <?php echo $result_rule["name"];?> </p>
+                  <?php 
                       $query1=mysqli_query($conn,"SELECT * FROM non_compliance");
                       $status ="active-status"; // compliant
                       $status_text ="Compliant";
@@ -137,7 +136,6 @@
               
             </div>
           <?php } ?>
-
       </div>
 
       <!-- Placeholder for pie chart when we get it working -->
