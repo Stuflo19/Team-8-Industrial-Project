@@ -99,7 +99,7 @@
                               {
                                 echo '<td><div class="exception-status"> Non-Compliant</div></td>';
                               }
-                              echo '<tr>';
+                              echo '</tr>';
                             }
                           ?>
                       </tbody>
