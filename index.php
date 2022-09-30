@@ -72,8 +72,8 @@
               <!-- Compliance Rule Card -->
               <div class="card cardColor text-center m-auto">
                 <div class="card-body m-1 p-1">
-                  <p class="card-text pb-1 m-auto"> <?php echo $result_rule["name"];?> </p>
-                    <?php 
+                  <p class="card-text pb-1 m-auto"> <?php echo $result_rule["name"];?></p>
+                  <?php 
                       $query1=mysqli_query($conn,"SELECT * FROM non_compliance");
                       $status ="active-status"; // compliant
                       $status_text ="Compliant";
@@ -86,8 +86,8 @@
                           break;
                         }
                       }
-                    ?>
-                 <div class="<?php echo $status;?>"> <?php echo $status_text;?></div>
+                  ?>
+                  <div class="<?php echo $status;?>"> <?php echo $status_text;?></div>
                 </div>
                 
                 <button class="btn btn-outline-warning m-1" type="button"  data-toggle="collapse" data-target="#Rule<?php echo $result_rule['id'];?>" aria-expanded="false" aria-controls="collapseExample">
@@ -95,38 +95,33 @@
                 </button>
                 <div class="collapse" id="<?php echo 'Rule' . $result_rule['id'];?>">
                   <div class="card-body">
-                    <?php echo $result_rule['description']; ?>
-                  </div>
-                  <div class="card-body">
-                      <table class="table table-striped" style= "width:100%; color: white; background-color: #333333">
-                        <thead class="thead-dark">
-                          <tr>
-                            <th scope="col">Resource</th>
-                            <th scope="col">Status</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                              while($row = $result->fetch_assoc()) {
-                                echo '
-                                <tr>
-                                <td>'.$row["resource_name"].'</td>
-                                <td><div class="active-status">Compliant</div></td>
-                                </tr>';
-                              }
+                    <table class="table table-striped" style= "width:100%; color: white; background-color: #333333">
+                      <thead class="thead-dark">
+                        <tr>
+                          <th scope="col">Resource</th>
+                          <th scope="col">Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                          <?php
+                            while($row = $result->fetch_assoc()) {
+                              echo '
+                              <tr>
+                              <td>'.$row["resource_name"].'</td>
+                              <td><div class="active-status">Compliant</div></td>
+                              </tr>';
+                            }
                           ?>
-                        </tbody>
-                      </table>
+                      </tbody>
+                    </table>
                   </div>
                   <button type="button" id="<?php echo 'Rule' . $result_rule['id'];?>" class="btn btn-outline-warning float-right m-1" data-toggle="modal" data-target="#newExcModal">Add Exception</button>
                   <button type="button" class="btn btn-outline-warning float-right m-1" data-toggle="modal" data-target="#historyModal">View Exception History</button>
                 </div>
               </div>
             </div>
-            
           </div>
-        <?php } ?>
-
+          <?php } ?>
       </div>
 
       <!-- Placeholder for pie chart when we get it working -->
