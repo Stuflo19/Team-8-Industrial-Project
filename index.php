@@ -1,3 +1,9 @@
+<?php
+  include 'dbconnect.php';
+  
+  $sql = "SELECT * FROM resource WHERE account_id = 1";
+  $result = $conn->query($sql);
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -17,10 +23,6 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="scripts.js"></script>
 </head>
-
-<?php
-  include "dbconnect.php"
-?>
 
 <body onload ="generateGraph()">
 
@@ -92,6 +94,28 @@
                 <div class="collapse" id="<?php echo 'Rule' . $result_rule['id'];?>">
                   <div class="card-body">
                     <?php echo $result_rule['description']; ?>
+                  </div>
+                  <div class="card-body">
+                  <table class="table table-striped" style= "width:100%; color: white; background-color: #333333">
+                      <thead class="thead-dark">
+                        <tr>
+                          <th scope="col">Resource</th>
+                          <th scope="col">Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                          <?php
+                            while($row = $result->fetch_assoc()) {
+                              if()
+                              echo '
+                              <tr>
+                              <td>'.$row["resource_name"].'</td>
+                              <td><div class="active-status">Compliant</div></td>
+                              </tr>';
+                            }
+                          ?>
+                      </tbody>
+                    </table>
                   </div>
                   <button type="button" id="<?php echo 'Rule' . $result_rule['id'];?>" class="btn btn-outline-warning float-right m-1" data-toggle="modal" data-target="#newExcModal">Add Exception</button>
                   <button type="button" class="btn btn-outline-warning float-right m-1" data-toggle="modal" data-target="#historyModal">View Exception History</button>
