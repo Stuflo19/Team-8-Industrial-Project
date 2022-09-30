@@ -4,6 +4,7 @@
   $sql = "SELECT * FROM resource WHERE account_id = 1";
   $result = $conn->query($sql);
 ?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -23,6 +24,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="scripts.js"></script>
 </head>
+
 
 <body onload ="generateGraph()">
 
@@ -70,33 +72,31 @@
               <!-- Compliance Rule Card -->
               <div class="card cardColor text-center m-auto">
                 <div class="card-body m-1 p-1">
-                  <p class="card-text pb-1 m-auto"> <?php echo $result_rule["name"];?> </p>
+                  <p class="card-text pb-1 m-auto"> <?php echo $result_rule["name"];?></p>
                   <?php 
-                    $query1=mysqli_query($conn,"SELECT * FROM non_compliance");
-                    $status ="active-status"; // compliant
-                    $status_text ="Compliant";
-                    while($result_non_compl = mysqli_fetch_array($query1))
-                    {
-                      if ($result_rule['id'] == $result_non_compl['rule_id'])
+                      $query1=mysqli_query($conn,"SELECT * FROM non_compliance");
+                      $status ="active-status"; // compliant
+                      $status_text ="Compliant";
+                      while($result_non_compl = mysqli_fetch_array($query1))
                       {
-                        $status ="exception-status";
-                        $status_text ="Non-Compliant";
-                        break;
+                        if ($result_rule['id'] == $result_non_compl['rule_id'])
+                        {
+                          $status ="exception-status";
+                          $status_text ="Non-Compliant";
+                          break;
+                        }
                       }
-                    }
                   ?>
                   <div class="<?php echo $status;?>"> <?php echo $status_text;?></div>
                 </div>
                 
                 <button class="btn btn-outline-warning m-1" type="button"  data-toggle="collapse" data-target="#Rule<?php echo $result_rule['id'];?>" aria-expanded="false" aria-controls="collapseExample">
-                  View details
+                    View details
                 </button>
                 <div class="collapse" id="<?php echo 'Rule' . $result_rule['id'];?>">
                   <div class="card-body">
                     <?php echo $result_rule['description']; ?>
-                  </div>
-                  <div class="card-body">
-                  <table class="table table-striped" style= "width:100%; color: white; background-color: #333333">
+                    <table class="table table-striped" style= "width:100%; color: white; background-color: #333333">
                       <thead class="thead-dark">
                         <tr>
                           <th scope="col">Resource</th>
@@ -106,7 +106,6 @@
                       <tbody>
                           <?php
                             while($row = $result->fetch_assoc()) {
-                              if()
                               echo '
                               <tr>
                               <td>'.$row["resource_name"].'</td>
@@ -124,9 +123,6 @@
             </div>
             
           </div>
-          <?php } ?>
-
-      </div>
 
       <!-- Placeholder for pie chart when we get it working -->
       <div class="col-lg-5" position="absolute">
