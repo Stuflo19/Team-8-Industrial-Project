@@ -1,5 +1,5 @@
 <?php
-  include 'dbconnectlocal.php';
+  include 'dbconnect.php';
   
   $sql = "SELECT * FROM resource WHERE account_id = 1";
   $result = mysqli_query($conn, $sql);
@@ -110,11 +110,21 @@
                       <tbody>
                           <?php
                             foreach($result as $row) {
+                              $checked = false;
                               echo '
                               <tr>
                               <td>'.$row["resource_name"].'</td>';
+                              
+                              if(in_array($row["id"], $non_compliant_ids))
+                              {
+                                foreach(array_keys($non_compliant_ids, $row['id']) as $index) {
+                                  $non_compliant_rules[$index] == $result_rule["id"] ? $checked = true : $checked = false;
+                                  if($checked) {break;}
+                                };
+                              }
+
                               //if the resource edxists in the id array && ruleID at index of resource in the rules array
-                              if(in_array($row["id"], $non_compliant_ids) && $non_compliant_rules[array_search($row['id'], $non_compliant_ids)] == $result_rule["id"])
+                              if($checked)
                               {
                                 echo '<td><div class="exception-status"> Non-Compliant</div></td>';
                               }
@@ -258,3 +268,8 @@
   
 
 </body>
+
+
+<?php
+  $conn->close();
+?>
