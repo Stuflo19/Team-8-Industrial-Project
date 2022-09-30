@@ -78,7 +78,7 @@ CREATE TABLE rule(
     id INT(4) NOT NULL,
     name VARCHAR(100) NOT NULL,
     resource_type_id INT(4) NOT NULL,
-    description VARCHAR(10),
+    description VARCHAR(100),
     PRIMARY KEY (id),
     FOREIGN KEY (resource_type_id) REFERENCES resource_type(id)
 );
@@ -222,7 +222,7 @@ VALUES
 LOCK TABLE resource_type WRITE;
 
 UNLOCK TABLES;
-INSERT INTO rule(id,name, resource_type_id)
+INSERT INTO rule(id,name, resource_type_id, description)
 VALUES
     (1,'ebs-detect-unencrypted-volume',2,'If a developer creates an AWS EC2 Instance and the AWS EBS storage volume(s) attached to the instance are not encrypted then the the developer and compliance team are notified.'),
     (2,'s3-detect-unauthorised-public-bucket',12,'If a developer creates or updates AWS S3 Bucket to make it publically visible to anyone on the internet, then automatically change the S3 Bucket configuration to make it private and the developer and compliance team are notified.'),
