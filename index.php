@@ -1,5 +1,5 @@
 <?php
-  include 'dbconnectlocal.php';
+  include 'dbconnect.php';
   
   $sql = "SELECT * FROM resource WHERE account_id = 1";
   $result = mysqli_query($conn, $sql);
