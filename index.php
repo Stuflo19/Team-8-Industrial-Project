@@ -2,7 +2,14 @@
   include 'dbconnect.php';
   
   $sql = "SELECT * FROM resource WHERE account_id = 1";
-  $result = $conn->query($sql);
+  $result = mysqli_query($conn, $sql);
+
+  $sql = "SELECT * FROM non_compliance";
+  $compliant = mysqli_query($conn, $sql);
+  while (($row = mysqli_fetch_array($compliant, MYSQLI_ASSOC)) != false){
+    $non_compliant_ids[] = $row['resource_id'];
+    $non_compliant_rules[] = $row[''] // add the row in to the results (data) array
+  }
 ?>
 
 <!DOCTYPE html>
@@ -19,8 +26,6 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <!-- import css file -->
   <link rel="stylesheet" href="master.css">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="scripts.js"></script>
 </head>
@@ -86,12 +91,10 @@
                       <tbody>
                           <?php
                             while($row = $result->fetch_assoc()) {
-                              $statement = "SELECT * FROM non_compliance WHERE resource_id = ".$row["resource_id"];
-                              $compliant = $conn->query($statement);
                               echo '
                               <tr>
                               <td>'.$row["resource_name"].'</td>';
-                              if($compliant->num_rows > 0)
+                              if(!in_array($row["id"], $non_compliant_ids))
                               {
                                 echo '<td><div class="active-status">Compliant</div></td>';
                               }
