@@ -24,10 +24,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <!-- import bootstrap -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'> 
   <!-- import css file -->
-  <link rel="stylesheet" href="master.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="scripts.js"></script>
+  <link rel="stylesheet" href="master.css">
 </head>
 
 
@@ -42,20 +43,14 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav p-1 m-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="">Home</a>
-        </li>
-        <li class="nav-item mx-2">
-          <a class="nav-link" href="">Something</a>
-        </li>
-        <li class="nav-item mx-2">
-          <a class="nav-link" href="">Something else..</a>
-        </li>
-        
-
+    <div class="collapse navbar-collapse d-flex justify-content-around" id="navbarNav">
+      <ul class=mb-auto>
+        <li>Username: Customer Name</li>
+        <li>Role: Customer Role</li>
       </ul>
+      <br>
+      <h1 class=m-auto> Company Name </h1>
+      <h2><i class='fa fa-refresh p-2'></i>Last checked: date</h2>
     </div>
   </nav>
 
