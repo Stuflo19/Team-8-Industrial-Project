@@ -8,7 +8,7 @@
   $compliant = mysqli_query($conn, $sql);
   while (($row = mysqli_fetch_array($compliant, MYSQLI_ASSOC)) != false){
     $non_compliant_ids[] = $row['resource_id'];
-    $non_compliant_rules[] = $row[''] // add the row in to the results (data) array
+    $non_compliant_rules[] = $row['']; 
   }
 ?>
 
