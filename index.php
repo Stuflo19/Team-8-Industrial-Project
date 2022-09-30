@@ -93,11 +93,11 @@
                               <td>'.$row["resource_name"].'</td>';
                               if($compliant->num_rows > 0)
                               {
-                                echo '<td><div class="active-status">Compliant</div></td>'
+                                echo '<td><div class="active-status">Compliant</div></td>';
                               }
                               else
                               {
-                                echo '<td><div class="exception-status"> Non-Compliant</div></td>'
+                                echo '<td><div class="exception-status"> Non-Compliant</div></td>';
                               }
                               echo '<tr>';
                             }
