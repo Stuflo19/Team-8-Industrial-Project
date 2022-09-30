@@ -2,7 +2,14 @@
   include 'dbconnect.php';
   
   $sql = "SELECT * FROM resource WHERE account_id = 1";
-  $result = $conn->query($sql);
+  $result = mysqli_query($conn, $sql);
+
+  $sql = "SELECT * FROM non_compliance";
+  $compliant = mysqli_query($conn, $sql);
+  while (($row = mysqli_fetch_array($compliant, MYSQLI_ASSOC)) != false){
+    $non_compliant_ids[] = $row['resource_id'];
+    $non_compliant_rules[] = $row['rule_id']; 
+  }
 ?>
 
 <!DOCTYPE html>
@@ -19,8 +26,6 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <!-- import css file -->
   <link rel="stylesheet" href="master.css">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="scripts.js"></script>
 </head>
@@ -86,15 +91,15 @@
                           break;
                         }
                       }
-                  ?>
-                  <div class="<?php echo $status;?>"> <?php echo $status_text;?></div>
-                </div>
-                
-                <button class="btn btn-outline-warning m-1" type="button"  data-toggle="collapse" data-target="#Rule<?php echo $result_rule['id'];?>" aria-expanded="false" aria-controls="collapseExample">
-                  View details
-                </button>
-                <div class="collapse" id="<?php echo 'Rule' . $result_rule['id'];?>">
-                  <div class="card-body">
+                    ?>
+                    <div class="<?php echo $status;?>"> <?php echo $status_text;?></div>
+                  </div>
+                  
+                  <button class="btn btn-outline-warning m-1" type="button"  data-toggle="collapse" data-target="#Rule<?php echo $result_rule['id'];?>" aria-expanded="false" aria-controls="collapseExample">
+                    View details
+                  </button>
+                  <div class="collapse" id="<?php echo 'Rule' . $result_rule['id'];?>">
+                    <div class="card-body">
                     <table class="table table-striped" style= "width:100%; color: white; background-color: #333333">
                       <thead class="thead-dark">
                         <tr>
@@ -104,23 +109,42 @@
                       </thead>
                       <tbody>
                           <?php
-                            while($row = $result->fetch_assoc()) {
+                            foreach($result as $row) {
+                              $checked = false;
                               echo '
                               <tr>
-                              <td>'.$row["resource_name"].'</td>
-                              <td><div class="active-status">Compliant</div></td>
-                              </tr>';
+                              <td>'.$row["resource_name"].'</td>';
+                              
+                              if(in_array($row["id"], $non_compliant_ids))
+                              {
+                                foreach(array_keys($non_compliant_ids, $row['id']) as $index) {
+                                  $non_compliant_rules[$index] == $result_rule["id"] ? $checked = true : $checked = false;
+                                  if($checked) {break;}
+                                };
+                              }
+
+                              //if the resource edxists in the id array && ruleID at index of resource in the rules array
+                              if($checked)
+                              {
+                                echo '<td><div class="exception-status"> Non-Compliant</div></td>';
+                              }
+                              else
+                              {
+                                echo '<td><div class="active-status">Compliant</div></td>';
+                              }
+                              echo '</tr>';
                             }
                           ?>
                       </tbody>
                     </table>
+                    </div>
+                    <button type="button" id="<?php echo 'Rule' . $result_rule['id'];?>" class="btn btn-outline-warning float-right m-1" data-toggle="modal" data-target="#newExcModal">Add Exception</button>
+                    <button type="button" class="btn btn-outline-warning float-right m-1" data-toggle="modal" data-target="#historyModal">View Exception History</button>
                   </div>
-                  <button type="button" id="<?php echo 'Rule' . $result_rule['id'];?>" class="btn btn-outline-warning float-right m-1" data-toggle="modal" data-target="#newExcModal">Add Exception</button>
-                  <button type="button" class="btn btn-outline-warning float-right m-1" data-toggle="modal" data-target="#historyModal">View Exception History</button>
                 </div>
               </div>
+              
             </div>
-          </div>
           <?php } ?>
       </div>
 
@@ -244,3 +268,8 @@
   
 
 </body>
+
+
+<?php
+  $conn->close();
+?>
