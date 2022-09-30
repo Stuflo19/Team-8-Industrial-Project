@@ -6,17 +6,20 @@ body {
 }
 
 /* Fonts for headings */
-h1, h2 {
+h1{
   font-size: 24px;
   font-family: 'Bahnschrift', cursive;
   color: #2e2e2e;
 }
-
+h2{
+  font-size: 15px;
+  font-family: 'Bahnschrift', cursive;
+  color: #2e2e2e;
+}
 h3, h4 {
   font-size: 24px;
   font-family: 'Bahnschrift', cursive;
   color: white;
-
   padding-left: 1px;
 }
 h5, h6 {
@@ -202,4 +205,19 @@ footer a:hover {
 /* Styling for forms of type number */
 input[type=number] {
   width: 50%;
+}
+
+ul{
+  list-style-type: none;
+  text-align: left;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+li{
+  font-size: 15px;
+  font-family: 'Bahnschrift', cursive;
+  color: #2e2e2e;
+  font-weight: bolder;
 }

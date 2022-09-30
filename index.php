@@ -1,5 +1,5 @@
 <?php
-  include 'dbconnect.php';
+  include 'dbconnectlocal.php';
   
   $sql = "SELECT * FROM resource WHERE account_id = 1";
   $result = mysqli_query($conn, $sql);
@@ -25,9 +25,9 @@
   <!-- import bootstrap -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <!-- import css file -->
-  <link rel="stylesheet" href="master.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="scripts.js"></script>
+  <link rel="stylesheet" href="master.css">
 </head>
 
 
@@ -43,19 +43,12 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav p-1 m-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="">Home</a>
-        </li>
-        <li class="nav-item mx-2">
-          <a class="nav-link" href="">Something</a>
-        </li>
-        <li class="nav-item mx-2">
-          <a class="nav-link" href="">Something else..</a>
-        </li>
-        
-
+      <ul class="col-xs-2">
+        <li>Username: Customer Name</li>
+        <li>Role: Customer Role</li>
       </ul>
+      <h1 class=m-auto> Company Name </h1>
+      <h2 class="float-right">Last checked: date</h2>
     </div>
   </nav>
 
