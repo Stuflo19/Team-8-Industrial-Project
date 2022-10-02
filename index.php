@@ -40,9 +40,6 @@
 
   <!-- navigation bar with links -->
   <nav class="navbar navbar-expand-lg navbar-light">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
     <div class="collapse navbar-collapse d-flex justify-content-around" id="navbarNav">
       <ul class=mb-auto>
         <li>Username: Customer Name</li>
