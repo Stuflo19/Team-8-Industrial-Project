@@ -1,5 +1,5 @@
 <?php
-  include 'dbconnect.php';
+  include 'dbconnectlocal.php';
   
   $sql = "SELECT * FROM resource WHERE account_id = 1";
   $result = mysqli_query($conn, $sql);
@@ -41,7 +41,7 @@
   <!-- navigation bar with links -->
   <nav class="navbar navbar-expand-lg navbar-light">
     <div class="collapse navbar-collapse d-flex justify-content-around" id="navbarNav">
-      <ul class=mb-auto>
+      <ul class="mb-auto pl-0">
         <li>Username: Customer Name</li>
         <li>Role: Customer Role</li>
       </ul>
@@ -92,7 +92,7 @@
                   </button>
                   <div class="collapse" id="<?php echo 'Rule' . $result_rule['id'];?>">
                     <div class="card-body">
-                    <table class="table table-striped" style= "width:100%; color: white; background-color: #333333">
+                    <table class="table table-striped" style="color:white">
                       <thead class="thead-dark">
                         <tr>
                           <th scope="col">Resource</th>
@@ -105,7 +105,7 @@
                               $checked = false;
                               echo '
                               <tr>
-                              <td>'.$row["resource_name"].'</td>';
+                              <td style="text-align: left">'.$row["resource_name"].'</td>';
                               
                               if(in_array($row["id"], $non_compliant_ids))
                               {
@@ -118,11 +118,11 @@
                               //if the resource edxists in the id array && ruleID at index of resource in the rules array
                               if($checked)
                               {
-                                echo '<td><div class="exception-status"> Non-Compliant</div></td>';
+                                echo '<td style="vertical-align: middle"><div class="exception-status"> Non-Compliant</div></td>';
                               }
                               else
                               {
-                                echo '<td><div class="active-status">Compliant</div></td>';
+                                echo '<td style="vertical-align: middle"><div class="active-status">Compliant</div></td>';
                               }
                               echo '</tr>';
                             }
@@ -199,7 +199,7 @@
             </button>
           </div>
           <div class="modal-body">
-          <table class="table table-striped" style= "width:100%; color: white; background-color: #333333">
+          <table class="table table-striped">
             <thead class="thead-dark">
               <tr>
                 <th scope="col">Exception ID</th>
