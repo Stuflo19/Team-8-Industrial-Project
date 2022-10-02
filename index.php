@@ -1,5 +1,5 @@
 <?php
-  include 'dbconnectlocal.php';
+  include 'dbconnect.php';
   
   $sql = "SELECT * FROM resource WHERE account_id = 1";
   $result = mysqli_query($conn, $sql);
@@ -199,7 +199,7 @@
             </button>
           </div>
           <div class="modal-body">
-          <table class="table table-striped">
+          <table class="table table-striped" style="color:white">
             <thead class="thead-dark">
               <tr>
                 <th scope="col">Exception ID</th>
