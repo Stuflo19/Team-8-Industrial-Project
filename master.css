@@ -7,80 +7,29 @@ body {
 
 /* Fonts for headings */
 h1{
-  font-size: 24px;
+  font-size: 1.5rem;
   font-family: 'Bahnschrift', cursive;
   color: #2e2e2e;
 }
 h2{
-  font-size: 15px;
+  font-size: 1rem;
   font-family: 'Bahnschrift', cursive;
   color: #2e2e2e;
 }
 h3, h4 {
-  font-size: 24px;
+  font-size: 0.8rem;
   font-family: 'Bahnschrift', cursive;
   color: white;
   padding-left: 1px;
 }
 h5, h6 {
-  font-size: 16px;
+  font-size: 0.5rem;
   font-family: 'Bahnschrift', cursive;
   color: white;
 }
 
-
-option {
-  color: white;
-}
-label {
-  color: white;
-}
-
-/* Styling for header image */
-#headerImg {
-  height: 250px;
-  display: block;
-  margin: 0px auto;
-}
-
-/* Styling for links */
-a{
-  color:green;
-}
-
-a:hover
-{
-  color:#00a3ad;
-  
-}
-
 /* Background color of header */
 header {
-  background-color: #115e67;
-}
-
-/* Styling for the navigation bar */
-nav {
-  background-color: #f1b434;
-  text-align: center;
-}
-
-/* Styling for the links in the navigation bar */
-nav a {
-  color: #2e2e2e !important;
-  border-radius: 10px;
-  /* Fade effect when hovered */
-  transition: .5s;
-  /* Support for other browsers*/
-  -o-transition: .5s;
-  -ms-transition: .5s;
-  -moz-transition: .5s;
-  -webkit-transition: .5s;
-}
-
-/* Styling for the links when they are hovered on */
-nav a:hover {
-  color: white !important;
   background-color: #115e67;
 }
 
@@ -95,6 +44,11 @@ main button {
 main button:hover {
   background-color: #f1b434 !important;
   color: #34252f !important;
+}
+
+nav {
+  background-color: #f1b434;
+  text-align: center;
 }
 
 .card {
@@ -112,8 +66,6 @@ main button:hover {
 .active-status {
   background-color: #40b640;
   margin: 0px 10px;
-  width: 150px;
-  height: 25px;
   border-radius: 5px;
   display: inline-block;
   color: black;
@@ -123,8 +75,6 @@ main button:hover {
 .exception-status {
   background-color: #d63030;
   margin: 0px 10px;
-  width: 150px;
-  height: 25px;
   border-radius: 5px;
   display: inline-block;
   color: black;
@@ -144,69 +94,6 @@ footer h6 {
   color: white;
 }
 
-/* Styling for links in the footer */
-footer a {
-  color: white;
-  /* Fade effect when hovered */
-  transition: .5s;
-  /* Support for other browsers*/
-  -o-transition: .5s;
-  -ms-transition: .5s;
-  -moz-transition: .5s;
-  -webkit-transition: .5s;
-}
-
-/* Styling for links in the footer when hovered */
-footer a:hover {
-  color: lightgray;
-  text-decoration: none;
-}
-
-/* Styling for the questions in about page */
-.questions {
-  font-size: 40px;
-  font-family: 'Bahnschrift', cursive;
-  color: black;
-  text-decoration: none;
-  /* Fade effect when hovered */
-  transition: .5s;
-  /* Support for other browsers*/
-  -o-transition: .5s;
-  -ms-transition: .5s;
-  -moz-transition: .5s;
-  -webkit-transition: .5s;
-}
-
-/* Styling when hovered on questions */
-.questions:hover {
-  color: #7a566e;
-  text-decoration: none;
-}
-
-/* css required to filter shop */
-.filter {
-  display: none;
-}
-
-.show {
-  display: block;
-}
-
-/* Styling for calculator  score */
-#disp {
-  font-size: 200px;
-}
-
-#dispText {
-  font-family: 'Bahnschrift', cursive;
-  font-size: 50px;
-}
-
-/* Styling for forms of type number */
-input[type=number] {
-  width: 50%;
-}
-
 ul{
   list-style-type: none;
   text-align: left;
@@ -214,8 +101,38 @@ ul{
 }
 
 li{
-  font-size: 15px;
+  font-size: 1rem;
   font-family: 'Bahnschrift', cursive;
   color: #2e2e2e;
   font-weight: bolder;
+}
+
+table{
+  table-layout: fixed;
+  width: 80%;
+  color: white;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  background-color: #333333;
+}
+
+@media (max-width: 500px) {
+  .active-status, .exception-status {
+    width: 75px;
+    height: 12.5px;
+  }
+  html {
+      font-size: 10px;  
+  }
+}
+
+@media (min-width: 501px) {
+  .active-status, .exception-status {
+    width: 150px;
+    height: 25px;
+  }
+  html {
+      font-size: 15px;
+  }
 }
