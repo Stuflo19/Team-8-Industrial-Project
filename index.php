@@ -265,7 +265,8 @@
       //check if the rule id & the exception name match the values of the button pressed.
       if(rows[i]['rule_id'] == ids[1] && rows[i]['exception_value'] == ids[0])
       {
-        var currdate = new Date();
+        console.log(rows[i]['review_date'].split(" ")[0].replaceAll ("-","/"));
+        var currdate = new Date(rows[i]['review_date'].split(" ")[0].replaceAll("-","/"));
         currdate = currdate.getTime();
         console.log(currdate);
 
