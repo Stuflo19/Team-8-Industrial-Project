@@ -1,15 +1,6 @@
 <?php
   include 'dbconnect.php';
-  
-  $sql = "SELECT * FROM resource WHERE account_id = 1";
-  $result = mysqli_query($conn, $sql);
-
-  $sql = "SELECT * FROM non_compliance";
-  $compliant = mysqli_query($conn, $sql);
-  while (($row = mysqli_fetch_array($compliant, MYSQLI_ASSOC)) != false){
-    $non_compliant_ids[] = $row['resource_id'];
-    $non_compliant_rules[] = $row['rule_id']; 
-  }
+  include 'readdb.php';
   echo "<script>console.log('Debug Objects: " . count($non_compliant_ids) . "' );</script>";
 ?>
 
