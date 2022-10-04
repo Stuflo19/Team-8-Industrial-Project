@@ -53,7 +53,7 @@ nav {
 
 .chart {
   top: 0px;
-  position: absolute;
+  position: inherit;
 }
 .card {
   margin: 10px 0px;
