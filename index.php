@@ -56,7 +56,14 @@
         </div>
           
       </div>
+      <!-- Review Dates -->
       <div class="col-lg">
+      
+      </div>
+    </div>
+      
+      <div class="row">
+        <div class="col-lg">
         
           <!-- Complaince Rule and Status -->
           <?php 
@@ -65,84 +72,82 @@
             {
           ?>
           <div class = "row mb-2">
-            
             <div class="col-lg">
               <!-- Compliance Rule Card -->
               <div class="card cardColor text-center m-auto">
                 <div class="card-body m-1 p-1">
                   <p class="card-text pb-1 m-auto"> <?php echo $result_rule["name"];?> </p>
                   <?php 
-                      $status ="active-status"; // compliant
-                      $status_text ="Compliant";
-                      foreach($compliant as $result_non_compl)
+                    $status ="active-status"; // compliant
+                    $status_text ="Compliant";
+                    foreach($compliant as $result_non_compl)
+                    {
+                      if ($result_rule['id'] == $result_non_compl['rule_id'])
                       {
-                        if ($result_rule['id'] == $result_non_compl['rule_id'])
-                        {
-                          $status ="exception-status";
-                          $status_text ="Non-Compliant";
-                          break;
-                        }
+                        $status ="exception-status";
+                        $status_text ="Non-Compliant";
+                        break;
                       }
-                    ?>
-                    <div class="<?php echo $status;?>"> <?php echo $status_text;?></div>
-                  </div>
+                    }
+                  ?>
+                  <div class="<?php echo $status;?>"> <?php echo $status_text;?></div>
+                </div>
                   
-                  <button class="btn btn-outline-warning m-1" type="button"  data-toggle="collapse" data-target="#Rule<?php echo $result_rule['id'];?>" aria-expanded="false" aria-controls="collapseExample">
-                    View details
-                  </button>
-                  <div class="collapse" id="<?php echo 'Rule' . $result_rule['id'];?>">
-                    <div class="card-body">
-                      <table class="table table-striped" style="color:white">
-                        <thead class="thead-dark">
-                          <tr>
-                            <th scope="col">Resource</th>
-                            <th scope="col">Status</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <?php
-                            foreach($result as $row) {
-                              $checked = false;
-                              echo '
-                              <tr>
-                              <td style="text-align: left">'.$row["resource_name"].'</td>';
+                <button class="btn btn-outline-warning m-1" type="button"  data-toggle="collapse" data-target="#Rule<?php echo $result_rule['id'];?>" aria-expanded="false" aria-controls="collapseExample">
+                  View details
+                </button>
+                <div class="collapse" id="<?php echo 'Rule' . $result_rule['id'];?>">
+                  <div class="card-body">
+                    <table class="table table-striped" style="color:white">
+                      <thead class="thead-dark">
+                        <tr>
+                          <th scope="col">Resource</th>
+                          <th scope="col">Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php
+                          foreach($result as $row) {
+                            $checked = false;
+                            echo '
+                            <tr>
+                            <td style="text-align: left">'.$row["resource_name"].'</td>';
                               
-                              if(in_array($row["id"], $non_compliant_ids))
-                              {
-                                foreach(array_keys($non_compliant_ids, $row['id']) as $index) {
-                                  $non_compliant_rules[$index] == $result_rule["id"] ? $checked = true : $checked = false;
-                                  if($checked) {break;}
-                                };
-                              }
-
-                              //if the resource edxists in the id array && ruleID at index of resource in the rules array
-                              if($checked)
-                              {
-                                echo '<td style="vertical-align: middle"><div class="exception-status"> Non-Compliant</div></td>';
-                              }
-                              else
-                              {
-                                echo '<td style="vertical-align: middle"><div class="active-status">Compliant</div></td>';
-                              }
-                              echo '</tr>';
+                            if(in_array($row["id"], $non_compliant_ids))
+                            {
+                              foreach(array_keys($non_compliant_ids, $row['id']) as $index) {
+                                $non_compliant_rules[$index] == $result_rule["id"] ? $checked = true : $checked = false;
+                                if($checked) {break;}
+                              };
                             }
+
+                            //if the resource edxists in the id array && ruleID at index of resource in the rules array
+                            if($checked)
+                            {
+                              echo '<td style="vertical-align: middle"><div class="exception-status"> Non-Compliant</div></td>';
+                            }
+                            else
+                            {
+                              echo '<td style="vertical-align: middle"><div class="active-status">Compliant</div></td>';
+                            }
+                            echo '</tr>';
+                          }
                             
-                          ?>
-                        </tbody>
-                      </table>
-                    </div>
-                    <button type="button" id="<?php echo 'Rule' . $result_rule['id'];?>" class="btn btn-outline-warning float-right m-1" data-toggle="modal" data-target="#newExcModal">Add Exception</button>
-                    <button type="button" class="btn btn-outline-warning float-right m-1" data-toggle="modal" data-target="#historyModal">View Exception History</button>
+                        ?>
+                      </tbody>
+                    </table>
                   </div>
+                  <button type="button" id="<?php echo 'Rule' . $result_rule['id'];?>" class="btn btn-outline-warning float-right m-1" data-toggle="modal" data-target="#newExcModal">Add Exception</button>
+                  <button type="button" class="btn btn-outline-warning float-right m-1" data-toggle="modal" data-target="#historyModal">View Exception History</button>
                 </div>
               </div>
-              
             </div>
+              
+          </div>
           <?php } ?>
         </div>
-
+      </div>      
       
-    </div>
     <!-- Add exception Modal -->
     <div class="modal fade" id="newExcModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
