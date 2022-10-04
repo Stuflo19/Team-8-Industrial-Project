@@ -1,2 +1,2 @@
-dbconnectlocal.php
-dbconnect.php
+# Database connection files
+/dbconnectlocal.php
