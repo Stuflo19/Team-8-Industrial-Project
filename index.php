@@ -2,6 +2,7 @@
   include 'dbconnect.php';
   include 'readdb.php';
   echo "<script>console.log('Debug Objects: " . count($non_compliant_ids) . "' );</script>";
+  echo "<script>console.log('Debug Objects: " . mysqli_num_rows($result) . "' );</script>";
 ?>
 
 <!DOCTYPE html>
@@ -128,7 +129,7 @@
               </div>
               
             </div>
-          <?php } echo "<script>console.log('Debug Objects: " . count($row["resource_name"]) . "' );</script>";?>
+          <?php } ?>
       </div>
 
       <!-- Placeholder for pie chart when we get it working -->
