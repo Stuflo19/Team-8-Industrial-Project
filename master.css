@@ -117,6 +117,10 @@ table{
   background-color: #333333;
 }
 
+form{
+  width: 400px;
+}
+
 @media (max-width: 500px) {
   .active-status, .exception-status {
     width: 75px;
