@@ -86,6 +86,7 @@
                         <tr>
                           <th scope="col">Resource</th>
                           <th scope="col">Status</th>
+                          <th scope ="col">History</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -105,25 +106,24 @@
                                   };
                                 }
 
-                                //if the resource edxists in the id array && ruleID at index of resource in the rules array
-                                if($checked)
-                                {
-                                  echo '<td style="vertical-align: middle"><div class="exception-status"> Non-Compliant</div></td>';
-                                }
-                                else
-                                {
-                                  echo '<td style="vertical-align: middle"><div class="active-status">Compliant</div></td>';
-                                }
-                                echo '</tr>';
+                              //if the resource edxists in the id array && ruleID at index of resource in the rules array
+                              if($checked)
+                              {
+                                echo '<td style="vertical-align: middle"><div class="exception-status"> Non-Compliant</div></td>';
                               }
+                              else
+                              {
+                                echo '<td style="vertical-align: middle"><div class="active-status">Compliant</div></td>';
+                              } 
+                              echo "<td style='vertical-align: middle'><button type='button' class='btn btn-outline-warning historybutton' data-toggle='modal' data-target='#historyModal' id='{$row["resource_name"]},{$result_rule["id"]}' onclick='historybutton(this.id)'>Exception History</button></td></tr>";
                             }
-                            
-                          ?>
+                          }
+                        ?>
                       </tbody>
                     </table>
                     </div>
                     <button type="button" id="<?php echo 'Rule' . $result_rule['id'];?>" class="btn btn-outline-warning float-right m-1" data-toggle="modal" data-target="#newExcModal">Add Exception</button>
-                    <button type="button" class="btn btn-outline-warning float-right m-1" data-toggle="modal" data-target="#historyModal">View Exception History</button>
+                    
                   </div>
                 </div>
               </div>
@@ -202,10 +202,10 @@
             </thead>
             <tbody>
               <tr>
-                <th scope="row">1</th>
-                <td>Mr Crabbs</td>
-                <td>This is a reason to check if it expands fully</td>
-                <td>24/06/2026</td>
+                <th scope="row" id="eid">1</th>
+                <td id="ecreator">Mr Crabbs</td>
+                <td id="ejustification">This is a reason to check if it expands fully</td>
+                <td id="ereview">24/06/2026</td>
               </tr>
             </tbody>
           </table>
@@ -248,7 +248,45 @@
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  <script src="web-app/registerSW.js"></script>
   
 
 </body>
+
+<script>
+  function historybutton(id)
+  {
+    // numrows: holds the number of rows to loop through
+    // rows: holds the rows read in from the database from PHP
+    var numrows = <?php echo mysqli_num_rows($exceptions);?>;
+    var ids = id.split(",");
+    var rows = <?php echo json_encode($exception); ?>;
+    
+    //Loops through all of the rows read in
+    for(var i = 0; i < rows.length; i++) {
+
+      //check if the rule id & the exception name match the values of the button pressed.
+      if(rows[i]['rule_id'] == ids[1] && rows[i]['exception_value'] == ids[0])
+      {
+        var currentDate = new Date();
+        var today = new Date(currentDate.getFullYear() +"/"+ (currentDate.getMonth()+1) +"/"+ currentDate.getDate() + " " + currentDate.getUTCHours() + ":" + currentDate.getUTCMinutes());
+        var review = new Date(rows[i]['review_date'].replace('-','/'));
+
+        //update the HTML table with the correct values
+        document.getElementById('eid').innerHTML = rows[i]['id'];
+        document.getElementById('ecreator').innerHTML = rows[i]['last_updated_by'];
+        document.getElementById('ejustification').innerHTML = rows[i]['justification'];
+        document.getElementById('ereview').innerHTML = today < review ? rows[i]['review_date'] : "EXPIRED"
+        return;
+      }
+      //else if we have reached the end of the rows and no match is found.
+      else if(i == rows.length-1)
+      {
+        //populate that nothing was found
+        document.getElementById('eid').innerHTML = "N/A";
+        document.getElementById('ecreator').innerHTML = "N/A";
+        document.getElementById('ejustification').innerHTML = "N/A";
+        document.getElementById('ereview').innerHTML = "N/A";
+      }
+    }
+  }
+</script>
