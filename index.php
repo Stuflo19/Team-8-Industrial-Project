@@ -52,7 +52,6 @@
         </div>
           <!-- Complaince Rule and Status -->
           <?php 
-            $query = mysqli_query($conn,"SELECT * FROM rule");
             while($result_rule=mysqli_fetch_array($query))
             {
           ?>
@@ -63,10 +62,9 @@
                 <div class="card-body m-1 p-1">
                   <p class="card-text pb-1 m-auto"> <?php echo $result_rule["name"];?> </p>
                   <?php 
-                      $query1=mysqli_query($conn,"SELECT * FROM non_compliance");
                       $status ="active-status"; // compliant
                       $status_text ="Compliant";
-                      while($result_non_compl = mysqli_fetch_array($query1))
+                      foreach($compliant as $result_non_compl)
                       {
                         if ($result_rule['id'] == $result_non_compl['rule_id'])
                         {
