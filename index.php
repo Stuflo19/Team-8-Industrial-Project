@@ -1,5 +1,5 @@
 <?php
-  include 'dbconnectlocal.php';
+  include 'dbconnect.php';
   include 'readdb.php';
 ?>
 
@@ -92,8 +92,6 @@
                           <?php
                             foreach($result as $row) {
                               $checked = false;
-                              echo "<script>console.log('Debug Objects: " . $result_rule['resource_type_id'] . "' );</script>";
-                              echo "<script>console.log('Debug Objects: " . $row['resource_type_id'] . "' );</script>";
                               if($row['resource_type_id'] == $result_rule['resource_type_id']){
                                 echo '
                                 <tr>
