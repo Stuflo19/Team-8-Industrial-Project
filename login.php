@@ -22,6 +22,23 @@
 
   <img src="brightSolid.jpg" alt="BrightSolid logo">
 
+
+  <form>
+  <!-- Email input -->
+  <div class="form-outline mb-4">
+    <input type="username" id="loginuser" class="form-control" />
+    <label class="form-label" for="loginuser">Username</label>
+  </div>
+
+  <!-- Password input -->
+  <div class="form-outline mb-4">
+    <input type="password" id="loginpassword" class="form-control" />
+    <label class="form-label" for="loginpassword">Password</label>
+  </div>
+
+  <!-- Submit button -->
+  <button type="button" class="btn btn-primary btn-block mb-4">Sign in</button>
+</form>
   </main>
 
   <!-- Footer -->
