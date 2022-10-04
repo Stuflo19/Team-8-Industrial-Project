@@ -1,3 +1,9 @@
+function callAll(x, y)
+{
+  generateGraph(x, y);
+  getReviews();
+}
+
 function generateGraph(noncompliant, compliant)
 {
   trueComp = compliant - noncompliant

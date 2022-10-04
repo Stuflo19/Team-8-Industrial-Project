@@ -23,7 +23,7 @@
 </head>
 
 
-<body onload ="generateGraph(<?php echo count($non_compliant_ids)?> , <?php echo mysqli_num_rows($result)?>)">
+<body onload ="callAll(<?php echo count($non_compliant_ids)?> , <?php echo mysqli_num_rows($result)?>)">
 
   <header class="container-fluid p-1">
 
@@ -57,7 +57,7 @@
           
       </div>
       <!-- Review Dates -->
-      <div class="col-lg" onload="getReviews()">
+      <div class="col-lg">
       <table id="dtDynamicVerticalScrollExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
         <thead>
           <tr>
