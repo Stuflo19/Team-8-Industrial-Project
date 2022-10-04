@@ -1,5 +1,5 @@
 <?php
-  include 'dbconnect.php';
+  include 'dbconnectlocal.php';
   include 'readdb.php';
 ?>
 
@@ -265,17 +265,15 @@
       //check if the rule id & the exception name match the values of the button pressed.
       if(rows[i]['rule_id'] == ids[1] && rows[i]['exception_value'] == ids[0])
       {
-        console.log(rows[i]['review_date'].split(" ")[0].replaceAll ("-","/"));
-        var currdate = new Date(rows[i]['review_date'].split(" ")[0].replaceAll("-","/"));
-        currdate = currdate.getTime();
-        console.log(currdate);
-
+        var currentDate = new Date();
+        var today = new Date(currentDate.getFullYear() +"/"+ (currentDate.getMonth()+1) +"/"+ currentDate.getDate() + " " + currentDate.getUTCHours() + ":" + currentDate.getUTCMinutes());
+        var review = new Date(rows[i]['review_date'].replace('-','/'));
 
         //update the HTML table with the correct values
         document.getElementById('eid').innerHTML = rows[i]['id'];
         document.getElementById('ecreator').innerHTML = rows[i]['last_updated_by'];
         document.getElementById('ejustification').innerHTML = rows[i]['justification'];
-        document.getElementById('ereview').innerHTML = rows[i]['review_date'];
+        document.getElementById('ereview').innerHTML = today < review ? rows[i]['review_date'] : "EXPIRED"
         return;
       }
       //else if we have reached the end of the rows and no match is found.
