@@ -1,5 +1,6 @@
-function generateGraph()
+function generateGraph(noncompliant, compliant)
 {
+  trueComp = compliant - noncompliant
   Chart.defaults.color = "#FFFFFF";
     const data = {
         labels: [
@@ -9,7 +10,7 @@ function generateGraph()
         
         datasets: [{
           label: 'My First Dataset',
-          data: [267, 170], //Number of compliant to non-compliant rules. Will need to be replaced when db is linked
+          data: [trueComp, noncompliant], //Number of compliant to non-compliant rules. Will need to be replaced when db is linked
           backgroundColor: [
             '#40b640', //Compliant Colour
             '#d63030' //Non-Compliant Colour
