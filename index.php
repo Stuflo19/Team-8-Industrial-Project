@@ -60,11 +60,12 @@
         
           <!-- Complaince Rule and Status -->
           <?php 
+            echo '<h3>Compliance Rules</h3>';
             while($result_rule=mysqli_fetch_array($query))
             {
           ?>
           <div class = "row mb-2">
-            <h3>Compliance Rules</h3> 
+            
             <div class="col-lg">
               <!-- Compliance Rule Card -->
               <div class="card cardColor text-center m-auto">
