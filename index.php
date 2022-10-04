@@ -116,6 +116,7 @@
                               }
                               echo '</tr>';
                             }
+                            echo "<script>console.log('Debug Objects: " . count($row["resource_name"]) . "' );</script>";
                           ?>
                       </tbody>
                     </table>
