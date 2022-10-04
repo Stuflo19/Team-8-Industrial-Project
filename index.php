@@ -32,7 +32,7 @@
 
   <main>
 
-  <img src="brightSolid.jpg" alt="BrightSolid logo">
+  <img src="brightSolid.png" alt="BrightSolid logo">
 
 
   <form>
