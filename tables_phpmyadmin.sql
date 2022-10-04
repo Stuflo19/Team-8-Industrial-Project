@@ -21,8 +21,7 @@ LOCK TABLE user_role WRITE;
 UNLOCK TABLES;
 -- e.g. user of the company (customer)
 CREATE TABLE user(
-    id INT(4) NOT NULL,
-    name VARCHAR(100),
+    id VARCHAR(100), -- name
     role_id INT(4) NOT NULL,
     customer_id INT(4) NOT NULL,
     PRIMARY KEY (id),
@@ -37,7 +36,7 @@ CREATE TABLE login(
     id INT(4) NOT NULL,
     username VARCHAR(50),
     password VARCHAR(50), -- need to be hashed
-    user_id INT(4) NOT NULL,
+    user_id VARCHAR(100) NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (user_id) REFERENCES user(id)
 );
@@ -90,7 +89,7 @@ CREATE TABLE exception (
     id INT(4) NOT NULL,
     customer_id INT(4) NOT NULL,
     rule_id INT(4) NOT NULL,
-    last_updated_by INT(4) NOT NULL,
+    last_updated_by VARCHAR(100) NOT NULL,
     exception_value VARCHAR(200) NOT NULL,
     justification VARCHAR(200) NOT NULL,
     review_date TIMESTAMP NOT NULL,
@@ -136,7 +135,7 @@ CREATE TABLE non_compliance_audit (
     non_compliance_id INT(4) NOT NULL,
     resource_id INT(4) NOT NULL, 
     rule_id INT(4) NOT NULL,
-    user_id INT(4) NOT NULL,
+    user_id VARCHAR(100) NOT NULL,
     action VARCHAR(100) NOT NULL,
     action_dt TIMESTAMP NOT NULL,
     PRIMARY KEY (id),
@@ -152,7 +151,7 @@ UNLOCK TABLES;
 CREATE TABLE exception_audit(
     id INT(4) NOT NULL, 
     exception_id INT(4) NOT NULL,
-    user_id INT(4) NOT NULL,
+    user_id VARCHAR(100) NOT NULL,
     customer_id INT(4) NOT NULL,
     rule_id INT(4) NOT NULL,
     action VARCHAR (100) NOT NULL, 
@@ -189,9 +188,9 @@ VALUES
 LOCK TABLE user_role WRITE;
 
 UNLOCK TABLES;
-INSERT INTO user(id, name, role_id,customer_id)
+INSERT INTO user(id, role_id,customer_id)
 VALUES
-    (1, 'system',1, 1);
+    ('system',1, 1);
 LOCK TABLE user WRITE;
 
 UNLOCK TABLES;
@@ -238,8 +237,8 @@ LOCK TABLE rule WRITE;
 UNLOCK TABLES;
 INSERT INTO exception (id, customer_id, rule_id, exception_value, justification, review_date, last_updated, last_updated_by)
 VALUES
-    (1,1,4,'bs-quorum-dropbox','Enabled by system','2022-12-12 16:23:59.759 +0000','2022-09-12 17:25:36.091 +0100',1),
-    (3,1,4,'bsol-dev-bakery-assets','Enabled by system','2022-12-12 16:23:59.759 +0000','2022-09-12 17:25:36.091 +0100',1);
+    (1,1,4,'bs-quorum-dropbox','Enabled by system','2022-12-12 16:23:59.759 +0000','2022-09-12 17:25:36.091 +0100','system'),
+    (3,1,4,'bsol-dev-bakery-assets','Enabled by system','2022-12-12 16:23:59.759 +0000','2022-09-12 17:25:36.091 +0100','system');
 LOCK TABLE exception WRITE;
 
 
