@@ -1,5 +1,5 @@
 <?php
-  include 'dbconnectlocal.php';
+  include 'dbconnect.php';
   include 'readdb.php';
 ?>
 
@@ -19,7 +19,6 @@
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'> 
   <!-- import css file -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script type="text/javascript" src="backend.js"></script>
   <script src="scripts.js"></script>
   <link rel="stylesheet" href="master.css">
 </head>
@@ -266,6 +265,11 @@
       //check if the rule id & the exception name match the values of the button pressed.
       if(rows[i]['rule_id'] == ids[1] && rows[i]['exception_value'] == ids[0])
       {
+        var currdate = new Date();
+        currdate = currdate.getTime();
+        console.log(currdate);
+
+
         //update the HTML table with the correct values
         document.getElementById('eid').innerHTML = rows[i]['id'];
         document.getElementById('ecreator').innerHTML = rows[i]['last_updated_by'];
@@ -285,7 +289,3 @@
     }
   }
 </script>
-
-<?php
-  $conn->close();
-?>

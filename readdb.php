@@ -30,4 +30,7 @@
   READING ALL FROM RULES
   ======================*/
   $query = mysqli_query($conn,"SELECT * FROM rule");
+
+
+  $conn->close();
 ?>
