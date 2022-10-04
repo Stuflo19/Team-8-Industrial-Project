@@ -1,8 +1,6 @@
 <?php
   include 'dbconnect.php';
   include 'readdb.php';
-  echo "<script>console.log('Debug Objects: " . count($non_compliant_ids) . "' );</script>";
-  echo "<script>console.log('Debug Objects: " . mysqli_num_rows($result) . "' );</script>";
 ?>
 
 <!DOCTYPE html>
