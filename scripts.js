@@ -42,6 +42,7 @@ function getReviews()
     });
     $('.dataTables_length').addClass('bs-select');
   });
+  console.log("Test");
 }
 
 
