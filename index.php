@@ -116,7 +116,7 @@
                               }
                               echo '</tr>';
                             }
-                            echo "<script>console.log('Debug Objects: " . count($row["resource_name"]) . "' );</script>";
+                            
                           ?>
                       </tbody>
                     </table>
@@ -128,7 +128,7 @@
               </div>
               
             </div>
-          <?php } ?>
+          <?php } echo "<script>console.log('Debug Objects: " . count($row["resource_name"]) . "' );</script>";?>
       </div>
 
       <!-- Placeholder for pie chart when we get it working -->
