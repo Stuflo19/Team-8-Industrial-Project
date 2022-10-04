@@ -45,16 +45,26 @@
   <main class="container-fluid p-5">
 
     <div class="row">
-      <div class="col-lg">
-        <div class="col-lg-7"> 
-          <h3>Compliance Rules</h3>
+      
+      <!-- Placeholder for pie chart when we get it working -->
+      <div class="col-lg-5 chart">
+        <h3>Overall Compliance</h3>
+        <p> The objective is to get a pie chart display in here similar to the interface on our university attendance tracker "SEATs", which visualises a percentage of how many rules are compliant, those that have exceptions and those that are non-compliant
+          <!-- Doughnut Chart -->
+        <div>
+          <canvas id="myChart"></canvas>
         </div>
+          
+      </div>
+      <div class="col-lg">
+        
           <!-- Complaince Rule and Status -->
           <?php 
             while($result_rule=mysqli_fetch_array($query))
             {
           ?>
-          <div class = "row mb-2"> 
+          <div class = "row mb-2">
+            <h3>Compliance Rules</h3> 
             <div class="col-lg">
               <!-- Compliance Rule Card -->
               <div class="card cardColor text-center m-auto">
@@ -81,14 +91,14 @@
                   </button>
                   <div class="collapse" id="<?php echo 'Rule' . $result_rule['id'];?>">
                     <div class="card-body">
-                    <table class="table table-striped" style="color:white">
-                      <thead class="thead-dark">
-                        <tr>
-                          <th scope="col">Resource</th>
-                          <th scope="col">Status</th>
-                        </tr>
-                      </thead>
-                      <tbody>
+                      <table class="table table-striped" style="color:white">
+                        <thead class="thead-dark">
+                          <tr>
+                            <th scope="col">Resource</th>
+                            <th scope="col">Status</th>
+                          </tr>
+                        </thead>
+                        <tbody>
                           <?php
                             foreach($result as $row) {
                               $checked = false;
@@ -117,8 +127,8 @@
                             }
                             
                           ?>
-                      </tbody>
-                    </table>
+                        </tbody>
+                      </table>
                     </div>
                     <button type="button" id="<?php echo 'Rule' . $result_rule['id'];?>" class="btn btn-outline-warning float-right m-1" data-toggle="modal" data-target="#newExcModal">Add Exception</button>
                     <button type="button" class="btn btn-outline-warning float-right m-1" data-toggle="modal" data-target="#historyModal">View Exception History</button>
@@ -128,19 +138,9 @@
               
             </div>
           <?php } ?>
-      </div>
-
-      <!-- Placeholder for pie chart when we get it working -->
-      <div class="col-lg-5 chart">
-        <h3>Overall Compliance</h3>
-        <p> The objective is to get a pie chart display in here similar to the interface on our university attendance tracker "SEATs", which visualises a percentage of how many rules are compliant, those that have exceptions and those that are non-compliant
-          <!-- Doughnut Chart -->
-          <div>
-            <canvas id="myChart"></canvas>
-          </div>
-          
         </div>
 
+      
     </div>
     <!-- Add exception Modal -->
     <div class="modal fade" id="newExcModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
