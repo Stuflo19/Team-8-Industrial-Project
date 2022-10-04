@@ -51,6 +51,10 @@ nav {
   text-align: center;
 }
 
+.chart {
+  top: 0px;
+  position: absolute;
+}
 .card {
   margin: 10px 0px;
   position: relative;
