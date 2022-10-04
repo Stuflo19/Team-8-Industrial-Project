@@ -1,21 +1,13 @@
 <?php
-  include 'dbconnect.php';
-  
-  $sql = "SELECT * FROM resource WHERE account_id = 1";
-  $result = mysqli_query($conn, $sql);
-
-  $sql = "SELECT * FROM non_compliance";
-  $compliant = mysqli_query($conn, $sql);
-  while (($row = mysqli_fetch_array($compliant, MYSQLI_ASSOC)) != false){
-    $non_compliant_ids[] = $row['resource_id'];
-    $non_compliant_rules[] = $row['rule_id']; 
-  }
+  include 'dbconnectlocal.php';
+  include 'readdb.php';
 ?>
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
 <head>
+  
   <meta charset="utf-8">
   <!-- page title -->
   <title> Prototype | Home </title>
@@ -27,6 +19,7 @@
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'> 
   <!-- import css file -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script type="text/javascript" src="backend.js"></script>
   <script src="scripts.js"></script>
   <link rel="stylesheet" href="master.css">
 </head>
@@ -60,7 +53,6 @@
         </div>
           <!-- Complaince Rule and Status -->
           <?php 
-            $query = mysqli_query($conn,"SELECT * FROM rule");
             while($result_rule=mysqli_fetch_array($query))
             {
           ?>
@@ -71,10 +63,9 @@
                 <div class="card-body m-1 p-1">
                   <p class="card-text pb-1 m-auto"> <?php echo $result_rule["name"];?> </p>
                   <?php 
-                      $query1=mysqli_query($conn,"SELECT * FROM non_compliance");
                       $status ="active-status"; // compliant
                       $status_text ="Compliant";
-                      while($result_non_compl = mysqli_fetch_array($query1))
+                      foreach($compliant as $result_non_compl)
                       {
                         if ($result_rule['id'] == $result_non_compl['rule_id'])
                         {
@@ -97,12 +88,14 @@
                         <tr>
                           <th scope="col">Resource</th>
                           <th scope="col">Status</th>
+                          <th scope ="col">History</th>
                         </tr>
                       </thead>
                       <tbody>
                           <?php
                             foreach($result as $row) {
                               $checked = false;
+                              $id = $row['id'];
                               echo '
                               <tr>
                               <td style="text-align: left">'.$row["resource_name"].'</td>';
@@ -123,15 +116,14 @@
                               else
                               {
                                 echo '<td style="vertical-align: middle"><div class="active-status">Compliant</div></td>';
-                              }
-                              echo '</tr>';
+                              } 
+                              echo "<td style='vertical-align: middle'><button type='button' class='btn btn-outline-warning historybutton' data-toggle='modal' data-target='#historyModal' id='{$row["resource_name"]},{$result_rule["id"]}' onclick='historybutton(this.id)'>Exception History</button></td></tr>";
                             }
-                          ?>
+                            ?>
                       </tbody>
                     </table>
                     </div>
                     <button type="button" id="<?php echo 'Rule' . $result_rule['id'];?>" class="btn btn-outline-warning float-right m-1" data-toggle="modal" data-target="#newExcModal">Add Exception</button>
-                    <button type="button" class="btn btn-outline-warning float-right m-1" data-toggle="modal" data-target="#historyModal">View Exception History</button>
                   </div>
                 </div>
               </div>
@@ -195,7 +187,7 @@
           <div class="modal-header">
             <h3 class="modal-title" id="historyModalLabel">Exception History</h3>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
+              <span aria-hidden="true">&times;</span> 
             </button>
           </div>
           <div class="modal-body">
@@ -210,10 +202,10 @@
             </thead>
             <tbody>
               <tr>
-                <th scope="row">1</th>
-                <td>Mr Crabbs</td>
-                <td>This is a reason to check if it expands fully</td>
-                <td>24/06/2026</td>
+                <th scope="row" id="eid">1</th>
+                <td id="ecreator">Mr Crabbs</td>
+                <td id="ejustification">This is a reason to check if it expands fully</td>
+                <td id="ereview">24/06/2026</td>
               </tr>
             </tbody>
           </table>
@@ -256,11 +248,43 @@
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  <script src="web-app/registerSW.js"></script>
   
-
 </body>
 
+<script>
+  function historybutton(id)
+  {
+    // numrows: holds the number of rows to loop through
+    // rows: holds the rows read in from the database from PHP
+    var numrows = <?php echo mysqli_num_rows($exceptions);?>;
+    var ids = id.split(",");
+    var rows = <?php echo json_encode($exception); ?>;
+    
+    //Loops through all of the rows read in
+    for(var i = 0; i < rows.length; i++) {
+
+      //check if the rule id & the exception name match the values of the button pressed.
+      if(rows[i]['rule_id'] == ids[1] && rows[i]['exception_value'] == ids[0])
+      {
+        //update the HTML table with the correct values
+        document.getElementById('eid').innerHTML = rows[i]['id'];
+        document.getElementById('ecreator').innerHTML = rows[i]['last_updated_by'];
+        document.getElementById('ejustification').innerHTML = rows[i]['justification'];
+        document.getElementById('ereview').innerHTML = rows[i]['review_date'];
+        return;
+      }
+      //else if we have reached the end of the rows and no match is found.
+      else if(i == rows.length-1)
+      {
+        //populate that nothing was found
+        document.getElementById('eid').innerHTML = "N/A";
+        document.getElementById('ecreator').innerHTML = "N/A";
+        document.getElementById('ejustification').innerHTML = "N/A";
+        document.getElementById('ereview').innerHTML = "N/A";
+      }
+    }
+  }
+</script>
 
 <?php
   $conn->close();
