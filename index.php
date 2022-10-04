@@ -10,6 +10,7 @@
     $non_compliant_ids[] = $row['resource_id'];
     $non_compliant_rules[] = $row['rule_id']; 
   }
+  echo "<script>console.log('Debug Objects: " . count($non_compliant_ids) . "' );</script>";
 ?>
 
 <!DOCTYPE html>
