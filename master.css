@@ -122,6 +122,11 @@ table{
     width: 75px;
     height: 12.5px;
   }
+  .historybutton{
+    width: 75px;
+    height: 20px;
+    font-size: 0.7rem;
+  }
   html {
       font-size: 10px;  
   }
@@ -129,8 +134,13 @@ table{
 
 @media (min-width: 501px) {
   .active-status, .exception-status {
-    width: 150px;
+    width: 125px;
     height: 25px;
+  }
+  .historybutton {
+    width: 125px;
+    height: 25px;
+    padding: 0px;
   }
   html {
       font-size: 15px;

@@ -1,15 +1,6 @@
 <?php
   include 'dbconnect.php';
-  
-  $sql = "SELECT * FROM resource WHERE account_id = 1";
-  $result = mysqli_query($conn, $sql);
-
-  $sql = "SELECT * FROM non_compliance";
-  $compliant = mysqli_query($conn, $sql);
-  while (($row = mysqli_fetch_array($compliant, MYSQLI_ASSOC)) != false){
-    $non_compliant_ids[] = $row['resource_id'];
-    $non_compliant_rules[] = $row['rule_id']; 
-  }
+  include 'readdb.php';
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +23,7 @@
 </head>
 
 
-<body onload ="generateGraph()">
+<body onload ="generateGraph(<?php echo count($non_compliant_ids)?> , <?php echo mysqli_num_rows($result)?>)">
 
   <header class="container-fluid p-1">
 
@@ -60,7 +51,6 @@
         </div>
           <!-- Complaince Rule and Status -->
           <?php 
-            $query = mysqli_query($conn,"SELECT * FROM rule");
             while($result_rule=mysqli_fetch_array($query))
             {
           ?>
@@ -71,10 +61,9 @@
                 <div class="card-body m-1 p-1">
                   <p class="card-text pb-1 m-auto"> <?php echo $result_rule["name"];?> </p>
                   <?php 
-                      $query1=mysqli_query($conn,"SELECT * FROM non_compliance");
                       $status ="active-status"; // compliant
                       $status_text ="Compliant";
-                      while($result_non_compl = mysqli_fetch_array($query1))
+                      foreach($compliant as $result_non_compl)
                       {
                         if ($result_rule['id'] == $result_non_compl['rule_id'])
                         {
@@ -126,6 +115,7 @@
                               }
                               echo '</tr>';
                             }
+                            
                           ?>
                       </tbody>
                     </table>
