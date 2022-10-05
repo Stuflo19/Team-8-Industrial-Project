@@ -132,7 +132,7 @@ table{
 }
 
 .fixed_header tbody{
-  display: block;
+  display: inline;
   overflow:auto;
   height:200px;
   width:100%;
