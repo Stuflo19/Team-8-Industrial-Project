@@ -34,14 +34,14 @@ header {
 }
 
 /* Styling for the buttons */
-main button {
+button {
   background-color: #2e2e2e !important;
   color: white !important;
   font-family: 'Bahnschrift', cursive;
 }
 
 /* Styling for the buttons when hovered on */
-main button:hover {
+button:hover {
   background-color: #f1b434 !important;
   color: #34252f !important;
 }
