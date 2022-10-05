@@ -119,8 +119,10 @@ table{
 
 form{
   width: 400px;
-  align-content: center;
+  text-align: center;
 }
+
+
 
 @media (max-width: 500px) {
   .active-status, .exception-status {

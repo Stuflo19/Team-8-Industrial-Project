@@ -32,7 +32,7 @@
 
   <main>
 
-  <img src="brightSolid.png" alt="BrightSolid logo">
+  <img src="brightSolid.png" alt="BrightSolid logo" style=" text_align = centre;">
 
 
 
