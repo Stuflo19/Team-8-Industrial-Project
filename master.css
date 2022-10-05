@@ -133,14 +133,10 @@ table{
 }
 
 .fixed_header tbody{
-  display: inline-block;
+  display: inline;
   overflow: auto;
-  height: inherit;
+  height: 500px;
   width: 100%;
-}
-
-.fixed_header thead tr {
-  display: inline-block;
 }
 
 .fixed_header th, .fixed_header td{
