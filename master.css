@@ -129,13 +129,14 @@ table{
   text-align: center;
   background-color: #333333;
   border-collapse: collapse;
+  height:200px;
 }
 
 .fixed_header tbody{
   display: inline;
   overflow:auto;
-  height:200px;
-  width:100%;
+  
+  width:80%;
 }
 
 .fixed_header thead tr {

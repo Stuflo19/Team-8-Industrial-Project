@@ -57,7 +57,7 @@
           
       </div>
       <!-- Review Dates -->
-      <div class="col-lg">
+      <div class="col">
       <table class="fixed_header" style="color:white">
         <thead>
           <tr>
