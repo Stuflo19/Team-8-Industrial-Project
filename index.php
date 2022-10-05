@@ -1,5 +1,5 @@
 <?php
-  include 'dbconnectlocal.php';
+  include 'dbconnect.php';
   include 'readdb.php';
 ?>
 
@@ -112,7 +112,7 @@
                                       if($result_rule['id'] == $exc['rule_id'] && $row['resource_name'] == $exc['exception_value'])
                                       {
                                         $checked = false;
-                                        return;
+                                        break;
                                       }
                                     }
                                   }
