@@ -150,7 +150,7 @@
             <td>Edinburgh</td>
             <td>2012/03/29</td>
           </tr>
-          <!-- <tr>
+          <tr>
             <td>Cedric Kelly</td>
             <td>Senior Javascript Developer</td>
             <td>Edinburgh</td>
@@ -215,7 +215,7 @@
             <td>Integration Specialist</td>
             <td>Tokyo</td>
             <td>2010/10/14</td>
-          </tr> -->
+          </tr>
         </tbody>
       </table>
       </div>
