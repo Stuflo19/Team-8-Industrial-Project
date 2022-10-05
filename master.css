@@ -125,7 +125,8 @@ table{
   display: inline-block; 
   width: 100%;
   border-collapse: collapse;
-  height: 600px;
+  min-height: 200px;
+  max-height: 600px;
   overflow-y: scroll;
 }
 
