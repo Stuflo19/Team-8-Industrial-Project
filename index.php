@@ -174,7 +174,7 @@
             <td>New York</td>
             <td>2012/12/02</td>
           </tr>
-          <tr>
+          <!-- <tr>
             <td>Herrod Chandler</td>
             <td>Sales Assistant</td>
             <td>San Francisco</td>
@@ -215,7 +215,7 @@
             <td>Integration Specialist</td>
             <td>Tokyo</td>
             <td>2010/10/14</td>
-          </tr>
+          </tr> -->
         </tbody>
       </table>
       </div>
