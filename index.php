@@ -38,7 +38,7 @@
 
   
 
-  <form action="dashboard.php">
+  <form>
   <!-- Email input -->
   <div class="form-outline mb-4">
     <input type="username" id="loginuser" name="loginuser" class="form-control" />
@@ -52,17 +52,9 @@
   </div>
 
   <!-- Submit button -->
-  <button type="button" input type="submit" value="Submit" class="btn btn-primary btn-block mb-4">Sign in</button>
+  <button type="button" class="btn btn-primary btn-block mb-4">Sign in</button>
 
 </form>
-
-<?php
-$user_name = $_POST['username'];
-if($user_name->exists($user_name))
-{
-  header('dashboard.php');
-}
-?>
 
   </main>
 
