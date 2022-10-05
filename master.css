@@ -135,7 +135,7 @@ table{
 .fixed_header tbody{
   display:block;
   overflow:auto;
-  height:80%;
+  height:30%;
   width:100%;
 }
 
