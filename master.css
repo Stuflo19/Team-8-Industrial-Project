@@ -123,7 +123,6 @@ table{
 
 .fixed_header{
   table-layout: fixed;
-  width: 60%;
   color: white;
   margin-left: auto;
   margin-right: auto;
@@ -133,9 +132,14 @@ table{
 }
 
 .fixed_header tbody{
+  display:block;
   overflow:auto;
   height:200px;
   width:100%;
+}
+
+.fixed_header thead tr {
+   display: block;
 }
 
 .fixed_header th, .fixed_header td{
