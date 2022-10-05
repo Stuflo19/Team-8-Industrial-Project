@@ -44,7 +44,7 @@
 
   <main class="container-fluid p-5">
 
-    <div class="row">
+    <div class="row" style="max-height:150px">
       
       <!-- Placeholder for pie chart when we get it working -->
       <div class="col-lg-5 chart">
@@ -57,8 +57,8 @@
           
       </div>
       <!-- Review Dates -->
-      
-      <table class="fixed_header" style="color:white">
+      <div class="col-lg">
+      <table class="table fixed_header" style="color:white">
         <thead>
           <tr>
             <th class="th-sm">Name
@@ -218,6 +218,7 @@
           </tr>
         </tbody>
       </table>
+      </div>
     </div>
       
       <div class="row">
