@@ -126,7 +126,7 @@ table{
   width: 100%;
   border-collapse: collapse;
   min-height: 25vh;
-  max-height: 75vh;
+  max-height: 50vh;
   overflow-y: scroll;
   margin: 0px;
 }
