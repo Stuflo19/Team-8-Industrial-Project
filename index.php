@@ -47,7 +47,7 @@
     <div class="row">
       
       <!-- Placeholder for pie chart when we get it working -->
-      <div class="col-lg-5 chart">
+      <div class="col-lg-6 chart">
         <h3>Overall Compliance</h3>
         <p> The objective is to get a pie chart display in here similar to the interface on our university attendance tracker "SEATs", which visualises a percentage of how many rules are compliant, those that have exceptions and those that are non-compliant
           <!-- Doughnut Chart -->
