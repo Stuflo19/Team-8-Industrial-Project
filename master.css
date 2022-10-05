@@ -124,7 +124,7 @@ table{
 .fixed_header{
   display: block;
   border-collapse: collapse;
-  height: 200px;
+  height: 600px;
   overflow-y: scroll;
 }
 
