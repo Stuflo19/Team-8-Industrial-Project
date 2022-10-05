@@ -120,17 +120,27 @@ table{
   text-align: center;
   background-color: #333333;
 }
-table.dataTable thead .sorting:after,
-table.dataTable thead .sorting:before,
-table.dataTable thead .sorting_asc:after,
-table.dataTable thead .sorting_asc:before,
-table.dataTable thead .sorting_asc_disabled:after,
-table.dataTable thead .sorting_asc_disabled:before,
-table.dataTable thead .sorting_desc:after,
-table.dataTable thead .sorting_desc:before,
-table.dataTable thead .sorting_desc_disabled:after,
-table.dataTable thead .sorting_desc_disabled:before {
-bottom: .5em;
+
+.fixed_header{
+  width: 80%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+.fixed_header tbody{
+overflow: auto;
+height: 100px;
+}
+
+.fixed_header thead {
+background: black;
+color:#fff;
+}
+
+.fixed_header th, .fixed_header td {
+padding: 5px;
+text-align: left;
+width: 200px;
 }
 
 @media (max-width: 500px) {

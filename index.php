@@ -58,7 +58,7 @@
       </div>
       <!-- Review Dates -->
       <div class="col-lg">
-      <table id="dtDynamicVerticalScrollExample" class="table dataTable table-bordered" cellspacing="0" width="100%">
+      <table class="fixed_header">
         <thead>
           <tr>
             <th class="th-sm">Name
