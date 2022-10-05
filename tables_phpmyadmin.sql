@@ -1,24 +1,19 @@
 -- Make-Tables
 
-UNLOCK TABLES;
 -- e.g. a specific company
 CREATE TABLE customer(
     id INT(4) NOT NULL,  
     name VARCHAR(100) NOT NULL, -- e.g. brightsolid
     PRIMARY KEY (id)
 ); 
-LOCK TABLE customer WRITE;
 
-UNLOCK TABLES;
 -- manager or auditor
 CREATE TABLE user_role(
     id INT(4) NOT NULL,
     role VARCHAR(100) NOT NULL, 
     PRIMARY KEY (id)
 );
-LOCK TABLE user_role WRITE;
 
-UNLOCK TABLES;
 -- e.g. user of the company (customer)
 CREATE TABLE user(
     id VARCHAR(100), -- name
@@ -28,10 +23,7 @@ CREATE TABLE user(
     FOREIGN KEY (role_id) REFERENCES user_role(id),
     FOREIGN KEY (customer_id) REFERENCES customer(id)
 );
-LOCK TABLE user WRITE;
 
-
-UNLOCK TABLES;
 CREATE TABLE login(
     id INT(4) NOT NULL,
     username VARCHAR(50),
@@ -40,17 +32,13 @@ CREATE TABLE login(
     PRIMARY KEY (id),
     FOREIGN KEY (user_id) REFERENCES user(id)
 );
-LOCK TABLE login WRITE;
 
-UNLOCK TABLES;
 CREATE TABLE platform(
     id INT(4) NOT NULL,
     name VARCHAR(50) NOT NULL,
     PRIMARY KEY (id)
 );
-LOCK TABLE platform WRITE;
 
-UNLOCK TABLES;
 CREATE TABLE account (
     id INT(4) NOT NULL,
     account_ref VARCHAR(50) NOT NULL,
@@ -60,9 +48,7 @@ CREATE TABLE account (
     FOREIGN KEY (platorm_id) REFERENCES platform(id),
     FOREIGN KEY (customer_id) REFERENCES customer(id)
 );
-LOCK TABLE account WRITE;
 
-UNLOCK TABLES;
 CREATE TABLE resource_type(
     id INT(4) NOT NULL,
     name VARCHAR(200) NOT NULL,
@@ -70,9 +56,7 @@ CREATE TABLE resource_type(
     PRIMARY KEY (id),
     FOREIGN KEY (platorm_id) REFERENCES platform(id)
 );
-LOCK TABLE resource_type WRITE;
 
-UNLOCK TABLES;
 CREATE TABLE rule(
     id INT(4) NOT NULL,
     name VARCHAR(200) NOT NULL,
@@ -81,10 +65,8 @@ CREATE TABLE rule(
     PRIMARY KEY (id),
     FOREIGN KEY (resource_type_id) REFERENCES resource_type(id)
 );
-LOCK TABLE rule WRITE;
 
 
-UNLOCK TABLES;
 CREATE TABLE exception (
     id INT(4) NOT NULL,
     customer_id INT(4) NOT NULL,
@@ -94,14 +76,13 @@ CREATE TABLE exception (
     justification VARCHAR(200) NOT NULL,
     review_date TIMESTAMP NOT NULL,
     last_updated TIMESTAMP NOT NULL,
+    suspended INT(0),
     PRIMARY KEY (id),
     FOREIGN KEY (customer_id) REFERENCES customer(id), 
     FOREIGN KEY (rule_id) REFERENCES rule(id), 
     FOREIGN KEY (last_updated_by) REFERENCES user(id)
 );
-LOCK TABLE exception WRITE;
 
-UNLOCK TABLES;
 CREATE TABLE resource(
     id INT(4) NOT NULL,
     resource_ref VARCHAR(1000) NOT NULL,
@@ -114,9 +95,7 @@ CREATE TABLE resource(
     FOREIGN KEY (account_id) REFERENCES account(id),
     FOREIGN KEY (resource_type_id) REFERENCES resource_type(id)
 );
-LOCK TABLE resource WRITE;
 
-UNLOCK TABLES;
 CREATE TABLE non_compliance (
     id INT(4) NOT NULL,
     resource_id INT(4) NOT NULL,
@@ -125,10 +104,7 @@ CREATE TABLE non_compliance (
     FOREIGN KEY (resource_id) REFERENCES resource(id),
     FOREIGN KEY (rule_id) REFERENCES rule(id)
 );
-LOCK TABLE non_compliance WRITE;
 
-
-UNLOCK TABLES;
 -- stores new added exceptions
 CREATE TABLE non_compliance_audit (
     id INT(4) NOT NULL,
@@ -144,9 +120,7 @@ CREATE TABLE non_compliance_audit (
     FOREIGN KEY (rule_id) REFERENCES rule(id),
     FOREIGN KEY (user_id) REFERENCES user(id)
 );
-LOCK TABLE non_compliance_audit WRITE;
 
-UNLOCK TABLES;
 -- stores history of exceptions of a specific resource
 CREATE TABLE exception_audit(
     id INT(4) NOT NULL, 
@@ -169,44 +143,32 @@ CREATE TABLE exception_audit(
     FOREIGN KEY (customer_id) REFERENCES customer(id)
 
 );
-LOCK TABLE exception_audit WRITE;
-
 
 
 -- Test-data-addition
-UNLOCK TABLES;
+
 INSERT INTO customer(id, name)
 VALUES
     (1, 'brightsolid');
-LOCK TABLE customer WRITE;
 
-UNLOCK TABLES;
 INSERT INTO user_role(id, role)
 VALUES
     (1, 'compliance manager'),
     (2, 'compliance auditor');
-LOCK TABLE user_role WRITE;
 
-UNLOCK TABLES;
 INSERT INTO user(id, role_id,customer_id)
 VALUES
     ('system',1, 1);
-LOCK TABLE user WRITE;
 
-UNLOCK TABLES;
 INSERT INTO platform(id, name)
 VALUES  
     (2,'aws'),
     (3,'azure');
-LOCK TABLE platform WRITE;
 
-UNLOCK TABLES;
 INSERT INTO account(id, account_ref, platorm_id, customer_id)
 VALUES
     (1, '11072135518',2,1); -- not sure which platform is for brightsolid, so just chose aws 
-LOCK TABLE account WRITE;
 
-UNLOCK TABLES;
 INSERT INTO resource_type(id, name, platorm_id)
 VALUES
     (1,'ec2',2),
@@ -219,9 +181,7 @@ VALUES
     (10,'rds',2),
     (11,'elb',2),
     (12,'s3',2);
-LOCK TABLE resource_type WRITE;
 
-UNLOCK TABLES;
 INSERT INTO rule(id,name, resource_type_id, description)
 VALUES
     (1,'ebs-detect-unencrypted-volume',2,'If a developer creates an AWS EC2 Instance and the AWS EBS storage volume(s) attached to the instance are not encrypted then the the developer and compliance team are notified.'),
@@ -232,17 +192,12 @@ VALUES
     (6,'rds-detect-unauthorised-public-db-instance',10,'If a developer creates an AWS RDS Instance and attaches the instance to a public subnet (e.g. a subnet which is addressable to/from the internet) then the developer and compliance team are notified'),
     (7,'rds-detect-unencrypted-instances',10,'If a developer creates an AWS RDS Instance and the storage attached to the Instance is not encrypted then the the developer and compliance team are notified.'),
     (8,'lambda-detect-unauthorised-public-function',7,'If a developer creates an AWS Lambda function and attaches the instance to a public subnet (e.g. a subnet which is addressable to/from the internet) then the developer and compliance team are notified');
-LOCK TABLE rule WRITE;
 
-UNLOCK TABLES;
-INSERT INTO exception (id, customer_id, rule_id, exception_value, justification, review_date, last_updated, last_updated_by)
+INSERT INTO exception (id, customer_id, rule_id, exception_value, justification, review_date, last_updated, last_updated_by, suspended)
 VALUES
-    (1,1,4,'bs-quorum-dropbox','Enabled by system','2022-12-12 16:23:59.759 +0000','2022-09-12 17:25:36.091 +0100','system'),
-    (3,1,4,'bsol-dev-bakery-assets','Enabled by system','2022-12-12 16:23:59.759 +0000','2022-09-12 17:25:36.091 +0100','system');
-LOCK TABLE exception WRITE;
+    (1,1,4,'bs-quorum-dropbox','Enabled by system','2022-12-12 16:23:59.759 +0000','2022-09-12 17:25:36.091 +0100','system', 0),
+    (3,1,4,'bsol-dev-bakery-assets','Enabled by system','2022-12-12 16:23:59.759 +0000','2022-09-12 17:25:36.091 +0100','system', 0);
 
-
-UNLOCK TABLES;
 INSERT INTO resource(id,resource_ref, account_id, resource_type_id, resource_name, last_updated, resource_metadata)
 VALUES
     (1128,'i-060476bb31df657e7',1,1,'vault test','2022-09-08 14:18:25.529 +0100','{"AmiLaunchIndex": 0, "ImageId": "ami-0089b31e09ac3fffc", "InstanceId": "i-060476bb31df657e7", "InstanceType": "t2.micro", "KeyName": "pc-dev-keypair01", "LaunchTime": "2021-04-12T15:41:40+00:00", "Monitoring": {"State": "disabled"}, "Placement": {"AvailabilityZone": "eu-west-2a", "GroupName": "", "Tenancy": "default"}, "PrivateDnsName": "ip-10-184-0-18.eu-west-2.compute.internal", "PrivateIpAddress": "10.184.0.18", "ProductCodes": [], "PublicDnsName": "", "State": {"Code": 80, "Name": "stopped"}, "StateTransitionReason": "User initiated (2021-04-12 15:43:14 GMT)", "SubnetId": "subnet-0385927a7d61e8706", "VpcId": "vpc-05da5d22d7bd6f8cf", "Architecture": "x86_64", "BlockDeviceMappings": [{"DeviceName": "/dev/xvda", "Ebs": {"AttachTime": "2020-02-10T21:21:24+00:00", "DeleteOnTermination": true, "Status": "attached", "VolumeId": "vol-0e181efd2ccb65947"}}], "ClientToken": "", "EbsOptimized": false, "EnaSupport": true, "Hypervisor": "xen", "IamInstanceProfile": {"Arn": "arn:aws:iam::011072135518:instance-profile/vaultInstanceProfile", "Id": "AIPAQFE7TMFPMA6DXMOQM"}, "NetworkInterfaces": [{"Attachment": {"AttachTime": "2020-02-10T21:21:23+00:00", "AttachmentId": "eni-attach-0ab8f83f7f6acfb0a", "DeleteOnTermination": true, "DeviceIndex": 0, "Status": "attached", "NetworkCardIndex": 0}, "Description": "", "Groups": [{"GroupName": "launch-wizard-4", "GroupId": "sg-0072d99591e9b5afb"}], "Ipv6Addresses": [], "MacAddress": "06:70:52:26:68:62", "NetworkInterfaceId": "eni-0aa1501647f12ae7f", "OwnerId": "011072135518", "PrivateDnsName": "ip-10-184-0-18.eu-west-2.compute.internal", "PrivateIpAddress": "10.184.0.18", "PrivateIpAddresses": [{"Primary": true, "PrivateDnsName": "ip-10-184-0-18.eu-west-2.compute.internal", "PrivateIpAddress": "10.184.0.18"}], "SourceDestCheck": true, "Status": "in-use", "SubnetId": "subnet-0385927a7d61e8706", "VpcId": "vpc-05da5d22d7bd6f8cf", "InterfaceType": "interface"}], "RootDeviceName": "/dev/xvda", "RootDeviceType": "ebs", "SecurityGroups": [{"GroupName": "launch-wizard-4", "GroupId": "sg-0072d99591e9b5afb"}], "SourceDestCheck": true, "StateReason": {"Code": "Client.UserInitiatedShutdown", "Message": "Client.UserInitiatedShutdown: User initiated shutdown"}, "Tags": [{"Key": "customer", "Value": "brightsolid"}, {"Key": "customer_code", "Value": "16BSOT01"}, {"Key": "project_code", "Value": "08-BSOT-931"}, {"Key": "Name", "Value": "vault test"}, {"Key": "resource_owner", "Value": "109bb604.brightsolid.com@emea.teams.ms"}, {"Key": "c7n:FindingId:ec2-instance-with-invalid-customer", "Value": "eu-west-2/011072135518/10b41698007565e1d396787f129479ce/f2e74d392bf3eaf1359eb8e6c4530568:2020-09-10T16:10:14.602386+00:00"}], "VirtualizationType": "hvm", "CpuOptions": {"CoreCount": 1, "ThreadsPerCore": 1}, "CapacityReservationSpecification": {"CapacityReservationPreference": "open"}, "HibernationOptions": {"Configured": false}, "MetadataOptions": {"State": "applied", "HttpTokens": "optional", "HttpPutResponseHopLimit": 1, "HttpEndpoint": "enabled", "HttpProtocolIpv6": "disabled", "InstanceMetadataTags": "disabled"}, "EnclaveOptions": {"Enabled": false}, "PlatformDetails": "Linux/UNIX", "UsageOperation": "RunInstances", "UsageOperationUpdateTime": "2020-02-10T21:21:23+00:00", "PrivateDnsNameOptions": {}, "MaintenanceOptions": {"AutoRecovery": "default"}}'),
@@ -453,9 +408,7 @@ VALUES
     (1325,'bsol-contract-web-hosting-test',1,12,'bsol-contract-web-hosting-test','2022-09-08 15:27:22.297 +0100','{"Name": "bsol-contract-web-hosting-test", "CreationDate": "2020-10-20T09:47:39+00:00", "Location": {"LocationConstraint": "eu-west-2"}, "Tags": [{"Key": "resource_owner", "Value": "109bb604.brightsolid.com@emea.teams.ms"}, {"Key": "project_code", "Value": "08-BSOT-931"}, {"Key": "customer_code", "Value": "16BSOT01"}, {"Key": "Name", "Value": "bsol-contract-web-hosting-test"}, {"Key": "customer", "Value": "brightsolid"}], "Policy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"Allow bucket listing\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"*\"},\"Action\":\"s3:ListBucket\",\"Resource\":\"arn:aws:s3:::bsol-contract-web-hosting-test\",\"Condition\":{\"ForAnyValue:StringLike\":{\"aws:PrincipalARN\":[\"arn:aws:iam::011072135518:role/*-SU\",\"arn:aws:iam::011072135518:role/*-CONTRACT\",\"arn:aws:iam::011072135518:role/*-ADMIN\"]}}},{\"Sid\":\"Allow bucket operations for admin\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"*\"},\"Action\":[\"s3:PutObject\",\"s3:GetObject\",\"s3:DeleteObject\"],\"Resource\":\"arn:aws:s3:::bsol-contract-web-hosting-test/*\",\"Condition\":{\"ForAnyValue:StringLike\":{\"aws:PrincipalARN\":[\"arn:aws:iam::011072135518:role/*-SU\",\"arn:aws:iam::011072135518:role/*-CONTRACT\",\"arn:aws:iam::011072135518:role/*-ADMIN\"]}}},{\"Sid\":\"Allow get requests from cloudfront\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity E12JABJQDRMAKA\"},\"Action\":\"s3:GetObject\",\"Resource\":\"arn:aws:s3:::bsol-contract-web-hosting-test/*\"}]}", "Acl": {"Owner": {"ID": "b6acdbfd07d7f2c62c701d830d17ab463a41bc23916b56284059565ac8f7c1f2"}, "Grants": [{"Grantee": {"ID": "b6acdbfd07d7f2c62c701d830d17ab463a41bc23916b56284059565ac8f7c1f2", "Type": "CanonicalUser"}, "Permission": "FULL_CONTROL"}]}, "Replication": null, "Versioning": {"Status": "Enabled", "MFADelete": "Disabled"}, "Website": null, "Logging": {}, "Notification": {}, "Lifecycle": {"Rules": [{"ID": "pdf_history", "Filter": {"Prefix": "pdf_history/"}, "Status": "Enabled", "NoncurrentVersionTransitions": [{"NoncurrentDays": 60, "StorageClass": "GLACIER"}], "NoncurrentVersionExpiration": {"NoncurrentDays": 366}}]}, "c7n:bucket-encryption": {}}'),
     (1326,'bsol-mdr-conversions',1,12,'bsol-mdr-conversions','2022-09-08 15:27:22.327 +0100','{"Name": "bsol-mdr-conversions", "CreationDate": "2022-06-23T10:37:15+00:00", "Location": {"LocationConstraint": "eu-west-2"}, "Tags": [{"Key": "resource_owner", "Value": "109bb604.brightsolid.com@emea.teams.ms"}, {"Key": "project_code", "Value": "08-BSOT-931"}, {"Key": "customer_code", "Value": "16BSOT01"}, {"Key": "customer", "Value": "brightsolid"}], "Policy": null, "Acl": {"Owner": {"ID": "b6acdbfd07d7f2c62c701d830d17ab463a41bc23916b56284059565ac8f7c1f2"}, "Grants": [{"Grantee": {"ID": "b6acdbfd07d7f2c62c701d830d17ab463a41bc23916b56284059565ac8f7c1f2", "Type": "CanonicalUser"}, "Permission": "FULL_CONTROL"}, {"Grantee": {"ID": "c4d8eabf8db69dbe46bfe0e517100c554f01200b104d59cd408e777ba442a322", "Type": "CanonicalUser"}, "Permission": "WRITE"}, {"Grantee": {"ID": "c4d8eabf8db69dbe46bfe0e517100c554f01200b104d59cd408e777ba442a322", "Type": "CanonicalUser"}, "Permission": "READ_ACP"}]}, "Replication": null, "Versioning": {}, "Website": null, "Logging": {}, "Notification": {}, "Lifecycle": null}'),
     (1327,'cdk-hnb659fds-assets-011072135518-eu-west-2',1,12,'cdk-hnb659fds-assets-011072135518-eu-west-2','2022-09-08 15:27:22.332 +0100','{"Name": "cdk-hnb659fds-assets-011072135518-eu-west-2", "CreationDate": "2022-09-04T17:07:41+00:00", "Location": {"LocationConstraint": "eu-west-2"}, "Tags": [{"Key": "aws:cloudformation:stack-name", "Value": "CDKToolkit"}, {"Key": "resource_owner", "Value": "109bb604.brightsolid.com@emea.teams.ms"}, {"Key": "aws:cloudformation:stack-id", "Value": "arn:aws:cloudformation:eu-west-2:011072135518:stack/CDKToolkit/00129640-2c74-11ed-9eac-06748188f90c"}, {"Key": "aws:cloudformation:logical-id", "Value": "StagingBucket"}, {"Key": "project_code", "Value": "08-BSOT-931"}, {"Key": "customer_code", "Value": "16BSOT01"}, {"Key": "customer", "Value": "brightsolid"}], "Policy": "{\"Version\":\"2012-10-17\",\"Id\":\"AccessControl\",\"Statement\":[{\"Sid\":\"AllowSSLRequestsOnly\",\"Effect\":\"Deny\",\"Principal\":\"*\",\"Action\":\"s3:*\",\"Resource\":[\"arn:aws:s3:::cdk-hnb659fds-assets-011072135518-eu-west-2\",\"arn:aws:s3:::cdk-hnb659fds-assets-011072135518-eu-west-2/*\"],\"Condition\":{\"Bool\":{\"aws:SecureTransport\":\"false\"}}}]}", "Acl": {"Owner": {"ID": "b6acdbfd07d7f2c62c701d830d17ab463a41bc23916b56284059565ac8f7c1f2"}, "Grants": [{"Grantee": {"ID": "b6acdbfd07d7f2c62c701d830d17ab463a41bc23916b56284059565ac8f7c1f2", "Type": "CanonicalUser"}, "Permission": "FULL_CONTROL"}]}, "Replication": null, "Versioning": {"Status": "Enabled"}, "Website": null, "Logging": {}, "Notification": {}, "Lifecycle": null}');
-LOCK TABLE resource WRITE;
 
-UNLOCK TABLES;
 INSERT INTO non_compliance (id, resource_id, rule_id)
 VALUES
     (1,1269,1),
@@ -481,4 +434,3 @@ VALUES
     (21,1330,4),
     (22,1335,4),
     (23,1138,4);
-LOCK TABLE non_compliance WRITE;
