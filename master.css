@@ -53,6 +53,7 @@ nav {
 
 .chart {
   top: 0px;
+  max-height: 80vh;
   position: relative;
 }
 .card {
