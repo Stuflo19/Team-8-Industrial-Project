@@ -130,7 +130,7 @@ table{
   text-align: center;
   background-color: #333333;
   border-collapse: collapse;
-  height:inherit;
+  max-height: inherit;
   overflow-y: scroll;
 }
 
