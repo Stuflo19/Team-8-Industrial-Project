@@ -52,7 +52,29 @@
   </div>
 
   <!-- Submit button -->
-  <button type="button" class="btn btn-primary btn-block mb-4">Sign in</button>
+  <button type="Submit" class="btn btn-primary btn-block mb-4">Sign in</button>
+
+  <?php 
+include("config.php");
+
+if(isset($_POST['sub']))
+{
+$user_name = $_POST['loginuser'];
+
+$res = mysqli_query($mysqli,"SELECT* from user where 'loginuser'='$user_name'");
+$result=mysqli_fetch_array($res);
+if($result)
+{
+echo "You are login Successfully ";
+header("location:dashboard.php"); 
+	
+}
+else
+{
+	echo "failed ";
+}
+}
+?>
 
 </form>
 
