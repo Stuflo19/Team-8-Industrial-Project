@@ -51,7 +51,7 @@
         <h3>Overall Compliance</h3>
         <!-- Doughnut Chart -->
         <div>
-          <canvas id="myChart"></canvas>
+          <canvas id="myChart" style="max-height: 75vh;"></canvas>
         </div>
           
       </div>
