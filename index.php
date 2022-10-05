@@ -44,10 +44,10 @@
 
   <main class="container-fluid p-5">
 
-    <div class="row" style="max-height: 80vh;">
+    <div class="row">
       
       <!-- Placeholder for pie chart when we get it working -->
-      <div class="col-lg-6 chart">
+      <div class="col-lg-5 chart">
         <h3>Overall Compliance</h3>
         <!-- Doughnut Chart -->
         <div>
@@ -55,7 +55,7 @@
         </div>
           
       </div>
-      <div class="col-lg-1"></div>
+      <div class="col-lg-2"></div>
       <!-- Review Dates -->
       <div class="col-lg-4" >
       <table class="table fixed_header" style="color:white">
