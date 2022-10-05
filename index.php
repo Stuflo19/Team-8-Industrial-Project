@@ -57,8 +57,8 @@
       </div>
       <div class="col-lg-2"></div>
       <!-- Review Dates -->
-      <div class="col-lg-4" >
-      <table class="table fixed_header d-flex align-items-center" style="color:white">
+      <div class="col-lg-4 d-flex align-items-center" >
+      <table class="table fixed_header " style="color:white">
         <thead>
           <tr>
             <th scope="col-lg">Name
