@@ -123,7 +123,7 @@ table{
 
 .fixed_header{
   table-layout: fixed;
-  width: 97%;
+  width: 60%;
   color: white;
   margin-left: auto;
   margin-right: auto;
@@ -133,13 +133,14 @@ table{
 }
 
 .fixed_header tbody{
-  overflow: auto;
-  height: 100px;
-  width: 100%;
+  overflow:auto;
+  height:200px;
+  width:100%;
 }
 
 .fixed_header th, .fixed_header td{
   padding: 5px;
+  text-align: left;
 }
 
 @media (max-width: 500px) {
