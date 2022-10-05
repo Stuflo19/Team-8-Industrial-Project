@@ -90,32 +90,33 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <?php
-                          foreach($result as $row) {
-                            $checked = false;
-                            $id = $row['id'];
-                            echo '  
-                            <tr>
-                            <td style="text-align: left">'.$row["resource_name"].'</td>';
-                            
-                            if(in_array($row["id"], $non_compliant_ids))
-                            {
-                              foreach(array_keys($non_compliant_ids, $row['id']) as $index) {
-                                $non_compliant_rules[$index] == $result_rule["id"] ? $checked = true : $checked = false;
-                                if($checked) {break;}
-                              };
-                            }
+                          <?php
+                            foreach($result as $row) {
+                              $checked = false;
+                              if($row['resource_type_id'] == $result_rule['resource_type_id']){
+                                echo '
+                                <tr>
+                                <td style="text-align: left">'.$row["resource_name"].'</td>';
+                                
+                                if(in_array($row["id"], $non_compliant_ids))
+                                {
+                                  foreach(array_keys($non_compliant_ids, $row['id']) as $index) {
+                                    $non_compliant_rules[$index] == $result_rule["id"] ? $checked = true : $checked = false;
+                                    if($checked) {break;}
+                                  };
+                                }
 
-                            //if the resource edxists in the id array && ruleID at index of resource in the rules array
-                            if($checked)
-                            {
-                              echo '<td style="vertical-align: middle"><div class="exception-status"> Non-Compliant</div></td>';
+                              //if the resource edxists in the id array && ruleID at index of resource in the rules array
+                              if($checked)
+                              {
+                                echo '<td style="vertical-align: middle"><div class="exception-status"> Non-Compliant</div></td>';
+                              }
+                              else
+                              {
+                                echo '<td style="vertical-align: middle"><div class="active-status">Compliant</div></td>';
+                              } 
+                              echo "<td style='vertical-align: middle'><button type='button' class='btn btn-outline-warning historybutton' data-toggle='modal' data-target='#historyModal' id='{$row["resource_name"]},{$result_rule["id"]}' onclick='historybutton(this.id)'>Exception History</button></td></tr>";
                             }
-                            else
-                            {
-                              echo '<td style="vertical-align: middle"><div class="active-status">Compliant</div></td>';
-                            } 
-                            echo "<td style='vertical-align: middle'><button type='button' class='btn btn-outline-warning historybutton' data-toggle='modal' data-target='#historyModal' id='{$row["resource_name"]},{$result_rule["id"]}' onclick='historybutton(this.id)'>Exception History</button></td></tr>";
                           }
                         ?>
                       </tbody>
