@@ -44,7 +44,7 @@
 
   <main class="container-fluid p-5">
 
-    <div class="row" style="max-height:750px">
+    <div class="row">
       
       <!-- Placeholder for pie chart when we get it working -->
       <div class="col-lg-5 chart">
