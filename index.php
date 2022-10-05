@@ -55,8 +55,9 @@
         </div>
           
       </div>
+      <div class="col-lg-1"></div>
       <!-- Review Dates -->
-      <div class="col-lg-4 float-right mx-2 my-1" >
+      <div class="col-lg-4" >
       <table class="table fixed_header" style="color:white">
         <thead>
           <tr>
