@@ -129,7 +129,7 @@ table{
 
 .fixed_header tbody{
 overflow: auto;
-height: 100px;
+max-height: 50px;
 }
 
 .fixed_header thead {
