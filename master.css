@@ -123,6 +123,7 @@ table{
 
 .fixed_header{
   table-layout: fixed;
+  display: block;
   color: white;
   margin-left: auto;
   margin-right: auto;
@@ -130,10 +131,11 @@ table{
   background-color: #333333;
   border-collapse: collapse;
   height:200px;
+  overflow-y: scroll;
 }
 
-.fixed_header tbody{
-  display: inline;
+/* .fixed_header tbody{
+  
   overflow:auto;
   
   width:80%;
@@ -147,7 +149,7 @@ table{
 .fixed_header th, .fixed_header td{
   padding: 5px;
   text-align: left;
-}
+} */
 
 @media (max-width: 500px) {
   .active-status, .exception-status {
