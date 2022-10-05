@@ -42,7 +42,7 @@ function generateGraph(noncompliant, compliant)
 function getReviews()
 {
   $(document).ready(function () {
-    $('#dtVerticalScrollExample').DataTable({
+    $('#dtDynamicVerticalScrollExample').DataTable({
       "scrollY": "200px",
       "scrollCollapse": true,
     });
