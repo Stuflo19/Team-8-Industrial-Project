@@ -20,7 +20,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="javascript/scripts.js"></script>
   <script src="javascript/backend.js"></script>
-  <link rel="stylesheet" href="master.css">
+  <link rel="stylesheet" href="CSS/master.css">
 </head>
 
 
