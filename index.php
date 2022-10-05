@@ -61,13 +61,13 @@
       <table class="table fixed_header" style="color:white">
         <thead>
           <tr>
-            <th scope="col">Name
+            <th scope="col-sm">Name
             </th>
-            <th scope="col">Position
+            <th scope="col-sm">Position
             </th>
-            <th scope="col">Office
+            <th scope="col-sm">Office
             </th>
-            <th scope="col">Start date
+            <th scope="col-sm">Start date
             </th>
           </tr>
         </thead>
