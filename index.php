@@ -58,7 +58,7 @@
       </div>
       <!-- Review Dates -->
       <div class="col-lg">
-      <table class="table table-fixed" cellspacing="0">
+      <table class="table-fixed" cellspacing="0">
         <thead>
           <tr>
             <th class="th-sm">Name
