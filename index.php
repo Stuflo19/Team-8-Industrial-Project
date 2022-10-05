@@ -35,22 +35,35 @@
   <img src="brightSolid.png" alt="BrightSolid logo">
 
 
-  <form>
+
+  
+
+  <form action="dashboard.php">
   <!-- Email input -->
   <div class="form-outline mb-4">
-    <input type="username" id="loginuser" class="form-control" />
+    <input type="username" id="loginuser" name="loginuser" class="form-control" />
     <label class="form-label" for="loginuser">Username</label>
   </div>
 
   <!-- Password input -->
   <div class="form-outline mb-4">
-    <input type="password" id="loginpassword" class="form-control" />
+    <input type="password" id="loginpassword" name="loginpassword" class="form-control" />
     <label class="form-label" for="loginpassword">Password</label>
   </div>
 
   <!-- Submit button -->
-  <button type="button" class="btn btn-primary btn-block mb-4">Sign in</button>
+  <button type="button" input type="submit" value="Submit" class="btn btn-primary btn-block mb-4">Sign in</button>
+
 </form>
+
+<?php
+$user_name = $_POST['username'];
+if($user_name->exists($user_name))
+{
+  header('dashboard.php');
+}
+?>
+
   </main>
 
   <!-- Footer -->
