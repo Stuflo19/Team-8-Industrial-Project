@@ -124,7 +124,7 @@ table{
 .fixed_header{
   
   border-collapse: collapse;
-  max-height: inherit;
+  height: 600px;
   overflow-y: scroll;
 }
 
