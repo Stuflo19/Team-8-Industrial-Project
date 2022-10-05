@@ -43,7 +43,7 @@ function getReviews()
 {
   $(document).ready(function () {
     $('#dtDynamicVerticalScrollExample').DataTable({
-      "scrollY": "50vh",
+      "scrollY": "200px",
       "scrollCollapse": true,
     });
     $('.dataTables_length').addClass('bs-select');
