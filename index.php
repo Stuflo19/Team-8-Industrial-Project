@@ -1,5 +1,5 @@
 <?php
-  include 'dbconnect.php';
+  include 'dbconnectlocal.php';
   include 'readdb.php';
 ?>
 
@@ -104,6 +104,18 @@
                                     $non_compliant_rules[$index] == $result_rule["id"] ? $checked = true : $checked = false;
                                     if($checked) {break;}
                                   };
+
+                                  if($checked)
+                                  {
+                                    foreach($exception as $exc)
+                                    {
+                                      if($result_rule['id'] == $exc['rule_id'] && $row['resource_name'] == $exc['exception_value'])
+                                      {
+                                        $checked = false;
+                                        return;
+                                      }
+                                    }
+                                  }
                                 }
 
                               //if the resource edxists in the id array && ruleID at index of resource in the rules array
