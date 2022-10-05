@@ -58,7 +58,7 @@
       </div>
       <!-- Review Dates -->
       <div class="col-lg">
-      <table class="table fixed_header" style="color:white">
+      <table class="fixed_header" style="color:white">
         <thead>
           <tr>
             <th class="th-sm">Name
@@ -89,6 +89,72 @@
             <td>Junior Technical Author</td>
             <td>San Francisco</td>
             <td>2009/01/12</td>
+          </tr>
+          <tr>
+            <td>Cedric Kelly</td>
+            <td>Senior Javascript Developer</td>
+            <td>Edinburgh</td>
+            <td>2012/03/29</td>
+          </tr>
+          <tr>
+            <td>Cedric Kelly</td>
+            <td>Senior Javascript Developer</td>
+            <td>Edinburgh</td>
+            <td>2012/03/29</td>
+          </tr>
+          <tr>
+            <td>Cedric Kelly</td>
+            <td>Senior Javascript Developer</td>
+            <td>Edinburgh</td>
+            <td>2012/03/29</td>
+          </tr>
+          <tr>
+            <td>Cedric Kelly</td>
+            <td>Senior Javascript Developer</td>
+            <td>Edinburgh</td>
+            <td>2012/03/29</td>
+          </tr>
+          <tr>
+            <td>Cedric Kelly</td>
+            <td>Senior Javascript Developer</td>
+            <td>Edinburgh</td>
+            <td>2012/03/29</td>
+          </tr>
+          <tr>
+            <td>Cedric Kelly</td>
+            <td>Senior Javascript Developer</td>
+            <td>Edinburgh</td>
+            <td>2012/03/29</td>
+          </tr>
+          <tr>
+            <td>Cedric Kelly</td>
+            <td>Senior Javascript Developer</td>
+            <td>Edinburgh</td>
+            <td>2012/03/29</td>
+          </tr>
+          <tr>
+            <td>Cedric Kelly</td>
+            <td>Senior Javascript Developer</td>
+            <td>Edinburgh</td>
+            <td>2012/03/29</td>
+          </tr>
+          <tr>
+            <td>Cedric Kelly</td>
+            <td>Senior Javascript Developer</td>
+            <td>Edinburgh</td>
+            <td>2012/03/29</td>
+          </tr>
+          <tr>
+            <td>Cedric Kelly</td>
+            <td>Senior Javascript Developer</td>
+            <td>Edinburgh</td>
+            <td>2012/03/29</td>
+          </tr>
+          <tr>
+            <td>Cedric Kelly</td>
+            <td>Senior Javascript Developer</td>
+            <td>Edinburgh</td>
+            <td>2012/03/29</td>
           </tr>
           <tr>
             <td>Cedric Kelly</td>
