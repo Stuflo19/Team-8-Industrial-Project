@@ -128,6 +128,7 @@ table{
   min-height: 200px;
   max-height: 600px;
   overflow-y: scroll;
+  margin: 0px;
 }
 
 .fixed_header tbody{
