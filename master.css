@@ -122,6 +122,7 @@ table{
 }
 
 .fixed_header{
+  display: block;
   width: 60%;
   border-collapse: collapse;
   height: 600px;
