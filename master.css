@@ -124,26 +124,24 @@ table{
 .fixed_header{
   
   border-collapse: collapse;
-  height: 600px;
+  height: 200px;
   overflow-y: scroll;
 }
 
-/* .fixed_header tbody{
+.fixed_header tbody{
   
   overflow:auto;
-  
   width:80%;
 }
 
 .fixed_header thead tr {
   width: 100%; 
-  
 }
 
 .fixed_header th, .fixed_header td{
   padding: 5px;
   text-align: left;
-} */
+}
 
 @media (max-width: 500px) {
   .active-status, .exception-status {
