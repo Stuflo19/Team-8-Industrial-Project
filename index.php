@@ -150,7 +150,7 @@
             <td>Edinburgh</td>
             <td>2012/03/29</td>
           </tr>
-          <tr>
+          <!-- <tr>
             <td>Cedric Kelly</td>
             <td>Senior Javascript Developer</td>
             <td>Edinburgh</td>
@@ -174,7 +174,7 @@
             <td>New York</td>
             <td>2012/12/02</td>
           </tr>
-          <!-- <tr>
+          <tr>
             <td>Herrod Chandler</td>
             <td>Sales Assistant</td>
             <td>San Francisco</td>
