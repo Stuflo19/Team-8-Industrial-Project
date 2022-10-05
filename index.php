@@ -37,14 +37,14 @@
         <li>Role: Customer Role</li>
       </ul>
       <br>
-      <h1 class=m-auto> Company Name </h1>
+      <h1 class="m-auto"> Company Name </h1>
       <h2><i class='fa fa-refresh p-2'></i>Last checked: date</h2>
     </div>
   </nav>
 
   <main class="container-fluid p-5">
 
-    <div class="row">
+    <div class="row text-center">
       
       <!-- Placeholder for pie chart when we get it working -->
       <div class="col-lg-5 chart">
@@ -55,7 +55,7 @@
         </div>
           
       </div>
-      <div class="col-lg-2"></div>
+      <div class="col-lg-1"></div>
       <!-- Review Dates -->
       <div class="col-lg-5 d-flex align-items-center p-4" >
       <table class="table fixed_header " style="color:white">
