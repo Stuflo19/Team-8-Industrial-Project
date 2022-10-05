@@ -60,7 +60,6 @@
       <div class="col-lg">
       <table class="fixed_header" style="color:white">
         <thead>
-          <tr>
             <th class="th-sm">Name
             </th>
             <th class="th-sm">Position
@@ -69,7 +68,6 @@
             </th>
             <th class="th-sm">Start date
             </th>
-          </tr>
         </thead>
         <tbody>
           <tr>
