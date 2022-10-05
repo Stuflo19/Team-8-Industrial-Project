@@ -122,8 +122,8 @@ table{
 }
 
 .fixed_header{
-  display: block;
-  width: 80%;
+  display: inline-block; 
+  width: 100%;
   border-collapse: collapse;
   height: 600px;
   overflow-y: scroll;
@@ -138,6 +138,10 @@ table{
 .fixed_header thead tr {
   
   width: 100%; 
+}
+
+.fixed_header th, .fixed_header td{
+  padding: 5px;
 }
 
 @media (max-width: 500px) {
