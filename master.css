@@ -122,8 +122,6 @@ table{
 }
 
 .fixed_header{
-  max-width: 80%;
-  min-width: 75%;
   table-layout: fixed;
   color: white;
   margin-left: auto;
@@ -134,8 +132,14 @@ table{
 }
 
 .fixed_header tbody{
-  overflow: auto;
-  max-height: 50px;
+  display:block;
+  overflow:auto;
+  height:200px;
+  width:100%;
+}
+
+.fixed_header thead tr {
+  display: block;
 }
 
 .fixed_header th, .fixed_header td{
