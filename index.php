@@ -60,14 +60,16 @@
       <div class="col-lg">
       <table class="fixed_header" style="color:white">
         <thead>
-            <th class="th-sm">Name
+          <tr>
+            <th scope="col">Name
             </th>
-            <th class="th-sm">Position
+            <th scope="col">Position
             </th>
-            <th class="th-sm">Office
+            <th scope="col">Office
             </th>
-            <th class="th-sm">Start date
+            <th scope="col">Start date
             </th>
+          </tr>
         </thead>
         <tbody>
           <tr>
