@@ -123,6 +123,7 @@ table{
 
 .fixed_header{
   table-layout: fixed;
+  width: 50%;
   color: white;
   margin-left: auto;
   margin-right: auto;
