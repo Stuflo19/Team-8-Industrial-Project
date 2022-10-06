@@ -23,7 +23,7 @@
 </head>
 
 
-<body>
+<body onload ="generateGraph(<?php echo count($non_compliant_ids)?> , <?php echo mysqli_num_rows($result)?>)">
 
   <header class="container-fluid p-1">
 
@@ -54,18 +54,26 @@
   <!-- Submit button -->
   <button type="Submit" value="Login" class="btn btn-primary btn-block mb-4">Sign in</button>
 
-<?php 
-  include("dbconnect.php");
+  <?php 
+include("dbconnect.php");
 
-  $user_name = $_POST['user_name'];
+if(isset($_POST['sub']))
+{
+$user_name = $_POST['user_name'];
 
-  $sql = "SELECT * FROM user WHERE user_name = $user_name";
-  $result = mysqli_query($conn, $sql);
-  if($result)
-  {
-    echo "Login Success"
-    header(location:"dashboard.php")
-  }
+$res = mysqli_query($mysqli,"SELECT* from user where 'user_name'='$user_name'");
+$result=mysqli_fetch_array($res);
+if($result)
+{
+echo "You are login Successfully ";
+header("location:dashboard.php"); 
+	
+}
+else
+{
+	echo "failed ";
+}
+}
 ?>
 
 </form>
