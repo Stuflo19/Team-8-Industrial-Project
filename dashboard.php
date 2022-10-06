@@ -34,8 +34,7 @@
   <nav class="navbar navbar-expand-lg navbar-light">
     <div class="collapse navbar-collapse d-flex justify-content-around" id="navbarNav">
       <ul class="mb-auto pl-0">
-        <li>Username: <?php echo $user_name ?> </li>
-      
+        <li>Username: Customer Name</li>
         <li>Role: Customer Role</li>
       </ul>
       <br>
