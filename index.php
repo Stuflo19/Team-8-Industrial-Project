@@ -41,7 +41,7 @@
   <form action = "" method="POST">
   <!-- Email input -->
   <div class="form-outline mb-4">
-    <input type="username" id="loginuser" name="loginuser" class="form-control" />
+    <input type="username" id="user_name" name="user_name" class="form-control" />
     <label class="form-label" for="loginuser">Username</label>
   </div>
 
@@ -57,9 +57,9 @@
   <?php 
 include("dbconnect.php");
 
-$user_name = $_POST['loginuser'];
+$user_name = $_POST['user_name'];
 
-$res = mysqli_query($mysqli,"SELECT* from user where 'loginuser'='$user_name'");
+$res = mysqli_query($mysqli,"SELECT* from user where 'user_name'='$user_name'");
 $result=mysqli_fetch_array($res);
 if($result)
 {
