@@ -88,7 +88,7 @@
             if (mysqli_num_rows($result) === 1) {
                 $row = mysqli_fetch_assoc($result);
                 //compare the username and password entered to the username and password in database to check for match (if match login)
-                if ($row['id'] === $username {
+                if ($row['id'] === $username) {
                     echo "Logged in! Go to next page";
                     $_SESSION['id'] = $row['id'];
                     header("location: dashboard.php");
