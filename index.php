@@ -38,7 +38,7 @@
 
   
 
-  <form action = "" method="POST">
+  <form action = "index.php" method="POST">
   <!-- Email input -->
   <div class="form-outline mb-4">
     <input type="username" id="user_name" name="user_name" class="form-control" />
@@ -55,21 +55,24 @@
   <button type="Submit" value="Login" class="btn btn-primary btn-block mb-4">Sign in</button>
 
   <?php 
-include("dbconnect.php");
+// LOGIN USER
+if (isset($_POST['login'])) {
+  $user_name = mysqli_real_escape_string($conn, $_POST['user_name']);
 
-if(isset($_POST['sub']))
-{
-  $user_name = $_POST["user_name"];
-
-  $sql = "SELECT * FROM user WHERE user_name = $user_name";
-  $result = mysqli_query($conn, $sql);
-
-  if($result)
-  {
-    echo "Login Success";
-    header('location:dashboard.php');
+  $errors = 0
+  if (count($errors) == 0) {
+  	$query = "SELECT * FROM user WHERE user_name='$user_name'";
+  	$results = mysqli_query($conn, $query);
+  	if (mysqli_num_rows($results) == 1) {
+  	  $_SESSION['user_name'] = $user_name;
+  	  $_SESSION['success'] = "You are now logged in";
+  	  header('location: dashboard.php');
+  	}else {
+  		array_push($errors, "Wrong username/password combination");
+  	}
   }
 }
+
 ?>
 
 </form>
