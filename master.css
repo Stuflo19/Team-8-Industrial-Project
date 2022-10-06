@@ -142,8 +142,12 @@ table{
   width: 100%; 
 }
 
+.fixed_header th {
+  padding: 0px;
+}
+
 .fixed_header td {
-  padding: 3px;
+  padding: 5px;
 }
 
 .stickyHead {
