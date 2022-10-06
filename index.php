@@ -20,7 +20,6 @@
     if ($user) {
         
             header("Location: dashboard.php");
-            exit;
         }
     
 
