@@ -1,6 +1,12 @@
 <?php
   include 'dbconnect.php';
   include 'readdb.php';
+
+
+session_start();
+
+if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
+
 ?>
 
 <!DOCTYPE html>
@@ -33,7 +39,7 @@
   <nav class="navbar navbar-expand-lg navbar-light">
     <div class="collapse navbar-collapse d-flex justify-content-around" id="navbarNav">
       <ul class="mb-auto pl-0">
-        <li>Username: Customer Name</li>
+        <li>Username: <?php $_SESSION['username']; ?></li>
         <li>Role: Customer Role</li>
       </ul>
       <br>
@@ -251,7 +257,16 @@
 
 </body>
 
+</html>
 
 <?php
   $conn->close();
 ?>
+
+<?php
+}else{
+     header("Location: index.php");
+     exit();
+}
+ ?>
+
