@@ -145,7 +145,7 @@ table{
 
 .fixed_header th {
   padding: 0px;
-  margin: 0px;
+  border: 0px;
 }
 
 .fixed_header td {
@@ -157,6 +157,7 @@ table{
   position: sticky;
   top: 0;
   padding: 0px;
+  border: 0px;
 }
 
 @media (max-width: 500px) {
@@ -187,21 +188,4 @@ table{
   html {
       font-size: 15px;
   }
-}
-
-.table-fixed thead {
-  width: 100%;
-}
-.inputHeader{width:100%}
-.table-fixed tbody {
-  height: 230px;
-  overflow-y: auto;
-  width: 100%;
-}
-.table-fixed thead, .table-fixed tbody, .table-fixed tr, .table-fixed td, .table-fixed th {
-  display: block;
-}
-.table-fixed tbody td, .table-fixed thead > tr> th {
-  float: left;
-  border-bottom-width: 0;
 }
