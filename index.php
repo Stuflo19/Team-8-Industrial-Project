@@ -1,5 +1,5 @@
 <?php
-  include 'PHP/dbconnect.php';
+  include 'PHP/dbconnectlocal.php';
   include 'PHP/readdb.php';
 ?>
 
@@ -112,14 +112,14 @@
                                     {
                                       if($result_rule['id'] == $exc['rule_id'] && $row['resource_name'] == $exc['exception_value'])
                                       {
-                                        $checked = false;
+                                        $checked = $exc['suspended'] == 0 ? false : true;
                                         break;
                                       }
                                     }
                                   }
                                 }
 
-                              //if the resource edxists in the id array && ruleID at index of resource in the rules array
+                              //if the resource exists in the id array && ruleID at index of resource in the rules array
                               if($checked)
                               {
                                 echo '<td style="vertical-align: middle"><div class="exception-status"> Non-Compliant</div></td>';

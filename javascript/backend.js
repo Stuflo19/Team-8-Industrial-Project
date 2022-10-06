@@ -5,9 +5,11 @@ function updatesuspended(exceptionid, suspended)
     .then(res => res.text())
     .then((txt) => {
         console.log("\n" + txt);
-        document.getElementById("suspendButton").value = txt == "1" ? "Suspended" : "Suspend"; 
+        document.getElementById("suspendButton").value = txt == 1 ? "Unsuspend" : "Suspend";
     })
     .catch((err) => { console.error(err); });
+
+    location.reload();
     return false;
 }
 
@@ -25,6 +27,7 @@ function historybutton(id, rows)
     //check if the rule id & the exception name match the values of the button pressed.
     if(rows[i]['rule_id'] == ids[1] && rows[i]['exception_value'] == ids[0])
     {
+      console.log(rows[i]['suspended']);
       var currentDate = new Date();
       var today = new Date(currentDate.getFullYear() +"/"+ (currentDate.getMonth()+1) +"/"+ currentDate.getDate() + " " + currentDate.getUTCHours() + ":" + currentDate.getUTCMinutes());
       var review = new Date(rows[i]['review_date'].replace('-','/'));
@@ -38,7 +41,7 @@ function historybutton(id, rows)
       tr.insertCell().appendChild(document.createTextNode(today < review ? review : "EXPIRED"));
       var btn = document.createElement('input');
       btn.type = "button";
-      btn.value = rows[i]['suspended'] == 0 ? 'Suspend' : "Suspended";
+      btn.value = rows[i]['suspended'] == 0 ? 'Suspend' : "Unsuspend";
       btn.id = "suspendButton";
       btn.addEventListener("click", function () {
         updatesuspended(currRow, currSuspended);
