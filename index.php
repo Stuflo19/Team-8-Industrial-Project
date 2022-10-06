@@ -58,26 +58,26 @@
       <div class="col-lg-1"></div>
       <!-- Review Dates -->
       <div class="col-lg-5 d-flex align-items-center p-4" >
-      <table class="table fixed_header " style="color:white">
+      <table class="table fixed_header" style="color:white">
         <thead>
           <tr>
-            <th scope="col-lg">Resource
+            <th class="stickyHead" scope="col-lg">Resource
             </th>
-            <th scope="col-lg">Rule ID
+            <th class="stickyHead" scope="col-lg">Rule ID
             </th>
-            <th scope="col-lg">Created By
+            <th class="stickyHead" scope="col-lg">Created By
             </th>
-            <th scope="col-lg">Justification
+            <th class="stickyHead" scope="col-lg">Justification
             </th>
-            <th scope="col-lg">Review date
+            <th class="stickyHead" scope="col-lg">Review date
             </th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>dh-dc1</td>
-            <td>Michael Cera</td>
             <td></td>
+            <td>Michael Cera</td>
             <td>The resource would not work</td>
             <td>2011/04/25</td>
           </tr>
