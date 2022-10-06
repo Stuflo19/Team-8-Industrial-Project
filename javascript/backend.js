@@ -1,7 +1,7 @@
 function updatesuspended(exceptionid, suspended)
 {
     // fetch statement found from: https://code-boxx.com/call-php-file-from-javascript/
-    fetch("PHP\\suspend.php", {method: "POST", headers: {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"}, body: `id=${exceptionid}&suspended=${suspended}`})
+    fetch("PHP/suspend.php", {method: "POST", headers: {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"}, body: `id=${exceptionid}&suspended=${suspended}`})
     .then(res => res.text())
     .then((txt) => {
         console.log("\n" + txt);
