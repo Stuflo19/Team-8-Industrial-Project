@@ -3,14 +3,11 @@
   include 'readdb.php';
 
 
-$is_invalid = false;
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
     
 
     $user_name = $_POST["user_name"];
 
-    $conn = require __DIR__ . "/dbconnect.php";
     
     $sql = sprintf("SELECT * FROM user
                     WHERE user_name = $user_name",
@@ -25,9 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             header("Location: dashboard.php");
             exit;
         }
-    }
     
-    $is_invalid = true;
 
 
 ?>
