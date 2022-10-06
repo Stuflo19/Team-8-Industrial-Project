@@ -139,7 +139,7 @@
                       $var = "Non-Compliant";
                       if(strcmp($status_text, $var) == 0)
                       {
-                        echo "<button type='button' class='btn btn-outline-warning float-right m-1' data-toggle='modal' data-target='#newExcModal' id=". $result_rule['id']." name=". $result_rule['id'] . "," . $result_rule['resource_type_id']." onclick='addException(this.name,".json_encode($resource).",".json_encode($non_compliant).",".json_encode($exception). ")' >
+                        echo "<button type='button' class='btn btn-outline-warning float-right m-1' data-toggle='modal' data-target='#newExcModal' id=". $result_rule['id']." name=". $result_rule['id'] . "," . $result_rule['resource_type_id']." onclick='addException(this.name)' >
                         Add Exception
                         </button>";
                       }
@@ -292,5 +292,62 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   
+  <script>
+    function addException(rule_rescourceType){
+  var rows_resource = <?php echo json_encode($resource); ?>;
+  var rows_non_compliant = <?php echo json_encode($non_compliant); ?>;
+  var rows_except = <?php echo json_encode($exception); ?>;
+  //console.log(rule_rescourceType);
+  var ruleID = rule_rescourceType.split(",")[0];
+  //var resourceTypeID = rule_rescourceType.split(",")[1];
+  var resource_name = "";
+  var resource_id = 0;
+  var non_compl = 1;
+  //console.log(ruleID);
+  //console.log(resourceTypeID);
+  var select_dropdown = document.querySelector('#resourceList');
+  while (select_dropdown.firstChild) 
+  {
+    select_dropdown.removeChild(select_dropdown.firstChild);
+  }
+
+  for(var i = 0; i < rows_non_compliant.length; i++) {
+    //looking if a rule has non-compliant resources
+    if(rows_non_compliant[i]['rule_id'] == ruleID)
+    {
+      //finding the name of a resource
+      for(var j = 0; j < rows_resource.length; j++)
+      {
+        if(rows_resource[j]['id'] == rows_non_compliant[i]['resource_id'])
+        {
+          //checking if a non-compliant resource has an axception -> making a resource compliant
+          for(var k=0; k<rows_except.length; k++)
+          {
+            if(rows_resource[j]['resource_name'] === rows_except[k]['exception_value'])
+            {
+              non_compl=0;
+              break;
+            }
+          } 
+
+          if(non_compl==1)
+          {
+            resource_name = rows_resource[j]['resource_name'];
+            resource_id = rows_resource[j]['id'];
+            console.log(resource_name, ruleID);
+
+            var resourceID_ruleID = resource_id+"_"+ruleID;
+            select_dropdown.appendChild(addOption(resource_name, resourceID_ruleID));
+          }
+          
+          break;
+        }
+      }
+    }
+
+  }
+
+}
+  </script>
 
 </body>
