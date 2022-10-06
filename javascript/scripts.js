@@ -44,10 +44,15 @@ function generateGraph(noncompliant, compliant)
 // Help from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/abs
 function upcomingReviews(row) 
 {
-  console.log("Below Here");
-  console.log(row[0]['id']);
-  console.log("Above Here");
+  for(var i = 0; i < row.length; i++)
+  {
+    console.log("Below Here");
+    console.log(row[i]['exception_value']);
+    console.log("Above Here");
+
+  }
   return false;
+}
 
   // var ids = id.split(",");
 
@@ -93,6 +98,6 @@ function upcomingReviews(row)
   //   }
   // }
   
-}
+
 
             
