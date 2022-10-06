@@ -39,11 +39,11 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
   <nav class="navbar navbar-expand-lg navbar-light">
     <div class="collapse navbar-collapse d-flex justify-content-around" id="navbarNav">
       <ul class="mb-auto pl-0">
-        <li>Username: Username</li>
+        <li>Username: <?php echo $_SESSION['username'];?></li>
         <li>Role: Customer Role</li>
       </ul>
       <br>
-      <h1 class=m-auto> <?php echo $_SESSION['username'];?> </h1>
+      <h1 class=m-auto> Company Name </h1>
       <h2><i class='fa fa-refresh p-2'></i>Last checked: date</h2>
     </div>
   </nav>
