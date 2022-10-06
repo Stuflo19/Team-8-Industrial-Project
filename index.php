@@ -38,7 +38,7 @@
 
   
 
-  <form>
+  <form action = "" method="POST">
   <!-- Email input -->
   <div class="form-outline mb-4">
     <input type="username" id="loginuser" name="loginuser" class="form-control" />
@@ -57,8 +57,6 @@
   <?php 
 include("dbconnect.php");
 
-if(isset($_POST['sub']))
-{
 $user_name = $_POST['loginuser'];
 
 $res = mysqli_query($mysqli,"SELECT* from user where 'loginuser'='$user_name'");
@@ -72,7 +70,6 @@ header("location:dashboard.php");
 else
 {
 	echo "failed ";
-}
 }
 ?>
 
