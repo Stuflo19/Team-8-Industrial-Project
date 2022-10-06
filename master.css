@@ -121,6 +121,10 @@ table{
   background-color: #333333;
 }
 
+th {
+  padding: 0px;
+}
+
 .fixed_header{
   display: inline-block; 
   width: 100%;
