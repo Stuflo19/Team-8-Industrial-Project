@@ -57,23 +57,15 @@
   <?php 
 include("dbconnect.php");
 
-if(isset($_POST['sub']))
-{
 $user_name = $_POST['user_name'];
 
-$res = mysqli_query($mysqli,"SELECT* from user where 'user_name'='$user_name'");
-$result=mysqli_fetch_array($res);
-if($result)
-{
-echo "You are login Successfully ";
-header("location:dashboard.php"); 
-	
-}
-else
-{
-	echo "failed ";
-}
-}
+$sql = "SELECT * FROM user WHERE user_name = $user_name";
+  $result = mysqli_query($conn, $sql);
+  if($result)
+  {
+    echo "Login Success"
+    header(location:"dashboard.php")
+  }
 ?>
 
 </form>
