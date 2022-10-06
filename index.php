@@ -73,7 +73,7 @@
         </thead>
         <tbody>
           <tr>
-            <td>arn:aws:autoscaling:eu-west-2:011072135518:autoScalingGroup:0986b5ee-f56e-4d8c-b253-d2844d8b94d5:autoScalingGroupName/packer-asg-test</td>
+            <td>dh-dc1</td>
             <td>Michael Cera</td>
             <td>The resource would not work</td>
             <td>2011/04/25</td>
