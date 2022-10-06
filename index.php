@@ -265,7 +265,7 @@
         </div>
       </div>
     </div>
-    </main>
+  </main>
 
   <!-- Footer -->
   <footer class="container-fluid page-footer footerDesign">
@@ -277,7 +277,7 @@
         <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sit amet leo nunc. Aliquam augue nulla, ullamcorper in fringilla eget, pulvinar id tellus. Vestibulum eros tortor, porttitor a tortor sit amet, consectetur auctor nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Ut lacinia sagittis sapien id cursus.</p>
       </div>
 
-    </div>
+  </div>
 
     <div class="row">
 
@@ -298,7 +298,6 @@
   
 
 </body>
-</script>
 
 
 <script>
