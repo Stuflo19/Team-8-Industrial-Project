@@ -1,7 +1,6 @@
 <?php
   include 'dbconnect.php';
   include 'readdb.php';
-  include 'index.php';
 ?>
 
 <!DOCTYPE html>
