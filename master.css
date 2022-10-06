@@ -121,10 +121,6 @@ table{
   background-color: #333333;
 }
 
-th {
-  padding: 0px;
-}
-
 .fixed_header{
   display: inline-block; 
   width: 100%;
@@ -146,8 +142,8 @@ th {
   width: 100%; 
 }
 
-.fixed_header th, .fixed_header td{
-  padding: 5px;
+.fixed_header td {
+  padding: 3px;
 }
 
 .stickyHead {
