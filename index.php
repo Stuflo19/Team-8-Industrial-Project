@@ -38,7 +38,8 @@
 
   
 
-  <form action="index.php" method="post">
+      <!-- Use a form for data entery with method post for the php to work :) -->
+      <form action="index.php" method="post">
 
 <h2>LOGIN</h2>
 
@@ -64,7 +65,7 @@
     //Using my local db file to connect to my db for testing
     include 'dbconnect.php';
     // using post method in the form (important bit) to get data
-    if (isset($_POST['username'])) {
+    if (isset($_POST['username']) && isset($_POST['password'])) {
       // strips away whitespaces in password and username
         function validate($data){
             $data = trim($data);
@@ -73,25 +74,34 @@
         }
         //set username and password to variable
         $username = validate($_POST['username']);
+        $password = validate($_POST['password']);
         //if no username, tell them to enter one
         if (empty($username)) {
             echo "Enter username";
             exit();
         }
+        //if no password, tell them to enter one
+        else if(empty($password)){
+            echo "Enter password";
+            exit();
+        }
         //if both fields have data
         else{
           //go into database login table and select everything from username and password rows
-            $sql = "SELECT * FROM user WHERE id='$username'";
+            $sql = "SELECT * FROM login WHERE username='$username' AND password='$password'";
             //create a query to database
             $result = mysqli_query($conn, $sql);
             //if there is data in a row
             if (mysqli_num_rows($result) === 1) {
                 $row = mysqli_fetch_assoc($result);
                 //compare the username and password entered to the username and password in database to check for match (if match login)
-                if ($row['id'] === $username) {
+                if ($row['username'] === $username && $row['password'] === $password) {
                     echo "Logged in! Go to next page";
+                    $_SESSION['username'] = $row['username'];
+                    $_SESSION['password'] = $row['password'];
                     $_SESSION['id'] = $row['id'];
-                    header("location: https://issue-br-issue-15.herokuapp.com/dashboard.php");
+                    $_SESSION['user_id'] = $row['user_id'];
+                    header("Location: https://issue-br-issue-15.herokuapp.com/dashboard.php");
                     exit();
                 }
                 //if not match, tell them incorrect
