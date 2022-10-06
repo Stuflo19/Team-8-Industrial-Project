@@ -91,6 +91,7 @@
                 if ($row['id'] === $username {
                     echo "Logged in! Go to next page";
                     $_SESSION['id'] = $row['id'];
+                    header("location: dashboard.php")
                     exit();
                 }
                 //if not match, tell them incorrect
