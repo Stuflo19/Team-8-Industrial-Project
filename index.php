@@ -135,8 +135,15 @@
                       </tbody>
                     </table>
                     </div>
-                    <button type="button" id="<?php echo 'Rule' . $result_rule['id'];?>" class="btn btn-outline-warning float-right m-1" data-toggle="modal" data-target="#newExcModal">Add Exception</button>
-                    
+                    <?php
+                      $var = "Non-Compliant";
+                      if(strcmp($status_text, $var) == 0)
+                      {
+                        echo "<button type='button' class='btn btn-outline-warning float-right m-1' data-toggle='modal' data-target='#newExcModal' id=". $result_rule['id']." name=". $result_rule['id'] . "," . $result_rule['resource_type_id']." onclick='addException(this.name,".json_encode($resource).",".json_encode($non_compliant).",".json_encode($exception). " ' >
+                        Add Exception
+                        </button>";
+                      }
+                    ?>
                   </div>
                 </div>
               </div>
@@ -168,30 +175,61 @@
             </button>
           </div>
           <div class="modal-body">
-            <form>
+            <form action="" method="post">
               <div class="form-group">
                 <label for="resources-list" class="col-form-label">Select a cloud resource:</label>
-                <select style= "width:100%; color: white; background-color: #333333" id="resources-list">
-                  <!-- Temp until we can read in resources from the db -->
-                  <option label="T1"></option>
-                  <option label="T2"></option>
-                  <option label="T3"></option>
-                  <option label="T4"></option>
+                <select style= "width:100%; color: white; background-color: #333333" name="resourceList" id="resourceList">
+                <!-- OPTIONS are created dynamically -->
                 </select>
               </div>
+
               <div class="form-group">
                 <label for="message-text" class="col-form-label">Justification:</label>
-                <textarea class="form-control" id="message-text" style="color: white; background-color: #333333"></textarea>
+                <textarea class="form-control" id="newJustification" name="newJustification" style="color: white; background-color: #333333" maxlength="200" required></textarea>
               </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
-            <button type="button" class="btn btn-primary">Submit</button>
+              <!-- Exception Value = resource name  -->
+              <div class="form-group">
+                <label for="message-text" class="col-form-label">Review Date:</label>
+                <!-- Code taken from https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date -->
+                <input type="date" id="newReviewDate" name="newReviewDate" value="<?php echo date("Y-m-d")?>" min="<?php echo date("Y-m-d", strtotime("+1 day"))?>" max="<?php echo date("Y-m-d", strtotime("+1 year"))?>">
+                <!-- <input id="today" type="date"> -->
+              </div>
+              
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>   
+            </form>    
+            <?php
+              //id
+              $len_exception = count($exception)+1;
+              //last_updates = today's day
+              $date = date("Y-m-d H:i:sa");
+              //ruleID
+              $justif = $_POST['newJustification'];
+              //echo $justif;
+              $IDs = $_POST['resourceList'];
+              $ruleID = intval(explode("_",$IDs)[1]);
+              //exception_value
+              $resourceID= intval(explode("_",$IDs)[0]);
+              $exception_value = "";
+              while($row =mysqli_fetch_array($result_res))
+              {
+                if($row['id'] == $resourceID)
+                {
+                  $exception_value = $row['resource_name'];
+                }
+              }
+              //customer_id & last_updated_by are FIXED values
+              $addExceptionS="INSERT INTO exception(id, customer_id, rule_id,last_updated_by, exception_value, justification, review_date, last_updated, suspended) VALUES (".$len_exception. ", 1,". $ruleID .",'system','" . $exception_value . "','".$justif."', '" . $_POST['newReviewDate'] . "','". $date ."',0 );";
+              //echo $addException;
+              $insertQ = mysqli_query($conn,$addExceptionS);
+            ?>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+
 
     <!-- View History Modal -->
     <div class="modal fade bd-example-modal-lg" id="historyModal" tabindex="-1" role="dialog" aria-labelledby="historyModalLabel" aria-hidden="true">
