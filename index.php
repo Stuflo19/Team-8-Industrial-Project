@@ -101,7 +101,7 @@
                     $_SESSION['password'] = $row['password'];
                     $_SESSION['id'] = $row['id'];
                     $_SESSION['user_id'] = $row['user_id'];
-                    header("Location: https://issue-br-issue-15.herokuapp.com/dashboard.php");
+                    header("Location: dashboard.php");
                     exit();
                 }
                 //if not match, tell them incorrect
