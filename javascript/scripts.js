@@ -43,7 +43,9 @@ function generateGraph(noncompliant, compliant)
 // Help from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/abs
 function upcomingReviews(exceptions) 
 {
-  console.log(exceptions[1]);
+  console.log("Below Here");
+  console.log(exceptions);
+  console.log("Above Here");
 
   // var ids = id.split(",");
 
