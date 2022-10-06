@@ -1,6 +1,6 @@
 async function updatesuspended(exceptionid, suspended)
 {
-    // fetch statement found from: https://code-boxx.com/call-php-file-from-javascript/
+    // fetch statement found from: https://code-boxx.com/call-php-file-from-javascript/ && https://sebhastian.com/call-php-function-from-javascript/ 
     await fetch("PHP/suspend.php", {mode: 'cors', method: "POST", headers: {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"}, body: `id=${exceptionid}&suspended=${suspended}`})
     .then(res => res.text())
     .then((txt) => {
