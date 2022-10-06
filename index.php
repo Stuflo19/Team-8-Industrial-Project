@@ -52,10 +52,10 @@
   </div>
 
   <!-- Submit button -->
-  <button type="Submit" class="btn btn-primary btn-block mb-4">Sign in</button>
+  <button type="Submit" value="Login" class="btn btn-primary btn-block mb-4">Sign in</button>
 
   <?php 
-include("config.php");
+include("dbconnect.php");
 
 if(isset($_POST['sub']))
 {
