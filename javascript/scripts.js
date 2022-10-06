@@ -1,7 +1,8 @@
 function callAll(x, y, exceptions)
 {
-  generateGraph(x, y);
   upcomingReviews(exceptions);
+  generateGraph(x, y);
+  
 }
 
 function generateGraph(noncompliant, compliant)
@@ -41,10 +42,10 @@ function generateGraph(noncompliant, compliant)
 }
 
 // Help from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/abs
-function upcomingReviews(exceptions) 
+function upcomingReviews(row) 
 {
   console.log("Below Here");
-  console.log(exceptions[0]['exception_value']);
+  console.log(row[0]['exception_value']);
   console.log("Above Here");
 
   // var ids = id.split(",");
