@@ -54,12 +54,12 @@
   <!-- Submit button -->
   <button type="Submit" value="Login" class="btn btn-primary btn-block mb-4">Sign in</button>
 
-  <?php 
-include("dbconnect.php");
+<?php 
+  include("dbconnect.php");
 
-$user_name = $_POST['user_name'];
+  $user_name = $_POST['user_name'];
 
-$sql = "SELECT * FROM user WHERE user_name = $user_name";
+  $sql = "SELECT * FROM user WHERE user_name = $user_name";
   $result = mysqli_query($conn, $sql);
   if($result)
   {
