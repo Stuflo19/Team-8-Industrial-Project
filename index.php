@@ -1,6 +1,35 @@
 <?php
   include 'dbconnect.php';
   include 'readdb.php';
+
+
+$is_invalid = false;
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    
+
+    $user_name = $_POST["user_name"];
+
+    $conn = require __DIR__ . "/dbconnect.php";
+    
+    $sql = sprintf("SELECT * FROM user
+                    WHERE user_name = $user_name",
+                   $conn->real_escape_string($_POST["user_name"]));
+    
+    $result = $conn->query($sql);
+    
+    $user = $conn->fetch_assoc();
+    
+    if ($user) {
+        
+            header("Location: dashboard.php");
+            exit;
+        }
+    }
+    
+    $is_invalid = true;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -38,7 +67,7 @@
 
   
 
-  <form action = "" method="POST">
+  <form method="post">
   <!-- Email input -->
   <div class="form-outline mb-4">
     <input type="username" id="user_name" name="user_name" class="form-control" />
@@ -54,21 +83,6 @@
   <!-- Submit button -->
   <button type="Submit" value="Login" class="btn btn-primary btn-block mb-4">Sign in</button>
 
-  <?php 
-  if(isset($_POST['login']))
-  {
-    $user_name = mysqli_real_escape_string($conn, $_POST['user_name']);
-
-    $query = "SELECT * FROM user WHERE user_name='$user_name'";
-    $results = mysqli_query($conn, $query);
-    if (mysqli_num_rows($results) == 1)
-    {
-      $_SESSION['user_name'] = $user_name;
-      header('location: dashboard.php');
-    }
-  }
-
-  ?>
 
 </form>
 
