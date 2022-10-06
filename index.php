@@ -38,84 +38,81 @@
 
   
 
-     <!-- Use a form for data entery with method post for the php to work :) -->
-     <form method="post">
+  <form action="index.php" method="post">
 
-        <h2>LOGIN</h2>
+<h2>LOGIN</h2>
 
-        <?php if (isset($_GET['error'])) { ?>
+<?php if (isset($_GET['error'])) { ?>
 
-            <p class="error"><?php echo $_GET['error']; ?></p>
+    <p class="error"><?php echo $_GET['error']; ?></p>
 
-        <?php } ?>
+<?php } ?>
 
-        <label>User Name</label>
+<label>User Name</label>
 
-        <input type="text" name="user_name" placeholder="User Name"><br>
+<input type="text" name="username" placeholder="User Name"><br>
 
-        <label>Password</label>
+<label>Password</label>
 
-        <input type="password" name="password" placeholder="Password"><br> 
+<input type="password" name="password" placeholder="Password"><br> 
 
-        <button type="submit">Login</button>
-        
-        <?php 
-            //Creates the session
-            session_start(); 
-            //Using my local db file to connect to my db for testing
-            include 'dbconnect.php';
-            // using post method in the form (important bit) to get data
-            if (isset($_POST['user_name'])) {
-              // strips away whitespaces in password and user_name
-                function validate($data){
-                    $data = trim($data);
-                    return $data;
-            
-                }
-                //set user_name and password to variable
-                $user_name = validate($_POST['user_name']);
-                //if no user_name, tell them to enter one
-                if (empty($user_name)) {
-                    echo "Enter user_name";
+<button type="submit">Login</button>
+
+<?php 
+    //Creates the session
+    session_start(); 
+    //Using my local db file to connect to my db for testing
+    include 'dbconnect.php';
+    // using post method in the form (important bit) to get data
+    if (isset($_POST['username'])) {
+      // strips away whitespaces in password and username
+        function validate($data){
+            $data = trim($data);
+            return $data;
+    
+        }
+        //set username and password to variable
+        $username = validate($_POST['username']);
+        //if no username, tell them to enter one
+        if (empty($username)) {
+            echo "Enter username";
+            exit();
+        }
+        //if both fields have data
+        else{
+          //go into database login table and select everything from username and password rows
+            $sql = "SELECT * FROM user WHERE id='$username'";
+            //create a query to database
+            $result = mysqli_query($conn, $sql);
+            //if there is data in a row
+            if (mysqli_num_rows($result) === 1) {
+                $row = mysqli_fetch_assoc($result);
+                //compare the username and password entered to the username and password in database to check for match (if match login)
+                if ($row['id'] === $username {
+                    echo "Logged in! Go to next page";
+                    $_SESSION['id'] = $row['id'];
                     exit();
                 }
-                //if both fields have data
-                else{
-                  //go into database login table and select everything from user_name and password rows
-                    $sql = "SELECT * FROM user WHERE user_name='$user_name'";
-                    //create a query to database
-                    $result = mysqli_query($conn, $sql);
-                    //if there is data in a row
-                    if (mysqli_num_rows($result) === 1) {
-                        $row = mysqli_fetch_assoc($result);
-                        //compare the user_name and password entered to the user_name and password in database to check for match (if match login)
-                        if ($row['user_name'] === $user_name) {
-                            echo "Logged in! Go to next page";
-                            $_SESSION['user_name'] = $row['user_name'];
-                            $_SESSION['user_id'] = $row['user_id'];
-                            header('location: dashboard.php');
-                            exit();
-                        }
-                        //if not match, tell them incorrect
-                        else {
-                            echo "Incorrect user_name or password";
-                            exit();
-                        }
-                    }
-                    //if not match, tell them incorrect
-                    else {
-                        echo "Incorrect user_name or password";
-                        exit();
-                    }
+                //if not match, tell them incorrect
+                else {
+                    echo "Incorrect username or password";
+                    exit();
                 }
             }
-
+            //if not match, tell them incorrect
             else {
-              echo "no";
+                echo "Incorrect username or password";
                 exit();
             }
-        ?>
-     </form>
+        }
+    }
+
+    else {
+      echo "no";
+        exit();
+    }
+?>
+</form>
 
   </main>
 
