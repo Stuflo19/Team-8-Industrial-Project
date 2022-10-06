@@ -45,7 +45,7 @@ function generateGraph(noncompliant, compliant)
 function upcomingReviews(row) 
 {
   console.log("Below Here");
-  console.log(row);
+  console.log(row[0]['id']);
   console.log("Above Here");
 
   // var ids = id.split(",");
