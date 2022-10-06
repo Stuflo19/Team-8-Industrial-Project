@@ -1,8 +1,8 @@
-function callAll(x, y, exceptions)
+function callAll(x, y, row)
 {
-  upcomingReviews(exceptions);
-  generateGraph(x, y);
   
+  generateGraph(x, y);
+  upcomingReviews(row);
 }
 
 function generateGraph(noncompliant, compliant)
