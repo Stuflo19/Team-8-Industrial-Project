@@ -39,7 +39,7 @@
   
 
      <!-- Use a form for data entery with method post for the php to work :) -->
-     <form action="index.php" method="post">
+     <form method="post">
 
         <h2>LOGIN</h2>
 
