@@ -67,7 +67,7 @@ if(isset($_POST['sub']))
   if($result)
   {
     echo "Login Success";
-    header(location:"dashboard.php");
+    header('location:dashboard.php');
   }
 }
 ?>
