@@ -1,7 +1,7 @@
 function callAll(x, y, row)
 {
   
-  //generateGraph(x, y);
+  generateGraph(x, y);
   upcomingReviews(row);
 }
 
@@ -44,14 +44,11 @@ function generateGraph(noncompliant, compliant)
 // Help from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/abs
 function upcomingReviews(row) 
 {
-  for(var i = 0; i < row.length; i++)
-  {
+  
     console.log("Below Here");
     console.log(row);
     console.log("Above Here");
 
-  }
-  return false;
 }
 
   // var ids = id.split(",");
