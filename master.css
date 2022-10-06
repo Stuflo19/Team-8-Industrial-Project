@@ -117,11 +117,10 @@ table{
   background-color: #333333;
 }
 
-form{
-  width: 400px;
-  text-align: center;
+.form-centre {
+  display: flex;
+  justify-content: center;
 }
-
 
 
 @media (max-width: 500px) {

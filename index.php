@@ -36,7 +36,7 @@
 
 
 
-  
+  <div class="form-centre">
 
       <!-- Use a form for data entery with method post for the php to work :) -->
       <form action="index.php" method="post">
@@ -125,6 +125,8 @@
 ?>
 </form>
 
+  </div>
+  
   </main>
 
   <!-- Footer -->
