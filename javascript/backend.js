@@ -1,7 +1,7 @@
-function updatesuspended(exceptionid, suspended)
+async function updatesuspended(exceptionid, suspended)
 {
     // fetch statement found from: https://code-boxx.com/call-php-file-from-javascript/
-    fetch("PHP/suspend.php", {method: "POST", headers: {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"}, body: `id=${exceptionid}&suspended=${suspended}`})
+    await fetch("PHP/suspend.php", {method: "POST", headers: {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"}, body: `id=${exceptionid}&suspended=${suspended}`})
     .then(res => res.text())
     .then((txt) => {
         document.getElementById("suspendButton").value = txt == 1 ? "Unsuspend" : "Suspend";
@@ -43,7 +43,7 @@ function historybutton(id, rows)
       btn.value = rows[i]['suspended'] == 0 ? 'Suspend' : "Unsuspend";
       btn.id = "suspendButton";
       btn.addEventListener("click", function () {
-        updatesuspended(currRow, currSuspended, event);
+        updatesuspended(currRow, currSuspended);
       });
       btn.className = "btn btn-outline-warning";
       tr.insertCell().appendChild(btn);
