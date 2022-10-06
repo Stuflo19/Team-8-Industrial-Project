@@ -60,7 +60,6 @@
       <div class="col-lg-5 d-flex align-items-center p-4" >
       <table class="table fixed_header" style="color:white">
         <thead style="position: sticky;top: 0" class="thead-dark">
-          <tr>
             <th class="stickyHead" scope="col-lg">Resource
             </th>
             <th class="stickyHead" scope="col-lg">Rule ID
@@ -71,7 +70,6 @@
             </th>
             <th class="stickyHead" scope="col-lg">Review date
             </th>
-          </tr>
         </thead>
         <tbody>
           <tr>
