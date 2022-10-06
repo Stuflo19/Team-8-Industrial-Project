@@ -138,7 +138,7 @@ table{
 }
 
 .fixed_header thead tr {
-  
+  padding: 0px;
   width: 100%; 
 }
 
