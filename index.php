@@ -24,7 +24,7 @@
 </head>
 
 
-<body onload ="callAll(<?php echo count($non_compliant_ids)?> , <?php echo mysqli_num_rows($result)?>), <?php json_encode($exception) ?>">
+<body onload ="callAll(<?php echo count($non_compliant_ids)?> , <?php echo mysqli_num_rows($result)?>, <?php echo json_encode($exception) ?>)">
 
   <header class="container-fluid p-1">
 
