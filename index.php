@@ -63,6 +63,8 @@
           <tr>
             <th scope="col-lg">Resource
             </th>
+            <th scope="col-lg">Rule ID
+            </th>
             <th scope="col-lg">Created By
             </th>
             <th scope="col-lg">Justification
@@ -75,6 +77,7 @@
           <tr>
             <td>dh-dc1</td>
             <td>Michael Cera</td>
+            <td></td>
             <td>The resource would not work</td>
             <td>2011/04/25</td>
           </tr>

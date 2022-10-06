@@ -144,6 +144,7 @@ table{
 
 .fixed_header th, .fixed_header td{
   padding: 5px;
+  position: sticky;
 }
 
 @media (max-width: 500px) {
