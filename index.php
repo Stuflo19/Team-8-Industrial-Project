@@ -101,7 +101,7 @@
                     $_SESSION['password'] = $row['password'];
                     $_SESSION['id'] = $row['id'];
                     $_SESSION['user_id'] = $row['user_id'];
-                    header("Location: dashboard.php");
+                    header("Location: login.php");
                     exit();
                 }
                 //if not match, tell them incorrect
@@ -126,7 +126,7 @@
 </form>
 
   </div>
-  
+
   </main>
 
   <!-- Footer -->
