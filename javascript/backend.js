@@ -43,10 +43,12 @@ function historybutton(id, rows)
       btn.value = rows[i]['suspended'] == 0 ? 'Suspend' : "Unsuspend";
       btn.id = "suspendButton";
       btn.addEventListener("click", function () {
-        updatesuspended(currRow, currSuspended);
+        updatesuspended(currRow, currSuspended, event);
       });
       btn.className = "btn btn-outline-warning";
       tr.insertCell().appendChild(btn);
     }
   }
+
+  return false;
 }
