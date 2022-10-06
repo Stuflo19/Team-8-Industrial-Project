@@ -139,7 +139,7 @@
                       $var = "Non-Compliant";
                       if(strcmp($status_text, $var) == 0)
                       {
-                        echo "<button type='button' class='btn btn-outline-warning float-right m-1' data-toggle='modal' data-target='#newExcModal' id=". $result_rule['id']." name=". $result_rule['id'] . "," . $result_rule['resource_type_id']." onclick='addException(this.name)' >
+                        echo "<button type='button' class='btn btn-outline-warning float-right m-1' data-toggle='modal' data-target='#newExcModal' id=". $result_rule['id']." name=". $result_rule['id'] . "," . $result_rule['resource_type_id']." onclick='addException(this.name,".json_encode($resource).",".json_encode($non_compliant).",".json_encode($exception). ")' >
                         Add Exception
                         </button>";
                       }
@@ -164,8 +164,8 @@
         </div>
 
     </div>
-  <!-- Add exception Modal -->
-  <div class="modal fade" id="newExcModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- Add exception Modal -->
+    <div class="modal fade" id="newExcModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content bg-dark" style="background-color: #115e67">
           <div class="modal-header">
@@ -177,11 +177,12 @@
           <div class="modal-body">
             <form action="" method="post">
               <div class="form-group">
-                <label for="resourceList" class="col-form-label">Select a cloud resource:</label>
+                <label for="resources-list" class="col-form-label">Select a cloud resource:</label>
                 <select style= "width:100%; color: white; background-color: #333333" name="resourceList" id="resourceList">
-                  <!-- OPTIONS created dynamically -->
+                <!-- OPTIONS are created dynamically -->
                 </select>
               </div>
+
               <div class="form-group">
                 <label for="message-text" class="col-form-label">Justification:</label>
                 <textarea class="form-control" id="newJustification" name="newJustification" style="color: white; background-color: #333333" maxlength="200" required></textarea>
@@ -192,16 +193,14 @@
                 <!-- Code taken from https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date -->
                 <input type="date" id="newReviewDate" name="newReviewDate" value="<?php echo date("Y-m-d")?>" min="<?php echo date("Y-m-d", strtotime("+1 day"))?>" max="<?php echo date("Y-m-d", strtotime("+1 year"))?>">
                 <!-- <input id="today" type="date"> -->
-                
               </div>
               
-              </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                </div>   
-            </form>
-          <?php
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>   
+            </form>    
+            <?php
               //id
               $len_exception = count($exception)+1;
               //last_updates = today's day
@@ -221,20 +220,15 @@
                   $exception_value = $row['resource_name'];
                 }
               }
-
               //customer_id & last_updated_by are FIXED values
-           
               $addExceptionS="INSERT INTO exception(id, customer_id, rule_id,last_updated_by, exception_value, justification, review_date, last_updated, suspended) VALUES (".$len_exception. ", 1,". $ruleID .",'system','" . $exception_value . "','".$justif."', '" . $_POST['newReviewDate'] . "','". $date ."',0 );";
               //echo $addException;
               $insertQ = mysqli_query($conn,$addExceptionS);
-
-
             ?>
-
-
+            </div>
+          </div>
         </div>
       </div>
-    </div>
 
 
     <!-- View History Modal -->
@@ -298,62 +292,5 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   
-  <script>
-    function addException(rule_rescourceType){
-  var rows_resource = <?php echo json_encode($resource); ?>;
-  var rows_non_compliant = <?php echo json_encode($non_compliant); ?>;
-  var rows_except = <?php echo json_encode($exception); ?>;
-  //console.log(rule_rescourceType);
-  var ruleID = rule_rescourceType.split(",")[0];
-  //var resourceTypeID = rule_rescourceType.split(",")[1];
-  var resource_name = "";
-  var resource_id = 0;
-  var non_compl = 1;
-  //console.log(ruleID);
-  //console.log(resourceTypeID);
-  var select_dropdown = document.querySelector('#resourceList');
-  while (select_dropdown.firstChild) 
-  {
-    select_dropdown.removeChild(select_dropdown.firstChild);
-  }
-
-  for(var i = 0; i < rows_non_compliant.length; i++) {
-    //looking if a rule has non-compliant resources
-    if(rows_non_compliant[i]['rule_id'] == ruleID)
-    {
-      //finding the name of a resource
-      for(var j = 0; j < rows_resource.length; j++)
-      {
-        if(rows_resource[j]['id'] == rows_non_compliant[i]['resource_id'])
-        {
-          //checking if a non-compliant resource has an axception -> making a resource compliant
-          for(var k=0; k<rows_except.length; k++)
-          {
-            if(rows_resource[j]['resource_name'] === rows_except[k]['exception_value'])
-            {
-              non_compl=0;
-              break;
-            }
-          } 
-
-          if(non_compl==1)
-          {
-            resource_name = rows_resource[j]['resource_name'];
-            resource_id = rows_resource[j]['id'];
-            console.log(resource_name, ruleID);
-
-            var resourceID_ruleID = resource_id+"_"+ruleID;
-            select_dropdown.appendChild(addOption(resource_name, resourceID_ruleID));
-          }
-          
-          break;
-        }
-      }
-    }
-
-  }
-
-}
-  </script>
 
 </body>
