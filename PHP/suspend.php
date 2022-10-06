@@ -20,4 +20,6 @@
     else {
         echo "error transmitting ID";
     }
+
+    $conn->close();
 ?>

@@ -5,14 +5,7 @@ function updatesuspended(exceptionid, suspended)
     .then(res => res.text())
     .then((txt) => {
         console.log("\n" + txt);
-        if(txt == "1")
-        {
-            document.getElementById("suspendButton").value = "Suspended"; 
-        }
-        else
-        {
-            document.getElementById("suspendButton").value = "Suspend";
-        }
+        document.getElementById("suspendButton").value = txt == "1" ? "Suspended" : "Suspend"; 
     })
     .catch((err) => { console.error(err); });
     return false;
