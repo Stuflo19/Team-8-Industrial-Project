@@ -57,6 +57,8 @@
   <?php 
 include("dbconnect.php");
 
+if(isset($_POST['sub']))
+{
 $user_name = $_POST['user_name'];
 
 $res = mysqli_query($mysqli,"SELECT* from user where 'user_name'='$user_name'");
@@ -70,6 +72,7 @@ header("location:dashboard.php");
 else
 {
 	echo "failed ";
+}
 }
 ?>
 
