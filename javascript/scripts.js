@@ -1,7 +1,7 @@
 function callAll(x, y, row)
 {
   
-  generateGraph(x, y);
+  //generateGraph(x, y);
   upcomingReviews(row);
 }
 
