@@ -1,35 +1,6 @@
 <?php
   include 'dbconnect.php';
   include 'readdb.php';
-
-
-$is_invalid = false;
-
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    
-
-    $user_name = $_POST["user_name"];
-
-    $conn = require __DIR__ . "/dbconnect.php";
-    
-    $sql = sprintf("SELECT * FROM user
-                    WHERE user_name = $user_name",
-                   $conn->real_escape_string($_POST["user_name"]));
-    
-    $result = $conn->query($sql);
-    
-    $user = $conn->fetch_assoc();
-    
-    if ($user) {
-        
-            header("Location: dashboard.php");
-            exit;
-        }
-    }
-    
-    $is_invalid = true;
-
-
 ?>
 
 <!DOCTYPE html>
@@ -52,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </head>
 
 
-<body onload ="generateGraph(<?php echo count($non_compliant_ids)?> , <?php echo mysqli_num_rows($result)?>)">
+<body>
 
   <header class="container-fluid p-1">
 
@@ -67,24 +38,84 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
   
 
-  <form method="post">
-  <!-- Email input -->
-  <div class="form-outline mb-4">
-    <input type="username" id="user_name" name="user_name" class="form-control" />
-    <label class="form-label" for="loginuser">Username</label>
-  </div>
+     <!-- Use a form for data entery with method post for the php to work :) -->
+     <form method="post">
 
-  <!-- Password input -->
-  <div class="form-outline mb-4">
-    <input type="password" id="loginpassword" name="loginpassword" class="form-control" />
-    <label class="form-label" for="loginpassword">Password</label>
-  </div>
+        <h2>LOGIN</h2>
 
-  <!-- Submit button -->
-  <button type="Submit" value="Login" class="btn btn-primary btn-block mb-4">Sign in</button>
+        <?php if (isset($_GET['error'])) { ?>
 
+            <p class="error"><?php echo $_GET['error']; ?></p>
 
-</form>
+        <?php } ?>
+
+        <label>User Name</label>
+
+        <input type="text" name="user_name" placeholder="User Name"><br>
+
+        <label>Password</label>
+
+        <input type="password" name="password" placeholder="Password"><br> 
+
+        <button type="submit">Login</button>
+        
+        <?php 
+            //Creates the session
+            session_start(); 
+            //Using my local db file to connect to my db for testing
+            include 'dbconnect.php';
+            // using post method in the form (important bit) to get data
+            if (isset($_POST['user_name'])) {
+              // strips away whitespaces in password and user_name
+                function validate($data){
+                    $data = trim($data);
+                    return $data;
+            
+                }
+                //set user_name and password to variable
+                $user_name = validate($_POST['user_name']);
+                //if no user_name, tell them to enter one
+                if (empty($user_name)) {
+                    echo "Enter user_name";
+                    exit();
+                }
+                //if both fields have data
+                else{
+                  //go into database login table and select everything from user_name and password rows
+                    $sql = "SELECT * FROM user WHERE user_name='$user_name'";
+                    //create a query to database
+                    $result = mysqli_query($conn, $sql);
+                    //if there is data in a row
+                    if (mysqli_num_rows($result) === 1) {
+                        $row = mysqli_fetch_assoc($result);
+                        //compare the user_name and password entered to the user_name and password in database to check for match (if match login)
+                        if ($row['user_name'] === $user_name) {
+                            echo "Logged in! Go to next page";
+                            $_SESSION['user_name'] = $row['user_name'];
+                            $_SESSION['user_id'] = $row['user_id'];
+                            header('location: dashboard.php');
+                            exit();
+                        }
+                        //if not match, tell them incorrect
+                        else {
+                            echo "Incorrect user_name or password";
+                            exit();
+                        }
+                    }
+                    //if not match, tell them incorrect
+                    else {
+                        echo "Incorrect user_name or password";
+                        exit();
+                    }
+                }
+            }
+
+            else {
+              echo "no";
+                exit();
+            }
+        ?>
+     </form>
 
   </main>
 
