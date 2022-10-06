@@ -93,7 +93,7 @@
                             echo "Logged in! Go to next page";
                             $_SESSION['user_name'] = $row['user_name'];
                             $_SESSION['user_id'] = $row['user_id'];
-                            header('location: dashboard.php')
+                            header('location: dashboard.php');
                             exit();
                         }
                         //if not match, tell them incorrect
