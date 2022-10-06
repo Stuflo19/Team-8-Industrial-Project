@@ -23,7 +23,7 @@
 </head>
 
 
-<body onload ="generateGraph(<?php echo count($non_compliant_ids)?> , <?php echo mysqli_num_rows($result)?>)">
+<body>
 
   <header class="container-fluid p-1">
 
