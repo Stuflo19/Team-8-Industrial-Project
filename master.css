@@ -147,8 +147,9 @@ table{
 }
 
 .stickyHead {
-  position:sticky;
+  position: sticky;
   top: 0;
+  padding: 0px;
 }
 
 @media (max-width: 500px) {
