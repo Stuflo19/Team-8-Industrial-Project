@@ -55,22 +55,20 @@
   <button type="Submit" value="Login" class="btn btn-primary btn-block mb-4">Sign in</button>
 
   <?php 
-include("dbconnect.php");
-
-if(isset($_POST['sub']))
-{
-  $user_name = $_POST["user_name"];
-
-  $sql = "SELECT * FROM user WHERE user_name = $user_name";
-  $result = mysqli_query($conn, $sql);
-
-  if($result)
+  if(isset($_POST['login']))
   {
-    echo "Login Success";
-    header('location:dashboard.php');
+    $user_name = mysqli_real_escape_string($conn, $_POST['user_name']);
+
+    $query = "SELECT * FROM user WHERE user_name='$user_name'";
+    $results = mysqli_query($conn, $query);
+    if (mysqli_num_rows($results) == 1)
+    {
+      $_SESSION['user_name'] = $user_name;
+      header('location: dashboard.php');
+    }
   }
-}
-?>
+
+  ?>
 
 </form>
 
