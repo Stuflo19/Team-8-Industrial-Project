@@ -164,8 +164,8 @@
         </div>
 
     </div>
-    <!-- Add exception Modal -->
-    <div class="modal fade" id="newExcModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <!-- Add exception Modal -->
+  <div class="modal fade" id="newExcModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content bg-dark" style="background-color: #115e67">
           <div class="modal-header">
@@ -177,12 +177,11 @@
           <div class="modal-body">
             <form action="" method="post">
               <div class="form-group">
-                <label for="resources-list" class="col-form-label">Select a cloud resource:</label>
+                <label for="resourceList" class="col-form-label">Select a cloud resource:</label>
                 <select style= "width:100%; color: white; background-color: #333333" name="resourceList" id="resourceList">
-                <!-- OPTIONS are created dynamically -->
+                  <!-- OPTIONS created dynamically -->
                 </select>
               </div>
-
               <div class="form-group">
                 <label for="message-text" class="col-form-label">Justification:</label>
                 <textarea class="form-control" id="newJustification" name="newJustification" style="color: white; background-color: #333333" maxlength="200" required></textarea>
@@ -193,14 +192,16 @@
                 <!-- Code taken from https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date -->
                 <input type="date" id="newReviewDate" name="newReviewDate" value="<?php echo date("Y-m-d")?>" min="<?php echo date("Y-m-d", strtotime("+1 day"))?>" max="<?php echo date("Y-m-d", strtotime("+1 year"))?>">
                 <!-- <input id="today" type="date"> -->
+                
               </div>
               
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </div>   
-            </form>    
-            <?php
+              </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>   
+            </form>
+          <?php
               //id
               $len_exception = count($exception)+1;
               //last_updates = today's day
@@ -220,15 +221,20 @@
                   $exception_value = $row['resource_name'];
                 }
               }
+
               //customer_id & last_updated_by are FIXED values
+           
               $addExceptionS="INSERT INTO exception(id, customer_id, rule_id,last_updated_by, exception_value, justification, review_date, last_updated, suspended) VALUES (".$len_exception. ", 1,". $ruleID .",'system','" . $exception_value . "','".$justif."', '" . $_POST['newReviewDate'] . "','". $date ."',0 );";
               //echo $addException;
               $insertQ = mysqli_query($conn,$addExceptionS);
+
+
             ?>
-            </div>
-          </div>
+
+
         </div>
       </div>
+    </div>
 
 
     <!-- View History Modal -->
