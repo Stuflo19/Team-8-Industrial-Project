@@ -47,7 +47,7 @@ function upcomingReviews(row)
   for(var i = 0; i < row.length; i++)
   {
     console.log("Below Here");
-    console.log(row[i]['exception_value']);
+    console.log(row);
     console.log("Above Here");
 
   }
