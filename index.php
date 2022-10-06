@@ -38,7 +38,7 @@
 
   
 
-  <form action = "" method="POST">
+  <form action = "dashboard.php" method="POST">
   <!-- Email input -->
   <div class="form-outline mb-4">
     <input type="username" id="user_name" name="user_name" class="form-control" />
