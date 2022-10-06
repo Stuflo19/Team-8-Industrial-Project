@@ -154,6 +154,7 @@ table{
   position: sticky;
   top: 0;
   padding: 0px;
+  margin: 0px;
 }
 
 @media (max-width: 500px) {
