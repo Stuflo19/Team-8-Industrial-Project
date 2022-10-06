@@ -1,5 +1,6 @@
-<!-- Script taken from guide at: https://www.doabledanny.com/Deploy-PHP-And-MySQL-to-Heroku -->
 <?php
+// Script taken from guide at: https://www.doabledanny.com/Deploy-PHP-And-MySQL-to-Heroku
+
     //Get Heroku ClearDB connection information
     $cleardb_url = parse_url(getenv("CLEARDB_DATABASE_URL"));
     $cleardb_server = $cleardb_url["host"];
