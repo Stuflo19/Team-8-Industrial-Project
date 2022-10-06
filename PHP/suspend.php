@@ -1,5 +1,5 @@
 <?php
-    include 'dbconnectlocal.php';
+    include 'dbconnect.php';
 
     if(isset($_POST['id']) && isset($_POST['suspended'])){
         $id = $_POST['id'];
