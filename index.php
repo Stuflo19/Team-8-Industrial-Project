@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="CSS/master.css">
 </head>
 
-<body onload ="upcomingReviews(<?php echo json_encode($exception) ?>)">
+<body onload ="upcomingReviews(<?php echo $exception ?>))">
 
   <header class="container-fluid p-1">
 
