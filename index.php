@@ -176,7 +176,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <form action="" method="POST"> 
+            <form action="" method="post"> 
               <div class="form-group">
                 <label for="resourceList" class="col-form-label">Select a cloud resource:</label>
                 <select style= "width:100%; color: white; background-color: #333333" name="resourceList" id="resourceList">
@@ -187,16 +187,15 @@
                 <label for="message-text" class="col-form-label">Justification:</label>
                 <textarea class="form-control" id="newJustification" name="newJustification" style="color: white; background-color: #333333" maxlength="200" required></textarea>
               </div>
-              <!-- Exception Value = resource name  -->
+              <!-- Exception Value = resource ref  -->
               <div class="form-group">
                 <label for="message-text" class="col-form-label">Review Date:</label>
                 <!-- Code taken from https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date -->
                 <input type="date" id="newReviewDate" name="newReviewDate" value="<?php echo date("Y-m-d")?>" min="<?php echo date("Y-m-d", strtotime("+1 day"))?>" max="<?php echo date("Y-m-d", strtotime("+1 year"))?>">
-                <!-- <input id="today" type="date"> -->
               </div>
               <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
-                  <input type="submit" class="btn btn-primary" value="Submit">
+                  <button type="submit" class="btn btn-primary">Submit</button>
               </div>   
             </form>
             <?php
@@ -205,28 +204,42 @@
               //last_updates = today's day
               $date = date("Y-m-d H:i:sa");
               //ruleID
+             // if (isset($justif) || isset($justif) || isset($justif))
+             if (isset($_POST['newJustification']) || isset($_POST['resourceList']) || isset($_POST['name']) )
+             {
+                
+             
               $justif = $_POST['newJustification'];
               //echo $justif;
               $IDs = $_POST['resourceList'];
-              $ruleID = intval(explode("_",$IDs)[1]);
+              //echo $IDs;
+              $IDs = explode("_",$IDs);
+              $ruleID = intval($IDs[1]);
               //exception_value
-              $resourceID= intval(explode("_",$IDs)[0]);
-              $exception_value = "";
-              while($row =mysqli_fetch_array($result_res))
-              {
-                if($row['id'] == $resourceID)
-                {
-                  $exception_value = $row['resource_name'];
-                }
-              }
+              //echo $ruleID 
+              $resourceID= intval($IDs[0]);
+              $exception_value =  $IDs[2];
+             
+               
+              //$exception_value = explode("_",$IDs)[2];
+              //echo $exception_value;
+              // while($row =mysqli_fetch_array($result_res))
+              // {
+              //   if($row['id'] == $resourceID)
+              //   {
+              //     $exception_value = $row['resource_name'];
+              //   }
+              // }
 
               //customer_id & last_updated_by are FIXED values
            
               $addExceptionS="INSERT INTO exception(id, customer_id, rule_id,last_updated_by, exception_value, justification, review_date, last_updated, suspended) VALUES (".$len_exception. ", 1,". $ruleID .",'system','" . $exception_value . "','".$justif."', '" . $_POST['newReviewDate'] . "','". $date ."',0 );";
+              //echo $addExceptionS;
               $insertQ = mysqli_query($conn,$addExceptionS);
-              // if(!$insertQ){
-              //   echo("Error description: " . mysqli_error($con));
-              // }
+              $conn->close();
+            
+             }
+            
               ?>
                
           </div>
@@ -317,6 +330,7 @@ function addException(rule_rescourceType){
   //var resourceTypeID = rule_rescourceType.split(",")[1];
   var resource_name = "";
   var resource_id = 0;
+  var resource_ref = " ";
   var non_compl = 1;
   //console.log(ruleID);
   //console.log(resourceTypeID);
@@ -325,7 +339,7 @@ function addException(rule_rescourceType){
   {
     select_dropdown.removeChild(select_dropdown.firstChild);
   }
-
+  
   for(var i = 0; i < rows_non_compliant.length; i++) {
     //looking if a rule has non-compliant resources
     if(rows_non_compliant[i]['rule_id'] == ruleID)
@@ -333,13 +347,17 @@ function addException(rule_rescourceType){
       //finding the name of a resource
       for(var j = 0; j < rows_resource.length; j++)
       {
+        non_compl = 1;
         if(rows_resource[j]['id'] == rows_non_compliant[i]['resource_id'])
-        {
+        {            
+          console.log(rows_resource[j]['resource_ref']);
+
           //checking if a non-compliant resource has an axception -> making a resource compliant
           for(var k=0; k<rows_except.length; k++)
           {
             if(rows_resource[j]['resource_name'] === rows_except[k]['exception_value'])
             {
+              console.log(rows_resource[j]['resource_name']);
               non_compl=0;
               break;
             }
@@ -349,15 +367,21 @@ function addException(rule_rescourceType){
           {
             resource_name = rows_resource[j]['resource_name'];
             resource_id = rows_resource[j]['id'];
-            console.log(resource_name, ruleID);
+            resource_ref = rows_resource[j]['resource_ref'];
+            console.log(resource_name, ruleID,resource_ref);
 
-            var resourceID_ruleID = resource_id+"_"+ruleID;
-            select_dropdown.appendChild(addOption(resource_name, resourceID_ruleID));
+            var resourceID_ruleID_ref = resource_id+"_"+ruleID+"_"+resource_ref;
+            select_dropdown.appendChild(addOption(resource_name, resourceID_ruleID_ref));
+            console.log(resourceID_ruleID_ref);
+
           }
-          break;
+          
+          //break;
         }
       }
     }
+
   }
+
 }
 </script>
