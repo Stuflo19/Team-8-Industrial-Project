@@ -55,7 +55,7 @@ function upcomingReviews(exceptions)
     const currDate = new Date(); //Todays date
     var today = new Date(currDate.getFullYear() +"/"+ (currDate.getMonth()+1) +"/"+ currDate.getDate() + " " + currDate.getUTCHours() + ":" + currDate.getUTCMinutes());
     var review = new Date(exceptions[i]['review_date'].replace('-','/'));
-    const msBetweenDates = reviewDate.getTime() - currDate.getTime();
+    const msBetweenDates = review.getTime() - currDate.getTime();
     console.log(review);
     console.log(today);
 
