@@ -44,9 +44,7 @@ function generateGraph(noncompliant, compliant)
 // Help from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/abs
 function upcomingReviews(exceptions) 
 {
-  console.log("Below Here");
-  console.log(exceptions[0]['review_date']);
-  console.log("Above Here");
+  var numOfUpcoming;
 
   document.getElementById("reviewbody").innerHTML = "";
 
@@ -72,15 +70,16 @@ function upcomingReviews(exceptions)
     //If past review date
     if (daysBetweenDates < 0) 
     { 
-          console.log(exceptions[i] + ' review date is Expired'); 
+          console.log(exceptions[i]['id'] + ' review date is Expired'); 
         } 
         
         //If review date coming up within 30days
         else if(daysBetweenDates < 30) 
         { 
           //console.log('date is within 30 days'); 
-
+          numOfUpcoming = numOfUpcoming + 1;
           const tr = document.getElementById('reviewbody').insertRow();
+
           tr.insertCell().appendChild(document.createTextNode(exceptions[i]['id']));
           tr.insertCell().appendChild(document.createTextNode(exceptions[i]['exception_value']));
           tr.insertCell().appendChild(document.createTextNode(exceptions[i]['rule_id']));
@@ -91,8 +90,12 @@ function upcomingReviews(exceptions)
 
         else 
         { //If review date is longer than 30 days out
-          console.log(exceptions[i] + ' review date is NOT within 30 days');
+          console.log(exceptions[i]['id'] + ' review date is NOT within 30 days');
         }
+    }
+    if(numOfUpcoming == 0)
+    {
+      document.getElementById("reviewbody").innerHTML = "There are no upcoming review dates";
     }
 }
   
