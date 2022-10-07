@@ -176,27 +176,60 @@
             </button>
           </div>
           <div class="modal-body">
-            <form>
+            <form action="" method="post"> 
               <div class="form-group">
-                <label for="resources-list" class="col-form-label">Select a cloud resource:</label>
-                <select style= "width:100%; color: white; background-color: #333333" id="resources-list">
-                  <!-- Temp until we can read in resources from the db -->
-                  <option label="T1"></option>
-                  <option label="T2"></option>
-                  <option label="T3"></option>
-                  <option label="T4"></option>
+              <label for="resourceList" class="col-form-label">Select a cloud resource:</label>
+                <select style= "width:100%; color: white; background-color: #333333" name="resourceList" id="resourceList">
+                  <!-- OPTIONS created dynamically -->
+
                 </select>
               </div>
               <div class="form-group">
                 <label for="message-text" class="col-form-label">Justification:</label>
-                <textarea class="form-control" id="message-text" style="color: white; background-color: #333333"></textarea>
+                <textarea class="form-control" id="newJustification" name="newJustification" style="color: white; background-color: #333333" maxlength="200" required></textarea>
               </div>
+              <!-- Exception Value = resource name  -->
+              <div class="form-group">
+                <label for="message-text" class="col-form-label">Review Date:</label>
+                <!-- Code taken from https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date -->
+                <input type="date" id="newReviewDate" name="newReviewDate" value="<?php echo date("Y-m-d")?>" min="<?php echo date("Y-m-d", strtotime("+1 day"))?>" max="<?php echo date("Y-m-d", strtotime("+1 year"))?>">
+                <!-- <input id="today" type="date"> -->
+              </div>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+              </div>   
             </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
-            <button type="button" class="btn btn-primary">Submit</button>
-          </div>
+            <?php
+              //id
+              $len_exception = count($exception)+1;
+              //last_updates = today's day
+              $date = date("Y-m-d H:i:sa");
+              //ruleID
+              $justif = $_POST['newJustification'];
+              //echo $justif;
+              $IDs = $_POST['resourceList'];
+              $ruleID = intval(explode("_",$IDs)[1]);
+              //exception_value
+              $resourceID= intval(explode("_",$IDs)[0]);
+              $exception_value = "";
+              while($row =mysqli_fetch_array($result_res))
+              {
+                if($row['id'] == $resourceID)
+                {
+                  $exception_value = $row['resource_name'];
+                }
+              }
+
+              //customer_id & last_updated_by are FIXED values
+           
+              $addExceptionS="INSERT INTO exception(id, customer_id, rule_id,last_updated_by, exception_value, justification, review_date, last_updated, suspended) VALUES (".$len_exception. ", 1,". $ruleID .",'system','" . $exception_value . "','".$justif."', '" . $_POST['newReviewDate'] . "','". $date ."',0 );";
+              //echo $addException;
+              $insertQ = mysqli_query($conn,$addExceptionS);
+
+
+            ?> 
         </div>
       </div>
     </div>
@@ -264,3 +297,69 @@
   
 
 </body>
+<script>
+// https://www.javascripttutorial.net/javascript-dom/javascript-appendchild/#:~:text=The%20appendChild()%20is%20a,of%20a%20specified%20parent%20node.&text=In%20this%20method%2C%20the%20childNode,()%20returns%20the%20appended%20child.
+function addOption(name, id){
+    let option = document.createElement("option");
+    option.text = name;
+    option.value = id;
+
+    return option;
+  }
+
+function addException(rule_rescourceType){
+  var rows_resource = <?php echo json_encode($resource); ?>;
+  var rows_non_compliant = <?php echo json_encode($non_compliant); ?>;
+  var rows_except = <?php echo json_encode($exception); ?>;
+  //console.log(rule_rescourceType);
+  var ruleID = rule_rescourceType.split(",")[0];
+  //var resourceTypeID = rule_rescourceType.split(",")[1];
+  var resource_name = "";
+  var resource_id = 0;
+  var non_compl = 1;
+  //console.log(ruleID);
+  //console.log(resourceTypeID);
+  var select_dropdown = document.querySelector('#resourceList');
+  while (select_dropdown.firstChild) 
+  {
+    select_dropdown.removeChild(select_dropdown.firstChild);
+  }
+  
+  for(var i = 0; i < rows_non_compliant.length; i++) {
+    //looking if a rule has non-compliant resources
+    if(rows_non_compliant[i]['rule_id'] == ruleID)
+    {
+      //finding the name of a resource
+      for(var j = 0; j < rows_resource.length; j++)
+      {
+        if(rows_resource[j]['id'] == rows_non_compliant[i]['resource_id'])
+        {
+          //checking if a non-compliant resource has an axception -> making a resource compliant
+          for(var k=0; k<rows_except.length; k++)
+          {
+            if(rows_resource[j]['resource_name'] === rows_except[k]['exception_value'])
+            {
+              non_compl=0;
+              break;
+            }
+          } 
+
+          if(non_compl==1)
+          {
+            resource_name = rows_resource[j]['resource_name'];
+            resource_id = rows_resource[j]['id'];
+            console.log(resource_name, ruleID);
+
+            var resourceID_ruleID = resource_id+"_"+ruleID;
+            select_dropdown.appendChild(addOption(resource_name, resourceID_ruleID));
+          }
+          
+          break;
+        }
+      }
+    }
+
+  }
+
+}
+</script>
