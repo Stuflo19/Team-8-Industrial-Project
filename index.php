@@ -59,7 +59,7 @@
       <!-- Review Dates -->
       <div class="col-lg-5 " >
         <div class="row">
-          <h3 class="text-center">Upcoming Reviews for Existing Exceptions</h3>
+          <h3 style="text-align: center">Upcoming Reviews for Existing Exceptions</h3>
         </div>
           <div class="d-flex align-items-center p-4">
           <table class="table fixed_header" style="color:white">
