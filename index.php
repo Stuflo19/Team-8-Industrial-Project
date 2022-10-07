@@ -57,8 +57,8 @@
       </div>
       <div class="col-lg-1"></div>
       <!-- Review Dates -->
-      <div class="col-lg-5 " >
-        <div class="row"> 
+      <div class="col-lg-5 d-flex align-items-center p-4" >
+        <div class="row d-flex align-items-center p-4"> 
           <h3>Upcoming Reviews for Existing Exceptions</h3>
         </div>
         
