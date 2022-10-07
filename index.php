@@ -195,16 +195,15 @@
                 <input type="date" id="newReviewDate" name="newReviewDate" value="<?php echo date("Y-m-d")?>" min="<?php echo date("Y-m-d", strtotime("+1 day"))?>" max="<?php echo date("Y-m-d", strtotime("+1 year"))?>">
                 <!-- <input id="today" type="date"> -->
               </div>
-            </div>
               <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
                   <button type="submit" class="btn btn-primary">Submit</button>
               </div>   
             </form>
             <?php
-            //   //id
-            //   $len_exception = count($exception)+1;
-            //   //last_updates = today's day
+              //id
+              $len_exception = count($exception)+1;
+              //last_updates = today's day
             //   $date = date("Y-m-d H:i:sa");
             //   //ruleID
             //   $justif = $_POST['newJustification'];
@@ -230,6 +229,7 @@
 
 
             // ?> 
+          </div>
         </div>
       </div>
     </div>
