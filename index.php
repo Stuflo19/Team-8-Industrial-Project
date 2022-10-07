@@ -325,7 +325,7 @@ function addException(rule_rescourceType){
   {
     select_dropdown.removeChild(select_dropdown.firstChild);
   }
-  
+
   for(var i = 0; i < rows_non_compliant.length; i++) {
     //looking if a rule has non-compliant resources
     if(rows_non_compliant[i]['rule_id'] == ruleID)
@@ -354,13 +354,10 @@ function addException(rule_rescourceType){
             var resourceID_ruleID = resource_id+"_"+ruleID;
             select_dropdown.appendChild(addOption(resource_name, resourceID_ruleID));
           }
-          
           break;
         }
       }
     }
-
   }
-
 }
 </script>
