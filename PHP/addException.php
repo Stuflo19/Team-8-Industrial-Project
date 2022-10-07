@@ -26,7 +26,7 @@
     console.log($addException);
     $insertQ = mysqli_query($conn,$addExceptionS);
 
-    //$conn->close();
-    //header( "../index.php");
+    $conn->close();
+    header( "../index.php");
 
 ?>
