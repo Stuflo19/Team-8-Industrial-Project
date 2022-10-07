@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="CSS/master.css">
 </head>
 
-<body onload ="upcomingReviews(<?php echo $exception ?>)">
+<body onload ='callAll(<?php echo count($non_compliant_ids)?> , <?php echo mysqli_num_rows($result)?> , <?php echo json_encode($exception) ?>)'>
 
   <header class="container-fluid p-1">
 

@@ -44,7 +44,6 @@ function generateGraph(noncompliant, compliant)
 // Help from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/abs
 function upcomingReviews(row) 
 {
-  
     console.log("Below Here");
     console.log(row[0]['rule_id']);
     console.log("Above Here");
