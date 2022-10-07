@@ -187,7 +187,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <form  method="post"> 
+            <form action="PHP/addException.php" method="post"> 
               <div class="form-group">
                 <label for="resourceList" class="col-form-label">Select a cloud resource:</label>
                 <select style= "width:100%; color: white; background-color: #333333" name="resourceList" id="resourceList">
@@ -206,7 +206,7 @@
               </div>
               <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
-                  <button type="submit" onclick="submitForm()" class="btn btn-primary">Submit</button>
+                  <button type="submit" class="btn btn-primary">Submit</button>
               </div>   
             </form>
             <?php
@@ -406,6 +406,10 @@ function addException(rule_rescourceType){
   }
 
 }
+</script>
+
+
+<!-- 
 function submitForm()
 {
 
@@ -416,12 +420,5 @@ http.open('POST', url, true);
 
 //Send the proper header information along with the request
 http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-
-http.onreadystatechange = function() {//Call a function when the state changes.
-    if(http.readyState == 4 && http.status == 200) {
-        alert(http.responseText);
-    }
-}
 http.send(params);
-}
-</script>
+} -->
