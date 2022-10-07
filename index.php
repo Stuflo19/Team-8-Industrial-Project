@@ -58,8 +58,11 @@
       <div class="col-lg-1"></div>
       <!-- Review Dates -->
       <div class="col-lg-5 d-flex align-items-center p-4" >
-        <h3>Upcoming Reviews for Existing Exceptions</h3>
-        <div>
+        <div class="row"> 
+          <h3>Upcoming Reviews for Existing Exceptions</h3>
+        </div>
+        
+        <div class="row">
           <table class="table fixed_header" style="color:white">
             <thead style="position: sticky; top:0;" class="thead-dark stickyHead">
               <tr class="stickyHead">
