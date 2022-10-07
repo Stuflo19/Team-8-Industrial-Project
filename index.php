@@ -223,7 +223,7 @@
               //customer_id & last_updated_by are FIXED values
            
               $addExceptionS="INSERT INTO exception(id, customer_id, rule_id,last_updated_by, exception_value, justification, review_date, last_updated, suspended) VALUES (".$len_exception. ", 1,". $ruleID .",'system','" . $exception_value . "','".$justif."', '" . $_POST['newReviewDate'] . "','". $date ."',0 );";
-              // $insertQ = mysqli_query($conn,$addExceptionS);
+              $insertQ = mysqli_query($conn,$addExceptionS);
               // if(!$insertQ){
               //   echo("Error description: " . mysqli_error($con));
               // }
