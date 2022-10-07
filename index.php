@@ -178,7 +178,7 @@
           <div class="modal-body">
             <form action="" method="post"> 
               <div class="form-group">
-              <label for="resourceList" class="col-form-label">Select a cloud resource:</label>
+                <label for="resourceList" class="col-form-label">Select a cloud resource:</label>
                 <select style= "width:100%; color: white; background-color: #333333" name="resourceList" id="resourceList">
                   <!-- OPTIONS created dynamically -->
 
@@ -195,7 +195,7 @@
                 <input type="date" id="newReviewDate" name="newReviewDate" value="<?php echo date("Y-m-d")?>" min="<?php echo date("Y-m-d", strtotime("+1 day"))?>" max="<?php echo date("Y-m-d", strtotime("+1 year"))?>">
                 <!-- <input id="today" type="date"> -->
               </div>
-              </div>
+            </div>
               <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
                   <button type="submit" class="btn btn-primary">Submit</button>
