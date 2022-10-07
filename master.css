@@ -5,6 +5,23 @@ body {
   background-color: #115e67;
 }
 
+.centerdiv{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+}
+
+.logo {
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  position:absolute;
+}
+
 /* Fonts for headings */
 h1{
   font-size: 1.5rem;
