@@ -216,7 +216,7 @@
               {
                 if($row['id'] == $resourceID)
                 {
-                  $exception_value = $row['resource_ref'];
+                  $exception_value = $row['resource_name'];
                 }
               }
 
