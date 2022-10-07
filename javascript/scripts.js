@@ -46,7 +46,7 @@ function upcomingReviews(row)
 {
   
     console.log("Below Here");
-    console.log(row[0]['id']);
+    console.log(row[0]['rule_id']);
     console.log("Above Here");
 
 }
