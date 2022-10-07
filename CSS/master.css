@@ -146,6 +146,7 @@ table{
 .fixed_header th {
   padding: 0px;
   border: 0px;
+  width: 16%;
 }
 
 .fixed_header td {
