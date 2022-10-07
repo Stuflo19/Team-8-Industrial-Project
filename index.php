@@ -410,13 +410,13 @@ function ajaxcall () {
   // (B1) GET FORM DATA
   var data = new FormData(document.getElementById("myForm"));
  
-  // (B2) AJAX CALL
-  var xhr = new XMLHttpRequest();
-  xhr.open("POST", "PHP/addException.php");
-  xhr.onload = function () {
-    console.log(this.response);
-  };
-  xhr.send(data);
+  // (B2) FETCH
+  fetch("PHP/addException.php", { method: "POST", body: data })
+  .then(res => res.text())
+  .then((txt) => {
+    console.log(txt);
+  })
+  .catch((err) => { console.error(err); });
   return false;
 }
 </script>
