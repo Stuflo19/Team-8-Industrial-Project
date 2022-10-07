@@ -46,7 +46,7 @@ function upcomingReviews(row)
 {
   
     console.log("Below Here");
-    console.log(row.length);
+    console.log(row);
     console.log("Above Here");
 
 }
