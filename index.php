@@ -187,7 +187,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <form id="myForm"> 
+            <form id="myForm" onsubmit="return ajaxcall();"> 
               <div class="form-group">
                 <label for="resourceList" class="col-form-label">Select a cloud resource:</label>
                 <select style= "width:100%; color: white; background-color: #333333" name="resourceList" id="resourceList">
@@ -206,7 +206,7 @@
               </div>
               <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
-                  <button type="button"  onsubmit="return ajaxcall()" class="btn btn-primary">Submit</button>
+                  <button type="button"  class="btn btn-primary">Submit</button>
               </div>   
             </form>
             <?php
@@ -414,12 +414,5 @@ function ajaxcall () {
  // fetch("PHP/suspend.php", {mode: 'cors', method: "POST", headers: {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"}, body: `id=${exceptionid}&suspended=${suspended}`})
 
   fetch("PHP/addException.php", { mode: 'cors', method: "POST", headers: {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"}, body: data )
-  .then(res => res.text())
-  .then((txt) => {
-    console.log(txt);
-  })
-  .catch((err) => { console.error(err); });
-  return false;
-}
 }
 </script>
