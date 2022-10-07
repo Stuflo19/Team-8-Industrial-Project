@@ -228,7 +228,7 @@
               $insertQ = mysqli_query($conn,$addExceptionS);
 
 
-            // ?> 
+             ?> 
           </div>
         </div>
       </div>
