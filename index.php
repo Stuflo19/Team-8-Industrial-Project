@@ -1,5 +1,5 @@
 <?php
-  include 'dbconnectphp';
+  include 'dbconnect.php';
   include 'readdb.php';
 ?>
 
