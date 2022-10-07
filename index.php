@@ -176,7 +176,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <form action="" method="post"> 
+            <form action="./PHP/addException.php" method="post"> 
               <div class="form-group">
                 <label for="resourceList" class="col-form-label">Select a cloud resource:</label>
                 <select style= "width:100%; color: white; background-color: #333333" name="resourceList" id="resourceList">
@@ -199,8 +199,7 @@
                   <button type="submit" class="btn btn-primary">Submit</button>
               </div>   
             </form>
-            <?php
-              //id
+              <!-- //id
               $len_exception = count($exception)+1;
               //last_updates = today's day
               $date = date("Y-m-d H:i:sa");
@@ -226,7 +225,7 @@
               console.log($addException);
               $insertQ = mysqli_query($conn,$addExceptionS);
 
-                ?>
+                -->
           </div>
         </div>
       </div>
