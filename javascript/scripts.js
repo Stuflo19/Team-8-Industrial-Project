@@ -52,14 +52,14 @@ function upcomingReviews(exceptions)
 
   for(var i = 0; i < exceptions.length; i++) 
   {
-    const currDate = new Date("2022/10/10 17:17:49"); //Todays date
-    console.log("CurrDate: " + currDate);
+    const currDate = new Date(); //Todays date
+    //console.log("CurrDate: " + currDate);
     
-    //var today = new Date(currDate.getFullYear() +"/"+ (currDate.getMonth()+1) +"/"+ currDate.getDate() + " " + currDate.getUTCHours() + ":" + currDate.getUTCMinutes());
+    var today = new Date(currDate.getFullYear() +"/"+ (currDate.getMonth()+1) +"/"+ currDate.getDate() + " " + currDate.getUTCHours() + ":" + currDate.getUTCMinutes());
     var review = new Date(exceptions[i]['review_date'].replace('-','/'));
     
     
-    console.log("Review Date: " + review);
+    //console.log("Review Date: " + review);
     //console.log("Today's date: " + today);
 
     const msBetweenDates = review.getTime() - currDate.getTime();
@@ -72,13 +72,13 @@ function upcomingReviews(exceptions)
     //If past review date
     if (daysBetweenDates < 0) 
     { 
-          console.log('Expired'); 
+          console.log(exceptions[i] + ' review date is Expired'); 
         } 
         
         //If review date coming up within 30days
         else if(daysBetweenDates < 30) 
         { 
-          console.log('date is within 30 days'); 
+          //console.log('date is within 30 days'); 
 
           const tr = document.getElementById('reviewbody').insertRow();
           tr.insertCell().appendChild(document.createTextNode(exceptions[i]['exception_value']));
@@ -90,7 +90,7 @@ function upcomingReviews(exceptions)
 
         else 
         { //If review date is longer than 30 days out
-          console.log('date is NOT within 30 days')
+          console.log(exceptions[i] + ' review date is NOT within 30 days');
         }
     }
 }
