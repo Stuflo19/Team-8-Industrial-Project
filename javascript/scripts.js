@@ -1,3 +1,10 @@
+function callAll(x, y, row)
+{
+  
+  generateGraph(x, y);
+  upcomingReviews(row);
+}
+
 function generateGraph(noncompliant, compliant)
 {
   trueComp = compliant - noncompliant
@@ -33,5 +40,64 @@ function generateGraph(noncompliant, compliant)
       );
       
 }
+
+// Help from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/abs
+function upcomingReviews(exceptions) 
+{
+  var numOfUpcoming = 0;
+
+  document.getElementById("reviewbody").innerHTML = "";
+
+  for(var i = 0; i < exceptions.length; i++) 
+  {
+    const currDate = new Date(); //Todays date
+    //console.log("CurrDate: " + currDate);
+    
+    var today = new Date(currDate.getFullYear() +"/"+ (currDate.getMonth()+1) +"/"+ currDate.getDate() + " " + currDate.getUTCHours() + ":" + currDate.getUTCMinutes());
+    var review = new Date(exceptions[i]['review_date'].replace('-','/'));
+    
+    
+    //console.log("Review Date: " + review);
+    //console.log("Today's date: " + today);
+
+    const msBetweenDates = review.getTime() - currDate.getTime();
+
+    // convert ms to days                     hour  min  sec   ms
+    const daysBetweenDates = msBetweenDates / (24 * 60 * 60 * 1000);
+        
+    console.log(daysBetweenDates); //Debug testing to show how many days until
+
+    //If past review date
+    if (daysBetweenDates < 0) 
+    { 
+          console.log(exceptions[i]['id'] + ' review date is Expired'); 
+        } 
+        
+        //If review date coming up within 30days
+        else if(daysBetweenDates < 30) 
+        { 
+          //console.log('date is within 30 days'); 
+          numOfUpcoming = numOfUpcoming + 1;
+          const tr = document.getElementById('reviewbody').insertRow();
+
+          tr.insertCell().appendChild(document.createTextNode(exceptions[i]['id']));
+          tr.insertCell().appendChild(document.createTextNode(exceptions[i]['exception_value']));
+          tr.insertCell().appendChild(document.createTextNode(exceptions[i]['rule_id']));
+          tr.insertCell().appendChild(document.createTextNode(exceptions[i]['last_updated_by']));
+          tr.insertCell().appendChild(document.createTextNode(exceptions[i]['justification']));
+          tr.insertCell().appendChild(document.createTextNode(exceptions[i]['review_date']));
+        } 
+
+        else 
+        { //If review date is longer than 30 days out
+          console.log(exceptions[i]['id'] + ' review date is NOT within 30 days');
+        }
+    }
+    if(numOfUpcoming == 0)
+    {
+      document.getElementById("reviewbody").innerHTML = "There are no upcoming review dates";
+    }
+}
+  
 
             

@@ -23,8 +23,7 @@
   <link rel="stylesheet" href="CSS/master.css">
 </head>
 
-
-<body onload ="generateGraph(<?php echo count($non_compliant_ids)?> , <?php echo mysqli_num_rows($result)?>)">
+<body onload ='callAll(<?php echo count($non_compliant_ids)?> , <?php echo mysqli_num_rows($result)?> , <?php echo json_encode($exception) ?>)'>
 
   <header class="container-fluid p-1">
 
@@ -38,50 +37,94 @@
         <li>Role: Customer Role</li>
       </ul>
       <br>
-      <h1 class=m-auto> Company Name </h1>
+      <h1 class="m-auto"> Company Name </h1>
       <h2><i class='fa fa-refresh p-2'></i>Last checked: date</h2>
     </div>
   </nav>
 
   <main class="container-fluid p-5">
 
-    <div class="row">
-      <div class="col-lg">
-        <div class="col-lg-7"> 
-          <h3>Compliance Rules</h3>
+    <div class="row text-center">
+      
+      <!-- Placeholder for pie chart when we get it working -->
+      <div class="col-lg-5 chart">
+        <h3>Overall Compliance</h3>
+        <!-- Doughnut Chart -->
+        <div>
+          <canvas id="myChart" style="max-height: 75vh;"></canvas>
         </div>
+          
+      </div>
+      <div class="col-lg-1"></div>
+      <!-- Review Dates -->
+      <div class="col-lg-5 " >
+        <div class="row-lg mt-4">
+          <h3>Upcoming Reviews for Existing Exceptions</h3>
+        </div>
+          <div class="d-flex align-items-center p-2">
+          <table class="table fixed_header" style="color:white">
+            <thead style="position: sticky; top:0;" class="thead-dark stickyHead">
+              <tr class="stickyHead">
+                <th class="stickyHead" scope="col-lg">Exception No.</th>
+                <th class="stickyHead" scope="col-lg">Resource</th>
+                <th class="stickyHead" scope="col-lg">Rule ID</th>
+                <th class="stickyHead" scope="col-lg">Creator</th>
+                <th class="stickyHead" scope="col-lg">Justification</th>
+                <th class="stickyHead" scope="col-lg">Review date</th>
+              </tr>
+            </thead>
+            <!-- If Michael Cera becomes a visible collaborator on the site, we have a problem -->
+            <tbody id="reviewbody"> 
+              <tr>
+                <td>1</td>
+                <td>dh-dc1</td>
+                <td>4</td>
+                <td>Michael Cera</td>
+                <td>The resource would not work</td>
+                <td>2011/04/25 06:94:20</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div> 
+    </div>
+      
+      <div class="row">
+        <div class="col-lg text-center mt-4">
+        
           <!-- Complaince Rule and Status -->
           <?php 
+            echo '<h3>Compliance Rules</h3>';
             while($result_rule=mysqli_fetch_array($query))
             {
           ?>
-          <div class = "row mb-2"> 
+          <div class = "row mb-2">
             <div class="col-lg">
               <!-- Compliance Rule Card -->
               <div class="card cardColor text-center m-auto">
                 <div class="card-body m-1 p-1">
                   <p class="card-text pb-1 m-auto"> <?php echo $result_rule["name"];?> </p>
                   <?php 
-                      $status ="active-status"; // compliant
-                      $status_text ="Compliant";
-                      foreach($compliant as $result_non_compl)
+                    $status ="active-status"; // compliant
+                    $status_text ="Compliant";
+                    foreach($compliant as $result_non_compl)
+                    {
+                      if ($result_rule['id'] == $result_non_compl['rule_id'])
                       {
-                        if ($result_rule['id'] == $result_non_compl['rule_id'])
-                        {
-                          $status ="exception-status";
-                          $status_text ="Non-Compliant";
-                          break;
-                        }
+                        $status ="exception-status";
+                        $status_text ="Non-Compliant";
+                        break;
                       }
-                    ?>
-                    <div class="<?php echo $status;?>"> <?php echo $status_text;?></div>
-                  </div>
+                    }
+                  ?>
+                  <div class="<?php echo $status;?>"> <?php echo $status_text;?></div>
+                </div>
                   
-                  <button class="btn btn-outline-warning m-1" type="button"  data-toggle="collapse" data-target="#Rule<?php echo $result_rule['id'];?>" aria-expanded="false" aria-controls="collapseExample">
-                    View details
-                  </button>
-                  <div class="collapse" id="<?php echo 'Rule' . $result_rule['id'];?>">
-                    <div class="card-body">
+                <button class="btn btn-outline-warning m-1" type="button"  data-toggle="collapse" data-target="#Rule<?php echo $result_rule['id'];?>" aria-expanded="false" aria-controls="collapseExample">
+                  View details
+                </button>
+                <div class="collapse" id="<?php echo 'Rule' . $result_rule['id'];?>">
+                  <div class="card-body">
                     <table class="table table-striped" style="color:white">
                       <thead class="thead-dark">
                         <tr>
@@ -141,22 +184,11 @@
                 </div>
               </div>
               
-            </div>
-          <?php } ?>
-      </div>
-
-      <!-- Placeholder for pie chart when we get it working -->
-      <div class="col-lg-5" position="absolute">
-        <h3>Overall Compliance</h3>
-        <p> The objective is to get a pie chart display in here similar to the interface on our university attendance tracker "SEATs", which visualises a percentage of how many rules are compliant, those that have exceptions and those that are non-compliant
-          <!-- Doughnut Chart -->
-          <div>
-            <canvas id="myChart"></canvas>
           </div>
-          
+          <?php } ?>
         </div>
-
-    </div>
+      </div>      
+      
     <!-- Add exception Modal -->
     <div class="modal fade" id="newExcModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
@@ -224,6 +256,8 @@
         </div>
       </div>
     </div>
+  </main>
+
 
   <!-- Footer -->
   <footer class="container-fluid page-footer footerDesign">
@@ -254,5 +288,4 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   
-
 </body>

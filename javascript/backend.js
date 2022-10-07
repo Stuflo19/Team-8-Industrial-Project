@@ -38,6 +38,7 @@ function historybutton(id, rows)
       tr.insertCell().appendChild(document.createTextNode(rows[i]['last_updated_by']));
       tr.insertCell().appendChild(document.createTextNode(rows[i]['justification']));
       tr.insertCell().appendChild(document.createTextNode(today < review ? review : "EXPIRED"));
+      // This is the most painful button you'll see in this project
       var btn = document.createElement('input');
       btn.type = "button";
       btn.value = rows[i]['suspended'] == 0 ? 'Suspend' : "Unsuspend";
