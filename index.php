@@ -68,9 +68,20 @@
                       {
                         if ($result_rule['id'] == $result_non_compl['rule_id'])
                         {
-                          $status ="exception-status";
-                          $status_text ="Non-Compliant";
-                          break;
+                          $quer = "SELECT * FROM resource WHERE id=".$result_non_compl['resource_id'];
+                          $quer1 = mysqli_query($conn, $quer);
+                          $quer2 = mysqli_fetch_array($quer1);
+
+                          $quer = "SELECT * FROM exception WHERE exception_value='".$quer2['resource_ref']."'";
+                          $quer1 = mysqli_query($conn, $quer);
+                          $quer2 = mysqli_fetch_array($quer1);
+
+                          if($quer2== NULL)
+                          {
+                            $status ="exception-status";
+                            $status_text ="Non-Compliant";
+                            break;
+                          }
                         }
                       }
                     ?>
@@ -110,7 +121,7 @@
                                   {
                                     foreach($exception as $exc)
                                     {
-                                      if($result_rule['id'] == $exc['rule_id'] && $row['resource_name'] == $exc['exception_value'])
+                                      if($result_rule['id'] == $exc['rule_id'] && $row['resource_ref'] == $exc['exception_value'])
                                       {
                                         $checked = $exc['suspended'] == 0 ? false : true;
                                         break;
@@ -128,7 +139,7 @@
                               {
                                 echo '<td style="vertical-align: middle"><div class="active-status">Compliant</div></td>';
                               } 
-                              echo "<td style='vertical-align: middle'><button type='button' class='btn btn-outline-warning historybutton' data-toggle='modal' data-target='#historyModal' id='{$row["resource_name"]},{$result_rule["id"]}' onclick='historybutton(this.id, ".json_encode($exception).")'>Exception History</button></td></tr>";
+                              echo "<td style='vertical-align: middle'><button type='button' class='btn btn-outline-warning historybutton' data-toggle='modal' data-target='#historyModal' id='{$row["resource_ref"]},{$result_rule["id"]}' onclick='historybutton(this.id, ".json_encode($exception).")'>Exception History</button></td></tr>";
                             }
                           }
                         ?>
@@ -176,7 +187,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <form action="" method="post"> 
+            <form action="PHP/addException.php" method="post"> 
               <div class="form-group">
                 <label for="resourceList" class="col-form-label">Select a cloud resource:</label>
                 <select style= "width:100%; color: white; background-color: #333333" name="resourceList" id="resourceList">
@@ -199,46 +210,54 @@
               </div>   
             </form>
             <?php
-              //id
-              $len_exception = count($exception)+1;
-              //last_updates = today's day
-              $date = date("Y-m-d H:i:sa");
-              //ruleID
-             // if (isset($justif) || isset($justif) || isset($justif))
-             if (isset($_POST['newJustification']) || isset($_POST['resourceList']) || isset($_POST['name']) )
-             {
+
+            
+            //   //id
+            //   $len_exception = count($exception)+1;
+            //   //last_updates = today's day
+            //   $date = date("Y-m-d H:i:sa");
+            //   //ruleID
+            //  // if (isset($justif) || isset($justif) || isset($justif))
+            //  if (isset($_POST['newJustification']) || isset($_POST['resourceList']) || isset($_POST['name']) )
+            //  {
                 
              
-              $justif = $_POST['newJustification'];
-              //echo $justif;
-              $IDs = $_POST['resourceList'];
-              //echo $IDs;
-              $IDs = explode("_",$IDs);
-              $ruleID = intval($IDs[1]);
-              //exception_value
-              //echo $ruleID 
-              $resourceID= intval($IDs[0]);
-              $exception_value =  $IDs[2];
+            //   $justif = $_POST['newJustification'];
+            //   //echo $justif;
+            //   $IDs = $_POST['resourceList'];
+            //   //echo $IDs;
+            //   $IDs = explode("_",$IDs);
+            //   $ruleID = intval($IDs[1]);
+            //   //exception_value
+            //   //echo $ruleID 
+            //   $resourceID= intval($IDs[0]);
+            //   $exception_value =  $IDs[2];
              
                
-              //$exception_value = explode("_",$IDs)[2];
-              //echo $exception_value;
-              // while($row =mysqli_fetch_array($result_res))
-              // {
-              //   if($row['id'] == $resourceID)
-              //   {
-              //     $exception_value = $row['resource_name'];
-              //   }
-              // }
+            //   //$exception_value = explode("_",$IDs)[2];
+            //   //echo $exception_value;
+            //   // while($row =mysqli_fetch_array($result_res))
+            //   // {
+            //   //   if($row['id'] == $resourceID)
+            //   //   {
+            //   //     $exception_value = $row['resource_name'];
+            //   //   }
+            //   // }
 
-              //customer_id & last_updated_by are FIXED values
+            //   //customer_id & last_updated_by are FIXED values
            
-              $addExceptionS="INSERT INTO exception(id, customer_id, rule_id,last_updated_by, exception_value, justification, review_date, last_updated, suspended) VALUES (".$len_exception. ", 1,". $ruleID .",'system','" . $exception_value . "','".$justif."', '" . $_POST['newReviewDate'] . "','". $date ."',0 );";
-              //echo $addExceptionS;
-              $insertQ = mysqli_query($conn,$addExceptionS);
-              $conn->close();
+            //   $addExceptionS="INSERT INTO exception(id, customer_id, rule_id,last_updated_by, exception_value, justification, review_date, last_updated, suspended) VALUES (".$len_exception. ", 1,". $ruleID .",'system','" . $exception_value . "','".$justif."', '" . $_POST['newReviewDate'] . "','". $date ."',0 );";
+            //   //echo $addExceptionS;
+            //   $insertQ = mysqli_query($conn,$addExceptionS);
+            //   //mysqli_refresh($conn);
+
+
+            //   //session_reset();
+            //   $conn->close();
+            //   echo "<meta http-equiv='refresh' content='0'>";
+
             
-             }
+            //  }
             
               ?>
                
@@ -358,7 +377,7 @@ function addException(rule_rescourceType){
           //checking if a non-compliant resource has an axception -> making a resource compliant
           for(var k=0; k<rows_except.length; k++)
           {
-            if(rows_resource[j]['resource_name'] === rows_except[k]['exception_value'])
+            if(rows_resource[j]['resource_ref'] === rows_except[k]['exception_value'])
             {
               console.log(rows_resource[j]['resource_name']);
               non_compl=0;
