@@ -53,11 +53,12 @@ function upcomingReviews(exceptions)
   for(var i = 0; i < exceptions.length; i++) 
   {
     const currDate = new Date(); //Todays date
+    console.log("CurrDate: " + currDate);
     var today = new Date(currDate.getFullYear() +"/"+ (currDate.getMonth()+1) +"/"+ currDate.getDate() + " " + currDate.getUTCHours() + ":" + currDate.getUTCMinutes());
     var review = new Date(exceptions[i]['review_date'].replace('-','/'));
     const msBetweenDates = review.getTime() - currDate.getTime();
-    console.log(review);
-    console.log(today);
+    console.log("Review Date: " + review);
+    console.log("Today's date: " + today);
 
     // convert ms to days                     hour  min  sec   ms
     const daysBetweenDates = msBetweenDates / (24 * 60 * 60 * 1000);
