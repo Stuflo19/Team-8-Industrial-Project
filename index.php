@@ -176,7 +176,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <form action="PHP/addException.php" method="post"> 
+            <form id="exception-form" method="post"> 
               <div class="form-group">
                 <label for="resourceList" class="col-form-label">Select a cloud resource:</label>
                 <select style= "width:100%; color: white; background-color: #333333" name="resourceList" id="resourceList">
@@ -197,7 +197,7 @@
               </div>
               <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <input type="button" id="submit_exception" name="submit_exception" class="btn btn-primary">Submit</input>
               </div>   
             </form>
               <!-- //id
@@ -297,6 +297,22 @@
 
 </body>
 <script>
+$(document).ready(function(){
+$('#submit_exception').click(function(){
+	var data=$('#user_form').serialize();
+	$.ajax({
+		url:'/POST/addException.php',
+		type:'post',
+		data:data,
+		success:function(response){
+		$('#mesg').text(response);
+	
+		}
+	});
+});
+});
+
+
 // https://www.javascripttutorial.net/javascript-dom/javascript-appendchild/#:~:text=The%20appendChild()%20is%20a,of%20a%20specified%20parent%20node.&text=In%20this%20method%2C%20the%20childNode,()%20returns%20the%20appended%20child.
 function addOption(name, id){
     let option = document.createElement("option");
