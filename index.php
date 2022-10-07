@@ -266,6 +266,7 @@
       </div>
     </div>
 
+  </main>
   <!-- Footer -->
   <footer class="container-fluid page-footer footerDesign">
     <div class="row">
