@@ -44,6 +44,6 @@
     $conn->close();
     //echo "<meta http-equiv='refresh' content='0'>";
    }
-    header("Location: http://localhost/Team-8-Industrial-Project-2/");
+    header("Location: https://issue-br-issue-13.herokuapp.com/");
 
 ?>
