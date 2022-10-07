@@ -301,7 +301,7 @@ $(document).ready(function(){
 $('#submit_exception').click(function(){
 	var data=$('#user_form').serialize();
 	$.ajax({
-		url:'/POST/addException.php',
+		url:'POST/addException.php',
 		type:'post',
 		data:data,
 		success:function(response){
