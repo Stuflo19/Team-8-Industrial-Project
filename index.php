@@ -187,7 +187,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <form id="form"> 
+            <form action="PHP/addException.php" method="post"> 
               <div class="form-group">
                 <label for="resourceList" class="col-form-label">Select a cloud resource:</label>
                 <select style= "width:100%; color: white; background-color: #333333" name="resourceList" id="resourceList">
@@ -204,12 +204,11 @@
                 <!-- Code taken from https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date -->
                 <input type="date" id="newReviewDate" name="newReviewDate" value="<?php echo date("Y-m-d")?>" min="<?php echo date("Y-m-d", strtotime("+1 day"))?>" max="<?php echo date("Y-m-d", strtotime("+1 year"))?>">
               </div>
-              
-            </form>
-            <div class="modal-footer">
+              <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
-                  <button type="button" onclick="sendForm()" class="btn btn-primary">Submit</button>
+                  <button type="submit" class="btn btn-primary">Submit</button>
               </div>   
+            </form>
             <?php
 
             
@@ -407,8 +406,10 @@ function addException(rule_rescourceType){
   }
 
 }
+</script>
 
-function sendForm()
+
+<!-- function sendForm()
 {
   var xmlhttp=new XMLHttpRequest();
   var url = "PHP/addException.php";
@@ -425,8 +426,8 @@ function sendForm()
   // }
 }
 
-}
-</script>
+} -->
+
 
 
 <!-- 
