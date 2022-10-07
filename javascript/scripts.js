@@ -44,7 +44,7 @@ function generateGraph(noncompliant, compliant)
 // Help from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/abs
 function upcomingReviews(exceptions) 
 {
-  var numOfUpcoming;
+  var numOfUpcoming = 0;
 
   document.getElementById("reviewbody").innerHTML = "";
 
