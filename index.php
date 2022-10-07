@@ -57,12 +57,12 @@
       </div>
       <div class="col-lg-1"></div>
       <!-- Review Dates -->
-      <div class="col-lg-5 d-flex align-items-center p-4" >
+      <div class="col-lg-5 " >
         <div class="row"> 
           <h3>Upcoming Reviews for Existing Exceptions</h3>
         </div>
         
-        <div class="row">
+        <div class="row d-flex align-items-center p-4">
           <table class="table fixed_header" style="color:white">
             <thead style="position: sticky; top:0;" class="thead-dark stickyHead">
               <tr class="stickyHead">
