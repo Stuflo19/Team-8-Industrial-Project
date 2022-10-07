@@ -54,7 +54,7 @@ function upcomingReviews(exceptions)
   {
     const currDate = new Date(); //Todays date
     var today = new Date(currDate.getFullYear() +"/"+ (currDate.getMonth()+1) +"/"+ currDate.getDate() + " " + currDate.getUTCHours() + ":" + currDate.getUTCMinutes());
-    var review = new Date(rows[i]['review_date'].replace('-','/'));
+    var review = new Date(exceptions[i]['review_date'].replace('-','/'));
     const msBetweenDates = reviewDate.getTime() - currDate.getTime();
     console.log(review);
     console.log(today);
@@ -76,9 +76,9 @@ function upcomingReviews(exceptions)
           console.log('date is within 30 days'); 
 
           const tr = document.getElementById('reviewbody').insertRow();
-          tr.insertCell().appendChild(document.createTextNode(rows[i]['id']));
-          tr.insertCell().appendChild(document.createTextNode(rows[i]['last_updated_by']));
-          tr.insertCell().appendChild(document.createTextNode(rows[i]['justification']));
+          tr.insertCell().appendChild(document.createTextNode(exceptions[i]['id']));
+          tr.insertCell().appendChild(document.createTextNode(exceptions[i]['last_updated_by']));
+          tr.insertCell().appendChild(document.createTextNode(exceptions[i]['justification']));
           tr.insertCell().appendChild(document.createTextNode(today < review ? review : "EXPIRED"));
         } 
 
