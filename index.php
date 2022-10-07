@@ -98,7 +98,7 @@
                             $_SESSION['password'] = $row['password'];
                             $_SESSION['id'] = $row['id'];
                             $_SESSION['user_id'] = $row['user_id'];
-                            header("Location: dashboard1.php");
+                            header("Location: dashboard.php");
                             exit();
                         }
                         //if not match, tell them incorrect
