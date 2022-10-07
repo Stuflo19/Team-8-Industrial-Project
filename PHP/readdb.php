@@ -47,5 +47,5 @@
   $query = mysqli_query($conn,"SELECT * FROM rule");
 
 
-  $conn->close();
+  //$conn->close();
 ?>
