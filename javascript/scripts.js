@@ -45,7 +45,7 @@ function generateGraph(noncompliant, compliant)
 function upcomingReviews(exceptions) 
 {
   console.log("Below Here");
-  console.log(row[0]['exception_value']);
+  console.log(exceptions[0]['exception_value']);
   console.log("Above Here");
 
   document.getElementById("reviewbody").innerHTML = "";
