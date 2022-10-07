@@ -1,6 +1,8 @@
 <?php
     include 'dbconnect.php';
     include 'readdb.php';
+
+    echo "ENTERED";
     $len_exception = count($exception)+1;
     //last_updates = today's day
     $date = date("Y-m-d H:i:sa");
@@ -41,7 +43,7 @@
 
 
     //session_reset();
-    $conn->close();
+    $conn->close();bbbbb
     //echo "<meta http-equiv='refresh' content='0'>";
    }
     header("Location: https://issue-br-issue-13.herokuapp.com/");

@@ -187,7 +187,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <form id="myForm" onsubmit="return ajaxcall();"> 
+            <form  method="post"> 
               <div class="form-group">
                 <label for="resourceList" class="col-form-label">Select a cloud resource:</label>
                 <select style= "width:100%; color: white; background-color: #333333" name="resourceList" id="resourceList">
@@ -206,7 +206,7 @@
               </div>
               <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
-                  <button type="button"  class="btn btn-primary">Submit</button>
+                  <button type="submit" onclick="submitForm()" class="btn btn-primary">Submit</button>
               </div>   
             </form>
             <?php
@@ -406,20 +406,22 @@ function addException(rule_rescourceType){
   }
 
 }
-function ajaxcall () {
-  // (B1) GET FORM DATA
-  var data = new FormData(document.getElementById("myForm"));
- 
-  // (B2) FETCH
- // fetch("PHP/suspend.php", {mode: 'cors', method: "POST", headers: {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"}, body: `id=${exceptionid}&suspended=${suspended}`})
+function submitForm()
+{
 
-  fetch("PHP/addException.php", { mode: 'cors', method: "POST", headers: {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"}, body: data )
-  .then(res => res.text())
-  .then((txt) => {
-    console.log(txt);
-  })
-  .catch((err) => { console.error(err); });
-  return false;
+var http = new XMLHttpRequest();
+var url = '/PHP/assException.php';
+var params = 'orem=ipsum&name=binny';
+http.open('POST', url, true);
+
+//Send the proper header information along with the request
+http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+http.onreadystatechange = function() {//Call a function when the state changes.
+    if(http.readyState == 4 && http.status == 200) {
+        alert(http.responseText);
+    }
 }
+http.send(params);
 }
 </script>
