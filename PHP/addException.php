@@ -1,5 +1,6 @@
 <?php
     include 'dbconnect.php';
+    include 'readdb.php';
 
     $len_exception = count($exception)+1;
     //last_updates = today's day

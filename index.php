@@ -176,7 +176,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <form action=" " method="post"> 
+            <form action="PHP/addException.php" method="POST"> 
               <div class="form-group">
                 <label for="resourceList" class="col-form-label">Select a cloud resource:</label>
                 <select style= "width:100%; color: white; background-color: #333333" name="resourceList" id="resourceList">
@@ -196,11 +196,10 @@
               </div>
               <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <input type="submit" class="btn btn-primary" value="Submit">
               </div>   
             </form>
-            <?php
-              //id
+              <!-- //id
               $len_exception = count($exception)+1;
               //last_updates = today's day
               $date = date("Y-m-d H:i:sa");
@@ -223,11 +222,10 @@
               //customer_id & last_updated_by are FIXED values
            
               $addExceptionS="INSERT INTO exception(id, customer_id, rule_id,last_updated_by, exception_value, justification, review_date, last_updated, suspended) VALUES (".$len_exception. ", 1,". $ruleID .",'system','" . $exception_value . "','".$justif."', '" . $_POST['newReviewDate'] . "','". $date ."',0 );";
-              $insertQ = mysqli_query($conn,$addExceptionS);
+              //$insertQ = mysqli_query($conn,$addExceptionS);
               // if(!$insertQ){
               //   echo("Error description: " . mysqli_error($con));
-              // }
-              ?>
+              // } -->
                
           </div>
         </div>
