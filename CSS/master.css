@@ -17,9 +17,10 @@ h2{
   color: #2e2e2e;
 }
 h3, h4 {
-  font-size: 1rem;
+  font-size: 1.5rem;
   font-family: 'Bahnschrift', cursive;
   color: white;
+  font-weight: bolder;
   padding-left: 1px;
 }
 h5, h6 {
