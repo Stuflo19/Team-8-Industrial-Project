@@ -1,5 +1,5 @@
 <?php
-  include 'PHP/dbconnectlocal.php';
+  include 'dbconnectphp';
   include 'readdb.php';
 ?>
 
@@ -31,95 +31,96 @@
 
 
   <main>
-  <div class="centerdiv col">
-    <!-- Use a form for data entery with method post for the php to work :) -->
-    <img src="brightSolid.png" alt="BrightSolid logo" style="position: absolute" class="mb-1 logo">
+    <div class="centerdiv col">
+    <div class="row">
+      <!-- Use a form for data entery with method post for the php to work :) -->
+      <img src="brightSolid.png" alt="BrightSolid logo" class="mb-3 col">
+    </div>
 
-    <form action="index.php" method="post" class="bg-dark p-3" style="z-index: 10">
+    <div class="row">
+      <form action="index.php" method="post" class="bg-dark p-3 col" style="border-radius: 25px;">
 
-      <h2>LOGIN</h2>
+        <h2 style="color: white; font-weight: bolder">LOGIN:</h2>
 
-      <?php if (isset($_GET['error'])) { ?>
+        <?php if (isset($_GET['error'])) { ?>
 
-          <p class="error"><?php echo $_GET['error']; ?></p>
+            <p class="error"><?php echo $_GET['error']; ?></p>
 
-      <?php } ?>
+        <?php } ?>
 
-      <label>User Name</label>
+        <label>Username:</label>
+        <input type="text" name="username" placeholder="Username"><br>
 
-      <input type="text" name="username" placeholder="User Name"><br>
+        <label>Password:</label>
+        <input type="password" name="password" placeholder="Password"><br> 
 
-      <label>Password</label>
+        <button class="loginbutton my-1" type="submit">Login</button>
 
-      <input type="password" name="password" placeholder="Password"><br> 
+        <?php 
+            //Creates the session
+            session_start(); 
+            //Using my local db file to connect to my db for testing
+            include 'dbconnect.php';
+            // using post method in the form (important bit) to get data
+            if (isset($_POST['username']) && isset($_POST['password'])) {
+              // strips away whitespaces in password and username
+                function validate($data){
+                    $data = trim($data);
+                    return $data;
+            
+                }
+                //set username and password to variable
+                $username = validate($_POST['username']);
+                $password = validate($_POST['password']);
+                //if no username, tell them to enter one
+                if (empty($username)) {
+                    echo "Enter username";
+                    exit();
+                }
+                //if no password, tell them to enter one
+                else if(empty($password)){
+                    echo "Enter password";
+                    exit();
+                }
+                //if both fields have data
+                else{
+                  //go into database login table and select everything from username and password rows
+                    $sql = "SELECT * FROM login WHERE username='$username' AND password='$password'";
+                    //create a query to database
+                    $result = mysqli_query($conn, $sql);
+                    //if there is data in a row
+                    if (mysqli_num_rows($result) === 1) {
+                        $row = mysqli_fetch_assoc($result);
+                        //compare the username and password entered to the username and password in database to check for match (if match login)
+                        if ($row['username'] === $username && $row['password'] === $password) {
+                            echo "Logged in! Go to next page";
+                            $_SESSION['username'] = $row['username'];
+                            $_SESSION['password'] = $row['password'];
+                            $_SESSION['id'] = $row['id'];
+                            $_SESSION['user_id'] = $row['user_id'];
+                            header("Location: dashboard1.php");
+                            exit();
+                        }
+                        //if not match, tell them incorrect
+                        else {
+                            echo "Incorrect username or password";
+                            exit();
+                        }
+                    }
+                    //if not match, tell them incorrect
+                    else {
+                        echo "Incorrect username or password";
+                        exit();
+                    }
+                }
+            }
 
-      <button type="submit">Login</button>
-
-      <?php 
-          //Creates the session
-          session_start(); 
-          //Using my local db file to connect to my db for testing
-          include 'PHP/dbconnectlocal.php';
-          // using post method in the form (important bit) to get data
-          if (isset($_POST['username']) && isset($_POST['password'])) {
-            // strips away whitespaces in password and username
-              function validate($data){
-                  $data = trim($data);
-                  return $data;
-          
-              }
-              //set username and password to variable
-              $username = validate($_POST['username']);
-              $password = validate($_POST['password']);
-              //if no username, tell them to enter one
-              if (empty($username)) {
-                  echo "Enter username";
-                  exit();
-              }
-              //if no password, tell them to enter one
-              else if(empty($password)){
-                  echo "Enter password";
-                  exit();
-              }
-              //if both fields have data
-              else{
-                //go into database login table and select everything from username and password rows
-                  $sql = "SELECT * FROM login WHERE username='$username' AND password='$password'";
-                  //create a query to database
-                  $result = mysqli_query($conn, $sql);
-                  //if there is data in a row
-                  if (mysqli_num_rows($result) === 1) {
-                      $row = mysqli_fetch_assoc($result);
-                      //compare the username and password entered to the username and password in database to check for match (if match login)
-                      if ($row['username'] === $username && $row['password'] === $password) {
-                          echo "Logged in! Go to next page";
-                          $_SESSION['username'] = $row['username'];
-                          $_SESSION['password'] = $row['password'];
-                          $_SESSION['id'] = $row['id'];
-                          $_SESSION['user_id'] = $row['user_id'];
-                          header("Location: dashboard1.php");
-                          exit();
-                      }
-                      //if not match, tell them incorrect
-                      else {
-                          echo "Incorrect username or password";
-                          exit();
-                      }
-                  }
-                  //if not match, tell them incorrect
-                  else {
-                      echo "Incorrect username or password";
-                      exit();
-                  }
-              }
-          }
-
-          else {
-            echo "no";
-              exit();
-          }
-      ?>
-    </form>
+            else {
+                exit();
+            }
+        ?>
+      </form>
+    </div>
   </div>
 
   </main>
