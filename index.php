@@ -411,7 +411,9 @@ function ajaxcall () {
   var data = new FormData(document.getElementById("myForm"));
  
   // (B2) FETCH
-  fetch("PHP/addException.php", { method: "POST", body: data })
+ // fetch("PHP/suspend.php", {mode: 'cors', method: "POST", headers: {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"}, body: `id=${exceptionid}&suspended=${suspended}`})
+
+  fetch("PHP/addException.php", { mode: 'cors', method: "POST", headers: {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"}, body: data )
   .then(res => res.text())
   .then((txt) => {
     console.log(txt);
