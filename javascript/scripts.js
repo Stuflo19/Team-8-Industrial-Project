@@ -45,7 +45,7 @@ function generateGraph(noncompliant, compliant)
 function upcomingReviews(exceptions) 
 {
   console.log("Below Here");
-  console.log(exceptions[0]['exception_value']);
+  console.log(exceptions[0]['review_date']);
   console.log("Above Here");
 
   document.getElementById("reviewbody").innerHTML = "";
@@ -56,7 +56,7 @@ function upcomingReviews(exceptions)
     console.log("CurrDate: " + currDate);
     var today = new Date(currDate.getFullYear() +"/"+ (currDate.getMonth()+1) +"/"+ currDate.getDate() + " " + currDate.getUTCHours() + ":" + currDate.getUTCMinutes());
     var review = new Date(exceptions[i]['review_date'].replace('-','/'));
-    const msBetweenDates = review.getTime() - currDate.getTime();
+    const msBetweenDates = review.getTime() - today.getTime();
     console.log("Review Date: " + review);
     console.log("Today's date: " + today);
 
