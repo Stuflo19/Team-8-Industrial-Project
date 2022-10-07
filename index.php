@@ -57,37 +57,35 @@
       </div>
       <div class="col-lg-1"></div>
       <!-- Review Dates -->
-      <div class="col-lg-5 d-flex align-items-center p-4" >
-        <div class="row d-flex align-items-center p-4"> 
+      <div class="col-lg-5 " >
+        <div class="row">
           <h3>Upcoming Reviews for Existing Exceptions</h3>
         </div>
         
-        <div class="row d-flex align-items-center p-4">
-          <table class="table fixed_header" style="color:white">
-            <thead style="position: sticky; top:0;" class="thead-dark stickyHead">
-              <tr class="stickyHead">
-                <th class="stickyHead" scope="col-lg">Exception No.</th>
-                <th class="stickyHead" scope="col-lg">Resource</th>
-                <th class="stickyHead" scope="col-lg">Rule ID</th>
-                <th class="stickyHead" scope="col-lg">Creator</th>
-                <th class="stickyHead" scope="col-lg">Justification</th>
-                <th class="stickyHead" scope="col-lg">Review date</th>
-              </tr>
-            </thead>
-            <!-- If Michael Cera becomes a visible collaborator on the site, we have a problem -->
-            <tbody id="reviewbody"> 
-              <tr>
-                <td>1</td>
-                <td>dh-dc1</td>
-                <td>4</td>
-                <td>Michael Cera</td>
-                <td>The resource would not work</td>
-                <td>2011/04/25 06:94:20</td>
-              </tr>
-            </tbody>
-          </table>
-        </div> 
-      </div>
+        <table class="table fixed_header d-flex align-items-center p-4" style="color:white">
+          <thead style="position: sticky; top:0;" class="thead-dark stickyHead">
+            <tr class="stickyHead">
+              <th class="stickyHead" scope="col-lg">Exception No.</th>
+              <th class="stickyHead" scope="col-lg">Resource</th>
+              <th class="stickyHead" scope="col-lg">Rule ID</th>
+              <th class="stickyHead" scope="col-lg">Creator</th>
+              <th class="stickyHead" scope="col-lg">Justification</th>
+              <th class="stickyHead" scope="col-lg">Review date</th>
+            </tr>
+          </thead>
+          <!-- If Michael Cera becomes a visible collaborator on the site, we have a problem -->
+          <tbody id="reviewbody"> 
+            <tr>
+              <td>1</td>
+              <td>dh-dc1</td>
+              <td>4</td>
+              <td>Michael Cera</td>
+              <td>The resource would not work</td>
+              <td>2011/04/25 06:94:20</td>
+            </tr>
+          </tbody>
+        </table>
+      </div> 
     </div>
       
       <div class="row">
