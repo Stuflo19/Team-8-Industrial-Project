@@ -187,7 +187,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <form action="PHP/addException.php" method="post"> 
+            <form id="form"> 
               <div class="form-group">
                 <label for="resourceList" class="col-form-label">Select a cloud resource:</label>
                 <select style= "width:100%; color: white; background-color: #333333" name="resourceList" id="resourceList">
@@ -204,11 +204,12 @@
                 <!-- Code taken from https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date -->
                 <input type="date" id="newReviewDate" name="newReviewDate" value="<?php echo date("Y-m-d")?>" min="<?php echo date("Y-m-d", strtotime("+1 day"))?>" max="<?php echo date("Y-m-d", strtotime("+1 year"))?>">
               </div>
-              <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
-                  <button type="submit" class="btn btn-primary">Submit</button>
-              </div>   
+              
             </form>
+            <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+                  <button type="button" onclick="sendForm()" class="btn btn-primary">Submit</button>
+              </div>   
             <?php
 
             
@@ -404,6 +405,25 @@ function addException(rule_rescourceType){
     }
 
   }
+
+}
+
+function sendForm()
+{
+  var xmlhttp=new XMLHttpRequest();
+  var url = "PHP/addException.php";
+  var checkBoxes_formData = new FormData(document.getElementById("form"));
+
+  xmlhttp.open("POST",url,true);
+  //xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+  xmlhttp.send(checkBoxes_formData);
+
+  // xmlhttp.onreadystatechange=function(){
+  //   if (xmlhttp.readyState==4 && xmlhttp.status==200){
+  //     document.getElementById("result").innerHTML=xmlhttp.responseText;
+  //   }
+  // }
+}
 
 }
 </script>
