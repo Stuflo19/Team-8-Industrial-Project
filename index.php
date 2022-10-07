@@ -207,12 +207,11 @@
               //ruleID
               $justif = $_POST['newJustification'];
               //echo $justif;
-              $IDs = $_POST['resourceList'];  // get resource ID and rule ID 
+              $IDs = $_POST['resourceList'];  // get resource ID and rule
               $ruleID = intval(explode("_",$IDs)[1]);
               //exception_value
               $resourceID= intval(explode("_",$IDs)[0]);
               $exception_value = "";
-
               while($row =mysqli_fetch_array($result_res))
               {
                 if($row['id'] == $resourceID)
@@ -340,7 +339,7 @@ function addException(rule_rescourceType){
           //checking if a non-compliant resource has an axception -> making a resource compliant
           for(var k=0; k<rows_except.length; k++)
           {
-            if(rows_resource[j]['resource_ref'].localeCompare(rows_except[k]['exception_value']) == 0)
+            if(rows_resource[j]['resource_name'] === rows_except[k]['exception_value'])
             {
               non_compl=0;
               break;
