@@ -187,7 +187,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <form action="PHP/addException.php" method="post"> 
+            <form id="myForm" onsubmit="return ajaxcall();"> 
               <div class="form-group">
                 <label for="resourceList" class="col-form-label">Select a cloud resource:</label>
                 <select style= "width:100%; color: white; background-color: #333333" name="resourceList" id="resourceList">
@@ -405,5 +405,18 @@ function addException(rule_rescourceType){
 
   }
 
+}
+function ajaxcall () {
+  // (B1) GET FORM DATA
+  var data = new FormData(document.getElementById("myForm"));
+ 
+  // (B2) AJAX CALL
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", "PHP/addException.php");
+  xhr.onload = function () {
+    console.log(this.response);
+  };
+  xhr.send(data);
+  return false;
 }
 </script>
