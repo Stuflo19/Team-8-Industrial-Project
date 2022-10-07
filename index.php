@@ -421,4 +421,5 @@ function ajaxcall () {
   .catch((err) => { console.error(err); });
   return false;
 }
+}
 </script>
