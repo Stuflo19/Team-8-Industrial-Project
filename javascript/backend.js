@@ -53,12 +53,5 @@ function historybutton(id, rows)
   return false;
 }
 
-// https://www.javascripttutorial.net/javascript-dom/javascript-appendchild/#:~:text=The%20appendChild()%20is%20a,of%20a%20specified%20parent%20node.&text=In%20this%20method%2C%20the%20childNode,()%20returns%20the%20appended%20child.
-function addOption(name, id){
-  let option = document.createElement("option");
-  option.text = name;
-  option.value = id;
 
-  return option;
-}
 
