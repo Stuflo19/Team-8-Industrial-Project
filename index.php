@@ -35,7 +35,7 @@
     <!-- Use a form for data entery with method post for the php to work :) -->
     <img src="brightSolid.png" alt="BrightSolid logo" style="position: absolute;" class="mb-1 logo">
 
-    <form action="index.php" method="post" class="bg-dark p-3" style="z-index: 10;">
+    <form action="index.php" method="post" class="bg-dark p-3" style="z-index: 10">
 
       <h2>LOGIN</h2>
 
