@@ -61,9 +61,10 @@
       <table class="table fixed_header" style="color:white">
         <thead style="position: sticky; top:0;" class="thead-dark stickyHead">
           <tr class="stickyHead">
+            <th class="stickyHead" scope="col-lg">Exception No.</th>
             <th class="stickyHead" scope="col-lg">Resource</th>
             <th class="stickyHead" scope="col-lg">Rule ID</th>
-            <th class="stickyHead" scope="col-lg">Created By</th>
+            <th class="stickyHead" scope="col-lg">Creator</th>
             <th class="stickyHead" scope="col-lg">Justification</th>
             <th class="stickyHead" scope="col-lg">Review date</th>
           </tr>

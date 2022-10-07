@@ -81,6 +81,7 @@ function upcomingReviews(exceptions)
           //console.log('date is within 30 days'); 
 
           const tr = document.getElementById('reviewbody').insertRow();
+          tr.insertCell().appendChild(document.createTextNode(exceptions[i]['id']));
           tr.insertCell().appendChild(document.createTextNode(exceptions[i]['exception_value']));
           tr.insertCell().appendChild(document.createTextNode(exceptions[i]['rule_id']));
           tr.insertCell().appendChild(document.createTextNode(exceptions[i]['last_updated_by']));
