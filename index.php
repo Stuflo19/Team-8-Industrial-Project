@@ -411,13 +411,7 @@ function sendForm()
  {
    var xmlhttp=new XMLHttpRequest();
    var url = "PHP/addException.php";
-  // var checkBoxes_formData = new FormData(document.getElementById("form"));
-   var data = new FormData();
-   data.append('newJustification' : document.getElementById('newJustification'));
-   data.append('resourceList' : document.getElementById('resourceList'));
-
-  
-
+   var data = new FormData(document.getElementById("form"));
    xmlhttp.open("POST",url,true);
    //xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
    xmlhttp.send(data);
