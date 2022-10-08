@@ -35,7 +35,7 @@
 /* READ TO GET CUSTOMER NAME */
 $sql = "SELECT login.user_id, user.customer_id, customer.name FROM customer INNER JOIN users ON customer.id = users.customer_id INNER JOIN login ON user.id = login.user_id";
 $result1 = mysqli_query($conn,$sql);
-$test = mysqli_fetch_assoc($result1);
+
 
 $conn->close();
 ?>
