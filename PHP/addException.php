@@ -39,14 +39,10 @@
     //echo $addExceptionS;
     $insertQ = mysqli_query($conn,$addExceptionS);
     //mysqli_refresh($conn);
-
-    echo "<meta http-equiv='refresh' content='0'>";
-   }
-    //session_reset();
-    else {
-        echo "error transmitting ID";
+    //$conn->close();
+    header("Location: ../index.php")
+    
     }
 
-    $conn->close();
-    header("../index.php")
+    
 ?>
