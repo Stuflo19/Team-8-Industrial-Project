@@ -85,7 +85,7 @@
                 //if both fields have data
                 else{
                   //go into database login table and select everything from username and password rows
-                    $sql = "SELECT * FROM login WHERE username='$username' AND password='$password'; SELECT login.user_id, user.customer_id, customer.name FROM customer INNER JOIN users ON customer.id = users.customer_id INNER JOIN login ON user.id = login.user_id";
+                    $sql = "SELECT * FROM login WHERE username='$username' AND password='$password';
                     //create a query to database
                     $login = mysqli_multi_query($conn, $sql);
                     //if there is data in a row
