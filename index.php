@@ -187,7 +187,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <form id="form" > 
+            <form action="PHP/addException.php" method="post"> 
               <div class="form-group">
                 <label for="resourceList" class="col-form-label">Select a cloud resource:</label>
                 <select style= "width:100%; color: white; background-color: #333333" name="resourceList" id="resourceList">
@@ -206,7 +206,7 @@
               </div>
               <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
-                  <button type="button" onclick="sendForm()" class="btn btn-primary">Submit</button>
+                  <button type="submit" class="btn btn-primary">Submit</button>
               </div>   
             </form>
             <?php
@@ -407,43 +407,31 @@ function addException(rule_rescourceType){
 
 }
 
-function sendForm()
- {
-  //  var xmlhttp=new XMLHttpRequest();
-  //  var url = "PHP/addException.php";
-  //  var data = new FormData(document.getElementById("form"));
-  //  xmlhttp.open("POST",url,true);
-  //  //xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-  //  xmlhttp.send(data);
-  //  // xmlhttp.onreadystatechange=function(){
-  //  //   if (xmlhttp.readyState==4 && xmlhttp.status==200){
-  //  //     document.getElementById("result").innerHTML=xmlhttp.responseText;
-  //  //   }
-  //   }
-    var data = document.getElementById("form");
+// function sendForm()
+//  {
+//   //  var xmlhttp=new XMLHttpRequest();
+//   //  var url = "PHP/addException.php";
+//   //  var data = new FormData(document.getElementById("form"));
+//   //  xmlhttp.open("POST",url,true);
+//   //  //xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+//   //  xmlhttp.send(data);
+//   //  // xmlhttp.onreadystatechange=function(){
+//   //  //   if (xmlhttp.readyState==4 && xmlhttp.status==200){
+//   //  //     document.getElementById("result").innerHTML=xmlhttp.responseText;
+//   //  //   }
+//   //   }
+//     var data = document.getElementById("form");
 
-    // fetch statement found from: https://code-boxx.com/call-php-file-from-javascript/ && https://sebhastian.com/call-php-function-from-javascript/ 
-    await fetch("PHP/suspend.php", {mode: 'cors', method: "POST", headers: {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"}, body:data)
-    .then(res => res.text())
-    )
-    .catch((err) => { console.error(err); });
+//     // fetch statement found from: https://code-boxx.com/call-php-file-from-javascript/ && https://sebhastian.com/call-php-function-from-javascript/ 
+//     await fetch("PHP/suspend.php", {mode: 'cors', method: "POST", headers: {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"}, body:data)
+//     .then(res => res.text())
+//     )
+//     .catch((err) => { console.error(err); });
 
-    location.reload();
-    //return false;
- }
+//     location.reload();
+//     //return false;
+//  }
+
+//  }
 </script>
 
-
-<!-- 
-function submitForm()
-{
-
-var http = new XMLHttpRequest();
-var url = '/PHP/assException.php';
-var params = 'orem=ipsum&name=binny';
-http.open('POST', url, true);
-
-//Send the proper header information along with the request
-http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-http.send(params);
-} -->
