@@ -40,7 +40,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
     <div class="collapse navbar-collapse d-flex justify-content-around" id="navbarNav">
       <ul class="mb-auto pl-0">
         <li>Username: <?php echo $_SESSION['username'];?></li>
-        <li>Role: <?php echo $result1; ?></li>
+        <li>Role: Customer name</li>
       </ul>
       <br>
       <h1 class=m-auto> Company Name </h1>
