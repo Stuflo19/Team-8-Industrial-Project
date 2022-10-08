@@ -45,9 +45,9 @@
 
 
     //session_reset();
-    $conn->close();bbbbb
+    $conn->close();
     //echo "<meta http-equiv='refresh' content='0'>";
    }
-    header("Location: https://issue-br-issue-13.herokuapp.com/");
+    // /("Location: https://issue-br-issue-13.herokuapp.com/");
 
 ?>
