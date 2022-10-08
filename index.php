@@ -187,7 +187,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <form id="form"> 
+            <form action="PHP/addException.php" method="post"> 
               <div class="form-group">
                 <label for="resourceList" class="col-form-label">Select a cloud resource:</label>
                 <select style= "width:100%; color: white; background-color: #333333" name="resourceList" id="resourceList">
@@ -206,7 +206,7 @@
               </div>
               <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
-                  <button type="submit"  onclick="sendForm()" class="btn btn-primary">Submit</button>
+                  <button type="submit" class="btn btn-primary">Submit</button>
               </div>   
             </form>
             <?php
@@ -406,30 +406,44 @@ function addException(rule_rescourceType){
   }
 
 }
-function sendForm()
+</script>
+
+
+<!-- 
+function submitForm()
 {
-  var xmlhttp=new XMLHttpRequest();
-  var url = "PHP/addException.php";
- // var checkBoxes_formData = new FormData(document.getElementById("form"));
-  var data = new FormData();
-  data.append('newJustification' : document.getElementById('newJustification'));
-  data.append('resourceList' : document.getElementById('resourceList'));
+
+var http = new XMLHttpRequest();
+var url = '/PHP/assException.php';
+var params = 'orem=ipsum&name=binny';
+http.open('POST', url, true);
+
+//Send the proper header information along with the request
+http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+http.send(params);
+} -->
+<!-- // function sendForm()
+// {
+//   var xmlhttp=new XMLHttpRequest();
+//   var url = "PHP/addException.php";
+//  // var checkBoxes_formData = new FormData(document.getElementById("form"));
+//   var data = new FormData();
+//   data.append('newJustification' : document.getElementById('newJustification'));
+//   data.append('resourceList' : document.getElementById('resourceList'));
 
   
 
-  xmlhttp.open("POST",url,true);
-  //xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-  xmlhttp.send(data);
+//   xmlhttp.open("POST",url,true);
+//   //xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+//   xmlhttp.send(data);
 
-  // xmlhttp.onreadystatechange=function(){
-  //   if (xmlhttp.readyState==4 && xmlhttp.status==200){
-  //     document.getElementById("result").innerHTML=xmlhttp.responseText;
-  //   }
-  // }
-}
-
-</script>
-
+//   // xmlhttp.onreadystatechange=function(){
+//   //   if (xmlhttp.readyState==4 && xmlhttp.status==200){
+//   //     document.getElementById("result").innerHTML=xmlhttp.responseText;
+//   //   }
+//   // }
+// }
+ -->
 
 
 <!-- 
