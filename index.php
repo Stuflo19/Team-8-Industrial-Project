@@ -414,7 +414,7 @@ var xmlhttp=new XMLHttpRequest();
 var url = "PHP/addException.php";
 var data = new FormData(document.getElementById("form"));
 xmlhttp.open("POST",url,true);
-//   //  //xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 xmlhttp.send(data);
 //   //  // xmlhttp.onreadystatechange=function(){
 //   //  //   if (xmlhttp.readyState==4 && xmlhttp.status==200){
