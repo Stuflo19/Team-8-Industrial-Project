@@ -39,7 +39,9 @@
     //echo $addExceptionS;
     $insertQ = mysqli_query($conn,$addExceptionS);
     //mysqli_refresh($conn);
-    
+
+    echo "<meta http-equiv='refresh' content='0'>";
+   }
     //session_reset();
     else {
         echo "error transmitting ID";
