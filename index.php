@@ -1,5 +1,5 @@
 <?php
-  include 'PHP/dbconnectlocal.php';
+  include 'PHP/dbconnect.php';
   include 'PHP/readdb.php';
 ?>
 
@@ -106,7 +106,7 @@
             </div>
           </div>
           <?php
-            while($result_rule=mysqli_fetch_array($query))
+            foreach($query as $result_rule)
             {
           ?>
           <div class = "row mb-2">
@@ -146,7 +146,10 @@
                       </thead>
                       <tbody id="<?php echo 'Table' . $result_rule['id'];?>">
                           <?php
-                          echo '<script>generateResources('.json_encode($result_rule).','.json_encode($resources).','.json_encode($non_compliance).','.json_encode($exception).')</script>';
+                            echo '<script>
+                                    var result_rule = '. json_encode($result_rule) .';
+                                    generateResources();
+                                  </script>';
                           //   foreach($result as $row) {
                             //   $checked = false;
                             //   if($row['resource_type_id'] == $result_rule['resource_type_id']){
