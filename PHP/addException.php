@@ -5,12 +5,9 @@
     $len_exception = count($exception)+1;
     //last_updates = today's day
     $date = date("Y-m-d H:i:sa");
-    //ruleID
-   // if (isset($justif) || isset($justif) || isset($justif))
 
-    echo $_POST['newJustification'];
 
-   if (isset($_POST['newJustification']) || isset($_POST['resourceList']) )
+   if (isset($_POST['newJustification']) && isset($_POST['resourceList']) )
    {
       
    
@@ -43,12 +40,13 @@
     $insertQ = mysqli_query($conn,$addExceptionS);
     //mysqli_refresh($conn);
 
+    echo "<meta http-equiv='refresh' content='0'>";
     
     //session_reset();
-    $conn->close();
-    //echo "<meta http-equiv='refresh' content='0'>";
-   }
-   //header("../index.php");
-header("Location: https://issue-br-issue-13.herokuapp.com/");
+    else {
+        echo "error transmitting ID";
+    }
 
+    $conn->close();
+    header("../index.php")
 ?>
