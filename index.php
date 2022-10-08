@@ -415,6 +415,11 @@ var url = "PHP/addException.php";
 var data = new FormData(document.getElementById("form"));
 xmlhttp.open("POST",url,true);
 xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+http.onreadystatechange = function() {
+  if (this.readyState == 4 && this.status == 200) {
+     console.log(this.responseText);
+  }
+};
 xmlhttp.send(data);
 //   //  // xmlhttp.onreadystatechange=function(){
 //   //  //   if (xmlhttp.readyState==4 && xmlhttp.status==200){
