@@ -417,21 +417,22 @@ const form = document.getElementById('form');
 form.addEventListener('click', function(event){
     //Prevent the event from submitting the form, no redirect or page reload
     const formattedFormData = new FormData(form);
-    postData(form);
+    postData(formattedFormData);
 });
 }
 
 async function postData(formattedFormData){
     const response = await fetch('PHP/addException.php',{
         method: 'POST',
-        mode: 'cors',
-        headers: {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"},
-        body: form
+        //mode: 'cors',
+        //headers: {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"},
+        body: formattedFormData
     });
     const data = await response.text();
+    console.log(data);
     //This should now print out the values that we sent to the backend-side
     console.log(data);
-    //location.reload();
+    location.reload();
 }
 
 function sendForm()
