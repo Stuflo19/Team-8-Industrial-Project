@@ -98,6 +98,10 @@
                             $_SESSION['password'] = $row['password'];
                             $_SESSION['id'] = $row['id'];
                             $_SESSION['user_id'] = $row['user_id'];
+                            $sql1 = "SELECT login.user_id, user.customer_id, customer.name FROM customer INNER JOIN users ON customer.id = users.customer_id INNER JOIN login ON user.id = login.user_id";
+                            $result1 = mysqli_query($conn,$sql1);
+                            $test = mysqli_fetch_assoc($result1);
+                            $_SESSION['customername'] = $test['customer.name'];
                             header("Location: dashboard.php");
                             exit();
                         }
