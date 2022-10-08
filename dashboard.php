@@ -40,12 +40,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
     <div class="collapse navbar-collapse d-flex justify-content-around" id="navbarNav">
       <ul class="mb-auto pl-0">
         <li>Username: <?php echo $_SESSION['username'];?></li>
-        <li>Role: <?php 
-          $sql1 = "SELECT login.user_id, user.customer_id, customer.name FROM customer INNER JOIN users ON customer.id = users.customer_id INNER JOIN login ON user.id = login.user_id";
-          $result1 = mysqli_query($conn,$sql1);
-          $test = mysqli_fetch_assoc($result1);
-          $_SESSION['customername'] = $test['customer.name'];
-          echo $_SESSION['customername'];?></li>
+        <li>Role: <?php echo $_SESSION['customername'];?></li>
       </ul>
       <br>
       <h1 class=m-auto> Company Name </h1>
