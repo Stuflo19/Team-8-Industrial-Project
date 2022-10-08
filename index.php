@@ -145,50 +145,11 @@
                         </tr>
                       </thead>
                       <tbody id="<?php echo 'Table' . $result_rule['id'];?>">
-                          <?php
-                            echo '<script>
-                                    var result_rule = '. json_encode($result_rule) .';
-                                    generateResources();
-                                  </script>';
-                          //   foreach($result as $row) {
-                            //   $checked = false;
-                            //   if($row['resource_type_id'] == $result_rule['resource_type_id']){
-                            //     echo '
-                            //     <tr>
-                            //     <td style="text-align: left">'.$row["resource_name"].'</td>';
-                                
-                            //     if(in_array($row["id"], $non_compliant_ids))
-                            //     {
-                            //       foreach(array_keys($non_compliant_ids, $row['id']) as $index) {
-                            //         $non_compliant_rules[$index] == $result_rule["id"] ? $checked = true : $checked = false;
-                            //         if($checked) {break;}
-                            //       };
-
-                            //       if($checked)
-                            //       {
-                            //         foreach($exception as $exc)
-                            //         {
-                            //           if($result_rule['id'] == $exc['rule_id'] && $row['resource_name'] == $exc['exception_value'])
-                            //           {
-                            //             $checked = $exc['suspended'] == 0 ? false : true;
-                            //             break;
-                            //           }
-                            //         }
-                            //       }
-                            //     }
-
-                            //   //if the resource exists in the id array && ruleID at index of resource in the rules array
-                            //   if($checked)
-                            //   {
-                            //     echo '<td style="vertical-align: middle"><div class="exception-status"> Non-Compliant</div></td>';
-                            //   }
-                            //   else
-                            //   {
-                            //     echo '<td style="vertical-align: middle"><div class="active-status">Compliant</div></td>';
-                            //   } 
-                            //   echo "<td style='vertical-align: middle'><button type='button' class='btn btn-outline-warning historybutton' data-toggle='modal' data-target='#historyModal' id='{$row["resource_name"]},{$result_rule["id"]}' onclick='historybutton(this.id, ".json_encode($exception).")'>Exception History</button></td></tr>";
-                            // }
-                          // }
+                        <?php
+                          echo '<script>
+                                  var result_rule = '. json_encode($result_rule) .';
+                                  generateResources();
+                                </script>';
                         ?>
                       </tbody>
                     </table>

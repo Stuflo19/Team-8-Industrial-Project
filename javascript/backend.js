@@ -63,7 +63,7 @@ async function filter() {
     result_rule = rules[i];
     await generateResources();
   }
-  
+
   return false;
 }
 
@@ -118,12 +118,11 @@ async function generateResources() {
       btn.value = "Exception History";
       btn.id = resource[i].resource_name + "," + result_rule.id;
       btn.addEventListener("click", function () {
-        document.getElementById("historyModal").style.display = 'block';
         historybutton(this.id);
       });
       btn.setAttribute('data-toggle', 'modal');
       btn.setAttribute('data-target', '#historyModal');
-      btn.className = "btn btn-outline-warning";
+      btn.className = "btn btn-outline-warning historybutton";
       
       //Insert the data into the table
       tr.insertCell().appendChild(document.createTextNode(resource[i]['resource_name']));

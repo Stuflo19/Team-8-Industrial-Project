@@ -122,6 +122,10 @@ table{
   background-color: #333333;
 }
 
+.table td, .table th{
+  vertical-align: middle;
+}
+
 .fixed_header{
   display: inline-block; 
   width: 100%;
@@ -166,6 +170,7 @@ table{
   .active-status, .exception-status {
     width: 75px;
     height: 12.5px;
+    font-size: 0.7rem;
   }
   .historybutton{
     width: 75px;
