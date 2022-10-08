@@ -43,6 +43,6 @@
     
     }
 
-    $conn->close();
-    header("https://issue-br-issue-13.herokuapp.com/");
+    //$conn->close();
+    header("../index.php");
 ?>

@@ -411,8 +411,6 @@ function addException(rule_rescourceType){
 
 
 function formCompleted(){
-
-
 const form = document.getElementById('form');
 form.addEventListener('click', function(event){
     //Prevent the event from submitting the form, no redirect or page reload
@@ -431,38 +429,9 @@ async function postData(formattedFormData){
     const data = await response.text();
     //This should now print out the values that we sent to the backend-side
     console.log(data);
+    location.reload();
+
 }
 
-function sendForm()
-{
-var xmlhttp=new XMLHttpRequest();
-var url = "PHP/addException.php";
-var data = new FormData(document.getElementById("form"));
-xmlhttp.open("POST",url,true);
-xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-http.onreadystatechange = function() {
-  if (this.readyState == 4 && this.status == 200) {
-     console.log(this.responseText);
-  }
-};
-xmlhttp.send(data);
-//   //  // xmlhttp.onreadystatechange=function(){
-//   //  //   if (xmlhttp.readyState==4 && xmlhttp.status==200){
-//   //  //     document.getElementById("result").innerHTML=xmlhttp.responseText;
-//   //  //   }
-//   //   }
-//     var data = document.getElementById("form");
-
-    // fetch statement found from: https://code-boxx.com/call-php-file-from-javascript/ && https://sebhastian.com/call-php-function-from-javascript/ 
-  //   await fetch("PHP/addException.php", {mode: 'cors', method: "POST", headers: {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"}, body:document.getElementById("form"))
-  //   .then(res => res.text())
-  //   .then((txt) => {
-  //   })
-  //   .catch((err) => { console.error(err); });
-
-  //   location.reload();
-  //   return false;
-  // }
-}
 </script>
 
