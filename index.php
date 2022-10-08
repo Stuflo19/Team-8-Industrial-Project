@@ -413,7 +413,7 @@ function sendForm()
   var checkBoxes_formData = new FormData(document.getElementById("form"));
 
   xmlhttp.open("POST",url,true);
-  xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+  //xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
   xmlhttp.send(checkBoxes_formData);
 
   // xmlhttp.onreadystatechange=function(){
