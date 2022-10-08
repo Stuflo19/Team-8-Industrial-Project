@@ -206,7 +206,7 @@
               </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
-                  <input type="submit" class="btn btn-primary" value="Submit">
+                  <input type="submit" class="btn btn-primary" onclick='formCompleted()' value="Submit">
               </div> 
             </form>
             
@@ -408,12 +408,18 @@ function addException(rule_rescourceType){
 
 }
 
+
+
+function formCompleted(){
+
+
 const form = document.getElementById('form');
 form.addEventListener('click', function(event){
     //Prevent the event from submitting the form, no redirect or page reload
     const formattedFormData = new FormData(form);
     postData(formattedFormData);
 });
+}
 
 async function postData(formattedFormData){
     const response = await fetch('PHP/addException.php',{
