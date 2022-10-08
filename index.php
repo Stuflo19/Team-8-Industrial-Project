@@ -413,14 +413,14 @@ function sendForm()
 var xmlhttp=new XMLHttpRequest();
 var url = "PHP/addException.php";
 var data = new FormData(document.getElementById("form"));
-xmlhttp.open("GET",url,true);
+xmlhttp.open("POST",url,true);
 xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 http.onreadystatechange = function() {
   if (this.readyState == 4 && this.status == 200) {
      console.log(this.responseText);
   }
 };
-//xmlhttp.send(data);
+xmlhttp.send(data);
 //   //  // xmlhttp.onreadystatechange=function(){
 //   //  //   if (xmlhttp.readyState==4 && xmlhttp.status==200){
 //   //  //     document.getElementById("result").innerHTML=xmlhttp.responseText;
