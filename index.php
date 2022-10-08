@@ -85,9 +85,9 @@
                 //if both fields have data
                 else{
                   //go into database login table and select everything from username and password rows
-                    $sql = "SELECT * FROM login WHERE username='$username' AND password='$password';
+                    $sql = "SELECT * FROM login WHERE username='$username' AND password='$password'";
                     //create a query to database
-                    $login = mysqli_multi_query($conn, $sql);
+                    $login = mysqli_query($conn, $sql);
                     //if there is data in a row
                     if (mysqli_num_rows($login) === 1) {
                         $row = mysqli_fetch_assoc($login);
