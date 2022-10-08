@@ -39,10 +39,10 @@
     //echo $addExceptionS;
     $insertQ = mysqli_query($conn,$addExceptionS);
     //mysqli_refresh($conn);
-    //$conn->close();
-    header("Location: ../index.php")
+    
     
     }
 
-    
+    $conn->close();
+    header("https://issue-br-issue-13.herokuapp.com/");
 ?>

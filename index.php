@@ -429,10 +429,8 @@ async function postData(formattedFormData){
         body: formattedFormData
     });
     const data = await response.text();
-    console.log(data);
     //This should now print out the values that we sent to the backend-side
     console.log(data);
-    location.reload();
 }
 
 function sendForm()
