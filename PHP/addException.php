@@ -48,6 +48,6 @@
     $conn->close();
     //echo "<meta http-equiv='refresh' content='0'>";
    }
-    // /("Location: https://issue-br-issue-13.herokuapp.com/");
+    ("Location: https://issue-br-issue-13.herokuapp.com/");
 
 ?>
