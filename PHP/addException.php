@@ -43,11 +43,12 @@
     $insertQ = mysqli_query($conn,$addExceptionS);
     //mysqli_refresh($conn);
 
-
+    header("Location: https://issue-br-issue-13.herokuapp.com/");
     //session_reset();
     $conn->close();
     //echo "<meta http-equiv='refresh' content='0'>";
    }
-    ("Location: https://issue-br-issue-13.herokuapp.com/");
+   header("../index.php");
+
 
 ?>
