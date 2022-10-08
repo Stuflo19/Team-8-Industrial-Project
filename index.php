@@ -409,17 +409,27 @@ function addException(rule_rescourceType){
 
 function sendForm()
  {
-   var xmlhttp=new XMLHttpRequest();
-   var url = "PHP/addException.php";
-   var data = new FormData(document.getElementById("form"));
-   xmlhttp.open("POST",url,true);
-   //xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-   xmlhttp.send(data);
-   // xmlhttp.onreadystatechange=function(){
-   //   if (xmlhttp.readyState==4 && xmlhttp.status==200){
-   //     document.getElementById("result").innerHTML=xmlhttp.responseText;
-   //   }
-    }
+  //  var xmlhttp=new XMLHttpRequest();
+  //  var url = "PHP/addException.php";
+  //  var data = new FormData(document.getElementById("form"));
+  //  xmlhttp.open("POST",url,true);
+  //  //xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+  //  xmlhttp.send(data);
+  //  // xmlhttp.onreadystatechange=function(){
+  //  //   if (xmlhttp.readyState==4 && xmlhttp.status==200){
+  //  //     document.getElementById("result").innerHTML=xmlhttp.responseText;
+  //  //   }
+  //   }
+    var data = document.getElementById("form");
+
+    // fetch statement found from: https://code-boxx.com/call-php-file-from-javascript/ && https://sebhastian.com/call-php-function-from-javascript/ 
+    await fetch("PHP/suspend.php", {mode: 'cors', method: "POST", headers: {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"}, body:data)
+    .then(res => res.text())
+    )
+    .catch((err) => { console.error(err); });
+
+    location.reload();
+    //return false;
  }
 </script>
 
