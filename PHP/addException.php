@@ -7,7 +7,7 @@
     $date = date("Y-m-d H:i:sa");
 
 
-   if (isset($_POST['newJustification']) && isset($_POST['resourceList']) )
+   if (isset($_POST['newJustification']) || isset($_POST['resourceList']) )
    {
       
    
