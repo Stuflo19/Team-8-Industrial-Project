@@ -98,6 +98,7 @@
                             $_SESSION['password'] = $row['password'];
                             $_SESSION['id'] = $row['id'];
                             $_SESSION['user_id'] = $row['user_id'];
+                            $_SESSION['customername'] = $test['customer.name'];
                             header("Location: dashboard.php");
                             exit();
                         }
