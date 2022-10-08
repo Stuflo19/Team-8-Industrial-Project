@@ -2,13 +2,15 @@
     include 'dbconnect.php';
     include 'readdb.php';
 
-    concole.log("ENTERED");
     $len_exception = count($exception)+1;
     //last_updates = today's day
     $date = date("Y-m-d H:i:sa");
     //ruleID
    // if (isset($justif) || isset($justif) || isset($justif))
-   if (isset($_POST['newJustification']) || isset($_POST['resourceList']) || isset($_POST['name']) )
+
+    echo $_FILES['newJustification'];
+
+   if (isset($_POST['newJustification']) || isset($_POST['resourceList']) )
    {
       
    
