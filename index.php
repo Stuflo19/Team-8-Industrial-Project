@@ -416,7 +416,7 @@ form.addEventListener('click', function(event){
 });
 
 async function postData(formattedFormData){
-    const response = await fetch('handle_form.php',{
+    const response = await fetch('PHP/addException.php',{
         method: 'POST',
         body: formattedFormData
     });
