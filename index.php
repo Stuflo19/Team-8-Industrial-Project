@@ -206,7 +206,7 @@
               </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
-                  <button type="submit" onclick = "sendForm()" class="btn btn-primary">Submit</button>
+                  <input type="submit" class="btn btn-primary" value="Submit">
               </div> 
             </form>
             
@@ -406,6 +406,23 @@ function addException(rule_rescourceType){
 
   }
 
+}
+
+const form = document.getElementById('form');
+form.addEventListener('click', function(event){
+    //Prevent the event from submitting the form, no redirect or page reload
+    const formattedFormData = new FormData(form);
+    postData(formattedFormData);
+});
+
+async function postData(formattedFormData){
+    const response = await fetch('handle_form.php',{
+        method: 'POST',
+        body: formattedFormData
+    });
+    const data = await response.text();
+    //This should now print out the values that we sent to the backend-side
+    console.log(data);
 }
 
 function sendForm()

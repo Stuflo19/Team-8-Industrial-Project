@@ -8,7 +8,7 @@
     //ruleID
    // if (isset($justif) || isset($justif) || isset($justif))
 
-    echo $_FILES['newJustification'];
+    echo $_POST['newJustification'];
 
    if (isset($_POST['newJustification']) || isset($_POST['resourceList']) )
    {
