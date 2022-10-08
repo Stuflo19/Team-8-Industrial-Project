@@ -206,7 +206,7 @@
               </div>
               <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
-                  <button type="submit" onclick="sendForm()" class="btn btn-primary">Submit</button>
+                  <button type="button" onclick="sendForm()" class="btn btn-primary">Submit</button>
               </div>   
             </form>
             <?php
@@ -422,23 +422,6 @@ function sendForm()
     }
  }
 </script>
-
-
-<!-- 
-function submitForm()
-{
-
-var http = new XMLHttpRequest();
-var url = '/PHP/assException.php';
-var params = 'orem=ipsum&name=binny';
-http.open('POST', url, true);
-
-//Send the proper header information along with the request
-http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-http.send(params);
-} -->
-
-
 
 
 <!-- 
