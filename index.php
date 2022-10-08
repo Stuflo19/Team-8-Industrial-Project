@@ -187,7 +187,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <form id="form"> 
+            <form id="form" onsubmit="return sendForm();"> 
               <div class="form-group">
                 <label for="resourceList" class="col-form-label">Select a cloud resource:</label>
                 <select style= "width:100%; color: white; background-color: #333333" name="resourceList" id="resourceList">
@@ -204,12 +204,12 @@
                 <!-- Code taken from https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date -->
                 <input type="date" id="newReviewDate" name="newReviewDate" value="<?php echo date("Y-m-d")?>" min="<?php echo date("Y-m-d", strtotime("+1 day"))?>" max="<?php echo date("Y-m-d", strtotime("+1 year"))?>">
               </div>
-                
-            </form>
-            <div class="modal-footer">
+                <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
-                  <button type="submit" onclick = "sendForm()" class="btn btn-primary">Submit</button>
+                  <button type="submit"  class="btn btn-primary">Submit</button>
               </div> 
+            </form>
+            
             <?php
 
             
@@ -408,14 +408,14 @@ function addException(rule_rescourceType){
 
 }
 
-function sendForm()
+async function sendForm()
 {
-var xmlhttp=new XMLHttpRequest();
-var url = "PHP/addException.php";
+//var xmlhttp=new XMLHttpRequest();
+//var url = "PHP/addException.php";
 var data = new FormData(document.getElementById("form"));
-xmlhttp.open("POST",url,true);
+//xmlhttp.open("POST",url,true);
 //xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-xmlhttp.send(data);
+//xmlhttp.send(data);
 //   //  // xmlhttp.onreadystatechange=function(){
 //   //  //   if (xmlhttp.readyState==4 && xmlhttp.status==200){
 //   //  //     document.getElementById("result").innerHTML=xmlhttp.responseText;
@@ -423,16 +423,16 @@ xmlhttp.send(data);
 //   //   }
 //     var data = document.getElementById("form");
 
-//     // fetch statement found from: https://code-boxx.com/call-php-file-from-javascript/ && https://sebhastian.com/call-php-function-from-javascript/ 
-//     await fetch("PHP/suspend.php", {mode: 'cors', method: "POST", headers: {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"}, body:data)
-//     .then(res => res.text())
-//     )
-//     .catch((err) => { console.error(err); });
+    // fetch statement found from: https://code-boxx.com/call-php-file-from-javascript/ && https://sebhastian.com/call-php-function-from-javascript/ 
+    await fetch("PHP/addException.php", {mode: 'cors', method: "POST", headers: {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"}, body:document.getElementById("form"))
+    .then(res => res.text())
+    .then((txt) => {
+    })
+    .catch((err) => { console.error(err); });
 
-//     location.reload();
-//     //return false;
-//  }
-
+    location.reload();
+    return false;
+  }
 }
 </script>
 
