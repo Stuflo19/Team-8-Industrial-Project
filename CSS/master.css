@@ -191,7 +191,7 @@ table{
   }
 }
 
-/* Code taken from https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date */
+/* Following code found on https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date */
 label {
   display: block;
   font: 1rem 'Fira Sans', sans-serif;

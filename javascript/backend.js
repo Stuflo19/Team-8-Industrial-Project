@@ -54,7 +54,7 @@ function historybutton(id, rows)
   return false;
 }
 
-// https://www.javascripttutorial.net/javascript-dom/javascript-appendchild/#:~:text=The%20appendChild()%20is%20a,of%20a%20specified%20parent%20node.&text=In%20this%20method%2C%20the%20childNode,()%20returns%20the%20appended%20child.
+// Code taken from and adapted to the website https://www.javascripttutorial.net/javascript-dom/javascript-appendchild/#:~:text=The%20appendChild()%20is%20a,of%20a%20specified%20parent%20node.&text=In%20this%20method%2C%20the%20childNode,()%20returns%20the%20appended%20child.
 function addOption(name, id){
   let option = document.createElement("option");
   option.text = name;
@@ -64,18 +64,12 @@ function addOption(name, id){
 }
 
 function addException(rule_rescourceType,rows_resource,rows_non_compliant,rows_except){
-  //var rows_resource = <?php echo json_encode($resource); ?>;
-  //var rows_non_compliant = <?php echo json_encode($non_compliant); ?>;
-  //var rows_except = <?php echo json_encode($exception); ?>;
-  //console.log(rule_rescourceType);
   var ruleID = rule_rescourceType.split(",")[0];
-  //var resourceTypeID = rule_rescourceType.split(",")[1];
   var resource_name = "";
   var resource_id = 0;
   var resource_ref = " ";
   var non_compl = 1;
-  //console.log(ruleID);
-  //console.log(resourceTypeID);
+  
   var select_dropdown = document.querySelector('#resourceList');
   while (select_dropdown.firstChild) 
   {
@@ -109,40 +103,31 @@ function addException(rule_rescourceType,rows_resource,rows_non_compliant,rows_e
           {
             resource_name = rows_resource[j]['resource_name'];
             resource_id = rows_resource[j]['id'];
-            resource_ref = rows_resource[j]['resource_ref'];
-            console.log(resource_name, ruleID,resource_ref);
-  
+            resource_ref = rows_resource[j]['resource_ref'];  
             var resourceID_ruleID_ref = resource_id+"_"+ruleID+"_"+resource_ref;
             select_dropdown.appendChild(addOption(resource_name, resourceID_ruleID_ref));
-            console.log(resourceID_ruleID_ref);
-  
           }
-          
         }
       }
     }
-  
-  }
-  
-  }
-
-// Code taken from : https://gist.github.com/jesperorb/a6c12f7d4418a167ea4b3454d4f8fb61
-function formCompleted(){
-const form = document.getElementById('form');
-form.addEventListener('click', function(event){
-  const objFormData = new FormData(form);
-  postData(objFormData);
-});
+  }  
 }
 
-// Code taken from : https://gist.github.com/jesperorb/a6c12f7d4418a167ea4b3454d4f8fb61
+// Function found on : https://gist.github.com/jesperorb/a6c12f7d4418a167ea4b3454d4f8fb61
+function formCompleted(){
+  const form = document.getElementById('form');
+  form.addEventListener('click', function(event){
+    const objFormData = new FormData(form);
+    postData(objFormData);
+  });
+}
+
+// Function found on: https://gist.github.com/jesperorb/a6c12f7d4418a167ea4b3454d4f8fb61
 async function postData(objFormData){
   const response = await fetch('PHP/addException.php',{
       method: 'POST',
       body: objFormData
   });
   const data = await response.text();
-  //This should now print out the values that we sent to the backend-side
-  console.log(data);
   location.reload();
 }
