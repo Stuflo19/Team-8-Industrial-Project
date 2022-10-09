@@ -23,6 +23,6 @@
     $insertQ = mysqli_query($conn,$addExceptionS);
 
     }
-    //$conn->close();
+    $conn->close();
     header("../index.php");
 ?>
