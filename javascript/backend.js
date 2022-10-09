@@ -53,3 +53,33 @@ function historybutton(id, rows)
 
   return false;
 }
+
+// https://www.javascripttutorial.net/javascript-dom/javascript-appendchild/#:~:text=The%20appendChild()%20is%20a,of%20a%20specified%20parent%20node.&text=In%20this%20method%2C%20the%20childNode,()%20returns%20the%20appended%20child.
+function addOption(name, id){
+  let option = document.createElement("option");
+  option.text = name;
+  option.value = id;
+
+  return option;
+}
+
+// Code taken from : https://gist.github.com/jesperorb/a6c12f7d4418a167ea4b3454d4f8fb61
+function formCompleted(){
+const form = document.getElementById('form');
+form.addEventListener('click', function(event){
+  const objFormData = new FormData(form);
+  postData(objFormData);
+});
+}
+
+// Code taken from : https://gist.github.com/jesperorb/a6c12f7d4418a167ea4b3454d4f8fb61
+async function postData(objFormData){
+  const response = await fetch('PHP/addException.php',{
+      method: 'POST',
+      body: objFormData
+  });
+  const data = await response.text();
+  //This should now print out the values that we sent to the backend-side
+  console.log(data);
+  location.reload();
+}

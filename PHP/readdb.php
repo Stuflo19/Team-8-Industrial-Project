@@ -4,6 +4,13 @@
   ===========================================*/
   $sql = "SELECT * FROM resource WHERE account_id = 1";
   $result = mysqli_query($conn, $sql);
+  foreach($result as $e)
+  {
+    $resource[] = $e;
+  }
+
+  $sql = "SELECT * FROM resource WHERE account_id = 1";
+  $result_res = mysqli_query($conn, $sql);
 
 
   /*========================================== 
@@ -26,11 +33,17 @@
     $non_compliant_rules[] = $row['rule_id']; 
   }
 
+  $sql = "SELECT * FROM non_compliance";
+  $compliant = mysqli_query($conn, $sql);
+  foreach($compliant as $e)
+  {
+    $non_compliant[] = $e;
+  }
+
 /*======================  
   READING ALL FROM RULES
   ======================*/
   $query = mysqli_query($conn,"SELECT * FROM rule");
 
-
-  $conn->close();
+  //$conn->close();
 ?>

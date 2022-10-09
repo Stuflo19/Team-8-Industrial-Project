@@ -190,3 +190,14 @@ table{
       font-size: 15px;
   }
 }
+
+/* Code taken from https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date */
+label {
+  display: block;
+  font: 1rem 'Fira Sans', sans-serif;
+}
+
+input,
+label {
+  margin: .4rem 0;
+}
