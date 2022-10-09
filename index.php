@@ -289,9 +289,9 @@
 </body>
 <script>
 function addException(rule_rescourceType){
-var rows_resource = <?php echo json_encode($resource); ?>;
+var rows_resource = <?php echo json_encode($resources); ?>;
 var rows_non_compliant = <?php echo json_encode($non_compliant); ?>;
-var rows_except = <?php echo json_encode($exception); ?>;
+var rows_except = <?php echo json_encode($exception1); ?>;
 //console.log(rule_rescourceType);
 var ruleID = rule_rescourceType.split(",")[0];
 //var resourceTypeID = rule_rescourceType.split(",")[1];

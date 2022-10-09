@@ -34,7 +34,7 @@
   $exceptions = mysqli_query($conn, $sql);
   foreach($exceptions as $e)
   {
-    $exception[] = $e;
+    $exception1[] = $e;
   }
   
 /*===============================  
