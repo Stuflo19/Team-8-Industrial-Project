@@ -9,6 +9,9 @@
     $resources[] = $row;
   }
 
+  $sql = "SELECT * FROM resource WHERE account_id = 1";
+  $result_res = mysqli_query($conn, $sql);
+
 
   /*========================================== 
   READING ALL FROM EXCEPTION WHERE CUSTOMER_ID
@@ -39,6 +42,8 @@
     $rules[] = $row;
   }
 
+
+
   // Adding to JS vars resource, non_compliance, exception
   echo '<Script>
           var resource = '. json_encode($resources) .'
@@ -47,5 +52,5 @@
           var rules = '. json_encode($rules) .'
         </Script>';
 
-  $conn->close();
+  //$conn->close();
 ?>

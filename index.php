@@ -121,11 +121,22 @@
                     {
                       if ($result_rule['id'] == $result_non_compl['rule_id'])
                       {
+                        $quer = "SELECT * FROM resource WHERE id=".$result_non_compl['resource_id'];
+                          $quer1 = mysqli_query($conn, $quer);
+                          $quer2 = mysqli_fetch_array($quer1);
+
+                          $quer = "SELECT * FROM exception WHERE exception_value='".$quer2['resource_ref']."'";
+                          $quer1 = mysqli_query($conn, $quer);
+                          $quer2 = mysqli_fetch_array($quer1);
+
+                          if($quer2== NULL)
+                          {
                         $status ="exception-status";
                         $status_text ="Non-Compliant";
                         break;
                       }
                     }
+                  }
                   ?>
                   <div class="<?php echo $status;?>"> <?php echo $status_text;?></div>
                 </div>
@@ -153,8 +164,16 @@
                       </tbody>
                     </table>
                     </div>
-                    <button type="button" id="<?php echo 'Rule' . $result_rule['id'];?>" class="btn btn-outline-warning float-right m-1" data-toggle="modal" data-target="#newExcModal">Add Exception</button>
-                    
+                    <?php
+                      $var = "Non-Compliant";
+                      if(strcmp($status_text, $var) == 0)
+                      {
+                        echo "<button type='button' class='btn btn-outline-warning float-right m-1' data-toggle='modal' data-target='#newExcModal' id=". $result_rule['id']." name=". $result_rule['id'] . "," . $result_rule['resource_type_id']." onclick='addException(this.name)' >
+                        Add Exception
+                        </button>";
+                      }
+                        
+                    ?>                    
                   </div>
                 </div>
               </div>
@@ -175,26 +194,28 @@
             </button>
           </div>
           <div class="modal-body">
-            <form>
+            <form id="form" > 
               <div class="form-group">
-                <label for="resources-list" class="col-form-label">Select a cloud resource:</label>
-                <select style= "width:100%; color: white; background-color: #333333" id="resources-list">
-                  <!-- Temp until we can read in resources from the db -->
-                  <option label="T1"></option>
-                  <option label="T2"></option>
-                  <option label="T3"></option>
-                  <option label="T4"></option>
+                <label for="resourceList" class="col-form-label">Select a cloud resource:</label>
+                <select style= "width:100%; color: white; background-color: #333333" name="resourceList" id="resourceList">
+                  <!-- OPTIONS created dynamically -->
                 </select>
               </div>
               <div class="form-group">
                 <label for="message-text" class="col-form-label">Justification:</label>
-                <textarea class="form-control" id="message-text" style="color: white; background-color: #333333"></textarea>
+                <textarea class="form-control" id="newJustification" name="newJustification" style="color: white; background-color: #333333" maxlength="200" required></textarea>
               </div>
+              <!-- Exception Value = resource ref  -->
+              <div class="form-group">
+                <label for="message-text" class="col-form-label">Review Date:</label>
+                <!-- Code taken from https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date -->
+                <input type="date" id="newReviewDate" name="newReviewDate" value="<?php echo date("Y-m-d")?>" min="<?php echo date("Y-m-d", strtotime("+1 day"))?>" max="<?php echo date("Y-m-d", strtotime("+1 year"))?>">
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+                  <input type="submit" class="btn btn-primary" onclick='formCompleted()' value="Submit">
+              </div> 
             </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
-            <button type="button" class="btn btn-primary">Submit</button>
           </div>
         </div>
       </div>
@@ -264,3 +285,6 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   
 </body>
+<?php
+    $_POST = array();
+?>
