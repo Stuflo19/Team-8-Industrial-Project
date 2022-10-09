@@ -80,6 +80,7 @@ async function generateResources() {
     if (resource[i]['resource_type_id'] == result_rule['resource_type_id']) {
       //create a table row.
       var tr = document.getElementById('Table' + result_rule['id']).insertRow();
+      tr.setAttribute('style', "font-size: 0.8rem");
 
       //if the resource id is in the non_compliance table
       if (JSON.stringify(non_compliance).includes(resource[i]['id'])) {

@@ -123,7 +123,7 @@ table{
 }
 
 .table td, .table th{
-  vertical-align: middle;
+  vertical-align: middle; 
 }
 
 .fixed_header{
@@ -170,22 +170,23 @@ table{
   .active-status, .exception-status {
     width: 75px;
     height: 12.5px;
-    font-size: 0.7rem;
+    line-height: 12.5px;
   }
   .historybutton{
     width: 75px;
     height: 20px;
     font-size: 0.7rem;
-  }
+  } 
   html {
       font-size: 10px;  
   }
 }
 
 @media (min-width: 501px) {
-  .active-status, .exception-status {
+  .active-status, .exception-status{
     width: 125px;
     height: 25px;
+    line-height: 25px;
   }
   .historybutton {
     width: 125px;
