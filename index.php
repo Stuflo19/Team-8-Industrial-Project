@@ -215,10 +215,7 @@
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
                   <input type="submit" class="btn btn-primary" onclick='formCompleted()' value="Submit">
               </div> 
-            </form>
-            
-                   
-               
+            </form>   
           </div>
         </div>
       </div>

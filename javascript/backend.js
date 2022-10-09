@@ -117,7 +117,7 @@ async function generateResources() {
           //check to see if the resource contains an exception
           for(let k = 0; k < exception.length; k++)
           {
-            if (result_rule['id'] == exception[k]['rule_id'] && resource[i]['resource_name'] == exception[k]['exception_value']) {
+            if (result_rule['id'] == exception[k]['rule_id'] && resource[i]['resource_ref'] == exception[k]['exception_value']) {
               checked = exception[k]['suspended'] == 0 ? false : true;
               break;
             }
