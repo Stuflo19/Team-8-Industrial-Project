@@ -169,7 +169,7 @@
                       $var = "Non-Compliant";
                       if(strcmp($status_text, $var) == 0)
                       {
-                        echo "<button type='button' class='btn btn-outline-warning float-right m-1' data-toggle='modal' data-target='#newExcModal' id=". $result_rule['id']." name=". $result_rule['id'] . "," . $result_rule['resource_type_id']." onclick='addException(this.name,". json_encode($resource).",".json_encode($non_compliant).",".json_encode($exception).")' >
+                        echo "<button type='button' class='btn btn-outline-warning float-right m-1' data-toggle='modal' data-target='#newExcModal' id=". $result_rule['id']." name=". $result_rule['id'] . "," . $result_rule['resource_type_id']." onclick='addException(this.name)' >
                         Add Exception
                         </button>";
                       }

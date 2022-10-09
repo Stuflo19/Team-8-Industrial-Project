@@ -24,7 +24,7 @@ function addOption(name, id){
   return option;
 }
 
-function addException(rule_rescourceType,rows_resource,rows_non_compliant,rows_except){
+function addException(rule_rescourceType){
   var ruleID = rule_rescourceType.split(",")[0];
   var resource_name = "";
   var resource_id = 0;
@@ -37,24 +37,24 @@ function addException(rule_rescourceType,rows_resource,rows_non_compliant,rows_e
     select_dropdown.removeChild(select_dropdown.firstChild);
   }
   
-  for(var i = 0; i < rows_non_compliant.length; i++) {
+  for(var i = 0; i < non_compliance.length; i++) {
     //looking if a rule has non-compliant resources
-    if(rows_non_compliant[i]['rule_id'] == ruleID)
+    if(non_compliance[i]['rule_id'] == ruleID)
     {
       //finding the name of a resource
-      for(var j = 0; j < rows_resource.length; j++)
+      for(var j = 0; j < resource.length; j++)
       {
         non_compl = 1;
-        if(rows_resource[j]['id'] == rows_non_compliant[i]['resource_id'])
+        if(resource[j]['id'] == non_compliance[i]['resource_id'])
         {            
-          console.log(rows_resource[j]['resource_ref']);
+          console.log(resource[j]['resource_ref']);
   
           //checking if a non-compliant resource has an axception -> making a resource compliant
-          for(var k=0; k<rows_except.length; k++)
+          for(var k=0; k<exception.length; k++)
           {
-            if(rows_resource[j]['resource_ref'] === rows_except[k]['exception_value'])
+            if(resource[j]['resource_ref'] === exception[k]['exception_value'])
             {
-              console.log(rows_resource[j]['resource_name']);
+              console.log(resource[j]['resource_name']);
               non_compl=0;
               break;
             }
@@ -62,9 +62,9 @@ function addException(rule_rescourceType,rows_resource,rows_non_compliant,rows_e
   
           if(non_compl==1)
           {
-            resource_name = rows_resource[j]['resource_name'];
-            resource_id = rows_resource[j]['id'];
-            resource_ref = rows_resource[j]['resource_ref'];  
+            resource_name = resource[j]['resource_name'];
+            resource_id = resource[j]['id'];
+            resource_ref = resource[j]['resource_ref'];  
             var resourceID_ruleID_ref = resource_id+"_"+ruleID+"_"+resource_ref;
             select_dropdown.appendChild(addOption(resource_name, resourceID_ruleID_ref));
           }
