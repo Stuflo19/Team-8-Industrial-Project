@@ -69,10 +69,10 @@
 
   // Adding to JS vars resource, non_compliance, exception
   echo '<Script>
-          var resource = '. json_encode($resources) .'
-          var non_compliance = '. json_encode($non_compliance) .'
-          var exception = '. json_encode($exception) .'
-          var rules = '. json_encode($rules) .'
+          var resource = '. json_encode($resources) .';
+          var non_compliance = '. json_encode($non_compliance) .';
+          var exception = '. json_encode($exception) .';
+          var rules = '. json_encode($rules) .';
         </Script>';
 
   //$conn->close();

@@ -25,12 +25,9 @@ function formCompleted(){
   async function postData(formattedFormData){
     const response = await fetch('PHP/addException.php',{
         method: 'POST',
-        //mode: 'cors',
-        //headers: {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"},
         body: formattedFormData
     });
     const data = await response.text();
-    //This should now print out the values that we sent to the backend-side
     console.log(data);
     location.reload();
   
