@@ -369,6 +369,7 @@ function formCompleted(){
         method: 'POST',
         body: formattedFormData
     });
+    console.log("Enetered2");
     const data = await response.text();
     console.log(data);
     location.reload();
