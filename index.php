@@ -93,19 +93,9 @@
         <div class="col-lg text-center mt-4">
         
           <!-- Complaince Rule and Status -->
-          <div class="row m-auto">
-            <h3 class="text-center">Compliance Rules</h3>
-            <div style = "margin-left: auto; margin-right: 0"> 
-              <label for="resources-list" class="">Filter:</label>
-              <select name="filter" style="color: white; background-color: #333333" id="filter-list" onchange="filter()">
-                <option value="No Filter">No Filter</option>
-                <option value="Compliant">Compliant</option>
-                <option value="Non-Compliant">Non-Compliant</option>
-              </select>
-            </div>
-          </div>
-          <?php
-            foreach($query as $result_rule)
+          <?php 
+            echo '<h3>Compliance Rules</h3>';
+            while($result_rule=mysqli_fetch_array($query))
             {
           ?>
           <div class = "row mb-2">
@@ -162,7 +152,7 @@
                                 echo '
                                 <tr>
                                 <td style="text-align: left">'.$row["resource_name"].'</td>';
-
+                                
                                 if(in_array($row["id"], $non_compliant_ids))
                                 {
                                   foreach(array_keys($non_compliant_ids, $row['id']) as $index) {
@@ -174,7 +164,7 @@
                                   {
                                     foreach($exception as $exc)
                                     {
-                                      if($result_rule['id'] == $exc['rule_id'] && $row['resource_name'] == $exc['exception_value'])
+                                      if($result_rule['id'] == $exc['rule_id'] && $row['resource_ref'] == $exc['exception_value'])
                                       {
                                         $checked = $exc['suspended'] == 0 ? false : true;
                                         break;
@@ -192,7 +182,7 @@
                               {
                                 echo '<td style="vertical-align: middle"><div class="active-status">Compliant</div></td>';
                               } 
-                              echo "<td style='vertical-align: middle'><button type='button' class='btn btn-outline-warning historybutton' data-toggle='modal' data-target='#historyModal' id='{$row["resource_name"]},{$result_rule["id"]}' onclick='historybutton(this.id, ".json_encode($exception).")'>Exception History</button></td></tr>";
+                              echo "<td style='vertical-align: middle'><button type='button' class='btn btn-outline-warning historybutton' data-toggle='modal' data-target='#historyModal' id='{$row["resource_ref"]},{$result_rule["id"]}' onclick='historybutton(this.id, ".json_encode($exception).")'>Exception History</button></td></tr>";
                             }
                           }
                         ?>
@@ -203,7 +193,7 @@
                       $var = "Non-Compliant";
                       if(strcmp($status_text, $var) == 0)
                       {
-                        echo "<button type='button' class='btn btn-outline-warning float-right m-1' data-toggle='modal' data-target='#newExcModal' id=". $result_rule['id']." name=". $result_rule['id'] . "," . $result_rule['resource_type_id']." onclick='addException(this.name)' >
+                        echo "<button type='button' class='btn btn-outline-warning float-right m-1' data-toggle='modal' data-target='#newExcModal' id=". $result_rule['id']." name=". $result_rule['id'] . "," . $result_rule['resource_type_id']." onclick='addException(this.name,". json_encode($resource).",".json_encode($non_compliant).",".json_encode($exception).")' >
                         Add Exception
                         </button>";
                       }
