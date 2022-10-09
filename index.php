@@ -93,10 +93,9 @@
         <div class="col-lg text-center mt-4">
         
           <!-- Complaince Rule and Status -->
-          <div class="row d-flex justify-content-between m-auto">
-            <div style="width: 100px"></div>
-            <h3 class="pl-5 ml-4 text-center">Compliance Rules</h3>
-            <div> 
+          <div class="row m-auto">
+            <h3 class="text-center">Compliance Rules</h3>
+            <div style = "margin-left: auto; margin-right: 0"> 
               <label for="resources-list" class="">Filter:</label>
               <select name="filter" style="color: white; background-color: #333333" id="filter-list" onchange="filter()">
                 <option value="No Filter">No Filter</option>

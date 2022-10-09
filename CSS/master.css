@@ -113,6 +113,7 @@ li{
 }
 
 table{
+  font-size: 1rem;
   table-layout: fixed;
   width: 80%;
   color: white;
@@ -178,7 +179,7 @@ table{
     font-size: 0.7rem;
   } 
   html {
-      font-size: 10px;  
+      font-size: 8px;  
   }
 }
 
