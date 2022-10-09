@@ -51,12 +51,12 @@
   $query = mysqli_query($conn,"SELECT * FROM rule");
 
   // Adding to JS vars resource, non_compliance, exception
-  echo '<Script>
+  echo '<script>
           var resource = '. json_encode($resources) .'
           var non_compliance = '. json_encode($non_compliance) .'
           var exception = '. json_encode($exception) .'
           var rules = '. json_encode($rules) .'
-        </Script>';
+        </script>';
 
  // $conn->close();
 ?>

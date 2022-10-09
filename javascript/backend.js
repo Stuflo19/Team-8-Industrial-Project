@@ -127,6 +127,7 @@ async function postData(objFormData){
       body: objFormData
   });
   const data = await response.text();
+  console.log(data);
   location.reload();
 }
 
