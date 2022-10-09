@@ -172,7 +172,7 @@ async function generateResources() {
           //check to see if the resource contains an exception
           for(let k = 0; k < exception.length; k++)
           {
-            if (result_rule['id'] == exception[k]['rule_id'] && resource[i]['resource_name'] == exception[k]['exception_value']) {
+            if (result_rule['id'] == exception[k]['rule_id'] && resource[i]['resource_ref'] == exception[k]['exception_value']) {
               checked = exception[k]['suspended'] == 0 ? false : true;
               break;
             }
@@ -194,7 +194,7 @@ async function generateResources() {
       var btn = document.createElement('input');
       btn.type = "button";
       btn.value = "Exception History";
-      btn.id = resource[i].resource_name + "," + result_rule.id;
+      btn.id = resource[i].resource_ref + "," + result_rule.id;
       btn.addEventListener("click", function () {
         historybutton(this.id);
       });
