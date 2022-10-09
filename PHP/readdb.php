@@ -42,6 +42,8 @@
     $rules[] = $row;
   }
 
+  $query = mysqli_query($conn,"SELECT * FROM rule");
+
 
 
   // Adding to JS vars resource, non_compliance, exception
