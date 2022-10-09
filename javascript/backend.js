@@ -1,3 +1,5 @@
+var currFilter;
+
 async function updatesuspended(exceptionid, suspended)
 {
     // fetch statement found from: https://code-boxx.com/call-php-file-from-javascript/ && https://sebhastian.com/call-php-function-from-javascript/ 
@@ -12,47 +14,6 @@ async function updatesuspended(exceptionid, suspended)
     return false;
 }
 
-function historybutton(id, rows)
-{
-  // rows: holds the rows read in from the database from PHP
-  var ids = id.split(",");
-  var currRow;
-  
-  document.getElementById("historybody").innerHTML = "";
-
-  //Loops through all of the rows read in
-  for(var i = 0; i < rows.length; i++) {
-
-    //check if the rule id & the exception name match the values of the button pressed.
-    if(rows[i]['rule_id'] == ids[1] && rows[i]['exception_value'] == ids[0])
-    {
-      console.log(rows[i]['suspended']);
-      var currentDate = new Date();
-      var today = new Date(currentDate.getFullYear() +"/"+ (currentDate.getMonth()+1) +"/"+ currentDate.getDate() + " " + currentDate.getUTCHours() + ":" + currentDate.getUTCMinutes());
-      var review = new Date(rows[i]['review_date'].replace('-','/'));
-      currRow = rows[i]['id'];
-      currSuspended = rows[i]['suspended'];
-
-      const tr = document.getElementById('historybody').insertRow();
-      tr.insertCell().appendChild(document.createTextNode(rows[i]['id']));
-      tr.insertCell().appendChild(document.createTextNode(rows[i]['last_updated_by']));
-      tr.insertCell().appendChild(document.createTextNode(rows[i]['justification']));
-      tr.insertCell().appendChild(document.createTextNode(today < review ? review : "EXPIRED"));
-      // This is the most painful button you'll see in this project
-      var btn = document.createElement('input');
-      btn.type = "button";
-      btn.value = rows[i]['suspended'] == 0 ? 'Suspend' : "Unsuspend";
-      btn.id = "suspendButton";
-      btn.addEventListener("click", function () {
-        updatesuspended(currRow, currSuspended);
-      });
-      btn.className = "btn btn-outline-warning";
-      tr.insertCell().appendChild(btn);
-    }
-  }
-
-  return false;
-}
 
 // Code taken from and adapted to the website https://www.javascripttutorial.net/javascript-dom/javascript-appendchild/#:~:text=The%20appendChild()%20is%20a,of%20a%20specified%20parent%20node.&text=In%20this%20method%2C%20the%20childNode,()%20returns%20the%20appended%20child.
 function addOption(name, id){
@@ -130,4 +91,68 @@ async function postData(objFormData){
   });
   const data = await response.text();
   location.reload();
+}
+
+async function generateResources() {
+  //empties the table
+  document.getElementById("Table" + result_rule.id).innerHTML = "";
+
+  //loops  through all resources
+  for (let i = 0; i < resource.length; i++) {
+    var checked = false;
+
+    //checks if the rule applies to the resource
+    if (resource[i]['resource_type_id'] == result_rule['resource_type_id']) {
+      //create a table row.
+      var tr = document.getElementById('Table' + result_rule['id']).insertRow();
+
+      //if the resource id is in the non_compliance table
+      if (JSON.stringify(non_compliance).includes(resource[i]['id'])) {
+        //loop to set the resource to non-compliant if there is a match in the non_compliance table
+        for (let j = 0; j < non_compliance.length; j++) {
+          non_compliance[j]['rule_id'] == result_rule["id"] && non_compliance[j]['resource_id'] == resource[i]['id'] ? checked = true : checked = false;
+          if (checked) { break; }
+        }
+
+        //If the resource is set to be non-compliant
+        if (checked) {
+          //check to see if the resource contains an exception
+          for(let k = 0; k < exception.length; k++)
+          {
+            if (result_rule['id'] == exception[k]['rule_id'] && resource[i]['resource_ref'] == exception[k]['exception_value']) {
+              checked = exception[k]['suspended'] == 0 ? false : true;
+              break;
+            }
+          }
+       }
+        //if the resource exists in the id array && ruleID at index of resource in the rules array
+      }
+
+      //Skips the row if a filter is active
+      if(currFilter == "Non-Compliant" && checked == false){continue;} 
+      if(currFilter == "Compliant" && checked == true){continue;}
+
+      //Creates div for compliance displaying
+      var div = document.createElement('Div');
+      div.innerHTML = checked ? "Non-Compliant" : "Compliant";
+      div.className = checked ? "exception-status" : "active-status";
+
+      //creates a button to display exception history
+      var btn = document.createElement('input');
+      btn.type = "button";
+      btn.value = "Exception History";
+      btn.id = resource[i].resource_name + "," + result_rule.id;
+      btn.addEventListener("click", function () {
+        historybutton(this.id);
+      });
+      btn.setAttribute('data-toggle', 'modal');
+      btn.setAttribute('data-target', '#historyModal');
+      btn.className = "btn btn-outline-warning historybutton";
+      
+      //Insert the data into the table
+      tr.insertCell().appendChild(document.createTextNode(resource[i]['resource_name']));
+      tr.insertCell().appendChild(div);
+      tr.insertCell().appendChild(btn);
+    }
+  }
 }

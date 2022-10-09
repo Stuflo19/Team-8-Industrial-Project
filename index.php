@@ -93,9 +93,19 @@
         <div class="col-lg text-center mt-4">
         
           <!-- Complaince Rule and Status -->
+          <div class="row m-auto">
+            <h3 class="text-center">Compliance Rules</h3>
+            <div style = "margin-left: auto; margin-right: 0"> 
+              <label for="resources-list" class="">Filter:</label>
+              <select name="filter" style="color: white; background-color: #333333" id="filter-list" onchange="filter()">
+                <option value="No Filter">No Filter</option>
+                <option value="Compliant">Compliant</option>
+                <option value="Non-Compliant">Non-Compliant</option>
+              </select>
+            </div>
+          </div>
           <?php 
-            echo '<h3>Compliance Rules</h3>';
-            while($result_rule=mysqli_fetch_array($query))
+            foreach($query as $result_rule)
             {
           ?>
           <div class = "row mb-2">
@@ -121,9 +131,10 @@
 
                           if($quer2== NULL)
                           {
-                        $status ="exception-status";
-                        $status_text ="Non-Compliant";
-                        break;
+                            $status ="exception-status";
+                            $status_text ="Non-Compliant";
+                            break;
+                          }
                       }
                     }
                   }
@@ -144,47 +155,12 @@
                           <th scope ="col">History</th>
                         </tr>
                       </thead>
-                      <tbody>
-                          <?php
-                            foreach($result as $row) {
-                              $checked = false;
-                              if($row['resource_type_id'] == $result_rule['resource_type_id']){
-                                echo '
-                                <tr>
-                                <td style="text-align: left">'.$row["resource_name"].'</td>';
-                                
-                                if(in_array($row["id"], $non_compliant_ids))
-                                {
-                                  foreach(array_keys($non_compliant_ids, $row['id']) as $index) {
-                                    $non_compliant_rules[$index] == $result_rule["id"] ? $checked = true : $checked = false;
-                                    if($checked) {break;}
-                                  };
-
-                                  if($checked)
-                                  {
-                                    foreach($exception as $exc)
-                                    {
-                                      if($result_rule['id'] == $exc['rule_id'] && $row['resource_ref'] == $exc['exception_value'])
-                                      {
-                                        $checked = $exc['suspended'] == 0 ? false : true;
-                                        break;
-                                      }
-                                    }
-                                  }
-                                }
-
-                              //if the resource exists in the id array && ruleID at index of resource in the rules array
-                              if($checked)
-                              {
-                                echo '<td style="vertical-align: middle"><div class="exception-status"> Non-Compliant</div></td>';
-                              }
-                              else
-                              {
-                                echo '<td style="vertical-align: middle"><div class="active-status">Compliant</div></td>';
-                              } 
-                              echo "<td style='vertical-align: middle'><button type='button' class='btn btn-outline-warning historybutton' data-toggle='modal' data-target='#historyModal' id='{$row["resource_ref"]},{$result_rule["id"]}' onclick='historybutton(this.id, ".json_encode($exception).")'>Exception History</button></td></tr>";
-                            }
-                          }
+                      <tbody id="<?php echo 'Table' . $result_rule['id'];?>">
+                        <?php
+                          echo '<script>
+                                  var result_rule = '. json_encode($result_rule) .';
+                                  generateResources();
+                                </script>';
                         ?>
                       </tbody>
                     </table>

@@ -31,6 +31,8 @@
   while (($row = mysqli_fetch_array($compliant, MYSQLI_ASSOC)) != false){
     $non_compliant_ids[] = $row['resource_id'];
     $non_compliant_rules[] = $row['rule_id']; 
+    $non_compliance[] = $row;
+
   }
 
   $sql = "SELECT * FROM non_compliance";
@@ -44,6 +46,19 @@
   READING ALL FROM RULES
   ======================*/
   $query = mysqli_query($conn,"SELECT * FROM rule");
+  while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) != false){
+    $rules[] = $row;
+  }
 
+
+  $query = mysqli_query($conn,"SELECT * FROM rule");
+
+    // Adding to JS vars resource, non_compliance, exception
+    echo '<Script>
+    var resource = '. json_encode($resource) .'
+    var non_compliance = '. json_encode($non_compliance) .'
+    var exception = '. json_encode($exception) .'
+    var rules = '. json_encode($rules) .'
+  </Script>';
   //$conn->close();
 ?>
