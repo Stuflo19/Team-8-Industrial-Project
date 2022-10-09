@@ -12,26 +12,7 @@ async function updatesuspended(exceptionid, suspended) {
   location.reload();
   return false;
 }
-// Code found  at : https://gist.github.com/jesperorb/a6c12f7d4418a167ea4b3454d4f8fb61
-function formCompleted(){
-  const form = document.getElementById('form');
-  form.addEventListener('click', function(event){
-    //Prevent the event from submitting the form, no redirect or page reload
-    const formattedFormData = new FormData(form);
-    postData(formattedFormData);
-  });
-  }
-  
-  async function postData(formattedFormData){
-    const response = await fetch('PHP/addException.php',{
-        method: 'POST',
-        body: formattedFormData
-    });
-    const data = await response.text();
-    console.log(data);
-    location.reload();
-  
-  }
+
 
 function historybutton(id) {
   // rows: holds the rows read in from the database from PHP
