@@ -17,7 +17,7 @@ h2{
   color: #2e2e2e;
 }
 h3, h4 {
-  font-size: 0.8rem;
+  font-size: 1rem;
   font-family: 'Bahnschrift', cursive;
   color: white;
   padding-left: 1px;
@@ -51,6 +51,10 @@ nav {
   text-align: center;
 }
 
+.chart {
+  top: 0px;
+  position: relative;
+}
 .card {
   margin: 10px 0px;
   position: relative;
@@ -117,6 +121,46 @@ table{
   background-color: #333333;
 }
 
+.fixed_header{
+  display: inline-block; 
+  width: 100%;
+  border-collapse: collapse;
+  min-height: 25vh;
+  max-height: 50vh;
+  overflow-y: scroll;
+  margin: 0px;
+}
+
+.fixed_header tbody{
+  
+  overflow:auto;
+  width:80%;
+}
+
+.fixed_header thead tr {
+  padding: 0px;
+  margin: 0px;
+  width: 100%; 
+}
+
+.fixed_header th {
+  padding: 0px;
+  border: 0px;
+  width: 16%;
+}
+
+.fixed_header td {
+  padding: 5px;
+  margin: 0px;
+}
+
+.stickyHead {
+  position: sticky;
+  top: 0;
+  padding: 0px;
+  border: 0px;
+}
+
 @media (max-width: 500px) {
   .active-status, .exception-status {
     width: 75px;
@@ -145,15 +189,4 @@ table{
   html {
       font-size: 15px;
   }
-}
-
-/* Code taken from https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date */
-label {
-  display: block;
-  font: 1rem 'Fira Sans', sans-serif;
-}
-
-input,
-label {
-  margin: .4rem 0;
 }

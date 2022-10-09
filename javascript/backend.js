@@ -53,6 +53,3 @@ function historybutton(id, rows)
 
   return false;
 }
-
-
-

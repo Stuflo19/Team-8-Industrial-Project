@@ -23,8 +23,7 @@
   <link rel="stylesheet" href="CSS/master.css">
 </head>
 
-
-<body onload ="generateGraph(<?php echo count($non_compliant_ids)?> , <?php echo mysqli_num_rows($result)?>)">
+<body onload ='callAll(<?php echo count($non_compliant_ids)?> , <?php echo mysqli_num_rows($result)?> , <?php echo json_encode($exception) ?>)'>
 
   <header class="container-fluid p-1">
 
@@ -38,61 +37,94 @@
         <li>Role: Customer Role</li>
       </ul>
       <br>
-      <h1 class=m-auto> Company Name </h1>
+      <h1 class="m-auto"> Company Name </h1>
       <h2><i class='fa fa-refresh p-2'></i>Last checked: date</h2>
     </div>
   </nav>
 
   <main class="container-fluid p-5">
 
-    <div class="row">
-      <div class="col-lg">
-        <div class="col-lg-7"> 
-          <h3>Compliance Rules</h3>
+    <div class="row text-center">
+      
+      <!-- Placeholder for pie chart when we get it working -->
+      <div class="col-lg-5 chart">
+        <h3>Overall Compliance</h3>
+        <!-- Doughnut Chart -->
+        <div>
+          <canvas id="myChart" style="max-height: 75vh;"></canvas>
         </div>
+          
+      </div>
+      <div class="col-lg-1"></div>
+      <!-- Review Dates -->
+      <div class="col-lg-5 " >
+        <div class="row-lg mt-4">
+          <h3>Upcoming Reviews for Existing Exceptions</h3>
+        </div>
+          <div class="d-flex align-items-center p-2">
+          <table class="table fixed_header" style="color:white">
+            <thead style="position: sticky; top:0;" class="thead-dark stickyHead">
+              <tr class="stickyHead">
+                <th class="stickyHead" scope="col-lg">Exception No.</th>
+                <th class="stickyHead" scope="col-lg">Resource</th>
+                <th class="stickyHead" scope="col-lg">Rule ID</th>
+                <th class="stickyHead" scope="col-lg">Creator</th>
+                <th class="stickyHead" scope="col-lg">Justification</th>
+                <th class="stickyHead" scope="col-lg">Review date</th>
+              </tr>
+            </thead>
+            <!-- If Michael Cera becomes a visible collaborator on the site, we have a problem -->
+            <tbody id="reviewbody"> 
+              <tr>
+                <td>1</td>
+                <td>dh-dc1</td>
+                <td>4</td>
+                <td>Michael Cera</td>
+                <td>The resource would not work</td>
+                <td>2011/04/25 06:94:20</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div> 
+    </div>
+      
+      <div class="row">
+        <div class="col-lg text-center mt-4">
+        
           <!-- Complaince Rule and Status -->
           <?php 
+            echo '<h3>Compliance Rules</h3>';
             while($result_rule=mysqli_fetch_array($query))
             {
           ?>
-          <div class = "row mb-2"> 
+          <div class = "row mb-2">
             <div class="col-lg">
               <!-- Compliance Rule Card -->
               <div class="card cardColor text-center m-auto">
                 <div class="card-body m-1 p-1">
                   <p class="card-text pb-1 m-auto"> <?php echo $result_rule["name"];?> </p>
                   <?php 
-                      $status ="active-status"; // compliant
-                      $status_text ="Compliant";
-                      foreach($compliant as $result_non_compl)
+                    $status ="active-status"; // compliant
+                    $status_text ="Compliant";
+                    foreach($compliant as $result_non_compl)
+                    {
+                      if ($result_rule['id'] == $result_non_compl['rule_id'])
                       {
-                        if ($result_rule['id'] == $result_non_compl['rule_id'])
-                        {
-                          $quer = "SELECT * FROM resource WHERE id=".$result_non_compl['resource_id'];
-                          $quer1 = mysqli_query($conn, $quer);
-                          $quer2 = mysqli_fetch_array($quer1);
-
-                          $quer = "SELECT * FROM exception WHERE exception_value='".$quer2['resource_ref']."'";
-                          $quer1 = mysqli_query($conn, $quer);
-                          $quer2 = mysqli_fetch_array($quer1);
-
-                          if($quer2== NULL)
-                          {
-                            $status ="exception-status";
-                            $status_text ="Non-Compliant";
-                            break;
-                          }
-                        }
+                        $status ="exception-status";
+                        $status_text ="Non-Compliant";
+                        break;
                       }
-                    ?>
-                    <div class="<?php echo $status;?>"> <?php echo $status_text;?></div>
-                  </div>
+                    }
+                  ?>
+                  <div class="<?php echo $status;?>"> <?php echo $status_text;?></div>
+                </div>
                   
-                  <button class="btn btn-outline-warning m-1" type="button"  data-toggle="collapse" data-target="#Rule<?php echo $result_rule['id'];?>" aria-expanded="false" aria-controls="collapseExample">
-                    View details
-                  </button>
-                  <div class="collapse" id="<?php echo 'Rule' . $result_rule['id'];?>">
-                    <div class="card-body">
+                <button class="btn btn-outline-warning m-1" type="button"  data-toggle="collapse" data-target="#Rule<?php echo $result_rule['id'];?>" aria-expanded="false" aria-controls="collapseExample">
+                  View details
+                </button>
+                <div class="collapse" id="<?php echo 'Rule' . $result_rule['id'];?>">
+                  <div class="card-body">
                     <table class="table table-striped" style="color:white">
                       <thead class="thead-dark">
                         <tr>
@@ -121,7 +153,7 @@
                                   {
                                     foreach($exception as $exc)
                                     {
-                                      if($result_rule['id'] == $exc['rule_id'] && $row['resource_ref'] == $exc['exception_value'])
+                                      if($result_rule['id'] == $exc['rule_id'] && $row['resource_name'] == $exc['exception_value'])
                                       {
                                         $checked = $exc['suspended'] == 0 ? false : true;
                                         break;
@@ -139,43 +171,24 @@
                               {
                                 echo '<td style="vertical-align: middle"><div class="active-status">Compliant</div></td>';
                               } 
-                              echo "<td style='vertical-align: middle'><button type='button' class='btn btn-outline-warning historybutton' data-toggle='modal' data-target='#historyModal' id='{$row["resource_ref"]},{$result_rule["id"]}' onclick='historybutton(this.id, ".json_encode($exception).")'>Exception History</button></td></tr>";
+                              echo "<td style='vertical-align: middle'><button type='button' class='btn btn-outline-warning historybutton' data-toggle='modal' data-target='#historyModal' id='{$row["resource_name"]},{$result_rule["id"]}' onclick='historybutton(this.id, ".json_encode($exception).")'>Exception History</button></td></tr>";
                             }
                           }
                         ?>
                       </tbody>
                     </table>
                     </div>
-                    <?php
-                      $var = "Non-Compliant";
-                      if(strcmp($status_text, $var) == 0)
-                      {
-                        echo "<button type='button' class='btn btn-outline-warning float-right m-1' data-toggle='modal' data-target='#newExcModal' id=". $result_rule['id']." name=". $result_rule['id'] . "," . $result_rule['resource_type_id']." onclick='addException(this.name)' >
-                        Add Exception
-                        </button>";
-                      }
-                        
-                    ?>
+                    <button type="button" id="<?php echo 'Rule' . $result_rule['id'];?>" class="btn btn-outline-warning float-right m-1" data-toggle="modal" data-target="#newExcModal">Add Exception</button>
+                    
                   </div>
                 </div>
               </div>
               
-            </div>
-          <?php } ?>
-      </div>
-
-      <!-- Placeholder for pie chart when we get it working -->
-      <div class="col-lg-5" position="absolute">
-        <h3>Overall Compliance</h3>
-        <p> The objective is to get a pie chart display in here similar to the interface on our university attendance tracker "SEATs", which visualises a percentage of how many rules are compliant, those that have exceptions and those that are non-compliant
-          <!-- Doughnut Chart -->
-          <div>
-            <canvas id="myChart"></canvas>
           </div>
-          
+          <?php } ?>
         </div>
-
-    </div>
+      </div>      
+      
     <!-- Add exception Modal -->
     <div class="modal fade" id="newExcModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
@@ -187,81 +200,26 @@
             </button>
           </div>
           <div class="modal-body">
-            <form id="form" > 
+            <form>
               <div class="form-group">
-                <label for="resourceList" class="col-form-label">Select a cloud resource:</label>
-                <select style= "width:100%; color: white; background-color: #333333" name="resourceList" id="resourceList">
-                  <!-- OPTIONS created dynamically -->
+                <label for="resources-list" class="col-form-label">Select a cloud resource:</label>
+                <select style= "width:100%; color: white; background-color: #333333" id="resources-list">
+                  <!-- Temp until we can read in resources from the db -->
+                  <option label="T1"></option>
+                  <option label="T2"></option>
+                  <option label="T3"></option>
+                  <option label="T4"></option>
                 </select>
               </div>
               <div class="form-group">
                 <label for="message-text" class="col-form-label">Justification:</label>
-                <textarea class="form-control" id="newJustification" name="newJustification" style="color: white; background-color: #333333" maxlength="200" required></textarea>
+                <textarea class="form-control" id="message-text" style="color: white; background-color: #333333"></textarea>
               </div>
-              <!-- Exception Value = resource ref  -->
-              <div class="form-group">
-                <label for="message-text" class="col-form-label">Review Date:</label>
-                <!-- Code taken from https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date -->
-                <input type="date" id="newReviewDate" name="newReviewDate" value="<?php echo date("Y-m-d")?>" min="<?php echo date("Y-m-d", strtotime("+1 day"))?>" max="<?php echo date("Y-m-d", strtotime("+1 year"))?>">
-              </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
-                  <input type="submit" class="btn btn-primary" onclick='formCompleted()' value="Submit">
-              </div> 
             </form>
-            
-            <?php
-
-            
-            //   //id
-            //   $len_exception = count($exception)+1;
-            //   //last_updates = today's day
-            //   $date = date("Y-m-d H:i:sa");
-            //   //ruleID
-            //  // if (isset($justif) || isset($justif) || isset($justif))
-            //  if (isset($_POST['newJustification']) || isset($_POST['resourceList']) || isset($_POST['name']) )
-            //  {
-                
-             
-            //   $justif = $_POST['newJustification'];
-            //   //echo $justif;
-            //   $IDs = $_POST['resourceList'];
-            //   //echo $IDs;
-            //   $IDs = explode("_",$IDs);
-            //   $ruleID = intval($IDs[1]);
-            //   //exception_value
-            //   //echo $ruleID 
-            //   $resourceID= intval($IDs[0]);
-            //   $exception_value =  $IDs[2];
-             
-               
-            //   //$exception_value = explode("_",$IDs)[2];
-            //   //echo $exception_value;
-            //   // while($row =mysqli_fetch_array($result_res))
-            //   // {
-            //   //   if($row['id'] == $resourceID)
-            //   //   {
-            //   //     $exception_value = $row['resource_name'];
-            //   //   }
-            //   // }
-
-            //   //customer_id & last_updated_by are FIXED values
-           
-            //   $addExceptionS="INSERT INTO exception(id, customer_id, rule_id,last_updated_by, exception_value, justification, review_date, last_updated, suspended) VALUES (".$len_exception. ", 1,". $ruleID .",'system','" . $exception_value . "','".$justif."', '" . $_POST['newReviewDate'] . "','". $date ."',0 );";
-            //   //echo $addExceptionS;
-            //   $insertQ = mysqli_query($conn,$addExceptionS);
-            //   //mysqli_refresh($conn);
-
-
-            //   //session_reset();
-            //   $conn->close();
-            //   echo "<meta http-equiv='refresh' content='0'>";
-
-            
-            //  }
-            
-              ?>
-               
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+            <button type="button" class="btn btn-primary">Submit</button>
           </div>
         </div>
       </div>
@@ -298,8 +256,9 @@
         </div>
       </div>
     </div>
-
   </main>
+
+
   <!-- Footer -->
   <footer class="container-fluid page-footer footerDesign">
     <div class="row">
@@ -329,109 +288,4 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   
-
 </body>
-<?php
-    $_POST = array();
-?>
-<script>
-// https://www.javascripttutorial.net/javascript-dom/javascript-appendchild/#:~:text=The%20appendChild()%20is%20a,of%20a%20specified%20parent%20node.&text=In%20this%20method%2C%20the%20childNode,()%20returns%20the%20appended%20child.
-function addOption(name, id){
-    let option = document.createElement("option");
-    option.text = name;
-    option.value = id;
-
-    return option;
-  }
-
-function addException(rule_rescourceType){
-  var rows_resource = <?php echo json_encode($resource); ?>;
-  var rows_non_compliant = <?php echo json_encode($non_compliant); ?>;
-  var rows_except = <?php echo json_encode($exception); ?>;
-  //console.log(rule_rescourceType);
-  var ruleID = rule_rescourceType.split(",")[0];
-  //var resourceTypeID = rule_rescourceType.split(",")[1];
-  var resource_name = "";
-  var resource_id = 0;
-  var resource_ref = " ";
-  var non_compl = 1;
-  //console.log(ruleID);
-  //console.log(resourceTypeID);
-  var select_dropdown = document.querySelector('#resourceList');
-  while (select_dropdown.firstChild) 
-  {
-    select_dropdown.removeChild(select_dropdown.firstChild);
-  }
-  
-  for(var i = 0; i < rows_non_compliant.length; i++) {
-    //looking if a rule has non-compliant resources
-    if(rows_non_compliant[i]['rule_id'] == ruleID)
-    {
-      //finding the name of a resource
-      for(var j = 0; j < rows_resource.length; j++)
-      {
-        non_compl = 1;
-        if(rows_resource[j]['id'] == rows_non_compliant[i]['resource_id'])
-        {            
-          console.log(rows_resource[j]['resource_ref']);
-
-          //checking if a non-compliant resource has an axception -> making a resource compliant
-          for(var k=0; k<rows_except.length; k++)
-          {
-            if(rows_resource[j]['resource_ref'] === rows_except[k]['exception_value'])
-            {
-              console.log(rows_resource[j]['resource_name']);
-              non_compl=0;
-              break;
-            }
-          } 
-
-          if(non_compl==1)
-          {
-            resource_name = rows_resource[j]['resource_name'];
-            resource_id = rows_resource[j]['id'];
-            resource_ref = rows_resource[j]['resource_ref'];
-            console.log(resource_name, ruleID,resource_ref);
-
-            var resourceID_ruleID_ref = resource_id+"_"+ruleID+"_"+resource_ref;
-            select_dropdown.appendChild(addOption(resource_name, resourceID_ruleID_ref));
-            console.log(resourceID_ruleID_ref);
-
-          }
-          
-          //break;
-        }
-      }
-    }
-
-  }
-
-}
-
-
-
-function formCompleted(){
-const form = document.getElementById('form');
-form.addEventListener('click', function(event){
-    //Prevent the event from submitting the form, no redirect or page reload
-    const formattedFormData = new FormData(form);
-    postData(formattedFormData);
-});
-}
-
-async function postData(formattedFormData){
-    const response = await fetch('PHP/addException.php',{
-        method: 'POST',
-        //mode: 'cors',
-        //headers: {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"},
-        body: formattedFormData
-    });
-    const data = await response.text();
-    //This should now print out the values that we sent to the backend-side
-    console.log(data);
-    location.reload();
-
-}
-
-</script>
-
