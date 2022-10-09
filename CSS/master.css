@@ -17,9 +17,10 @@ h2{
   color: #2e2e2e;
 }
 h3, h4 {
-  font-size: 1rem;
+  font-size: 1.5rem;
   font-family: 'Bahnschrift', cursive;
   color: white;
+  font-weight: bolder;
   padding-left: 1px;
 }
 h5, h6 {
@@ -112,6 +113,7 @@ li{
 }
 
 table{
+  font-size: 1rem;
   table-layout: fixed;
   width: 80%;
   color: white;
@@ -119,6 +121,10 @@ table{
   margin-right: auto;
   text-align: center;
   background-color: #333333;
+}
+
+.table td, .table th{
+  vertical-align: middle; 
 }
 
 .fixed_header{
@@ -165,21 +171,23 @@ table{
   .active-status, .exception-status {
     width: 75px;
     height: 12.5px;
+    line-height: 12.5px;
   }
   .historybutton{
     width: 75px;
     height: 20px;
     font-size: 0.7rem;
-  }
+  } 
   html {
-      font-size: 10px;  
+      font-size: 8px;  
   }
 }
 
 @media (min-width: 501px) {
-  .active-status, .exception-status {
+  .active-status, .exception-status{
     width: 125px;
     height: 25px;
+    line-height: 25px;
   }
   .historybutton {
     width: 125px;
@@ -189,15 +197,4 @@ table{
   html {
       font-size: 15px;
   }
-}
-
-/* Following code found on https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date */
-label {
-  display: block;
-  font: 1rem 'Fira Sans', sans-serif;
-}
-
-input,
-label {
-  margin: .4rem 0;
 }
