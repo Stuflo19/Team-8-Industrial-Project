@@ -76,6 +76,8 @@ async function generateResources() {
   //loops  through all resources
   for (let i = 0; i < resource.length; i++) {
     var checked = false;
+    var exc_check = false;
+    var sus_check = false;
 
     //checks if the rule applies to the resource
     if (resource[i]['resource_type_id'] == result_rule['resource_type_id']) {
@@ -96,6 +98,8 @@ async function generateResources() {
           for(let k = 0; k < exception.length; k++)
           {
             if (result_rule['id'] == exception[k]['rule_id'] && resource[i]['resource_ref'] == exception[k]['exception_value']) {
+              exc_check = true;
+              exception[k]['suspended'] == 0 ? sus_check = false : sus_check = true;
               checked = exception[k]['suspended'] == 0 ? false : true;
               break;
             }
@@ -113,6 +117,12 @@ async function generateResources() {
       div.innerHTML = checked ? "Non-Compliant" : "Compliant";
       div.className = checked ? "exception-status" : "active-status";
 
+      var exceptionicon = document.createElement('i');
+      exceptionicon.setAttribute('class', !exc_check ? 'fa fa-xmark fa-lg' : 'fa fa-check fa-lg');
+
+      var suspendedicon = document.createElement('i');
+      suspendedicon.setAttribute('class', !sus_check ? 'fa fa-xmark fa-lg' : 'fa fa-check fa-lg');
+
       //creates a button to display exception history
       var btn = document.createElement('input');
       btn.type = "button";
@@ -129,6 +139,8 @@ async function generateResources() {
       //Insert the data into the table
       tr.insertCell().appendChild(document.createTextNode(resource[i]['resource_name']));
       tr.insertCell().appendChild(div);
+      tr.insertCell().appendChild(exceptionicon);
+      tr.insertCell().appendChild(suspendedicon);
       tr.insertCell().appendChild(btn);
     }
   }
