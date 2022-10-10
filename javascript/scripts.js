@@ -8,7 +8,6 @@ function callAll(x, y, row)
 function generateGraph(noncompliant, compliant)
 {
   trueComp = compliant - noncompliant
-
   Chart.defaults.color = "#FFFFFF";
     const data = {
         labels: [

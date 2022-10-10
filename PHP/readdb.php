@@ -21,16 +21,10 @@
   ===============================*/
   $sql = "SELECT * FROM non_compliance";
   $compliant = mysqli_query($conn, $sql);
-  $non_compliant = mysqli_query($conn, $sql);
   while (($row = mysqli_fetch_array($compliant, MYSQLI_ASSOC)) != false){
     $non_compliant_ids[] = $row['resource_id'];
     $non_compliant_rules[] = $row['rule_id']; 
   }
-  while (($row = mysqli_fetch_array($non_compliant, MYSQLI_ASSOC)) == false){
-    $compliant_ids[] = $row['resource_id'];
-    $compliant_rules[] = $row['rule_id']; 
-  }
-
 
 /*======================  
   READING ALL FROM RULES
