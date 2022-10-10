@@ -64,6 +64,7 @@ function upcomingReviews(exceptions)
 
     var revBtn = document.createElement('button');
     revBtn.type = "button";
+    revBtn.textContent = "Review";
     
     revBtn.id = exceptions[i].exception_value + "," + exceptions[i].id;
     revBtn.addEventListener("click", function () {
@@ -77,9 +78,9 @@ function upcomingReviews(exceptions)
     var revIcon = document.createElement('i');
     revIcon.type = "i";
     revIcon.className = "fa fa-solid fa-circle-exclamation";
-    //revIcon.value = "Review";
+    revIcon.value = "Review";
 
-    revBtn.appendChild(revIcon + " Review");
+    revBtn.appendChild(revIcon);
 
     //If past review date
     if (daysBetweenDates < 0) 
