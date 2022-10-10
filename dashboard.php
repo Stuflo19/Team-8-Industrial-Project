@@ -44,12 +44,10 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && (isset($_SESSION['
       </ul>
       <br>
       <h1 class=m-auto> <?php  
-        $sql = "SELECT * FROM customer WHERE id = '$_SESSION['user_id']'";
-        $result1 = mysqli_query($conn,$sql);  
-        $row = mysqli_fetch_assoc($result1);
-        if ($row['id'] === $_SESSION['user_id'])
+        $row1 = mysqli_fetch_assoc($result1);
+        if ($row1['id'] === $_SESSION['id'])
         {
-          $_SESSION['customer'] = $row['name'];
+          $_SESSION['customer'] = $row1['name'];
           echo $_SESSION['customer'];
         }
         else {
