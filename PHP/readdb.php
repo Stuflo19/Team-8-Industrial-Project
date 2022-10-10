@@ -48,6 +48,7 @@
     $non_compliance[] = $row;
   }
 
+  
   $sql = "SELECT * FROM non_compliance";
   $compliant = mysqli_query($conn, $sql);
   foreach($compliant as $e)
