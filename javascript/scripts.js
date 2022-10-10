@@ -69,11 +69,16 @@ function upcomingReviews(exceptions)
     revBtn.addEventListener("click", function () {
       console.log(this.id);
     });
-
+    
     revBtn.setAttribute('data-toggle', 'modal');
-    revBtn.appendChild(document.createElement('i').className = "bi bi-exclamation-circle")
     //btn.setAttribute('data-target', '#reviewModal');
     revBtn.className = "btn btn-outline-warning historybutton bi bi-exclamation-circle";
+    
+    var revIcon = document.createElement('i');
+    revIcon.type = "i";
+    revIcon.className = "bi bi-exclamation-circle";
+
+    revBtn.appendChild(revIcon);
 
     //If past review date
     if (daysBetweenDates < 0) 
