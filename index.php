@@ -146,6 +146,8 @@
                 </button>
                 <div class="collapse" id="<?php echo 'Rule' . $result_rule['id'];?>">
                   <div class="card-body">
+                    <p id="<?php echo 'Description' . $result_rule['id'];?>"></p>
+
                     <table class="table table-striped" style="color:white">
                       <thead class="thead-dark">
                         <tr>
