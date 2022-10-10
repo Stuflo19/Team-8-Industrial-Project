@@ -131,6 +131,7 @@
                             if($quer2['suspended'] == 1)
                             {
                               $non_comp_except = $non_comp_except+1;
+                              $non_comp_total = $non_comp_total-1;
                             }
                             $status ="exception-status";
                             $status_text ="Non-Compliant";
