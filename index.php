@@ -1,5 +1,5 @@
 <?php
-  include 'PHP/dbconnect.php';
+  include 'PHP/dbconnectlocal.php';
   include 'PHP/readdb.php';
 ?>
 
@@ -38,7 +38,7 @@
       </ul>
       <br>
       <h1 class="m-auto"> Company Name </h1>
-      <button class="btn text-secondary border-bottom-0 border rounded-pill ms-n5" style="margin-right: 10px" onclick=refresh();><i class='fa fa-refresh p-2' style="color:white"></button></i>
+      <button class="btn border-bottom-0 border rounded-pill ms-n5" style="margin-right: 10px" onclick=refresh();><i class='fa fa-refresh p-2 refresh' style="color:white"></i>Refresh</button> 
       <h2 id="date" style="margin: 0"></h2>
     </div>
   </nav>
@@ -49,10 +49,12 @@
       
       <!-- Placeholder for pie chart when we get it working -->
       <div class="col-lg-5 chart">
-        <h3>Overall Compliance</h3>
         <!-- Doughnut Chart -->
         <div>
-          <canvas id="myChart" style="max-height: 75vh;"></canvas>
+          <h3>Overall Compliance<h3>
+            <canvas aria-label="Compliance pie chart" role="img" onkeydown tabindex=0 id="myChart" style="max-height: 75vh;">
+              <p>Chart could not be loaded</p>
+            </canvas>
         </div>
           
       </div>
@@ -97,6 +99,7 @@
           <div class="row m-auto">
             <h3 class="text-center">Compliance Rules</h3>
             <div style = "margin-left: auto; margin-right: 0"> 
+              <label class="visuallyhidden" for="filter-list" style=margin:0>Filter:</label>
               <select name="filter" style="color: white; background-color: #333333" id="filter-list" onchange="filter()">
                 <option value="No Filter">No Filter</option>
                 <option value="Compliant">Compliant</option>
@@ -136,7 +139,7 @@
                           if($quer2== NULL || $quer2['suspended'] == 1)
                           {
                             $non_comp_total =  $non_comp_total +1;
-                            if($quer2['suspended'] == 1)
+                            if($quer2 != NULL && $quer2['suspended'] == 1)
                             {
                               $non_comp_except = $non_comp_except+1;
                             }

@@ -42,8 +42,12 @@ button {
 }
 
 /* Styling for the buttons when hovered on */
-button:hover {
+button:hover{
   background-color: #f1b434 !important;
+  color: #34252f !important;
+}
+
+button:hover .fa-refresh {
   color: #34252f !important;
 }
 
@@ -78,7 +82,7 @@ nav {
 }
 
 .exception-status {
-  background-color: #d63030;
+  background-color: #e45858;
   margin: 0px 10px;
   border-radius: 5px;
   display: inline-block;
@@ -204,6 +208,21 @@ table{
   html {
       font-size: 15px;
   }
+}
+
+.filter{
+  display: inline-block;
+}
+
+.visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
 }
 
 /* Code found on https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date */

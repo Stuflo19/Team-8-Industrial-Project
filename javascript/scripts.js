@@ -37,6 +37,7 @@ function generateGraph(noncompliant, compliant)
       const config = {
         type: 'doughnut',
         data: data,
+        labelString: "Hello",
       };
     
       const myChart = new Chart(
