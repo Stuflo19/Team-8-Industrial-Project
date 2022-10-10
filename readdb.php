@@ -33,8 +33,8 @@
 
 
 /* READ TO GET CUSTOMER NAME */
-$sql = "SELECT * FROM customer WHERE id = '$_SESSION['id']'";
-$result1 = mysqli_query($conn,$sql);  
+  $sql = "SELECT * FROM customer WHERE id = '$_SESSION['id']'";
+  $result1 = mysqli_query($conn,$sql);  
 
 
 $conn->close();
