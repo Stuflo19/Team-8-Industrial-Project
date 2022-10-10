@@ -131,6 +131,7 @@
                             if($quer2['suspended'] == 1)
                             {
                               $non_comp_except = $non_comp_except+1;
+                              $non_comp_total = $non_comp_total-1;
                             }
                             $status ="exception-status";
                             $status_text ="Non-Compliant";
@@ -138,7 +139,7 @@
                           }
                       }
                     }
-                    $non_comp_total = $non_comp_total - $non_comp_except;
+                  
                   ?>
                     <div class="<?php echo $status;?>"> <?php echo $status_text;?></div>
                     <div id="<?php echo $num_comp;?>" class = "compliance_counter"> <?php echo "Compliant Resources: " . $num_comp;?></div>
