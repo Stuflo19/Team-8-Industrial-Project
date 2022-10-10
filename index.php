@@ -125,7 +125,7 @@
                           {
                             if ($result_rule['id'] == $result_non_compl['rule_id'])
                             {
-                              $num_comp = $num_comp +1;
+                        
       
                                 if($quer2== NULL || $quer2['suspended'] == 1)
                                 {
