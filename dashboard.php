@@ -6,6 +6,18 @@
 session_start();
 
 if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
+$sql = "SELECT * FROM customer";
+$result1 = mysqli_query($conn,$sql);   
+$row1 = mysqli_fetch_assoc($result1);
+if ($row1['id'] === $_SESSION['id'])
+{
+  $_SESSION['customer'] = $row1['name'];
+  break;
+}
+else {
+  echo "Error getting customer name";
+  break;
+}
 
 ?>
 
@@ -43,21 +55,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
         <li>Role: Role Name</li>
       </ul>
       <br>
-      <h1 class=m-auto> <?php 
-        $sql = "SELECT * FROM customer";
-        $result1 = mysqli_query($conn,$sql);   
-        $row1 = mysqli_fetch_assoc($result1);
-        if ($row1['id'] === $_SESSION['id'])
-        {
-          $_SESSION['customer'] = $row1['name'];
-          echo $_SESSION['customer'];
-          break;
-        }
-        else {
-          echo "Error getting customer name";
-          break;
-        }
-        ?> </h1>
+      <h1 class=m-auto> <?php echo $_SESSION['customer'];?>  </h1>
       <h2><i class='fa fa-refresh p-2'></i>Last checked: date</h2>
     </div>
   </nav>
