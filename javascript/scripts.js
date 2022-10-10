@@ -66,13 +66,13 @@ function upcomingReviews(exceptions)
     revBtn.type = "button";
     revBtn.value = "Review";
     revBtn.id = resource[i].resource_ref + "," + result_rule.id;
-    btn.addEventListener("click", function () {
+    revBtn.addEventListener("click", function () {
       console.log(this.id);
     });
 
-    btn.setAttribute('data-toggle', 'modal');
+    revBtn.setAttribute('data-toggle', 'modal');
     //btn.setAttribute('data-target', '#reviewModal');
-    btn.className = "btn btn-outline-warning historybutton";
+    revBtn.className = "btn btn-outline-warning historybutton";
 
     //If past review date
     if (daysBetweenDates < 0) 
