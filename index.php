@@ -115,19 +115,6 @@
                         exit();
                     }
                 }
-                $sql = "SELECT * FROM customer";
-                $result1 = mysqli_query($conn,$sql);   
-                $row = mysqli_fetch_assoc($result1);
-                if ($row['id'] == $_SESSION['id'])
-                {
-                  $_SESSION['customer'] = $row['name'];
-                  break;
-                }
-                else 
-                {
-                  echo "Error getting customer name";
-                  break;
-                }
             }
 
             else {
