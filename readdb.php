@@ -1,5 +1,4 @@
 <?php
-session_start();
 /*===========================================  
   READING ALL FROM RESOURCE WHERE CUSTOMER_ID
   ===========================================*/
