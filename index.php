@@ -1,6 +1,6 @@
 <?php
-  include 'dbconnect.php';
-  include 'readdb.php';
+  include 'PHP/dbconnect.php';
+  include 'PHP/readdb.php';
 ?>
 
 <!DOCTYPE html>
@@ -60,7 +60,7 @@
             //Creates the session
             session_start(); 
             //Using my local db file to connect to my db for testing
-            include 'dbconnect.php';
+            include 'PHP/dbconnect.php';
             
             // using post method in the form (important bit) to get data
             if (isset($_POST['username']) && isset($_POST['password'])) {
@@ -101,7 +101,6 @@
                             $_SESSION['user_id'] = $row['user_id'];
                             header("Location: dashboard.php");
                             exit();
-                            
                         }
                         //if not match, tell them incorrect
                         else {
