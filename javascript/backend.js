@@ -14,28 +14,6 @@ async function updatesuspended(exceptionid, suspended) {
 }
 
 
-// Code found  at : https://gist.github.com/jesperorb/a6c12f7d4418a167ea4b3454d4f8fb61
-function formCompleted(){
-  const form = document.getElementById('form');
-  console.log("Enetered1")
-  form.addEventListener('click', function(event){
-    const formattedFormData = new FormData(form);
-    postData(formattedFormData);
-  });
-  }
-  
-  async function postData(formattedFormData){
-    const response = await fetch('PHP/addException.php',{
-        method: 'POST',
-        body: formattedFormData
-    });
-    console.log("Enetered2");
-    const data = await response.text();
-    console.log(data);
-    location.reload();
-  
-  }
-
 function historybutton(id) {
   // rows: holds the rows read in from the database from PHP
   var ids = id.split(",");
