@@ -119,6 +119,7 @@
                           $num_non_comp =0;
                           $num_comp = 0;
                           $display_non_comp =0;
+                          $display_comp =0;
 
                           foreach($compliant as $result_non_compl)
                           {
@@ -129,7 +130,7 @@
                                 if($quer2== NULL || $quer2['suspended'] == 1)
                                 {
                                   $num_non_comp =  $num_non_comp +1;
-                                  $display_non_comp = $display_non_comp +1;
+                            
                                 
                                 }
                             }
@@ -170,6 +171,14 @@
                                 {
                                   foreach(array_keys($non_compliant_ids, $row['id']) as $index) {
                                     $non_compliant_rules[$index] == $result_rule["id"] ? $checked = true : $checked = false;
+                                    if($checked == true)
+                                    {
+                                      $display_non_comp = $display_non_comp +1
+                                    }
+                                    elseif($checked == false)
+                                    {
+                                      $display_comp = $display_comp +1;
+                                    }
                                     if($checked) {break;}
                                   };
 
