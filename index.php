@@ -373,7 +373,7 @@ function formCompleted(){
 
     const data = await response.text();
     console.log(data);
-    location.reload();
+    //location.reload();
   }
 
 </script>
