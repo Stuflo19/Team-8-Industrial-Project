@@ -99,7 +99,8 @@
                             $_SESSION['password'] = $row['password'];
                             $_SESSION['id'] = $row['id'];
                             $_SESSION['user_id'] = $row['user_id'];
-                            break;
+                            header("Location: dashboard.php");
+                            exit();
                             
                         }
                         //if not match, tell them incorrect
@@ -117,16 +118,15 @@
                 $sql = "SELECT * FROM customer";
                 $result1 = mysqli_query($conn,$sql);   
                 $row = mysqli_fetch_assoc($result1);
-                if ($row['id'] === $_SESSION['id'])
+                if ($row['id'] == $_SESSION['id'])
                 {
                   $_SESSION['customer'] = $row['name'];
-                  header("Location: dashboard.php");
-                  exit();
+                  break;
                 }
                 else 
                 {
                   echo "Error getting customer name";
-                  exit();
+                  break;
                 }
             }
 
