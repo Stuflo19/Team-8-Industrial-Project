@@ -5,7 +5,7 @@
 
 session_start();
 
-if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['id'])) {
+if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
 
 ?>
 
@@ -44,17 +44,18 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['i
       </ul>
       <br>
       <h1 class=m-auto> <?php  
-      $row = mysqli_fetch_assoc($custname);
-      if ($row['id'] == $_SESSION['id'])
-      {
-        $_SESSION['customer'] = $row['name'];
-        break;
+      while ($row = mysqli_fetch_assoc($custname)){
+        if ($row['id'] == $_SESSION['id'])
+        {
+          $_SESSION['customer'] = $row['name'];
+          break;
+        }
+        else 
+        {
+          echo "Error getting customer name";
+          break;
+        } 
       }
-      else 
-      {
-        echo "Error getting customer name";
-        break;
-      } 
       echo $_SESSION['customer'];
       ?>  
       </h1>
