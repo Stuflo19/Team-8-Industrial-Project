@@ -207,7 +207,7 @@
               </div>
               
           </div>
-          <?php } ?>
+          <?php $num_non_comp=0;} ?>
         </div>
       </div>      
       
