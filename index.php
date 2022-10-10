@@ -109,42 +109,34 @@
                     <?php 
                       $status ="active-status"; // compliant
                       $status_text ="Compliant";
-
-                      $num_comp =0;
-                      $num_non_comp =0;
-                      $display_non_comp =0;
-                      $num_comp_except = 0;
-
                       foreach($compliant as $result_non_compl)
                       {
                         if ($result_rule['id'] == $result_non_compl['rule_id'])
                         {
-                            
-                          $quer = "SELECT * FROM resource WHERE id=".$result_non_compl['resource_id'];
-                          $quer1 = mysqli_query($conn, $quer);
-                          $quer2 = mysqli_fetch_array($quer1);
+                          $status ="exception-status";
+                          $status_text ="Non-Compliant";
 
-                          $quer = "SELECT * FROM exception WHERE exception_value='".$quer2['resource_ref']."'";
-                          $quer1 = mysqli_query($conn, $quer);
-                          $quer2 = mysqli_fetch_array($quer1);
-        
-                          if($quer2== NULL || $quer2['suspended'] == 1)
+                          $num_non_comp =0;
+                          $num_comp = 0;
+                          $display_non_comp =0;
+
+                          foreach($compliant as $result_non_compl)
+                          {
+                            if ($result_rule['id'] == $result_non_compl['rule_id'])
+                            {
+                              $num_comp = $num_comp +1;
+      
+                                if($quer2== NULL || $quer2['suspended'] == 1)
                                 {
                                   $num_non_comp =  $num_non_comp +1;
-                                  $display_non_comp = $display_non_comp+1;
-                                  if($quer2['suspended'] == 1)
-                                  {
-                                    $num_comp_except = $num_comp_except+1;
-                                  }
+                                  $display_non_comp = $display_non_comp +1;
+                                
                                 }
-                                $display_non_comp = $display_non_comp-$num_comp_except;
-                                $status ="exception-status";
-                                $status_text ="Non-Compliant";
-                                break;
+                            }
+                          }
+                          break;
                         }
-                       }
-                        
-                      
+                      }
                     ?>
                     <div class="<?php echo $status;?>"> <?php echo $status_text;?></div>
                     <div id="<?php echo $num_comp;?>" class = "compliance_counter"> <?php echo "Compliant Resources: " . $num_comp;?></div>
@@ -217,7 +209,7 @@
               </div>
               
           </div>
-          <?php} ?>
+          <?php } ?>
         </div>
       </div>      
       
