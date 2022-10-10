@@ -117,6 +117,10 @@
                   <?php 
                     $status ="active-status"; // compliant
                     $status_text ="Compliant";
+
+                    $non_comp_total =0;
+                    $non_comp_except =0;
+
                     foreach($compliant as $result_non_compl)
                     {
                       if ($result_rule['id'] == $result_non_compl['rule_id'])
@@ -131,9 +135,14 @@
 
                           if($quer2== NULL || $quer2['suspended'] == 1)
                           {
-                          $status ="exception-status";
-                          $status_text ="Non-Compliant";
-                          break;
+                            $non_comp_total =  $non_comp_total +1;
+                            if($quer2['suspended'] == 1)
+                            {
+                              $non_comp_except = $non_comp_except+1;
+                            }
+                            $status ="exception-status";
+                            $status_text ="Non-Compliant";
+                            break;
                           }
                       }
                     }
@@ -166,7 +175,7 @@
                     </div>
                     <?php
                       $var = "Non-Compliant";
-                      if(strcmp($status_text, $var) == 0)
+                      if(strcmp($status_text, $var) == 0 && $non_comp_total > $non_comp_except )
                       {
                         echo "<button type='button' class='btn btn-outline-warning float-right m-1' data-toggle='modal' data-target='#newExcModal' id=". $result_rule['id']." name=". $result_rule['id'] . "," . $result_rule['resource_type_id']." onclick='addException(this.name)' >
                         Add Exception
