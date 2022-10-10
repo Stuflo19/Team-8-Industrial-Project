@@ -15,7 +15,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <!-- import bootstrap -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'> 
+  <script src="https://kit.fontawesome.com/1f40dabfaa.js" crossorigin="anonymous"></script>
   <!-- import css file -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="javascript/scripts.js"></script>
@@ -149,8 +149,10 @@
                     <table class="table table-striped" style="color:white">
                       <thead class="thead-dark">
                         <tr>
-                          <th scope="col">Resource</th>
+                          <th scope="col" style="width: 40%">Resource</th>
                           <th scope="col">Status</th>
+                          <th scope="col">Exception</th>
+                          <th scope="col">Suspended</th>
                           <th scope ="col">History</th>
                         </tr>
                       </thead>
