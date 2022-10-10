@@ -13,6 +13,7 @@ async function updatesuspended(exceptionid, suspended) {
   return false;
 }
 
+
 function historybutton(id) {
   // rows: holds the rows read in from the database from PHP
   var ids = id.split(",");
@@ -94,7 +95,7 @@ async function generateResources() {
           //check to see if the resource contains an exception
           for(let k = 0; k < exception.length; k++)
           {
-            if (result_rule['id'] == exception[k]['rule_id'] && resource[i]['resource_name'] == exception[k]['exception_value']) {
+            if (result_rule['id'] == exception[k]['rule_id'] && resource[i]['resource_ref'] == exception[k]['exception_value']) {
               checked = exception[k]['suspended'] == 0 ? false : true;
               break;
             }
@@ -116,8 +117,9 @@ async function generateResources() {
       var btn = document.createElement('input');
       btn.type = "button";
       btn.value = "Exception History";
-      btn.id = resource[i].resource_name + "," + result_rule.id;
+      btn.id = resource[i].resource_ref + "," + result_rule.id;
       btn.addEventListener("click", function () {
+        console.log(this.id);
         historybutton(this.id);
       });
       btn.setAttribute('data-toggle', 'modal');
@@ -130,4 +132,12 @@ async function generateResources() {
       tr.insertCell().appendChild(btn);
     }
   }
+}
+// https://www.javascripttutorial.net/javascript-dom/javascript-appendchild/#:~:text=The%20appendChild()%20is%20a,of%20a%20specified%20parent%20node.&text=In%20this%20method%2C%20the%20childNode,()%20returns%20the%20appended%20child.
+function addOption(name, id){
+  let option = document.createElement("option");
+  option.text = name;
+  option.value = id;
+
+  return option;
 }

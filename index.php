@@ -96,7 +96,6 @@
           <div class="row m-auto">
             <h3 class="text-center">Compliance Rules</h3>
             <div style = "margin-left: auto; margin-right: 0"> 
-              <label for="resources-list" class="">Filter:</label>
               <select name="filter" style="color: white; background-color: #333333" id="filter-list" onchange="filter()">
                 <option value="No Filter">No Filter</option>
                 <option value="Compliant">Compliant</option>
@@ -121,11 +120,22 @@
                     {
                       if ($result_rule['id'] == $result_non_compl['rule_id'])
                       {
+                        $quer = "SELECT * FROM resource WHERE id=".$result_non_compl['resource_id'];
+                          $quer1 = mysqli_query($conn, $quer);
+                          $quer2 = mysqli_fetch_array($quer1);
+
+                          $quer = "SELECT * FROM exception WHERE exception_value='".$quer2['resource_ref']."'";
+                          $quer1 = mysqli_query($conn, $quer);
+                          $quer2 = mysqli_fetch_array($quer1);
+
+                          if($quer2== NULL)
+                          {
                         $status ="exception-status";
                         $status_text ="Non-Compliant";
                         break;
                       }
                     }
+                  }
                   ?>
                   <div class="<?php echo $status;?>"> <?php echo $status_text;?></div>
                 </div>
@@ -153,8 +163,16 @@
                       </tbody>
                     </table>
                     </div>
-                    <button type="button" id="<?php echo 'Rule' . $result_rule['id'];?>" class="btn btn-outline-warning float-right m-1" data-toggle="modal" data-target="#newExcModal">Add Exception</button>
-                    
+                    <?php
+                      $var = "Non-Compliant";
+                      if(strcmp($status_text, $var) == 0)
+                      {
+                        echo "<button type='button' class='btn btn-outline-warning float-right m-1' data-toggle='modal' data-target='#newExcModal' id=". $result_rule['id']." name=". $result_rule['id'] . "," . $result_rule['resource_type_id']." onclick='addException(this.name)' >
+                        Add Exception
+                        </button>";
+                      }
+                        
+                    ?>                    
                   </div>
                 </div>
               </div>
@@ -175,30 +193,33 @@
             </button>
           </div>
           <div class="modal-body">
-            <form>
+            <form id="form" > 
               <div class="form-group">
-                <label for="resources-list" class="col-form-label">Select a cloud resource:</label>
-                <select style= "width:100%; color: white; background-color: #333333" id="resources-list">
-                  <!-- Temp until we can read in resources from the db -->
-                  <option label="T1"></option>
-                  <option label="T2"></option>
-                  <option label="T3"></option>
-                  <option label="T4"></option>
+                <label for="resourceList" class="col-form-label">Select a cloud resource:</label>
+                <select style= "width:100%; color: white; background-color: #333333" name="resourceList" id="resourceList">
+                  <!-- OPTIONS created dynamically -->
                 </select>
               </div>
               <div class="form-group">
                 <label for="message-text" class="col-form-label">Justification:</label>
-                <textarea class="form-control" id="message-text" style="color: white; background-color: #333333"></textarea>
+                <textarea class="form-control" id="newJustification" name="newJustification" style="color: white; background-color: #333333" maxlength="200" required></textarea>
               </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
-            <button type="button" class="btn btn-primary">Submit</button>
+              <!-- Exception Value = resource ref  -->
+              <div class="form-group">
+                <label for="message-text" class="col-form-label">Review Date:</label>
+                <!-- Code taken from https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date -->
+                <input type="date" id="newReviewDate" name="newReviewDate" value="<?php echo date("Y-m-d")?>" min="<?php echo date("Y-m-d", strtotime("+1 day"))?>" max="<?php echo date("Y-m-d", strtotime("+1 year"))?>">
+              </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+                  <input type="submit" class="btn btn-primary" onclick='formCompleted()' value="Submit">
+              </div> 
+            </form>   
           </div>
         </div>
       </div>
     </div>
+
 
     <!-- View History Modal -->
     <div class="modal fade bd-example-modal-lg" id="historyModal" tabindex="-1" role="dialog" aria-labelledby="historyModalLabel" aria-hidden="true">
@@ -264,3 +285,94 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   
 </body>
+<?php
+    $_POST = array();
+?>
+<script>
+function addException(rule_rescourceType){
+  var rows_resource = <?php echo json_encode($resource); ?>;
+  var rows_non_compliant = <?php echo json_encode($non_compliant); ?>;
+  var rows_except = <?php echo json_encode($exception1); ?>;
+  console.log(rule_rescourceType);
+  var ruleID = rule_rescourceType.split(",")[0];
+  //var resourceTypeID = rule_rescourceType.split(",")[1];
+  var resource_name = "";
+  var resource_id = 0;
+  var resource_ref = " ";
+  var non_compl = 1;
+  //console.log(ruleID);
+  //console.log(resourceTypeID);
+  var select_dropdown = document.querySelector('#resourceList');
+  while (select_dropdown.firstChild) 
+  {
+    select_dropdown.removeChild(select_dropdown.firstChild);
+  }
+  
+  for(var i = 0; i < rows_non_compliant.length; i++) {
+    //looking if a rule has non-compliant resources
+    if(rows_non_compliant[i]['rule_id'] == ruleID)
+    {
+      //finding the name of a resource
+      for(var j = 0; j < rows_resource.length; j++)
+      {
+        non_compl = 1;
+        if(rows_resource[j]['id'] == rows_non_compliant[i]['resource_id'])
+        {            
+          console.log(rows_resource[j]['resource_ref']);
+
+          //checking if a non-compliant resource has an axception -> making a resource compliant
+          for(var k=0; k<rows_except.length; k++)
+          {
+            if(rows_resource[j]['resource_ref'] === rows_except[k]['exception_value'])
+            {
+              console.log(rows_resource[j]['resource_name']);
+              non_compl=0;
+              break;
+            }
+          } 
+
+          if(non_compl==1)
+          {
+            resource_name = rows_resource[j]['resource_name'];
+            resource_id = rows_resource[j]['id'];
+            resource_ref = rows_resource[j]['resource_ref'];
+            console.log(resource_name, ruleID,resource_ref);
+
+            var resourceID_ruleID_ref = resource_id+"_"+ruleID+"_"+resource_ref;
+            select_dropdown.appendChild(addOption(resource_name, resourceID_ruleID_ref));
+            console.log(resourceID_ruleID_ref);
+
+          }
+          
+          //break;
+        }
+      }
+    }
+
+  }
+
+}
+
+// Code found  at : https://gist.github.com/jesperorb/a6c12f7d4418a167ea4b3454d4f8fb61
+function formCompleted(){
+  const form = document.getElementById('form');
+  console.log("Enetered1")
+  form.addEventListener('click', function(event){
+    const formattedFormData = new FormData(form);
+    postData(formattedFormData);
+  });
+  }
+  
+  async function postData(formattedFormData){
+    const response = await fetch('PHP/addException.php',{
+        method: 'POST',
+        body: formattedFormData
+    });
+    location.reload();
+
+    const data = await response.text();
+    console.log(data);
+    //location.reload();
+  }
+
+</script>
