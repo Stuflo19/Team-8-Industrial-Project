@@ -40,10 +40,23 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
     <div class="collapse navbar-collapse d-flex justify-content-around" id="navbarNav">
       <ul class="mb-auto pl-0">
         <li>Username: <?php echo $_SESSION['username'];?></li>
-        <li>Role: Customer name</li>
+        <li>Role: Role Name</li>
       </ul>
       <br>
-      <h1 class=m-auto> Company Name </h1>
+      <h1 class=m-auto> <?php  
+        $sql = "SELECT * FROM customer WHERE id = '$_SESSION['user_id']'";
+        $result1 = mysqli_query($conn,$sql);  
+        $row = mysqli_fetch_assoc($result1);
+        if ($row['id'] === $_SESSION['user_id']{
+          $_SESSION['customer'] = $row['name'];
+          echo $_SESSION['customer'];
+          exit();
+        }
+        else {
+          echo "Error getting customer name";
+          exit();
+        }
+        ?> </h1>
       <h2><i class='fa fa-refresh p-2'></i>Last checked: date</h2>
     </div>
   </nav>
