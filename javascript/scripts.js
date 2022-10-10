@@ -64,11 +64,14 @@ function upcomingReviews(exceptions)
 
     var revBtn = document.createElement('input');
     revBtn.type = "button";
-    revBtn.value = "Exception History";
+    revBtn.value = "Review";
     revBtn.id = resource[i].resource_ref + "," + result_rule.id;
+    btn.addEventListener("click", function () {
+      console.log(this.id);
+    });
 
     btn.setAttribute('data-toggle', 'modal');
-    btn.setAttribute('data-target', '#reviewModal');
+    //btn.setAttribute('data-target', '#reviewModal');
     btn.className = "btn btn-outline-warning historybutton";
 
     //If past review date
