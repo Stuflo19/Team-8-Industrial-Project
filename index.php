@@ -96,7 +96,6 @@
           <div class="row m-auto">
             <h3 class="text-center">Compliance Rules</h3>
             <div style = "margin-left: auto; margin-right: 0"> 
-              <label for="resources-list" class="">Filter:</label>
               <select name="filter" style="color: white; background-color: #333333" id="filter-list" onchange="filter()">
                 <option value="No Filter">No Filter</option>
                 <option value="Compliant">Compliant</option>
