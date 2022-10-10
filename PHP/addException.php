@@ -27,7 +27,7 @@
     elseif($add_update == 2)
     {
         $updateException = "UPDATE exception SET justification = '".$justif ."', review_date='".$_POST['newReviewDate']."', last_updated='".$date."', suspended=0 WHERE  exception_value = '".$exception_value."';";
-        echo $updateException;
+        //echo $updateException;
         $insertQ = mysqli_query($conn,$updateException);
     }
     
