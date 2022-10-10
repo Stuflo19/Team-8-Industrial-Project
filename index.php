@@ -125,6 +125,12 @@
                             {
                               $num_comp = $num_comp +1;
       
+                                if($quer2== NULL || $quer2['suspended'] == 1)
+                                {
+                                  $num_non_comp =  $num_non_comp +1;
+                                
+                                }
+                            }
                           }
                           break;
                         }
