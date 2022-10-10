@@ -23,5 +23,5 @@
 
     }
     //$conn->close();
-    header("Location: index.php");
+    header("..index.php");
     ?>

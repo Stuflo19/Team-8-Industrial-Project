@@ -369,10 +369,11 @@ function formCompleted(){
         method: 'POST',
         body: formattedFormData
     });
+    location.reload();
+
     const data = await response.text();
     console.log(data);
     location.reload();
-  
   }
 
 </script>
