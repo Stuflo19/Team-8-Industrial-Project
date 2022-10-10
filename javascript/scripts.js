@@ -71,8 +71,9 @@ function upcomingReviews(exceptions)
     });
 
     revBtn.setAttribute('data-toggle', 'modal');
+    revBtn.appendChild(document.createElement('i').className = "bi bi-exclamation-circle")
     //btn.setAttribute('data-target', '#reviewModal');
-    revBtn.className = "btn btn-outline-warning historybutton";
+    revBtn.className = "btn btn-outline-warning historybutton bi bi-exclamation-circle";
 
     //If past review date
     if (daysBetweenDates < 0) 
