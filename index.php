@@ -137,7 +137,7 @@
                       }
                     ?>
                     <div class="<?php echo $status;?>"> <?php echo $status_text;?></div>
-                    <?php echo $num_non_comp $num_comp; ?>
+                   
                   </div>
                 </div>
                   
