@@ -17,7 +17,7 @@ Feedback:
  - look into ethics 
  - our created website is an intellectual property
  
-### 03/10/2022 Meeting with Client (lenght 20min)
+### 03/10/2022 Meeting with Client (lenght ~17min)
 Feedback:
  - good progress with a website
  - suggested implementing more sorting/filtering capabilities (e.g. show only rules/resources that are non- compliant)
@@ -46,7 +46,7 @@ Friday
 
 # SPRINT 3 (10/10 - 14/10 - Week 3)
 
-### 10/10/2022 Meeting with Client (lenght 20min)
+### 10/10/2022 Meeting with Client (lenght ~16min)
 Feedback:
  - good progress with a website
  - suggested adding an option to choose a fixed day for a review date while adding exceptions (e.g. 30d, 90d, a year or custom (min -30d , max - one year) )
