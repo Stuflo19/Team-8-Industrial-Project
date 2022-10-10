@@ -128,14 +128,14 @@
                           $quer1 = mysqli_query($conn, $quer);
                           $quer2 = mysqli_fetch_array($quer1);
 
-                          if($quer2== NULL)
+                          if($quer2== NULL ||$quer2['suspended'] == 1)
                           {
-                        $status ="exception-status";
-                        $status_text ="Non-Compliant";
-                        break;
+                          $status ="exception-status";
+                          $status_text ="Non-Compliant";
+                          break;
+                          }
                       }
                     }
-                  }
                   ?>
                   <div class="<?php echo $status;?>"> <?php echo $status_text;?></div>
                 </div>
