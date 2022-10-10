@@ -1,6 +1,6 @@
 <?php
-  include 'PHP/dbconnect.php';
-  include 'PHP/readdb.php';
+  include 'dbconnect.php';
+  include 'readdb.php';
 
 
 session_start();
@@ -24,8 +24,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'> 
   <!-- import css file -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="javascrript/scripts.js"></script>
-  <link rel="stylesheet" href="CSS/master.css">
+  <script src="scripts.js"></script>
+  <link rel="stylesheet" href="master.css">
 </head>
 
 
