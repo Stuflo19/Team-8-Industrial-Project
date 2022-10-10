@@ -62,7 +62,7 @@ function upcomingReviews(exceptions)
     const daysBetweenDates = msBetweenDates / (24 * 60 * 60 * 1000);
     console.log(daysBetweenDates); //Debug testing to show how many days until
 
-    var revBtn = document.createElement('input');
+    var revBtn = document.createElement('button');
     revBtn.type = "button";
     revBtn.value = "Review";
     revBtn.id = exceptions[i].exception_value + "," + exceptions[i].id;
