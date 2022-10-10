@@ -51,9 +51,11 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
         {
           $_SESSION['customer'] = $row1['name'];
           echo $_SESSION['customer'];
+          break;
         }
         else {
           echo "Error getting customer name";
+          break;
         }
         ?> </h1>
       <h2><i class='fa fa-refresh p-2'></i>Last checked: date</h2>
