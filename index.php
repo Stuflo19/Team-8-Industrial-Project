@@ -323,7 +323,7 @@ function addException(rule_rescourceType){
           //checking if a non-compliant resource has an axception -> making a resource compliant
           for(var k=0; k<rows_except.length; k++)
           {
-            if(rows_resource[j]['resource_ref'] === rows_except[k]['exception_value'])
+            if(rows_resource[j]['resource_ref'] === rows_except[k]['exception_value'] && rows_except[k]['suspended'] == 0)
             {
               console.log(rows_resource[j]['resource_name']);
               non_compl=0;
