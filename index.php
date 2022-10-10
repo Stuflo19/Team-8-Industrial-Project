@@ -209,7 +209,7 @@
               </div>
               
           </div>
-          <?php } ?>
+          <?php $display_non_comp = 0;} ?>
         </div>
       </div>      
       
