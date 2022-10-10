@@ -378,7 +378,7 @@ function formCompleted(){
         method: 'POST',
         body: formattedFormData
     });
-    location.reload();
+    //location.reload();
 
     const data = await response.text();
     console.log(data);
