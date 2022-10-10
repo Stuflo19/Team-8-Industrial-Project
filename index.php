@@ -118,8 +118,7 @@
 
                           $num_non_comp =0;
                           $num_comp = 0;
-                          $display_non_comp =0;
-                          $display_comp =0;
+                         
 
                           foreach($compliant as $result_non_compl)
                           {
@@ -142,6 +141,7 @@
                     <div class="<?php echo $status;?>"> <?php echo $status_text;?></div>
                     <div id="<?php echo $num_comp;?>" class = "compliance_counter"> <?php echo "Compliant Resources: " . $display_comp;?></div>
                     <div id="<?php echo $display_non_comp;?>" class = "compliance_counter"> <?php echo "Non-Compliant Resources: " . $display_non_comp;?></div>
+                    <?php  $display_non_comp =0;  $display_comp =0; ?>
                   </div>
                 </div>
                   
