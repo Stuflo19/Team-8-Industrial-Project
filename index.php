@@ -300,6 +300,7 @@ function addException(rule_rescourceType){
   var resource_id = 0;
   var resource_ref = " ";
   var non_compl = 1;
+  var add_or_update = 1; // 1-add, 2- update
   //console.log(ruleID);
   //console.log(resourceTypeID);
   var select_dropdown = document.querySelector('#resourceList');
@@ -323,14 +324,23 @@ function addException(rule_rescourceType){
           //checking if a non-compliant resource has an axception -> making a resource compliant
           for(var k=0; k<rows_except.length; k++)
           {
-            if(rows_resource[j]['resource_ref'] === rows_except[k]['exception_value'] && rows_except[k]['suspended'] == 0)
+            if(rows_resource[j]['resource_ref'] === rows_except[k]['exception_value'])
             {
-              console.log(rows_resource[j]['resource_name']);
-              non_compl=0;
-              break;
+              if(rows_except[k]['suspended'] == 1)
+              {
+                add_or_update = 2; // update already existing exception in the table that was suspended
+              }
+              else
+              {
+                console.log(rows_resource[j]['resource_name']);
+                add_or_update = 1; // adding new exception
+                non_compl=0;
+                break;
+              }
+    
             }
           } 
-
+          
           if(non_compl==1)
           {
             resource_name = rows_resource[j]['resource_name'];
@@ -338,7 +348,7 @@ function addException(rule_rescourceType){
             resource_ref = rows_resource[j]['resource_ref'];
             console.log(resource_name, ruleID,resource_ref);
 
-            var resourceID_ruleID_ref = resource_id+"_"+ruleID+"_"+resource_ref;
+            var resourceID_ruleID_ref = resource_id+"_"+ruleID+"_"+resource_ref+"_"+add_or_update;
             select_dropdown.appendChild(addOption(resource_name, resourceID_ruleID_ref));
             console.log(resourceID_ruleID_ref);
 
