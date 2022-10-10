@@ -140,6 +140,3 @@ function addOption(name, id){
 
   return option;
 }
-
-
-

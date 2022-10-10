@@ -289,7 +289,6 @@
 <?php
     $_POST = array();
 ?>
-
 <script>
 function addException(rule_rescourceType){
   var rows_resource = <?php echo json_encode($resource); ?>;
@@ -354,6 +353,7 @@ function addException(rule_rescourceType){
   }
 
 }
+
 // Code found  at : https://gist.github.com/jesperorb/a6c12f7d4418a167ea4b3454d4f8fb61
 function formCompleted(){
   const form = document.getElementById('form');
@@ -375,4 +375,5 @@ function formCompleted(){
     location.reload();
   
   }
+
 </script>
