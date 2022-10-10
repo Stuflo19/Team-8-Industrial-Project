@@ -77,9 +77,9 @@ function upcomingReviews(exceptions)
     var revIcon = document.createElement('i');
     revIcon.type = "i";
     revIcon.className = "fa fa-solid fa-circle-exclamation";
-    revIcon.value = "Review";
+    //revIcon.value = "Review";
 
-    revBtn.appendChild(revIcon);
+    revBtn.appendChild(revIcon + " Review");
 
     //If past review date
     if (daysBetweenDates < 0) 
