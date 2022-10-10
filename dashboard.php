@@ -43,7 +43,21 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
         <li>Role: Role Name</li>
       </ul>
       <br>
-      <h1 class=m-auto> CUSTOMER NAME  </h1>
+      <h1 class=m-auto> <?php  
+      $row = mysqli_fetch_assoc($custname);
+      if ($row['id'] == $_SESSION['id'])
+      {
+        $_SESSION['customer'] = $row['name'];
+        break;
+      }
+      else 
+      {
+        echo "Error getting customer name";
+        break;
+      } 
+      echo $_SESSION['customer'];
+      ?>  
+      </h1>
       <h2><i class='fa fa-refresh p-2'></i>Last checked: date</h2>
     </div>
   </nav>
