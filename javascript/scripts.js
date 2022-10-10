@@ -62,9 +62,9 @@ function upcomingReviews(exceptions)
     const daysBetweenDates = msBetweenDates / (24 * 60 * 60 * 1000);
     console.log(daysBetweenDates); //Debug testing to show how many days until
 
-    var revBtn = document.createElement('input');
+    var revBtn = document.createElement('button');
     revBtn.type = "button";
-    revBtn.value = "Review";
+    
     revBtn.id = exceptions[i].exception_value + "," + exceptions[i].id;
     revBtn.addEventListener("click", function () {
       console.log(this.id);
@@ -77,6 +77,7 @@ function upcomingReviews(exceptions)
     var revIcon = document.createElement('i');
     revIcon.type = "i";
     revIcon.className = "fa fa-solid fa-circle-exclamation";
+    revIcon.value = "Review";
 
     revBtn.appendChild(revIcon);
 
