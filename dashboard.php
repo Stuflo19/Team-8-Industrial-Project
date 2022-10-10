@@ -47,7 +47,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
         $sql = "SELECT * FROM customer WHERE id = '$_SESSION['user_id']'";
         $result1 = mysqli_query($conn,$sql);  
         $row = mysqli_fetch_assoc($result1);
-        if ($row['id'] === $_SESSION['user_id']{
+        if ($row['id'] === $_SESSION['user_id'])
+        {
           $_SESSION['customer'] = $row['name'];
           echo $_SESSION['customer'];
           exit();
