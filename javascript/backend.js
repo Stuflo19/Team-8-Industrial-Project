@@ -73,6 +73,9 @@ async function filter() {
 
 //Function to generate resources inside of rule cards
 async function generateResources() {
+  //populate description paragraph
+  document.getElementById("Description" + result_rule.id).innerHTML = result_rule.description;
+
   //empties the table
   document.getElementById("Table" + result_rule.id).innerHTML = "";
 
