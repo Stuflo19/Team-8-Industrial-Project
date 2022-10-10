@@ -41,3 +41,22 @@ https://app.funretrospectives.com/agendas/-NDTFpIqGKypxMWgJ57m
 ### 03/10/2022 Team Meating (2h)
 Discussed reviews from a meeting with a client, added new user stories based on client's feedback, prioritised some user stories based on the client's needs, chose requirements that need to be implemented for sprint 2, divided the tasks. 
 
+Friday
+
+
+# SPRINT 3 (10/10 - 14/10 - Week 3)
+
+### 10/10/2022 Meeting with Client (lenght 20min)
+Feedback:
+ - good progress with a website
+ - suggested adding an option to choose a fixed day for a review date while adding exceptions (e.g. 30d, 90d, a year or custom (min -30d , max - one year) )
+ - suggested adding a description for each rule
+ - suggested adding a more informative title for table - "Upcoming Reviews for Existing Exceptions"
+ - suggested adding a rule id next to each rule
+ - suugested adding a column for resources to see if a resouce has an exception
+ - suggested adding a table to show expired resources
+
+
+
+
+
