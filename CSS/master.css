@@ -161,6 +161,11 @@ table{
   border: 0px;
 }
 
+.compliance_counter {
+  font-family: 'Bahnschrift', cursive;
+  color: white;
+  text-align: right;
+}
 @media (max-width: 500px) {
   .active-status, .exception-status {
     width: 75px;
