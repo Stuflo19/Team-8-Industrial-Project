@@ -57,7 +57,7 @@
       </div>
       <div class="col-lg-1"></div>
       <!-- Review Dates -->
-      <div class="col-lg-5 " >
+      <div class="col-lg-6 " >
         <div class="row-lg mt-4">
           <h3>Upcoming Reviews for Existing Exceptions</h3>
         </div>
@@ -71,6 +71,7 @@
                 <th class="stickyHead" scope="col-lg">Creator</th>
                 <th class="stickyHead" scope="col-lg">Justification</th>
                 <th class="stickyHead" scope="col-lg">Review date</th>
+                <th class="stickyHead" scope="col-lg">Review </th>
               </tr>
             </thead>
             <!-- If Michael Cera becomes a visible collaborator on the site, we have a problem -->
@@ -212,7 +213,7 @@
               </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
-                  <input type="submit" class="btn btn-primary" onclick='formCompleted()' value="Submit">
+                  <input type="submit" class="btn btn-outline-warning" onclick='formCompleted()' value="Submit">
               </div> 
             </form>   
           </div>

@@ -56,16 +56,20 @@ function upcomingReviews(exceptions)
     var today = new Date(currDate.getFullYear() +"/"+ (currDate.getMonth()+1) +"/"+ currDate.getDate() + " " + currDate.getUTCHours() + ":" + currDate.getUTCMinutes());
     var review = new Date(exceptions[i]['review_date'].replace('-','/'));
     
-    
-    //console.log("Review Date: " + review);
-    //console.log("Today's date: " + today);
-
     const msBetweenDates = review.getTime() - currDate.getTime();
 
     // convert ms to days                     hour  min  sec   ms
     const daysBetweenDates = msBetweenDates / (24 * 60 * 60 * 1000);
-        
     console.log(daysBetweenDates); //Debug testing to show how many days until
+
+    var revBtn = document.createElement('input');
+    revBtn.type = "button";
+    revBtn.value = "Exception History";
+    revBtn.id = resource[i].resource_ref + "," + result_rule.id;
+
+    btn.setAttribute('data-toggle', 'modal');
+    btn.setAttribute('data-target', '#reviewModal');
+    btn.className = "btn btn-outline-warning historybutton";
 
     //If past review date
     if (daysBetweenDates < 0) 
@@ -86,6 +90,7 @@ function upcomingReviews(exceptions)
           tr.insertCell().appendChild(document.createTextNode(exceptions[i]['last_updated_by']));
           tr.insertCell().appendChild(document.createTextNode(exceptions[i]['justification']));
           tr.insertCell().appendChild(document.createTextNode(exceptions[i]['review_date']));
+          tr.insertCell().appendChild(revBtn);
         } 
 
         else 
