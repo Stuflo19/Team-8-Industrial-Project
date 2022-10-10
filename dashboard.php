@@ -43,7 +43,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
         <li>Role: Role Name</li>
       </ul>
       <br>
-      <h1 class=m-auto> <?php echo $_SESSION['customer'];?>  </h1>
+      <h1 class=m-auto> CUSTOMER NAME  </h1>
       <h2><i class='fa fa-refresh p-2'></i>Last checked: date</h2>
     </div>
   </nav>
