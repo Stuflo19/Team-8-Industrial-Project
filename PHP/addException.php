@@ -17,7 +17,7 @@
     //exception_value
     $resourceID= intval($IDs[0]);
     $exception_value =  $IDs[2];
-    $add_update = $IDs[3];
+    $add_update =intval($IDs[3]);
 
     if($add_update == 1)
     {
@@ -26,7 +26,7 @@
     }
     elseif($add_update == 2)
     {
-        $updateException = "UPDATE exception SET justification = '".$justif ."', review_date='".$_POST['newReviewDate']."', last_updated='".$date."', suspended=1 WHERE  exception_value = '".$exception_value."';";
+        $updateException = "UPDATE exception SET justification = '".$justif ."', review_date='".$_POST['newReviewDate']."', last_updated='".$date."', suspended=0 WHERE  exception_value = '".$exception_value."';";
         echo $updateException;
         //$insertQ = mysqli_query($conn,$updateException);
     }
