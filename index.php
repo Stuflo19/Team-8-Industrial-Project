@@ -106,21 +106,67 @@
                   <div class="card-body m-1 p-1">
                     <p class="card-text pb-1 m-auto"> <?php echo $result_rule["name"];?> </p>
                     <?php 
-                      $status ="active-status"; // compliant
-                      $status_text ="Compliant";
-                      foreach($compliant as $result_non_compl)
+                    $status ="active-status"; // compliant
+                    $status_text ="Compliant";
+
+                    $non_comp_total =0;
+                    $comp_total =0;
+                    $non_comp_except =0;
+
+                    foreach($compliant as $result_non_compl)
+                    {
+                      if ($result_rule['id'] == $result_non_compl['rule_id'])
                       {
-                        if ($result_rule['id'] == $result_non_compl['rule_id'])
-                        {
-                          $status ="exception-status";
-                          $status_text ="Non-Compliant";
-                          break;
-                        }
+                        $quer = "SELECT * FROM resource WHERE id=".$result_non_compl['resource_id'];
+                          $quer1 = mysqli_query($conn, $quer);
+                          $quer2 = mysqli_fetch_array($quer1);
+
+                          $quer = "SELECT * FROM exception WHERE exception_value='".$quer2['resource_ref']."'";
+                          $quer1 = mysqli_query($conn, $quer);
+                          $quer2 = mysqli_fetch_array($quer1);
+
+                          if($quer2== NULL || $quer2['suspended'] == 1)
+                          {
+                            $non_comp_total =  $non_comp_total +1;
+                            if($quer2['suspended'] == 1)
+                            {
+                              $non_comp_except = $non_comp_except+1;
+                            }
+                            $status ="exception-status";
+                            $status_text ="Non-Compliant";
+                            break;
+                          }
                       }
-                    ?>
+                    }
+                    foreach($non_compliant as $result_compl)
+                    {
+                      if ($result_rule['id'] == $result_compl['rule_id'])
+                      {
+                        $quer = "SELECT * FROM resource WHERE id=".$result_compl['resource_id'];
+                          $quer1 = mysqli_query($conn, $quer);
+                          $quer2 = mysqli_fetch_array($quer1);
+
+                          $quer = "SELECT * FROM exception WHERE exception_value='".$quer2['resource_ref']."'";
+                          $quer1 = mysqli_query($conn, $quer);
+                          $quer2 = mysqli_fetch_array($quer1);
+
+                          if($quer2== NULL || $quer2['suspended'] == 1)
+                          {
+                            $comp_total =  $comp_total +1;
+                            if($quer2['suspended'] == 1)
+                            {
+                              $non_comp_except = $non_comp_except+1;
+                            }
+                            $status ="exception-status";
+                            $status_text ="Non-Compliant";
+                            break;
+                          }
+                      }
+                    }
+                  ?>
                     <div class="<?php echo $status;?>"> <?php echo $status_text;?></div>
-                    <div class="<?php echo $num_comp;?>"> <?php echo "Compliant Resources: " . $compliant_ids;?></div>
-                    <div class="<?php echo $num_non_comp;?>"> <?php echo "Non-Compliant Resources: " . $non_compliant_ids;?></div>
+                    <div class="<?php echo $num_comp;?>"> <?php echo "Compliant Resources: " . $comp_total;?></div>
+                    <div class="<?php echo $num_non_comp;?>"> <?php echo "Non-Compliant Resources: " . $non_comp_total;?></div>
                   </div>
                 </div>
                   
