@@ -37,5 +37,9 @@
   $custname = mysqli_query($conn,$sql);
 
 
+/* READ TO GET USER ROLE */
+  $sql = "SELECT * FROM user";
+  $custrole = mysqli_query($conn,$sql);
+
 $conn->close();
 ?>

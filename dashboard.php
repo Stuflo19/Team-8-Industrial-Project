@@ -40,7 +40,32 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
     <div class="collapse navbar-collapse d-flex justify-content-around" id="navbarNav">
       <ul class="mb-auto pl-0">
         <li>Username: <?php echo $_SESSION['username'];?></li>
-        <li>Role: Role Name</li>
+        <li>Role: <?php  
+          while ($row = mysqli_fetch_assoc($custrole)){
+            if ($row['id'] == $_SESSION['user_id'])
+            {
+              $_SESSION['role'] = $row['role_id'];
+              break;
+            }
+            else 
+            {
+              echo "Error getting role";
+              break;
+            } 
+          }
+          if($_SESSION['role'] == '1')
+          {
+            echo "Compliance Manager";
+          }
+          elseif($_SESSION['role'] == '2')
+          {
+            echo "Compliance Auditor";
+          }
+          else
+          {
+            echo "Error finding role";
+          }
+          ?>  </li>
       </ul>
       <br>
       <h1 class=m-auto> <?php  
@@ -62,7 +87,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
       }
       else
       {
-        echo "No idea who";
+        echo "Error";
       }
       ?>  
       </h1>
