@@ -117,6 +117,10 @@
                   <?php 
                     $status ="active-status"; // compliant
                     $status_text ="Compliant";
+
+                    $non_comp_total =0;
+                    $non_comp_except =0;
+
                     foreach($compliant as $result_non_compl)
                     {
                       if ($result_rule['id'] == $result_non_compl['rule_id'])
@@ -129,14 +133,19 @@
                           $quer1 = mysqli_query($conn, $quer);
                           $quer2 = mysqli_fetch_array($quer1);
 
-                          if($quer2== NULL)
+                          if($quer2== NULL || $quer2['suspended'] == 1)
                           {
-                        $status ="exception-status";
-                        $status_text ="Non-Compliant";
-                        break;
+                            $non_comp_total =  $non_comp_total +1;
+                            if($quer2['suspended'] == 1)
+                            {
+                              $non_comp_except = $non_comp_except+1;
+                            }
+                            $status ="exception-status";
+                            $status_text ="Non-Compliant";
+                            break;
+                          }
                       }
                     }
-                  }
                   ?>
                   <div class="<?php echo $status;?>"> <?php echo $status_text;?></div>
                 </div>
@@ -170,7 +179,7 @@
                     </div>
                     <?php
                       $var = "Non-Compliant";
-                      if(strcmp($status_text, $var) == 0)
+                      if(strcmp($status_text, $var) == 0 && $non_comp_total > $non_comp_except )
                       {
                         echo "<button type='button' class='btn btn-outline-warning float-right m-1' data-toggle='modal' data-target='#newExcModal' id=". $result_rule['id']." name=". $result_rule['id'] . "," . $result_rule['resource_type_id']." onclick='addException(this.name)' >
                         Add Exception
@@ -304,7 +313,6 @@ function addException(rule_rescourceType){
   var resource_name = "";
   var resource_id = 0;
   var resource_ref = " ";
-  var non_compl = 1;
   //console.log(ruleID);
   //console.log(resourceTypeID);
   var select_dropdown = document.querySelector('#resourceList');
@@ -330,12 +338,14 @@ function addException(rule_rescourceType){
           {
             if(rows_resource[j]['resource_ref'] === rows_except[k]['exception_value'])
             {
-              console.log(rows_resource[j]['resource_name']);
-              non_compl=0;
-              break;
+              
+                console.log(rows_resource[j]['resource_name']);
+                non_compl=0;
+                break;
+              
             }
           } 
-
+          
           if(non_compl==1)
           {
             resource_name = rows_resource[j]['resource_name'];
