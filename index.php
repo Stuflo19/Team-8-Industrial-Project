@@ -115,13 +115,29 @@
                         {
                           $status ="exception-status";
                           $status_text ="Non-Compliant";
+
+                          $num_non_comp =0;
+                          $num_comp = 0;
+      
+                          foreach($compliant as $result_non_compl)
+                          {
+                            if ($result_rule['id'] == $result_non_compl['rule_id'])
+                            {
+                              $num_comp = $num_comp +1;
+      
+                                if($quer2== NULL || $quer2['suspended'] == 1)
+                                {
+                                  $num_non_comp =  $num_non_comp +1;
+                                
+                                }
+                            }
+                          }
                           break;
                         }
                       }
                     ?>
                     <div class="<?php echo $status;?>"> <?php echo $status_text;?></div>
-                    <p id = "numCompliant"> </p>
-                    <p id = "numNon-Compliant"> </p>
+                    <?php echo $num_non_comp $num_comp ?>
                   </div>
                 </div>
                   
