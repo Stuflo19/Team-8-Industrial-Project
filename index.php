@@ -212,7 +212,7 @@
               </div>
               
           </div>
-          <?php $display_non_comp = 0; $display_comp =0;} ?>
+          <?php} ?>
         </div>
       </div>      
       
