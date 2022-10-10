@@ -47,7 +47,7 @@
     <div class="row text-center">
       
       <!-- Placeholder for pie chart when we get it working -->
-      <div class="col-lg-5 chart">
+      <div class="col-lg-5 chart"> 
         <h3>Overall Compliance</h3>
         <!-- Doughnut Chart -->
         <div>
