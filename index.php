@@ -61,6 +61,7 @@
             session_start(); 
             //Using my local db file to connect to my db for testing
             include 'dbconnect.php';
+            
             // using post method in the form (important bit) to get data
             if (isset($_POST['username']) && isset($_POST['password'])) {
               // strips away whitespaces in password and username
@@ -98,12 +99,13 @@
                             $_SESSION['password'] = $row['password'];
                             $_SESSION['id'] = $row['id'];
                             $_SESSION['user_id'] = $row['user_id'];
-                            header("Location: dashboard.php");
-                            exit();
+                            break;
+                            
                         }
                         //if not match, tell them incorrect
                         else {
                             echo "Incorrect username or password";
+                            break;
                             exit();
                         }
                     }
@@ -112,6 +114,20 @@
                         echo "Incorrect username or password";
                         exit();
                     }
+                }
+                $sql = "SELECT * FROM customer";
+                $result1 = mysqli_query($conn,$sql);   
+                $row1 = mysqli_fetch_assoc($result1);
+                if ($row1['id'] === $_SESSION['id'])
+                {
+                  $_SESSION['customer'] = $row1['name'];
+                  header("Location: dashboard.php");
+                  exit();
+                }
+                else 
+                {
+                  echo "Error getting customer name";
+                  exit();
                 }
             }
 
