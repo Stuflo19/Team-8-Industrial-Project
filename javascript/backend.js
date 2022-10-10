@@ -117,8 +117,9 @@ async function generateResources() {
       var btn = document.createElement('input');
       btn.type = "button";
       btn.value = "Exception History";
-      btn.id = resource[i].resource_name + "," + result_rule.id;
+      btn.id = resource[i].resource_ref + "," + result_rule.id;
       btn.addEventListener("click", function () {
+        console.log(this.id);
         historybutton(this.id);
       });
       btn.setAttribute('data-toggle', 'modal');
