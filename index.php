@@ -173,7 +173,7 @@
                                     $non_compliant_rules[$index] == $result_rule["id"] ? $checked = true : $checked = false;
                                     if($checked == true)
                                     {
-                                      $display_non_comp = $display_non_comp +1
+                                      $display_non_comp = $display_non_comp +1;
                                     }
                                     elseif($checked == false)
                                     {
