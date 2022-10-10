@@ -23,7 +23,6 @@
   <link rel="stylesheet" href="CSS/master.css">
 </head>
 
-<body onload ='callAll(<?php echo count($non_compliant_ids)?> , <?php echo count($compliant_ids)?> , <?php echo mysqli_num_rows($result)?> , <?php echo json_encode($exception) ?>)'>
 
   <header class="container-fluid p-1">
 
@@ -115,7 +114,6 @@
                         {
                           $status ="exception-status";
                           $status_text ="Non-Compliant";
-
                           break;
                         }
                       }
