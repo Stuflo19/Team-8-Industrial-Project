@@ -13,6 +13,9 @@ async function updatesuspended(exceptionid, suspended) {
   return false;
 }
 
+function refresh() {
+  location.reload();
+}
 
 function historybutton(id) {
   // rows: holds the rows read in from the database from PHP
