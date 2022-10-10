@@ -72,11 +72,11 @@ function upcomingReviews(exceptions)
     
     revBtn.setAttribute('data-toggle', 'modal');
     //btn.setAttribute('data-target', '#reviewModal');
-    revBtn.className = "btn btn-outline-warning historybutton bi bi-exclamation-circle";
+    revBtn.className = "btn btn-outline-warning historybutton";
     
     var revIcon = document.createElement('i');
     revIcon.type = "i";
-    revIcon.className = "bi bi-exclamation-circle";
+    revIcon.className = "fa fa-solid fa-circle-exclamation";
 
     revBtn.appendChild(revIcon);
 
