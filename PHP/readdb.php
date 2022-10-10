@@ -25,10 +25,7 @@
     $non_compliant_ids[] = $row['resource_id'];
     $non_compliant_rules[] = $row['rule_id']; 
   }
-  while (($row = mysqli_fetch_array($compliant, MYSQLI_ASSOC)) == false){
-    $compliant_ids[] = $row['resource_id'];
-    $compliant_rules[] = $row['rule_id']; 
-  }
+ 
 
 
 /*======================  
