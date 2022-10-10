@@ -45,9 +45,9 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
       <br>
       <h1 class=m-auto> <?php  
       while ($row = mysqli_fetch_assoc($custname)){
-        if ($row['id'] == $_SESSION['id'])
+        if ($row['id'] == $_SESSION['user_id'])
         {
-          $_SESSION['customer'] = $row['name'];
+          $_SESSION['customer'] = $row['customer_id'];
           break;
         }
         else 
@@ -56,7 +56,14 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
           break;
         } 
       }
-      echo $_SESSION['customer'];
+      if($_SESSION['customer'] == '1')
+      {
+        echo "Brightsolid";
+      }
+      else
+      {
+        echo "No idea who";
+      }
       ?>  
       </h1>
       <h2><i class='fa fa-refresh p-2'></i>Last checked: date</h2>

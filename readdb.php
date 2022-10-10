@@ -33,7 +33,7 @@
 
 
 /* READ TO GET CUSTOMER NAME */
-  $sql = "SELECT * FROM customer";
+  $sql = "SELECT * FROM user";
   $custname = mysqli_query($conn,$sql);
 
 
