@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="CSS/master.css">
 </head>
 
-<body onload ='callAll(<?php echo count($non_compliant_ids)?> , <?php echo mysqli_num_rows($result)?> , <?php echo json_encode($exception) ?>)'>
+<body onload ='callAll(<?php echo count($non_compliant_ids)?> , <?php echo count($compliant_ids)?> , <?php echo mysqli_num_rows($result)?> , <?php echo json_encode($exception) ?>)'>
 
   <header class="container-fluid p-1">
 
@@ -116,29 +116,13 @@
                           $status ="exception-status";
                           $status_text ="Non-Compliant";
 
-                          $num_non_comp =0;
-                          $num_comp = 0;
-      
-                          foreach($compliant as $result_non_compl)
-                          {
-                            if ($result_rule['id'] == $result_non_compl['rule_id'])
-                            {
-                              $num_comp = $num_comp +1;
-      
-                                if($quer2== NULL || $quer2['suspended'] == 1)
-                                {
-                                  $num_non_comp =  $num_non_comp +1;
-                                
-                                }
-                            }
-                          }
                           break;
                         }
                       }
                     ?>
                     <div class="<?php echo $status;?>"> <?php echo $status_text;?></div>
-                    <div class="<?php echo $num_comp;?>"> <?php echo "Compliant Resources: " . $num_comp;?></div>
-                    <div class="<?php echo $num_non_comp;?>"> <?php echo "Non-Compliant Resources: " . $num_non_comp;?></div>
+                    <div class="<?php echo $num_comp;?>"> <?php echo "Compliant Resources: " . $compliant_ids;?></div>
+                    <div class="<?php echo $num_non_comp;?>"> <?php echo "Non-Compliant Resources: " . $non_compliant_ids;?></div>
                   </div>
                 </div>
                   
