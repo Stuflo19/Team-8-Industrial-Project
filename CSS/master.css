@@ -114,7 +114,9 @@ li{
 
 table{
   font-size: 1rem;
+  display: inline-block;
   table-layout: fixed;
+  overflow-x: scroll;
   width: 80%;
   color: white;
   margin-left: auto;
@@ -123,7 +125,12 @@ table{
   background-color: #333333;
 }
 
+#historytable th{
+  width: 25%;
+}
+
 .table td, .table th{
+  width: 20%;
   vertical-align: middle; 
 }
 
