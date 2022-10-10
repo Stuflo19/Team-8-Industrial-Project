@@ -64,7 +64,7 @@ function upcomingReviews(exceptions)
 
     var revBtn = document.createElement('button');
     revBtn.type = "button";
-    revBtn.textContent = "Review";
+    revBtn.textContent = "Review ";
     
     revBtn.id = exceptions[i].exception_value + "," + exceptions[i].id;
     revBtn.addEventListener("click", function () {
