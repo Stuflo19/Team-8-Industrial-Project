@@ -105,7 +105,6 @@
                         //if not match, tell them incorrect
                         else {
                             echo "Incorrect username or password";
-                            break;
                             exit();
                         }
                     }
@@ -117,10 +116,10 @@
                 }
                 $sql = "SELECT * FROM customer";
                 $result1 = mysqli_query($conn,$sql);   
-                $row1 = mysqli_fetch_assoc($result1);
-                if ($row1['id'] === $_SESSION['id'])
+                $row = mysqli_fetch_assoc($result1);
+                if ($row['id'] === $_SESSION['id'])
                 {
-                  $_SESSION['customer'] = $row1['name'];
+                  $_SESSION['customer'] = $row['name'];
                   header("Location: dashboard.php");
                   exit();
                 }
