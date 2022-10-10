@@ -137,7 +137,7 @@
                                     $num_comp_except = $num_comp_except+1;
                                   }
                                 }
-                                $display_non_comp = $display_non_comp-$num_comp_except
+                                $display_non_comp = $display_non_comp-$num_comp_except;
                                 $status ="exception-status";
                                 $status_text ="Non-Compliant";
                                 break;
