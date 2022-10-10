@@ -173,11 +173,11 @@
                                     $non_compliant_rules[$index] == $result_rule["id"] ? $checked = true : $checked = false;
                                     if($checked == true)
                                     {
-                                      $display_non_comp = $display_non_comp +1;
+                                      $display_comp = $display_comp +1;
                                     }
                                     elseif($checked == false)
                                     {
-                                      $display_comp = $display_comp +1;
+                                      $display_non_comp = $display_non_comp +1;
                                     }
                                     if($checked) {break;}
                                   };
@@ -218,7 +218,7 @@
               </div>
               
           </div>
-          <?php $display_non_comp = 0;} ?>
+          <?php $display_non_comp = 0; $display_comp =0;} ?>
         </div>
       </div>      
       
