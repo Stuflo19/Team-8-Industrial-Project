@@ -61,16 +61,32 @@ function upcomingReviews(exceptions)
     var today = new Date(currDate.getFullYear() +"/"+ (currDate.getMonth()+1) +"/"+ currDate.getDate() + " " + currDate.getUTCHours() + ":" + currDate.getUTCMinutes());
     var review = new Date(exceptions[i]['review_date'].replace('-','/'));
     
-    
-    //console.log("Review Date: " + review);
-    //console.log("Today's date: " + today);
-
     const msBetweenDates = review.getTime() - currDate.getTime();
 
     // convert ms to days                     hour  min  sec   ms
     const daysBetweenDates = msBetweenDates / (24 * 60 * 60 * 1000);
-        
     console.log(daysBetweenDates); //Debug testing to show how many days until
+
+    var revBtn = document.createElement('button');
+    revBtn.type = "button";
+    revBtn.textContent = "Review ";
+    
+    revBtn.id = exceptions[i].exception_value + "," + exceptions[i].id;
+    revBtn.addEventListener("click", function () {
+      console.log(this.id);
+    });
+    
+    revBtn.setAttribute('data-toggle', 'modal');
+    revBtn.setAttribute('style', 'justify-content: center; align-items: center;');
+    //btn.setAttribute('data-target', '#reviewModal');
+    revBtn.className = "btn btn-outline-warning historybutton";
+    
+    var revIcon = document.createElement('i');
+    revIcon.type = "i";
+    revIcon.className = "fa fa-solid fa-circle-exclamation";
+    revIcon.value = "Review";
+
+    revBtn.appendChild(revIcon);
 
     //If past review date
     if (daysBetweenDates < 0) 
@@ -91,6 +107,7 @@ function upcomingReviews(exceptions)
           tr.insertCell().appendChild(document.createTextNode(exceptions[i]['last_updated_by']));
           tr.insertCell().appendChild(document.createTextNode(exceptions[i]['justification']));
           tr.insertCell().appendChild(document.createTextNode(exceptions[i]['review_date']));
+          tr.insertCell().appendChild(revBtn);
         } 
 
         else 
