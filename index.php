@@ -101,25 +101,28 @@
           <div class = "row mb-2">
             <div class="col-lg">
               <!-- Compliance Rule Card -->
-              <div class="card cardColor text-center m-auto">
-                <div class="card-body m-1 p-1">
-                  <p class="card-text pb-1 m-auto"> <?php echo $result_rule["name"];?> </p>
-                  <?php 
-                    $status ="active-status"; // compliant
-                    $status_text ="Compliant";
-                    foreach($compliant as $result_non_compl)
-                    {
-                      if ($result_rule['id'] == $result_non_compl['rule_id'])
+              <div class="d-flex justify-content-between">
+                <div class="card cardColor text-center m-auto">
+                  <div class="card-body m-1 p-1">
+                    <p class="card-text pb-1 m-auto"> <?php echo $result_rule["name"];?> </p>
+                    <?php 
+                      $status ="active-status"; // compliant
+                      $status_text ="Compliant";
+                      foreach($compliant as $result_non_compl)
                       {
-                        $status ="exception-status";
-                        $status_text ="Non-Compliant";
-                        break;
-                      }
-                    }
-                  ?>
-                  <div class="<?php echo $status;?>"> <?php echo $status_text;?></div>
+                        if ($result_rule['id'] == $result_non_compl['rule_id'])
+                       {
+                         $status ="exception-status";
+                         $status_text ="Non-Compliant";
+                         break;
+                       }
+                     }
+                    ?>
+                    <div class="<?php echo $status;?>"> <?php echo $status_text;?></div>
+                    <div class="<?php echo $truecomp $noncompliant;?>" </div>
+                    </div>
+                 </div>
                 </div>
-                  
                 <button class="btn btn-outline-warning m-1" type="button"  data-toggle="collapse" data-target="#Rule<?php echo $result_rule['id'];?>" aria-expanded="false" aria-controls="collapseExample">
                   View details
                 </button>
