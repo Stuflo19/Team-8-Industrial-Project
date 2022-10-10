@@ -122,29 +122,16 @@
                           foreach($compliant as $result_non_compl)
                           {
                             if ($result_rule['id'] == $result_non_compl['rule_id'])
-                      {
-                          $quer = "SELECT * FROM resource WHERE id=".$result_non_compl['resource_id'];
-                          $quer1 = mysqli_query($conn, $quer);
-                          $quer2 = mysqli_fetch_array($quer1);
-
-                          $quer = "SELECT * FROM exception WHERE exception_value='".$quer2['resource_ref']."'";
-                          $quer1 = mysqli_query($conn, $quer);
-                          $quer2 = mysqli_fetch_array($quer1);
-
-                           
-                          if($quer2== NULL || $quer2['suspended'] == 1)
-                          {
-                              $num_non_comp = $num_non_comp +1;
+                            {
+                              $num_comp = $num_comp +1;
       
                                 if($quer2== NULL || $quer2['suspended'] == 1)
                                 {
-                                  $non_comp_except = $non_comp_except+1;
+                                  $num_non_comp =  $num_non_comp +1;
                                 
                                 }
                             }
                           }
-                        }
-                          $num_non_comp = $num_comp -
                           break;
                         }
                       }
