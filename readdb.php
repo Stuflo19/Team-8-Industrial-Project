@@ -34,7 +34,7 @@ session_start();
 
 
 /* READ TO GET CUSTOMER NAME */
-  $sql = "SELECT * FROM customer";
+/*  $sql = "SELECT * FROM customer";
   $custname = mysqli_query($conn,$sql);
   $row = mysqli_fetch_assoc($custname);
   if ($row['id'] == $_SESSION['id'])
@@ -47,7 +47,7 @@ session_start();
     echo "Error getting customer name";
     break;
   }
-
+*/
 
 $conn->close();
 ?>
