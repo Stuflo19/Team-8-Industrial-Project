@@ -175,6 +175,7 @@ function addOption(name, id){
 function checkCustom() {
   if (document.getElementById('custom').checked) {
     document.getElementById('addCustom').style.visibility = 'visible';
+    
   }
   else document.getElementById('addCustom').style.visibility = 'hidden';
 }
@@ -182,5 +183,5 @@ function checkCustom() {
 function setNewValue()
 {
   document.getElementById('custom').value = document.getElementById('customReviewDate').value;
-  //console.log(document.getElementById('custom').value);
+  console.log(document.getElementById('custom').value);
 }
