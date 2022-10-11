@@ -141,7 +141,7 @@
                     ?>
                     <div class="<?php echo $status;?>"> <?php echo $status_text;?></div>
                     <div id = "<?php echo 'non_comp_notification' . $result_rule['id']?>"></div>
-                    <div id = "<?php echo 'comp_notification' . $result_rule['id'];?>"><?php echo "<script>document.writeln(comp_notification);</script>"?></div>
+                    <div id = "<?php echo 'comp_notification' . $result_rule['id'];?>"><?php echo 'comp_notification'?></div>
                   </div>
                 </div>
                   
@@ -191,12 +191,10 @@
                               if($checked)
                               {
                                 echo '<td style="vertical-align: middle"><div class="exception-status"> Non-Compliant</div></td>';
-                                $display_non_comp = $display_non_comp +1;
                               }
                               else
                               {
                                 echo '<td style="vertical-align: middle"><div class="active-status">Compliant</div></td>';
-                                $display_comp = $display_comp +1;
                               } 
                               echo "<td style='vertical-align: middle'><button type='button' class='btn btn-outline-warning historybutton' data-toggle='modal' data-target='#historyModal' id='{$row["resource_name"]},{$result_rule["id"]}' onclick='historybutton(this.id, ".json_encode($exception).")'>Exception History</button></td></tr>";
                             }
