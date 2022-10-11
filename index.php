@@ -414,7 +414,11 @@ function checkCustom() {
     document.getElementById('addCustom').style.display = 'block';
   }
   else
-  {document.getElementById('addCustom').style.display= 'none';}
+  {
+    document.getElementById('addCustom').style.display= 'none';
+    document.getElementById('customReviewDate').removeAttribute('required');
+
+  }
 }
 //setting radio button's value to be the value chosen on a calendar
 function setNewValue()
