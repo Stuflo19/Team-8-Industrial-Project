@@ -84,5 +84,5 @@
           var rules = '. json_encode($rules) .';
         </Script>';
 
-  //$conn->close();
+  $conn->close();
 ?>
