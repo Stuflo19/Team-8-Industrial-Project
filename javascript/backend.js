@@ -159,3 +159,28 @@ function addOption(name, id){
 
   return option;
 }
+
+
+// function chooseCustomDate(){
+//   var selectDate = document.getElementById('newReviewDate');
+//   let option = document.createElement("option");
+//   selectDate.appendChild(option);
+//   //<input type="date" id="customReviewDate" name="newReviewDate" value="<?php echo date("Y-m-d")?>" min="<?php echo date("Y-m-d", strtotime("+30 day"))?>" max="<?php echo date("Y-m-d", strtotime("+1 year"))?>">
+//   option.type= "date";
+//  // option.value="<?php echo date("Y-m-d")?>" min="<?php echo date("Y-m-d", strtotime("+30 day"))?>" max="<?php echo date("Y-m-d", strtotime("+1 year"))?>
+//   option.min = min_date;
+//   option.max= max_date;
+
+
+function checkCustom() {
+  if (document.getElementById('custom').checked) {
+    document.getElementById('addCustom').style.visibility = 'visible';
+  }
+  else document.getElementById('addCustom').style.visibility = 'hidden';
+}
+
+function setNewValue()
+{
+  document.getElementById('custom').value = document.getElementById('customReviewDate').value;
+  //console.log(document.getElementById('custom').value);
+}
