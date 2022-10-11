@@ -79,6 +79,7 @@ nav {
   display: inline-block;
   color: black;
   font-weight: bolder;
+  padding-left: 10px;
 }
 
 .exception-status {
@@ -88,6 +89,7 @@ nav {
   display: inline-block;
   color: black;
   font-weight: bolder;
+  padding-left: 10px;
 }
 
 /* Styling for footer */
@@ -203,6 +205,7 @@ table{
 .resource-counter{
   color: white;
   text-align: right;
+  padding-top: 10px;
 }
 
 @media (max-width: 500px) {
