@@ -189,6 +189,12 @@ table{
   font-size: 1rem;
 }
 
+.resource-counter {
+  color: white !important;
+  font-family: 'Bahnschrift', cursive;
+  text-align: right;
+}
+
 @media (max-width: 500px) {
   .active-status, .exception-status {
     width: 75px;
