@@ -56,12 +56,13 @@ function upcomingReviews(exceptions)
   for(var i = 0; i < exceptions.length; i++) 
   {
     const currDate = new Date(); //Todays date
-    var review = new Date(exceptions[i]['review_date'].replaceAll('-','/')); //Review Date
+    var review = new Date(exceptions[i]['review_date']); //Review Date
     
     const msBetweenDates = review.getTime() - currDate.getTime(); //Calculates time between dates in milliseconds
 
     // convert ms to days                     hour  min  sec   ms
     const daysBetweenDates = msBetweenDates / (24 * 60 * 60 * 1000);
+    console.log(daysBetweenDates);
 
     //Button to review exceptions
     var revBtn = document.createElement('button');
@@ -87,7 +88,7 @@ function upcomingReviews(exceptions)
     revBtn.appendChild(revIcon);
     
     //If review date coming up within 30days
-    if(daysBetweenDates > 30) 
+    if(daysBetweenDates < 30 && daysBetweenDates > 0) 
     { 
       numOfUpcoming = numOfUpcoming + 1;
       const tr = document.getElementById('reviewbody').insertRow();
