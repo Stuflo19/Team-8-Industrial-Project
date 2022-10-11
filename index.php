@@ -1,6 +1,6 @@
 <?php
-  include 'dbconnect.php';
-  include 'readdb.php';
+  include 'PHP/dbconnect.php';
+  include 'PHP/readdb.php';
 ?>
 
 <!DOCTYPE html>
@@ -18,8 +18,8 @@
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'> 
   <!-- import css file -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="scripts.js"></script>
-  <link rel="stylesheet" href="master.css">
+  <script src="javascript/scripts.js"></script>
+  <link rel="stylesheet" href="CSS/master.css">
 </head>
 
 
@@ -34,7 +34,7 @@
     <div class="centerdiv col">
     <div class="row">
       <!-- Use a form for data entery with method post for the php to work :) -->
-      <img src="brightSolid.png" alt="BrightSolid logo" class="mb-3 col">
+      <img src="CSS/brightSolid.png" alt="BrightSolid logo" class="mb-3 col">
     </div>
 
     <div class="row">
