@@ -76,45 +76,5 @@
           var rules = '. json_encode($rules) .';
         </Script>';
 
-        
-                            foreach($result as $row) {
-                              $checked = false;
-                              if($row['resource_type_id'] == $result_rule['resource_type_id']){
-                              
-                                
-                                if(in_array($row["id"], $non_compliant_ids))
-                                {
-                                  foreach(array_keys($non_compliant_ids, $row['id']) as $index) {
-                                    $non_compliant_rules[$index] == $result_rule["id"] ? $checked = true : $checked = false;
-                                    if($checked) {break;}
-                                  };
-
-                                  if($checked)
-                                  {
-                                    foreach($exception as $exc)
-                                    {
-                                      if($result_rule['id'] == $exc['rule_id'] && $row['resource_name'] == $exc['exception_value'])
-                                      {
-                                        $checked = $exc['suspended'] == 0 ? false : true;
-                                        break;
-                                      }
-                                    }
-                                  }
-                                }
-
-                              //if the resource exists in the id array && ruleID at index of resource in the rules array
-                              if($checked)
-                              {
-    
-                                $display_non_comp = $display_non_comp +1;
-                              }
-                              else
-                              {
-                                $display_comp = $display_comp +1;
-                              } 
-
-                            }
-                          }
-                        
   //$conn->close();
 ?>
