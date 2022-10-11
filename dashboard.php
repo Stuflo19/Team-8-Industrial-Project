@@ -91,7 +91,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
       }
       ?>  
       </h1>
-      <h2><i class='fa fa-refresh p-2'></i>Last checked: date</h2>
+      <button class="btn text-secondary border-bottom-0 border rounded-pill ms-n5" style="margin-right: 10px" onclick=refresh();><i class='fa fa-refresh p-2' style="color:white"></button></i>
+      <h2 id="date" style="margin: 0"></h2>
     </div>
   </nav>
 
