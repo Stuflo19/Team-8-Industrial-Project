@@ -117,8 +117,8 @@ async function generateResources() {
       }
 
       //Skips the row if a filter is active
-      if(currFilter == "Non-Compliant" && checked == false){non_comp_counter = non_comp_counter+1; continue;} 
-      if(currFilter == "Compliant" && checked == true){comp_counter = comp_counter+1; continue;}
+      if(currFilter == "Non-Compliant" && checked == false){continue;} 
+      if(currFilter == "Compliant" && checked == true){continue;}
 
       //Creates div for compliance displaying
       var div = document.createElement('Div');
@@ -150,6 +150,9 @@ async function generateResources() {
       tr.insertCell().appendChild(exceptionicon);
       tr.insertCell().appendChild(suspendedicon);
       tr.insertCell().appendChild(btn);
+
+      if(checked == true){comp_counter = comp_counter++;}
+      if(checked == false){non_comp_counter = non_comp_counter++;}
     }
     
   
