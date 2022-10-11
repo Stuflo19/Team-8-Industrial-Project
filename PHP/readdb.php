@@ -64,7 +64,7 @@
     $rules[] = $row;
   }
 
-  $query = mysqli_query($conn,"SELECT * FROM rule");
+  //$query = mysqli_query($conn,"SELECT * FROM rule");
 
   /* READ TO GET CUSTOMER NAME */
   $sql = "SELECT * FROM user";
@@ -84,5 +84,5 @@
           var rules = '. json_encode($rules) .';
         </Script>';
 
-  $conn->close();
+  //$conn->close();
 ?>
