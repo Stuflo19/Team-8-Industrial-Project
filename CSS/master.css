@@ -200,6 +200,10 @@ table{
   font-size: 1rem;
 }
 
+.resource-counter{
+  color: white;
+}
+
 @media (max-width: 500px) {
   .active-status, .exception-status {
     width: 75px;
