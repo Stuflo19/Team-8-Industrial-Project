@@ -408,11 +408,18 @@ function formCompleted(){
 
 </script>
 <script>
+//making calendar visible
 function checkCustom() {
   if (document.getElementById('custom').checked) {
     document.getElementById('addCustom').style.visibility = 'visible';
     
   }
   else document.getElementById('addCustom').style.visibility = 'hidden';
+}
+//setting radio button's value to be the value chosen on a calendar
+function setNewValue()
+{
+  document.getElementById('custom').value = document.getElementById('customReviewDate').value;
+  console.log(document.getElementById('custom').value);
 }
 </script>
