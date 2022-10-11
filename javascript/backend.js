@@ -159,8 +159,8 @@ async function generateResources() {
     }
     
   
+    console.log(non_comp_counter);
   }
-  console.log(non_comp_counter);
   document.getElementById('non_comp_notification' + result_rule.id).innerHTML = non_comp_counter;
   document.getElementById('comp_notification' + result_rule.id).innerHTML = comp_counter;
 }
