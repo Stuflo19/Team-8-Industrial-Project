@@ -407,3 +407,12 @@ function formCompleted(){
   }
 
 </script>
+<script>
+function checkCustom() {
+  if (document.getElementById('custom').checked) {
+    document.getElementById('addCustom').style.visibility = 'visible';
+    
+  }
+  else document.getElementById('addCustom').style.visibility = 'hidden';
+}
+</script>
