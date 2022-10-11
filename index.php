@@ -418,7 +418,7 @@ function checkCustom() {
   else
   {
     document.getElementById('addCustom').style.display= 'none';
-    document.getElementById('customReviewDate').setAttribute('disabled');
+    document.getElementById('customReviewDate').setAttribute('disabled', '');
 
   }
 }
