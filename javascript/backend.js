@@ -120,6 +120,10 @@ async function generateResources() {
       if(currFilter == "Non-Compliant" && checked == false){continue;} 
       if(currFilter == "Compliant" && checked == true){continue;}
 
+      //incrementing display counter
+      if(checked == false){non_comp_counter = non_comp_counter++;}
+      if(checked == true){comp_counter = comp_counter++;}
+      
       //Creates div for compliance displaying
       var div = document.createElement('Div');
       div.innerHTML = checked ? "Non-Compliant" : "Compliant";
@@ -151,8 +155,7 @@ async function generateResources() {
       tr.insertCell().appendChild(suspendedicon);
       tr.insertCell().appendChild(btn);
 
-      if(checked == true){comp_counter = comp_counter++;}
-      if(checked == false){non_comp_counter = non_comp_counter++;}
+      
     }
     
   
