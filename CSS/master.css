@@ -189,12 +189,6 @@ table{
   font-size: 1rem;
 }
 
-.resource-counter {
-  color: white !important;
-  font-family: 'Bahnschrift', cursive;
-  text-align: right;
-}
-
 .badge {
   position: absolute;
   top: -10px;
