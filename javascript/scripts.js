@@ -103,7 +103,7 @@ function upcomingReviews(exceptions)
           
           var scrollId = document.createElement('a'); 
           scrollId.appendChild(document.createTextNode(exceptions[i]['rule_id']));
-          scrollId.set('#RuleCard' + exceptions[i]['rule_id']);
+          scrollId.href('#RuleCard' + exceptions[i]['rule_id']);
           
           tr.insertCell().appendChild(document.createTextNode(exceptions[i]['id']));
           tr.insertCell().appendChild(document.createTextNode(exceptions[i]['exception_value']));
