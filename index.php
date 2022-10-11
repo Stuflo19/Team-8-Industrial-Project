@@ -141,7 +141,7 @@
                     ?>
                     <div class="<?php echo $status;?>"> <?php echo $status_text;?></div>
                     <div id = "<?php echo 'non_comp_notification' . $result_rule['id']?>"></div>
-                    <div id = "<?php echo 'comp_notification' . $result_rule['id'];?>"></div>
+                    <div id = "<?php echo 'comp_notification' . $result_rule['id'];?>"><?php echo "<script>document.writeln(comp_notification);</script>"?></div>
                   </div>
                 </div>
                   
