@@ -161,11 +161,23 @@ table{
   border: 0px;
 }
 
+.badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  padding: 5px 10px;
+  border-radius: 50%;
+  background: red;
+  color: white;
+  font-size: 1rem;
+}
+
 .compliance_counter {
   font-family: 'Bahnschrift', cursive;
   color: white;
   text-align: right;
 }
+
 @media (max-width: 500px) {
   .active-status, .exception-status {
     width: 75px;
