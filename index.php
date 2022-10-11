@@ -232,7 +232,7 @@
                 <br>
                 <input type="radio" name="newReviewDate" value="<?php echo date("Y-m-d", strtotime("+1 year"))?>">After 12 months
                 <br>
-                <input type="radio" onclick="javascript:checkCustom()" id='custom' name="newReviewDate" value="">Custom
+                <input type="radio" onSelect="checkCustom()" id='custom' name="newReviewDate" value="">Custom
 
                 <div id="addCustom" style="visibility:hidden">
                   <!-- Help from https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date -->
