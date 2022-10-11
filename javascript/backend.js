@@ -84,6 +84,8 @@ async function generateResources() {
     var checked = false;
     var exc_check = false;
     var sus_check = false;
+    var non_comp_counter = 0;
+    var comp_counter = 0;
 
     //checks if the rule applies to the resource
     if (resource[i]['resource_type_id'] == result_rule['resource_type_id']) {
