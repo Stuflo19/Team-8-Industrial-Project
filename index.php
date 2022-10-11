@@ -141,7 +141,7 @@
                     ?>
                     <div class="<?php echo $status;?>"> <?php echo $status_text;?></div>
                     <div id="<?php echo $num_comp;?>" class = "compliance_counter"> <?php echo "Compliant Resources: " . $display_comp;?></div>
-                    <div id="<?php echo "notification".$result_rule['id'];?>" class = "compliance_counter"> <?php echo "Non-Compliant Resources: " . $display_non_comp;?></div>
+                    <div class = "<?php echo "notification".$result_rule['id'];?>"> <?php echo "notification".$result_rule['id']; ?></div>
                     <?php  $display_non_comp =0;  $display_comp =0; ?>
                   </div>
                 </div>
