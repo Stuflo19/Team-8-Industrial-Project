@@ -152,12 +152,14 @@
                       }
                     ?>
                     <div class="<?php echo $status;?>"> <?php echo $status_text;?></div>
-                    <div><p class = "resource-counter" id="<?php echo 'comp_notification' . $result_rule['id'];?>" > </p></div>
-                    <div><p class = "resource-counter" id="<?php echo 'non_comp_notification' . $result_rule['id'];?>" > </p></div>
+           
                   </div>
                   
                   <div>
                     <span class="badge">69</span>
+
+                    <p class = "resource-counter" id="<?php echo 'comp_notification' . $result_rule['id'];?>" > </p>
+                    <p id="<?php echo 'non_comp_notification' . $result_rule['id'];?>" > </p>
                   </div>
 
                 </div>
