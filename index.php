@@ -139,8 +139,3 @@
   
 
 </body>
-
-
-<?php
-  $conn->close();
-?>
