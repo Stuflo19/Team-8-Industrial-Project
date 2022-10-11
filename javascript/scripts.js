@@ -1,3 +1,5 @@
+var oldData = [];
+
 function callAll(x, y, row)
 {
   setDate();
@@ -68,9 +70,15 @@ function upcomingReviews(exceptions)
     revBtn.type = "button";
     revBtn.textContent = "Review ";
     
-    revBtn.id = exceptions[i].exception_value + "," + exceptions[i].id;
+    revBtn.id = exceptions[i].exception_value + "," + exceptions[i].id + "," + exceptions[i].rule_id + "," + exceptions[i].justification + "," + exceptions[i].review_date;
     revBtn.addEventListener("click", function () {
+      oldData = [];
       // Button click
+      var ids = this.id.split(',');
+      for (var i = 0; i < ids.length; i++) {
+        oldData.push(ids[i]);
+      }
+      console.log(oldData);
     });
     
       revBtn.setAttribute('data-toggle', 'modal');

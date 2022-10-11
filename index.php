@@ -137,7 +137,7 @@
                           if($quer2== NULL || $quer2['suspended'] == 1)
                           {
                             $non_comp_total =  $non_comp_total +1;
-                            if($quer2['suspended'] == 1)
+                            if($quer2 != NULL && $quer2['suspended'] == 1)
                             {
                               $non_comp_except = $non_comp_except+1;
                             }
@@ -210,16 +210,12 @@
           <div class="modal-body">
             <form id="reviewForm" > 
               <div class="form-group">
-                <label for="excID">Exception ID:</label> 
-                <textarea  class="form-control" id="excID" name="revJustification" style="color: white; background-color: #333333" rows=1 maxlength="200" readonly>3</textarea>   
-              </div>
-              <div class="form-group">
-                <label for="message-text" class="col-form-label">Justification:</label>
+                <label for="message-text" class="col-form-label">New Justification:</label>
                 <textarea class="form-control" id="revJustification" name="revJustification" style="color: white; background-color: #333333" maxlength="200" required></textarea>
               </div>
               <!-- Exception Value = resource ref  -->
               <div class="form-group">
-                <label for="message-text" class="col-form-label">Next Review Date:</label>
+                <label for="message-text" class="col-form-label">New Review Date:</label>
                 <!-- Code taken from https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date -->
                 <input type="date" id="revDate" name="revDate" value="<?php echo date("Y-m-d")?>" min="<?php echo date("Y-m-d", strtotime("+1 day"))?>" max="<?php echo date("Y-m-d", strtotime("+1 year"))?>">
               </div>
