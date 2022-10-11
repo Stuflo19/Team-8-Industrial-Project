@@ -175,7 +175,7 @@
                           echo '<script>
                                   var result_rule = '. json_encode($result_rule) .';
                                   generateResources();
-                                </script>';
+                                </script>';  //test
                         ?>
                       </tbody>
                     </table>
