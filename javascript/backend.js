@@ -172,6 +172,5 @@ async function addReview()
   })
   .catch((err) => { console.error(err); });
   
-  location.reload();
   return false;
 }
