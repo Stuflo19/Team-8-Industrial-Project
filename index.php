@@ -115,7 +115,7 @@
               <div class="card cardColor text-center m-auto">
                 
                 <div class="card-body m-1 p-1 d-flex justify-content-between">
-                  <p>Rule Number Here</p>
+                  <p>Rule: <?php echo $result_rule["id"];?></p>
                   <div>
                     <p class="card-text pb-1 m-auto"> <?php echo $result_rule["name"];?> </p>
                     <?php 
@@ -153,7 +153,7 @@
                     ?>
                     <div class="<?php echo $status;?>"> <?php echo $status_text;?></div>
                   </div>
-                  <p>Placeholder</p>
+                  <span class="badge">69</span>
                 </div>
                   
                 <button class="btn btn-outline-warning m-1" type="button"  data-toggle="collapse" data-target="#Rule<?php echo $result_rule['id'];?>" aria-expanded="false" aria-controls="collapseExample">
