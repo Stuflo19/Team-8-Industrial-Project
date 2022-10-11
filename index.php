@@ -412,11 +412,13 @@ function formCompleted(){
 function checkCustom() {
   if (document.getElementById('custom').checked) {
     document.getElementById('addCustom').style.display = 'block';
+    document.getElementById('customReviewDate').removeAttribute('disabled');
+
   }
   else
   {
     document.getElementById('addCustom').style.display= 'none';
-    document.getElementById('customReviewDate').removeAttribute('required');
+    document.getElementById('customReviewDate').addAttribute('disabled');
 
   }
 }
