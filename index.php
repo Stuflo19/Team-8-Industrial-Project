@@ -152,12 +152,12 @@
                       }
                     ?>
                     <div class="<?php echo $status;?>"> <?php echo $status_text;?></div>
-                    <div><span id="<?php echo 'comp_notification' . $result_rule['id']?>" >Compliant Resources: </span></div>
-                    <div><span id="<?php echo 'non_comp_notification' . $result_rule['id']?>" >Non-Compliant Resources: </span></div>
+                    <div><span id="<?php echo 'comp_notification' . $result_rule['id'];?>" >Compliant Resources: </span></div>
+                    <div><span id="<?php echo 'non_comp_notification' . $result_rule['id'];?>" >Non-Compliant Resources: </span></div>
                   </div>
                   
                   <div>
-                    <span id="<?php echo "Notification" . $result_rule['id']?>" class="badge">69</span>
+                    <span id="<?php echo "Notification" . $result_rule['id'];?>" class="badge">69</span>
                   </div>
 
                 </div>
