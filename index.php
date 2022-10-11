@@ -222,13 +222,28 @@
               <!-- Exception Value = resource ref  -->
               <div class="form-group">
                 <label for="message-text" class="col-form-label">Review Date:</label>
-                <!-- Code taken from https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date -->
-                <input type="date" id="newReviewDate" name="newReviewDate" value="<?php echo date("Y-m-d")?>" min="<?php echo date("Y-m-d", strtotime("+1 day"))?>" max="<?php echo date("Y-m-d", strtotime("+1 year"))?>">
+                <input type="radio" onclick="checkCustom()" name="newReviewDate" value="<?php echo date('Y-m-d', strtotime('+1 month'));?>">After 1 month
+                <br>
+                <input type="radio" onclick="checkCustom()" name="newReviewDate" value="<?php echo date("Y-m-d", strtotime("+3 month"));?>">After 3 months              
+                <br>
+                <input type="radio" onclick="checkCustom()" name="newReviewDate" value="<?php echo date("Y-m-d", strtotime("+6 month"))?>">After 6 months
+                <br>
+                <input type="radio" onclick="checkCustom()" name="newReviewDate" value="<?php echo date("Y-m-d", strtotime("+9 month"))?>">After 9 months
+                <br>
+                <input type="radio" onclick="checkCustom()" name="newReviewDate" value="<?php echo date("Y-m-d", strtotime("+1 year"))?>">After 12 months
+                <br>
+                <input type="radio" onclick="checkCustom()" id='custom' name="newReviewDate" value="">Custom
+
+                <div id="addCustom" style="display: none">
+                  <!-- Help from https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date -->
+                  <input type="date" disabled id="customReviewDate" onChange="setNewValue()" name="ReviewDate" value="<?php echo date("Y-m-d")?>" min="<?php echo date("Y-m-d", strtotime("+30 day"))?>" max="<?php echo date("Y-m-d", strtotime("+1 year"))?>"> 
+                </div>
               </div>
+
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
                   <input type="submit" class="btn btn-outline-warning" onclick='formCompleted()' value="Submit">
-              </div> 
+                </div> 
             </form>   
           </div>
         </div>
@@ -391,4 +406,27 @@ function formCompleted(){
     //location.reload();
   }
 
+</script>
+<script>
+//making calendar visible
+//Help from : http://jsfiddle.net/QAaHP/12/
+function checkCustom() {
+  if (document.getElementById('custom').checked) {
+    document.getElementById('addCustom').style.display = 'block';
+    document.getElementById('customReviewDate').removeAttribute('disabled');
+
+  }
+  else
+  {
+    document.getElementById('addCustom').style.display= 'none';
+    document.getElementById('customReviewDate').setAttribute('disabled', '');
+
+  }
+}
+//setting radio button's value to be the value chosen on a calendar
+function setNewValue()
+{
+  document.getElementById('custom').value = document.getElementById('customReviewDate').value;
+  console.log(document.getElementById('custom').value);
+}
 </script>
