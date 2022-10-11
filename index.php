@@ -1,4 +1,5 @@
 <?php
+  ob_start();
   include 'PHP/dbconnect.php';
   include 'PHP/readdb.php';
 ?>
