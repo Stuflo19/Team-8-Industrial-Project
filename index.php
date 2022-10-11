@@ -157,7 +157,7 @@
                     <div class="<?php echo $status;?>"> <?php echo $status_text;?></div>
                   </div>
                   <div id="<?php echo $display_comp;?>" class="resource-counter"> <?php echo "Compliant Resources " . $display_comp;?></div>
-                  <div id="<?php echo $display_non_comp;?>" class="resource-counter"> <?php echo "Non-Compliant Resources " . $display_non_comp;?></div>
+                  <div id="<?php echo $display_non_comp;?>" class="resource-counter"> <?php echo "Non-Compliant Resources " . $non_comp_total;?></div>
                   
                   <span class="badge">69</span>
                 </div>
