@@ -1,5 +1,5 @@
 <?php
-  include 'PHP/dbconnectlocal.php';
+  include 'PHP/dbconnect.php';
   include 'PHP/readdb.php';
 ?>
 
@@ -197,6 +197,42 @@
         </div>
       </div>      
       
+      <!-- Review exception Modal -->
+      <div class="modal fade" id="reviewException" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content bg-dark" style="background-color: #115e67">
+          <div class="modal-header">
+            <h3 class="modal-title" id="exampleModalLabel">Review Exception</h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="reviewForm" > 
+              <div class="form-group">
+                <label for="excID">Exception ID:</label> 
+                <textarea  class="form-control" id="excID" name="revJustification" style="color: white; background-color: #333333" rows=1 maxlength="200" readonly>3</textarea>   
+              </div>
+              <div class="form-group">
+                <label for="message-text" class="col-form-label">Justification:</label>
+                <textarea class="form-control" id="revJustification" name="revJustification" style="color: white; background-color: #333333" maxlength="200" required></textarea>
+              </div>
+              <!-- Exception Value = resource ref  -->
+              <div class="form-group">
+                <label for="message-text" class="col-form-label">Next Review Date:</label>
+                <!-- Code taken from https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date -->
+                <input type="date" id="revDate" name="revDate" value="<?php echo date("Y-m-d")?>" min="<?php echo date("Y-m-d", strtotime("+1 day"))?>" max="<?php echo date("Y-m-d", strtotime("+1 year"))?>">
+              </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+                  <input type="submit" class="btn btn-outline-warning" onclick='addReview()' value="Submit">
+              </div> 
+            </form>   
+          </div>
+        </div>
+      </div>
+    </div>                  
+
     <!-- Add exception Modal -->
     <div class="modal fade" id="newExcModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">

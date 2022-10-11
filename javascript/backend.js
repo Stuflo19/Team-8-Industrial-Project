@@ -159,3 +159,12 @@ function addOption(name, id){
 
   return option;
 }
+
+function addReview()
+{
+  newJustification = document.getElementById("revJustification").value;
+  newReviewDate = document.getElementById("revDate").value;
+  excID = document.getElementById("excID").value;
+
+  console.log(newJustification, newReviewDate, excID);
+}

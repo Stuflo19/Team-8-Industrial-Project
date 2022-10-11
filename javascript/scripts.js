@@ -75,7 +75,7 @@ function upcomingReviews(exceptions)
     
       revBtn.setAttribute('data-toggle', 'modal');
       revBtn.setAttribute('style', 'justify-content: center; align-items: center;');
-      //btn.setAttribute('data-target', '#reviewModal');
+      revBtn.setAttribute('data-target', '#reviewException');
       revBtn.className = "btn btn-outline-warning historybutton";
       
       var revIcon = document.createElement('i');
