@@ -1,4 +1,8 @@
 /* Font for the page */
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: 'Bahnschrift';
   color: white;

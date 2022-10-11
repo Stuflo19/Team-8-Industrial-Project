@@ -159,7 +159,7 @@
                 <button class="btn btn-outline-warning m-1" type="button"  data-toggle="collapse" data-target="#Rule<?php echo $result_rule['id'];?>" aria-expanded="false" aria-controls="collapseExample">
                   View details
                 </button>
-                <div class="collapse" id="<?php echo 'Rule' . $result_rule['id'];?>">
+                <div class="collapse" id="<?php echo 'Rule' . $result_rule['id'];?>"> 
                   <div class="card-body">
                     <p id="<?php echo 'Description' . $result_rule['id'];?>"></p>
 
