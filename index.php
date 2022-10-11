@@ -104,12 +104,9 @@
             
               <div class="card cardColor text-center m-auto">
               <div class="card-body m-1 p-1 d-flex justify-content-between">
-              <p>Rule: <?php echo $result_rule["id"];?></p>
+        
+                  <p>Rule: <?php echo $result_rule["id"];?></p>
                   <div>
-
-                <div class="d-flex justify-content-between">
-                  <div class="card-body m-1 p-1">
-
                     <p class="card-text pb-1 m-auto"> <?php echo $result_rule["name"];?> </p>
                     <?php 
                       $status ="active-status"; // compliant
@@ -144,36 +141,14 @@
                               break;
                             }
 =======
-                          $status ="exception-status";
-                          $status_text ="Non-Compliant";
-
-                          $num_non_comp =0;
-                          $num_comp = 0;
-                         
-
-                          foreach($compliant as $result_non_compl)
-                          {
-                            if ($result_rule['id'] == $result_non_compl['rule_id'])
-                            {
-                        
-      
-                                if($quer2== NULL || $quer2['suspended'] == 1)
-                                {
-                                  $num_non_comp =  $num_non_comp +1;
-                            
-                                
-                                }
-                            }
-                          }
-                          break;
->>>>>>> issue-54
+        
                         }
                       }
                     ?>
                     <div class="<?php echo $status;?>"> <?php echo $status_text;?></div>
                     </div>
                   <span class="badge">69</span>
-                  
+                    </div>
                 <button class="btn btn-outline-warning m-1" type="button"  data-toggle="collapse" data-target="#Rule<?php echo $result_rule['id'];?>" aria-expanded="false" aria-controls="collapseExample">
                   View details
                 </button>
