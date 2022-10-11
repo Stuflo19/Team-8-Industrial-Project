@@ -162,8 +162,8 @@ function addOption(name, id){
 
 async function addReview()
 {
-  newJustification = document.getElementById("revJustification").value;
-  newReviewDate = document.getElementById("revDate").value;
+  var newJustification = document.getElementById("revJustification").value;
+  var newReviewDate = document.getElementById("revDate").value;
 
   await fetch("PHP/addReview.php", { mode: 'cors', method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8" }, body: `newJustification=${newJustification}&newReviewDate=${newReviewDate}&exceptionValue=${oldData[0]}&exceptionId=${oldData[1]}&ruleId=${oldData[2]}&oldJustification=${oldData[3]}&oldReview=${oldData[4]}`})
   .then(res => res.text())
