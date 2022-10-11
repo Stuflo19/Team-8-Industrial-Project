@@ -409,6 +409,7 @@ function formCompleted(){
 </script>
 <script>
 //making calendar visible
+//Help from : http://jsfiddle.net/QAaHP/12/
 function checkCustom() {
   if (document.getElementById('custom').checked) {
     document.getElementById('addCustom').style.display = 'block';
