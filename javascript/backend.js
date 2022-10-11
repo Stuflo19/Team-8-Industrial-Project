@@ -165,9 +165,9 @@ async function generateResources() {
   }
  
   console.log(non_comp_counter);
-  document.getElementById('non_comp_notification' + result_rule.id).innerHTML = non_comp_counter
+  document.getElementById('non_comp_notification' + result_rule.id).innerHTML = non_comp_counter;
   console.log(comp_counter);
-  document.getElementById('comp_notification' + result_rule.id).innerHTML = comp_counter;;
+  document.getElementById('comp_notification' + result_rule.id).innerHTML = comp_counter;
 
 }
 // https://www.javascripttutorial.net/javascript-dom/javascript-appendchild/#:~:text=The%20appendChild()%20is%20a,of%20a%20specified%20parent%20node.&text=In%20this%20method%2C%20the%20childNode,()%20returns%20the%20appended%20child.
