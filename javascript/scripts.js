@@ -56,24 +56,21 @@ function upcomingReviews(exceptions)
   for(var i = 0; i < exceptions.length; i++) 
   {
     const currDate = new Date(); //Todays date
-    //console.log("CurrDate: " + currDate);
+    var review = new Date(exceptions[i]['review_date']); //Review Date
     
-    var today = new Date(currDate.getFullYear() +"/"+ (currDate.getMonth()+1) +"/"+ currDate.getDate() + " " + currDate.getUTCHours() + ":" + currDate.getUTCMinutes());
-    var review = new Date(exceptions[i]['review_date'].replace('-','/'));
-    
-    const msBetweenDates = review.getTime() - currDate.getTime();
+    const msBetweenDates = review.getTime() - currDate.getTime(); //Calculates time between dates in milliseconds
 
     // convert ms to days                     hour  min  sec   ms
     const daysBetweenDates = msBetweenDates / (24 * 60 * 60 * 1000);
-    console.log(daysBetweenDates); //Debug testing to show how many days until
+    console.log(daysBetweenDates);
 
+    //Button to review exceptions
     var revBtn = document.createElement('button');
     revBtn.type = "button";
     revBtn.textContent = "Review ";
-    
     revBtn.id = exceptions[i].exception_value + "," + exceptions[i].id;
     revBtn.addEventListener("click", function () {
-      console.log(this.id);
+      // Button Click
     });
     
     revBtn.setAttribute('data-toggle', 'modal');
@@ -81,49 +78,38 @@ function upcomingReviews(exceptions)
     //btn.setAttribute('data-target', '#reviewModal');
     revBtn.className = "btn btn-outline-warning historybutton";
     
+    //Adds exalamtion icon to indicate the review is up and coming
     var revIcon = document.createElement('i');
     revIcon.type = "i";
     revIcon.className = "fa fa-solid fa-circle-exclamation";
     revIcon.value = "Review";
 
+    //Adds icon into button
     revBtn.appendChild(revIcon);
-
-    //If past review date
-    if (daysBetweenDates < 0) 
+    
+    //If review date coming up within 30days
+    if(daysBetweenDates < 30 && daysBetweenDates > 0) 
     { 
-          console.log(exceptions[i]['id'] + ' review date is Expired'); 
-        } 
-        
-        //If review date coming up within 30days
-        else if(daysBetweenDates < 30) 
-        { 
-          //console.log('date is within 30 days'); 
-          numOfUpcoming = numOfUpcoming + 1;
-          const tr = document.getElementById('reviewbody').insertRow();
-          
-          var scrollId = document.createElement('a'); 
-          scrollId.appendChild(document.createTextNode(exceptions[i]['rule_id']));
-          scrollId.href('#Rule' + exceptions[i]['rule_id']);
-          
-          tr.insertCell().appendChild(document.createTextNode(exceptions[i]['id']));
-          tr.insertCell().appendChild(document.createTextNode(exceptions[i]['exception_value']));
-          tr.insertCell().appendChild(scrollId);
-          tr.insertCell().appendChild(document.createTextNode(exceptions[i]['last_updated_by']));
-          tr.insertCell().appendChild(document.createTextNode(exceptions[i]['justification']));
-          tr.insertCell().appendChild(document.createTextNode(exceptions[i]['review_date']));
-          tr.insertCell().appendChild(revBtn);
-        } 
+      numOfUpcoming = numOfUpcoming + 1;
+      const tr = document.getElementById('reviewbody').insertRow();
+      
+      var scrollId = document.createElement('a'); 
+      scrollId.appendChild(document.createTextNode(exceptions[i]['rule_id']));
+      scrollId.setAttribute('href', '#RuleCard' + exceptions[i]['rule_id']);
+      
+      tr.insertCell().appendChild(document.createTextNode(exceptions[i]['id']));
+      tr.insertCell().appendChild(document.createTextNode(exceptions[i]['exception_value']));
+      tr.insertCell().appendChild(scrollId);
+      tr.insertCell().appendChild(document.createTextNode(exceptions[i]['last_updated_by']));
+      tr.insertCell().appendChild(document.createTextNode(exceptions[i]['justification']));
+      tr.insertCell().appendChild(document.createTextNode(exceptions[i]['review_date'].replaceAll('-', '/')));
+      tr.insertCell().appendChild(revBtn);
+    } 
 
-        else 
-        { //If review date is longer than 30 days out
-          console.log(exceptions[i]['id'] + ' review date is NOT within 30 days');
-        }
-    }
-    if(numOfUpcoming == 0)
-    {
-      document.getElementById("reviewbody").innerHTML = "There are no upcoming review dates";
-    }
+  }
+  if(numOfUpcoming == 0)
+  {
+    document.getElementById("reviewbody").innerHTML = "There are no upcoming review dates";
+  }
 }
   
-
-            
