@@ -179,8 +179,7 @@ function checkCustom() {
   }
   else document.getElementById('addCustom').style.visibility = 'hidden';
 }
-type="text/javascript";
-src="lib.js";
+
 function setNewValue()
 {
   document.getElementById('custom').value = document.getElementById('customReviewDate').value;
