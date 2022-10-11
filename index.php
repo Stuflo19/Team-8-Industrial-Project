@@ -234,7 +234,7 @@
                 <br>
                 <input type="radio" onclick="checkCustom()" id='custom' name="newReviewDate" value="">Custom
 
-                <div id="addCustom" style="visibility:hidden">
+                <div id="addCustom" style="display: none">
                   <!-- Help from https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date -->
                   <input type="date" id="customReviewDate" onChange="setNewValue()" name="ReviewDate" value="<?php echo date("Y-m-d")?>" min="<?php echo date("Y-m-d", strtotime("+30 day"))?>" max="<?php echo date("Y-m-d", strtotime("+1 year"))?>"> 
                 </div>
@@ -411,10 +411,10 @@ function formCompleted(){
 //making calendar visible
 function checkCustom() {
   if (document.getElementById('custom').checked) {
-    document.getElementById('addCustom').style.visibility = 'visible';
+    document.getElementById('addCustom').style.display = 'block';
   }
   else
-  {document.getElementById('addCustom').style.visibility = 'hidden';}
+  {document.getElementById('addCustom').style.display= 'none';}
 }
 //setting radio button's value to be the value chosen on a calendar
 function setNewValue()
