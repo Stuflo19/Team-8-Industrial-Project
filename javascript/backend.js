@@ -75,7 +75,7 @@ async function filter() {
 async function generateResources() {
   var non_comp_counter = 0;
   var comp_counter = 0;
-  console.log(non_comp_counter);
+  
   //populate description paragraph
   document.getElementById("Description" + result_rule.id).innerHTML = result_rule.description;
 
@@ -162,6 +162,7 @@ async function generateResources() {
   
     
   }
+  console.log(non_comp_counter);
   document.getElementById('non_comp_notification' + result_rule.id).innerHTML = non_comp_counter;
   document.getElementById('comp_notification' + result_rule.id).innerHTML = comp_counter;
 }
