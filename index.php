@@ -157,7 +157,7 @@
                   </div>
                   
                   <div>
-                    <span id="<?php echo "Notification" . $result_rule['id']?>" class="badge">69</span>
+                    <span class="badge">69</span>
                   </div>
 
                 </div>
