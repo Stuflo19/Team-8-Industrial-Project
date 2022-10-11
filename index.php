@@ -140,8 +140,8 @@
                       }
                     ?>
                     <div class="<?php echo $status;?>"> <?php echo $status_text;?></div>
-                    <div id = "<?php echo 'non_comp_notification' . $result_rule['id']?>"> <span id="non_comp_notification"></span></div>
-                    <div id = "<?php echo 'comp_notification' . $result_rule['id'];?>"><span id="comp_notification"></span></div>
+                    <div id = ""> <p id="<?php echo 'non_comp_notification' . $result_rule['id']?>"></p></div>
+                    <div id = ""><p id="<?php echo 'comp_notification' . $result_rule['id'];?>"></p></div>
                   </div>
                 </div>
                   
