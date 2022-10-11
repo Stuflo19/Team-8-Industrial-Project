@@ -56,16 +56,13 @@ function upcomingReviews(exceptions)
   for(var i = 0; i < exceptions.length; i++) 
   {
     const currDate = new Date(); //Todays date
-    //console.log("CurrDate: " + currDate);
     
-    var today = new Date(currDate.getFullYear() +"/"+ (currDate.getMonth()+1) +"/"+ currDate.getDate() + " " + currDate.getUTCHours() + ":" + currDate.getUTCMinutes());
-    var review = new Date(exceptions[i]['review_date'].replace('-','/'));
-    
+    var review = new Date(exceptions[i]['review_date'].replaceAll('-','/'));
+
     const msBetweenDates = review.getTime() - currDate.getTime();
 
     // convert ms to days                     hour  min  sec   ms
     const daysBetweenDates = msBetweenDates / (24 * 60 * 60 * 1000);
-    console.log(daysBetweenDates); //Debug testing to show how many days until
 
     var revBtn = document.createElement('button');
     revBtn.type = "button";
@@ -73,47 +70,35 @@ function upcomingReviews(exceptions)
     
     revBtn.id = exceptions[i].exception_value + "," + exceptions[i].id;
     revBtn.addEventListener("click", function () {
-      console.log(this.id);
+      // Button click
     });
     
-    revBtn.setAttribute('data-toggle', 'modal');
-    revBtn.setAttribute('style', 'justify-content: center; align-items: center;');
-    //btn.setAttribute('data-target', '#reviewModal');
-    revBtn.className = "btn btn-outline-warning historybutton";
-    
-    var revIcon = document.createElement('i');
-    revIcon.type = "i";
-    revIcon.className = "fa fa-solid fa-circle-exclamation";
-    revIcon.value = "Review";
+      revBtn.setAttribute('data-toggle', 'modal');
+      revBtn.setAttribute('style', 'justify-content: center; align-items: center;');
+      //btn.setAttribute('data-target', '#reviewModal');
+      revBtn.className = "btn btn-outline-warning historybutton";
+      
+      var revIcon = document.createElement('i');
+      revIcon.type = "i";
+      revIcon.className = "fa fa-solid fa-circle-exclamation";
+      revIcon.value = "Review";
 
-    revBtn.appendChild(revIcon);
-
-    //If past review date
-    if (daysBetweenDates < 0) 
-    { 
-          console.log(exceptions[i]['id'] + ' review date is Expired'); 
-        } 
+      revBtn.appendChild(revIcon);  
         
-        //If review date coming up within 30days
-        else if(daysBetweenDates < 30) 
-        { 
-          //console.log('date is within 30 days'); 
-          numOfUpcoming = numOfUpcoming + 1;
-          const tr = document.getElementById('reviewbody').insertRow();
+      //If review date coming up within 30days
+      if(daysBetweenDates < 30) 
+      {  
+        numOfUpcoming = numOfUpcoming + 1;
+        const tr = document.getElementById('reviewbody').insertRow();
 
-          tr.insertCell().appendChild(document.createTextNode(exceptions[i]['id']));
-          tr.insertCell().appendChild(document.createTextNode(exceptions[i]['exception_value']));
-          tr.insertCell().appendChild(document.createTextNode(exceptions[i]['rule_id']));
-          tr.insertCell().appendChild(document.createTextNode(exceptions[i]['last_updated_by']));
-          tr.insertCell().appendChild(document.createTextNode(exceptions[i]['justification']));
-          tr.insertCell().appendChild(document.createTextNode(exceptions[i]['review_date']));
-          tr.insertCell().appendChild(revBtn);
-        } 
-
-        else 
-        { //If review date is longer than 30 days out
-          console.log(exceptions[i]['id'] + ' review date is NOT within 30 days');
-        }
+        tr.insertCell().appendChild(document.createTextNode(exceptions[i]['id']));
+        tr.insertCell().appendChild(document.createTextNode(exceptions[i]['exception_value']));
+        tr.insertCell().appendChild(document.createTextNode(exceptions[i]['rule_id']));
+        tr.insertCell().appendChild(document.createTextNode(exceptions[i]['last_updated_by']));
+        tr.insertCell().appendChild(document.createTextNode(exceptions[i]['justification']));
+        tr.insertCell().appendChild(document.createTextNode(exceptions[i]['review_date'].replaceAll('-','/')));
+        tr.insertCell().appendChild(revBtn);
+      } 
     }
     if(numOfUpcoming == 0)
     {
