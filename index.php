@@ -61,6 +61,7 @@
       <div class="col-lg-5 " >
         <div class="row-lg mt-4">
           <h3>Upcoming Reviews for Existing Exceptions</h3>
+          <p>In the next 30 days, these exceptions will be up for review. <br> To easily locate a resource, click the Rule ID to quickly navigate to it</p>
         </div>
           <div class="d-flex align-items-center p-2">
           <table class="table fixed_header" style="color:white">
@@ -104,8 +105,11 @@
               <!-- Compliance Rule Card -->
             
               <div class="card cardColor text-center m-auto">
-                <div class="d-flex justify-content-between">
-                  <div class="card-body m-1 p-1">
+                
+                <div class="card-body m-1 p-1 d-flex justify-content-between" id="<?php echo 'RuleCard' . $result_rule['id'];?>">
+                  <p>Rule: <?php echo $result_rule["id"];?></p>
+                  
+                  <div>
                     <p class="card-text pb-1 m-auto"> <?php echo $result_rule["name"];?> </p>
                     <?php 
                       $status ="active-status"; // compliant
@@ -144,6 +148,11 @@
                     <div id = ""> <p id="<?php echo 'non_comp_notification' . $result_rule['id']?>"></p></div>
                     <div id = ""><p id="<?php echo 'comp_notification' . $result_rule['id'];?>"></p></div>
                   </div>
+                  
+                  <div>
+                    <span class="badge">69</span>
+                  </div>
+
                 </div>
                   
                 <button class="btn btn-outline-warning m-1" type="button"  data-toggle="collapse" data-target="#Rule<?php echo $result_rule['id'];?>" aria-expanded="false" aria-controls="collapseExample">
@@ -241,11 +250,32 @@
                 <label for="message-text" class="col-form-label">Justification:</label>
                 <textarea class="form-control" id="message-text" style="color: white; background-color: #333333"></textarea>
               </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
-            <button type="button" class="btn btn-primary">Submit</button>
+              <!-- Exception Value = resource ref  -->
+              <div class="form-group">
+                <label for="message-text" class="col-form-label">Review Date:</label>
+                <input type="radio" onclick="checkCustom()" name="newReviewDate" value="<?php echo date('Y-m-d', strtotime('+1 month'));?>">After 1 month
+                <br>
+                <input type="radio" onclick="checkCustom()" name="newReviewDate" value="<?php echo date("Y-m-d", strtotime("+3 month"));?>">After 3 months              
+                <br>
+                <input type="radio" onclick="checkCustom()" name="newReviewDate" value="<?php echo date("Y-m-d", strtotime("+6 month"))?>">After 6 months
+                <br>
+                <input type="radio" onclick="checkCustom()" name="newReviewDate" value="<?php echo date("Y-m-d", strtotime("+9 month"))?>">After 9 months
+                <br>
+                <input type="radio" onclick="checkCustom()" name="newReviewDate" value="<?php echo date("Y-m-d", strtotime("+1 year"))?>">After 12 months
+                <br>
+                <input type="radio" onclick="checkCustom()" id='custom' name="newReviewDate" value="">Custom
+
+                <div id="addCustom" style="display: none">
+                  <!-- Help from https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date -->
+                  <input type="date" disabled id="customReviewDate" onChange="setNewValue()" name="ReviewDate" value="<?php echo date("Y-m-d")?>" min="<?php echo date("Y-m-d", strtotime("+30 day"))?>" max="<?php echo date("Y-m-d", strtotime("+1 year"))?>"> 
+                </div>
+              </div>
+
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+                  <input type="submit" class="btn btn-outline-warning" onclick='formCompleted()' value="Submit">
+                </div> 
+            </form>   
           </div>
         </div>
       </div>
@@ -313,5 +343,120 @@
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  
+
 </body>
+<?php
+    $_POST = array();
+?>
+<script>
+function addException(rule_rescourceType){
+  var rows_resource = <?php echo json_encode($resource); ?>;
+  var rows_non_compliant = <?php echo json_encode($non_compliant); ?>;
+  var rows_except = <?php echo json_encode($exception1); ?>;
+  console.log(rule_rescourceType);
+  var ruleID = rule_rescourceType.split(",")[0];
+  //var resourceTypeID = rule_rescourceType.split(",")[1];
+  var resource_name = "";
+  var resource_id = 0;
+  var resource_ref = " ";
+  //console.log(ruleID);
+  //console.log(resourceTypeID);
+  var select_dropdown = document.querySelector('#resourceList');
+  while (select_dropdown.firstChild) 
+  {
+    select_dropdown.removeChild(select_dropdown.firstChild);
+  }
+  
+  for(var i = 0; i < rows_non_compliant.length; i++) {
+    //looking if a rule has non-compliant resources
+    if(rows_non_compliant[i]['rule_id'] == ruleID)
+    {
+      //finding the name of a resource
+      for(var j = 0; j < rows_resource.length; j++)
+      {
+        non_compl = 1;
+        if(rows_resource[j]['id'] == rows_non_compliant[i]['resource_id'])
+        {            
+          console.log(rows_resource[j]['resource_ref']);
+
+          //checking if a non-compliant resource has an axception -> making a resource compliant
+          for(var k=0; k<rows_except.length; k++)
+          {
+            if(rows_resource[j]['resource_ref'] === rows_except[k]['exception_value'])
+            {
+              
+                console.log(rows_resource[j]['resource_name']);
+                non_compl=0;
+                break;
+              
+            }
+          } 
+          
+          if(non_compl==1)
+          {
+            resource_name = rows_resource[j]['resource_name'];
+            resource_id = rows_resource[j]['id'];
+            resource_ref = rows_resource[j]['resource_ref'];
+            console.log(resource_name, ruleID,resource_ref);
+
+            var resourceID_ruleID_ref = resource_id+"_"+ruleID+"_"+resource_ref;
+            select_dropdown.appendChild(addOption(resource_name, resourceID_ruleID_ref));
+            console.log(resourceID_ruleID_ref);
+
+          }
+          
+          //break;
+        }
+      }
+    }
+
+  }
+
+}
+
+// Code found  at : https://gist.github.com/jesperorb/a6c12f7d4418a167ea4b3454d4f8fb61
+function formCompleted(){
+  const form = document.getElementById('form');
+  console.log("Enetered1")
+  form.addEventListener('click', function(event){
+    const formattedFormData = new FormData(form);
+    postData(formattedFormData);
+  });
+  }
+  
+  async function postData(formattedFormData){
+    const response = await fetch('PHP/addException.php',{
+        method: 'POST',
+        body: formattedFormData
+    });
+    location.reload();
+
+    const data = await response.text();
+    console.log(data);
+    //location.reload();
+  }
+
+
+<script>
+//making calendar visible
+//Help from : http://jsfiddle.net/QAaHP/12/
+function checkCustom() {
+  if (document.getElementById('custom').checked) {
+    document.getElementById('addCustom').style.display = 'block';
+    document.getElementById('customReviewDate').removeAttribute('disabled');
+
+  }
+  else
+  {
+    document.getElementById('addCustom').style.display= 'none';
+    document.getElementById('customReviewDate').setAttribute('disabled', '');
+
+  }
+}
+//setting radio button's value to be the value chosen on a calendar
+function setNewValue()
+{
+  document.getElementById('custom').value = document.getElementById('customReviewDate').value;
+  console.log(document.getElementById('custom').value);
+}
+</script>
