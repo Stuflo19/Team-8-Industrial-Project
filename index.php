@@ -61,6 +61,7 @@
       <div class="col-lg-6 " >
         <div class="row-lg mt-4">
           <h3>Upcoming Reviews for Existing Exceptions</h3>
+          <p>In the next 30 days, these exceptions will be up for review. <br> To easily locate a resource, click the Rule ID to quickly navigate to it</p>
         </div>
           <div class="d-flex align-items-center p-2">
           <table class="table fixed_header" style="color:white">
@@ -113,48 +114,58 @@
             <div class="col-lg">
               <!-- Compliance Rule Card -->
               <div class="card cardColor text-center m-auto">
-                <div class="card-body m-1 p-1">
-                  <p class="card-text pb-1 m-auto"> <?php echo $result_rule["name"];?> </p>
-                  <?php 
-                    $status ="active-status"; // compliant
-                    $status_text ="Compliant";
+                
+                <div class="card-body m-1 p-1 d-flex justify-content-between" id="<?php echo 'RuleCard' . $result_rule['id'];?>">
+                  <p>Rule: <?php echo $result_rule["id"];?></p>
+                  
+                  <div>
+                    <p class="card-text pb-1 m-auto"> <?php echo $result_rule["name"];?> </p>
+                    <?php 
+                      $status ="active-status"; // compliant
+                      $status_text ="Compliant";
 
-                    $non_comp_total =0;
-                    $non_comp_except =0;
+                      $non_comp_total =0;
+                      $non_comp_except =0;
 
-                    foreach($compliant as $result_non_compl)
-                    {
-                      if ($result_rule['id'] == $result_non_compl['rule_id'])
+                      foreach($compliant as $result_non_compl)
                       {
-                        $quer = "SELECT * FROM resource WHERE id=".$result_non_compl['resource_id'];
-                          $quer1 = mysqli_query($conn, $quer);
-                          $quer2 = mysqli_fetch_array($quer1);
+                        if ($result_rule['id'] == $result_non_compl['rule_id'])
+                        {
+                          $quer = "SELECT * FROM resource WHERE id=".$result_non_compl['resource_id'];
+                            $quer1 = mysqli_query($conn, $quer);
+                            $quer2 = mysqli_fetch_array($quer1);
 
-                          $quer = "SELECT * FROM exception WHERE exception_value='".$quer2['resource_ref']."'";
-                          $quer1 = mysqli_query($conn, $quer);
-                          $quer2 = mysqli_fetch_array($quer1);
+                            $quer = "SELECT * FROM exception WHERE exception_value='".$quer2['resource_ref']."'";
+                            $quer1 = mysqli_query($conn, $quer);
+                            $quer2 = mysqli_fetch_array($quer1);
 
-                          if($quer2== NULL || $quer2['suspended'] == 1)
-                          {
-                            $non_comp_total =  $non_comp_total +1;
-                            if($quer2['suspended'] == 1)
+                            if($quer2== NULL || $quer2['suspended'] == 1)
                             {
-                              $non_comp_except = $non_comp_except+1;
+                              $non_comp_total =  $non_comp_total +1;
+                              if($quer2['suspended'] == 1)
+                              {
+                                $non_comp_except = $non_comp_except+1;
+                              }
+                              $status ="exception-status";
+                              $status_text ="Non-Compliant";
+                              break;
                             }
-                            $status ="exception-status";
-                            $status_text ="Non-Compliant";
-                            break;
-                          }
+                        }
                       }
-                    }
-                  ?>
-                  <div class="<?php echo $status;?>"> <?php echo $status_text;?></div>
+                    ?>
+                    <div class="<?php echo $status;?>"> <?php echo $status_text;?></div>
+                  </div>
+                  
+                  <div>
+                    <span class="badge">69</span>
+                  </div>
+
                 </div>
                   
                 <button class="btn btn-outline-warning m-1" type="button"  data-toggle="collapse" data-target="#Rule<?php echo $result_rule['id'];?>" aria-expanded="false" aria-controls="collapseExample">
                   View details
                 </button>
-                <div class="collapse" id="<?php echo 'Rule' . $result_rule['id'];?>">
+                <div class="collapse" id="<?php echo 'Rule' . $result_rule['id'];?>"> 
                   <div class="card-body">
                     <p id="<?php echo 'Description' . $result_rule['id'];?>"></p>
 
@@ -313,7 +324,7 @@
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  
+
 </body>
 <?php
     $_POST = array();

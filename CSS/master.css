@@ -1,4 +1,8 @@
 /* Font for the page */
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: 'Bahnschrift';
   color: white;
@@ -174,6 +178,17 @@ table{
   border: 0px;
 }
 
+.badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  padding: 5px 10px;
+  border-radius: 50%;
+  background: red;
+  color: white;
+  font-size: 1rem;
+}
+
 @media (max-width: 500px) {
   .active-status, .exception-status {
     width: 75px;
@@ -183,7 +198,7 @@ table{
   .historybutton{
     width: 75px;
     height: 20px;
-    font-size: 0.7rem;
+    font-size: 1rem;
   } 
   html {
       font-size: 8px;  
