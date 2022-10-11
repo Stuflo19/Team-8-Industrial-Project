@@ -236,7 +236,7 @@
 
                 <div id="addCustom" style="display: none">
                   <!-- Help from https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date -->
-                  <input type="date" id="customReviewDate" onChange="setNewValue()" name="ReviewDate" value="<?php echo date("Y-m-d")?>" min="<?php echo date("Y-m-d", strtotime("+30 day"))?>" max="<?php echo date("Y-m-d", strtotime("+1 year"))?>"> 
+                  <input type="date" disabled id="customReviewDate" onChange="setNewValue()" name="ReviewDate" value="<?php echo date("Y-m-d")?>" min="<?php echo date("Y-m-d", strtotime("+30 day"))?>" max="<?php echo date("Y-m-d", strtotime("+1 year"))?>"> 
                 </div>
               </div>
 
