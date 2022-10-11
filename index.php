@@ -140,9 +140,8 @@
                       }
                     ?>
                     <div class="<?php echo $status;?>"> <?php echo $status_text;?></div>
-                    <div id="<?php echo $num_comp;?>" class = "compliance_counter"> <?php echo "Compliant Resources: " . $display_comp;?></div>
-                    <div class = "<?php echo "notification".$result_rule['id'];?>"> <?php echo "notification".$result_rule['id']; ?></div>
-                    <?php  $display_non_comp =0;  $display_comp =0; ?>
+                    <div class = "<?php echo "non_comp_notification".$result_rule['id'];?>"> <?php echo "Non-Compliant Resources: non_comp_notification". $result_rule['id']; ?></div>
+                    <div class = "<?php echo "comp_notification".$result_rule['id'];?>"> <?php echo "Compliant Resources: comp_notification". $result_rule['id']; ?></div>
                   </div>
                 </div>
                   

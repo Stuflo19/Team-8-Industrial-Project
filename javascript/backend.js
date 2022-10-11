@@ -115,8 +115,8 @@ async function generateResources() {
       }
 
       //Skips the row if a filter is active
-      if(currFilter == "Non-Compliant" && checked == false){continue;} 
-      if(currFilter == "Compliant" && checked == true){continue;}
+      if(currFilter == "Non-Compliant" && checked == false){non_comp_counter = non_comp_counter+1; continue;} 
+      if(currFilter == "Compliant" && checked == true){comp_counter = comp_counter+1; continue;}
 
       //Creates div for compliance displaying
       var div = document.createElement('Div');
@@ -151,7 +151,8 @@ async function generateResources() {
     }
   }
 
-  document.getElementById('notification' + result_rule.id).innerHTML = "counter";
+  document.getElementById('non_comp_notification' + result_rule.id).innerHTML = non_comp_counter;
+  document.getElementById('comp_notification' + result_rule.id).innerHTML = comp_counter;
 }
 // https://www.javascripttutorial.net/javascript-dom/javascript-appendchild/#:~:text=The%20appendChild()%20is%20a,of%20a%20specified%20parent%20node.&text=In%20this%20method%2C%20the%20childNode,()%20returns%20the%20appended%20child.
 function addOption(name, id){
