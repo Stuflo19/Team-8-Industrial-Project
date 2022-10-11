@@ -123,8 +123,8 @@ async function generateResources() {
       if(currFilter == "Compliant" && checked == true){continue;}
 
       //incrementing display counter
-      if(checked == false){non_comp_counter++;}
-      if(checked == true){comp_counter++;}
+      if(checked == false){comp_counter++;}
+      if(checked == true){non_comp_counter++;}
       
       //Creates div for compliance displaying
       var div = document.createElement('Div');
