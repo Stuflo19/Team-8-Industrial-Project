@@ -2,7 +2,7 @@
 
 if(isset($_POST['newJustification']))
 {
-        include 'dbconnectlocal.php';   
+        include 'dbconnect.php';   
 
         $newJustification = $_POST['newJustification'];
         $newReview = $_POST['newReviewDate'];
