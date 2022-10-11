@@ -192,7 +192,10 @@ table{
 .resource-counter {
   color: white !important;
   font-family: 'Bahnschrift', cursive;
-  text-align: right;
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  padding: 10px 20px;
 }
 
 @media (max-width: 500px) {
