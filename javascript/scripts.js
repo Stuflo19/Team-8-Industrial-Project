@@ -87,7 +87,7 @@ function upcomingReviews(exceptions)
     revBtn.appendChild(revIcon);
     
     //If review date coming up within 30days
-    if(daysBetweenDates < 30) 
+    if(daysBetweenDates > 30) 
     { 
       numOfUpcoming = numOfUpcoming + 1;
       const tr = document.getElementById('reviewbody').insertRow();
