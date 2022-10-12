@@ -79,7 +79,7 @@ nav {
   display: inline-block;
   color: black;
   font-weight: bolder;
-  padding-left: 10px;
+  padding-left: 100px;
 }
 
 .exception-status {
@@ -89,7 +89,7 @@ nav {
   display: inline-block;
   color: black;
   font-weight: bolder;
-  padding-left: 10px;
+  padding-left: 100px;
 }
 
 /* Styling for footer */
