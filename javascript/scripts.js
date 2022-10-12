@@ -54,6 +54,7 @@ function upcomingReviews(exceptions)
   var numOfUpcoming = 0;
 
   document.getElementById("reviewbody").innerHTML = "";
+  document.getElementById("expiredbody").innerHTML = "";
 
   for(var i = 0; i < exceptions.length; i++) 
   {
@@ -62,9 +63,11 @@ function upcomingReviews(exceptions)
     var review = new Date(exceptions[i]['review_date'].replaceAll('-','/'));
 
     const msBetweenDates = review.getTime() - currDate.getTime();
+    console.log('Current Date: ' + currDate + ' | Review Date: ' + review);
 
     // convert ms to days                     hour  min  sec   ms
     const daysBetweenDates = msBetweenDates / (24 * 60 * 60 * 1000);
+    console.log('Exception No: ' + exceptions[i].id + ' | Days: ' + daysBetweenDates);
 
     //Button to review exceptions
     var revBtn = document.createElement('button');
@@ -95,7 +98,7 @@ function upcomingReviews(exceptions)
       revBtn.appendChild(revIcon);  
         
       //If review date coming up within 30days
-      if(daysBetweenDates < 30) 
+      if(daysBetweenDates < 30 && daysBetweenDates > 0) 
       {  
         numOfUpcoming = numOfUpcoming + 1;
         const tr = document.getElementById('reviewbody').insertRow();
@@ -107,7 +110,19 @@ function upcomingReviews(exceptions)
         tr.insertCell().appendChild(document.createTextNode(exceptions[i]['justification']));
         tr.insertCell().appendChild(document.createTextNode(exceptions[i]['review_date'].replaceAll('-','/')));
         tr.insertCell().appendChild(revBtn);
-      } 
+      }
+      else if(daysBetweenDates < 0)
+      {
+        const tr = document.getElementById('expiredbody').insertRow();
+
+        tr.insertCell().appendChild(document.createTextNode(exceptions[i]['id']));
+        tr.insertCell().appendChild(document.createTextNode(exceptions[i]['exception_value']));
+        tr.insertCell().appendChild(document.createTextNode(exceptions[i]['rule_id']));
+        tr.insertCell().appendChild(document.createTextNode(exceptions[i]['last_updated_by']));
+        tr.insertCell().appendChild(document.createTextNode(exceptions[i]['justification']));
+        tr.insertCell().appendChild(document.createTextNode(exceptions[i]['review_date'].replaceAll('-','/')));
+        tr.insertCell().appendChild(revBtn);
+      }
     }
     if(numOfUpcoming == 0)
     {
