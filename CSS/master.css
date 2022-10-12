@@ -1,4 +1,8 @@
 /* Font for the page */
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: 'Bahnschrift';
   color: white;
@@ -71,6 +75,17 @@ button:hover {
 nav {
   background-color: #f1b434;
   text-align: center;
+}
+
+.badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  padding: 5px 10px;
+  border-radius: 50%;
+  background: red;
+  color: white;
+  font-size: 1rem;
 }
 
 .chart {
@@ -209,7 +224,7 @@ table{
   .historybutton{
     width: 75px;
     height: 20px;
-    font-size: 0.7rem;
+    font-size: 1rem;
   } 
   html {
       font-size: 8px;  
