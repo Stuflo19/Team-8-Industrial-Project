@@ -217,7 +217,6 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
                     $status_text ="Compliant";
 
                     $non_comp_total =0;
-                    $non_comp_except =0;
 
                     foreach($compliant as $result_non_compl)
                     {
@@ -231,20 +230,15 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
                           $quer1 = mysqli_query($conn, $quer);
                           $quer2 = mysqli_fetch_array($quer1);
 
-                          if($quer2== NULL || $quer2['suspended'] == 1 || $quer2['suspended'] == 0)
+                          if($quer2== NULL || $quer2['suspended'] == 1)
                         {
-                          if($quer2 != NULL && $quer2['suspended'] == 1 || $quer2['suspended'] == 0 )
-                          {
-                            $non_comp_except = $non_comp_except+1;
-                          }  
-                          if($quer2 NULL NULL || $quer2['suspended'] == 0)
+                          if($quer2== NULL)
                           {
                             $non_comp_total =  $non_comp_total +1;
-
-                            $status ="exception-status";
-                            $status_text ="Non-Compliant";
-                            break;
                           }
+                          $status ="exception-status";
+                          $status_text ="Non-Compliant";
+                          break;
                         }
                       }
                     }
@@ -287,7 +281,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
                   </div>
                   <?php
                     $var = "Non-Compliant";
-                    if(strcmp($status_text, $var) == 0 && $non_comp_total > $non_comp_except )
+                    if(strcmp($status_text, $var) == 0 && $non_comp_total != 0 )
                     {
                       echo "<button type='button' class='btn btn-outline-warning float-right m-1' data-toggle='modal' data-target='#newExcModal' id=". $result_rule['id']." name=". $result_rule['id'] . "," . $result_rule['resource_type_id']." onclick='addException(this.name)' >
                       Add Exception
