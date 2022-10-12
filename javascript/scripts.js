@@ -5,6 +5,10 @@ function callAll(x, y, row)
   upcomingReviews(row);
 }
 
+function hide() {
+  document.getElementById("addexep").style.display = 'none';
+}
+
 function setDate() {
   var today = new Date();
   document.getElementById("date").innerHTML = "Last Checked: " + today.toDateString() + " " + today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
