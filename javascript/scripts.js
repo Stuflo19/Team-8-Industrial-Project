@@ -109,7 +109,7 @@ function upcomingReviews(exceptions)
         tr.insertCell().appendChild(document.createTextNode(exceptions[i]['last_updated_by']));
         tr.insertCell().appendChild(document.createTextNode(exceptions[i]['justification']));
         tr.insertCell().appendChild(document.createTextNode(exceptions[i]['review_date'].replaceAll('-','/')));
-        if(user_role1 = "1")
+        if(user_role1 = "2")
         {
           tr.insertCell().appendChild(revBtn);
         }
@@ -124,7 +124,7 @@ function upcomingReviews(exceptions)
         tr.insertCell().appendChild(document.createTextNode(exceptions[i]['last_updated_by']));
         tr.insertCell().appendChild(document.createTextNode(exceptions[i]['justification']));
         tr.insertCell().appendChild(document.createTextNode(exceptions[i]['review_date'].replaceAll('-','/')));
-        if(user_role2 = "1")
+        if(user_role2 = "2")
         {
           tr.insertCell().appendChild(revBtn);
         }
