@@ -254,6 +254,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
                       }   
                       if ($_SESSION['role'] == '1')
                       {
+                        echo "testing stuff";
                         echo '<script> hide() </script>';
                       }
                       else{
