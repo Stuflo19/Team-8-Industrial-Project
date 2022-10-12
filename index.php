@@ -117,7 +117,7 @@
                  <div style = "text-align: left;"><p>Rule: <?php echo $result_rule["id"];?></p></div>
                   
                   <div>
-                  <div style = "text-align: centre;"><p class="card-text pb-1 m-auto"> <?php echo $result_rule["name"];?> </p></div>
+                  <div style = "text-align: centre; position: relative; top: -20px;"><p class="card-text pb-1 m-auto"> <?php echo $result_rule["name"];?> </p></div>
                     <?php 
                       $status ="active-status"; // compliant
                       $status_text ="Compliant";
