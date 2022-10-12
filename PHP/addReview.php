@@ -1,4 +1,5 @@
 <?php
+session_start(); 
 
 if(isset($_POST['newJustification']))
 {
@@ -13,8 +14,8 @@ if(isset($_POST['newJustification']))
         $oldReview = $_POST['oldReview'];
         $date = date('y-m-d h:i:s');
         $type = "Review";
-        $customer_id = 1;
-        $user_id = "system";
+        $customer_id = $_SESSION['customer'];
+        $user_id = $_SESSION['user_id'];
     
         $sql = "UPDATE `exception` SET `customer_id`='$customer_id', `last_updated_by`='$user_id', `justification`='$newJustification',`review_date`='$newReview',`last_updated`='$date' WHERE `id` = $exceptionId";
         mysqli_query($conn, $sql);
