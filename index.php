@@ -1,6 +1,6 @@
 <?php
   ob_start();
-  include 'PHP/dbconnectlocal.php';
+  include 'PHP/dbconnect.php';
   include 'PHP/readdb.php';
 ?>
 
@@ -61,7 +61,7 @@
             //Creates the session
             session_start(); 
             //Using my local db file to connect to my db for testing
-            include 'PHP/dbconnectlocal.php';
+            include 'PHP/dbconnect.php';
             
             // using post method in the form (important bit) to get data
             if (isset($_POST['username']) && isset($_POST['password'])) {
