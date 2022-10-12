@@ -151,7 +151,7 @@
                         }
                       }
                     ?>
-                    <div class="<?php echo $status;?>" style: "position: relative; top: -30px;"> <?php echo $status_text;?></div>
+                    <div class="<?php echo $status;?>" style = "position: relative; top: -30px;"> <?php echo $status_text;?></div>
            
                   </div>
                   
