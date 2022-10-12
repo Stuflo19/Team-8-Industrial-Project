@@ -155,8 +155,8 @@
            
                   </div>
                   
-                  <div>
-                    <span id="<?php echo 'non_comp_notification' . $result_rule['id'];?>"  class="badge"></span>
+                  <div id="<?php echo 'non_comp_notification' . $result_rule['id'];?>" >
+                 
                   </div>
 
                 </div>

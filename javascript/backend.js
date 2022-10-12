@@ -166,14 +166,15 @@ async function generateResources() {
  
   console.log(non_comp_counter);
 
+  document.getElementById('non_comp_notification' + result_rule.id).innerHTML = non_comp_counter;
 
   if(non_comp_counter == 0)
   {
-    document.getElementById('non_comp_notification' + result_rule.id).innerHTML = "<span id='<?php echo 'non_comp_notification' . $result_rule['id'];?>' style = 'background = green;' class='badge'></span>";
+    document.getElementById('badge_notification' + result_rule.id).innerHTML = "<span id='<?php echo 'non_comp_notification' . $result_rule['id'];?>' style = 'background = green;' class='badge'></span>";
   }
   else
   {
-    document.getElementById('non_comp_notification' + result_rule.id).innerHTML = "<span id='<?php echo 'non_comp_notification' . $result_rule['id'];?>' style = 'background = red;' class='badge'></span>;";
+    document.getElementById('badge_notification' + result_rule.id).innerHTML = "<span id='<?php echo 'non_comp_notification' . $result_rule['id'];?>' style = 'background = red;' class='badge'></span>;";
   }
   console.log(comp_counter);
   document.getElementById('comp_notification' + result_rule.id).innerHTML = comp_counter;
