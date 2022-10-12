@@ -327,7 +327,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
                   <label class="form-check-label" for="inlineRadio2">No</label>
                 </div>
               </div>
-              <div id="reviewContainer" style="display: none">
+              <div id="reviewContainer" style="display: none"> 
                 <div class="form-group">
                   <label for="message-text" class="col-form-label">New Justification:</label>
                   <textarea class="form-control" id="revJustification" name="revJustification" style="color: white; background-color: #333333" maxlength="200" required></textarea>
