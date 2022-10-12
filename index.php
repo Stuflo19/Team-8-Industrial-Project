@@ -117,7 +117,7 @@
                   <p>Rule: <?php echo $result_rule["id"];?></p>
                   
                   <div>
-                    <p class="card-text pb-1 m-auto"> <?php echo $result_rule["name"];?> </p>
+                    <p class="card-text pb-1 m-auto" style="margin-right: 100px;"> <?php echo $result_rule["name"];?> </p>
                     <?php 
                       $status ="active-status"; // compliant
                       $status_text ="Compliant";
