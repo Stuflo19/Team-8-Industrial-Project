@@ -425,7 +425,12 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
               <th scope="col">Created By</th>
               <th scope="col">Justification</th>
               <th scope="col">Review Date</th>
-              <th scope="col">Suspend</th>
+              <th scope="col" id="uprev">Suspend <?php
+                    echo '<script>
+                    var user_role3 = '. json_encode($_SESSION['role']) .';
+                    hide();
+                    </script>';
+                    ?></th>
             </thead>
             <!-- Table body populated by Javascript historybutton function -->
             <tbody id ="historybody">
