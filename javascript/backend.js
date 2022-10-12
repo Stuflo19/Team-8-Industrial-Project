@@ -182,12 +182,12 @@ function reviewToggle() {
   {
     console.log('Toggled On');
     document.getElementById('reviewContainer').style.display = 'block';
-    document.getElementById('customReviewDate').removeAttribute('disabled');
+    //document.getElementById('customReviewDate').removeAttribute('disabled');
   }
   else
   {
     console.log('Toggled Off');
-    document.getElementById('addCustom').style.display= 'none';
-    document.getElementById('customReviewDate').setAttribute('disabled', '');
+    document.getElementById('reviewContainer').style.display= 'none';
+    //document.getElementById('customReviewDate').setAttribute('disabled', '');
   }
 }
