@@ -116,7 +116,7 @@
               <div class="card-body m-1 p-1" id="<?php echo 'RuleCard' . $result_rule['id'];?>">
                  <div style = "text-align: left; "><p>Rule: <?php echo $result_rule["id"];?></p></div>
                   
-                  <div>
+                
                   <div style = "text-align: centre; position: relative; top: -30px;"><p class="card-text pb-1 m-auto"> <?php echo $result_rule["name"];?> </p></div>
                     <?php 
                       $status ="active-status"; // compliant
@@ -153,7 +153,7 @@
                     ?>
                     <div class="<?php echo $status;?>" style = "position: relative; top: -30px;"> <?php echo $status_text;?></div>
            
-                  </div>
+              
                   
              
                     <span class="badge">69</span>
