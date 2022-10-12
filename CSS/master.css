@@ -193,6 +193,7 @@ table{
   color: white;
   text-align: right;
   font-size: 1rem;
+  margin-bottom: 0px;
 }
 
 @media (max-width: 500px) {
