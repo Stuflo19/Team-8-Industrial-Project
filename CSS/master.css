@@ -62,6 +62,7 @@ nav {
 }
 .card {
   margin: 0px;
+  padding-bottom: 0px;
   position: relative;
   width: 100%
 }
