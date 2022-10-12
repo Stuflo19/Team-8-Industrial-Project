@@ -300,8 +300,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
       </div>
     </div>      
       
-      <!-- Review exception Modal -->
-      <div class="modal fade" id="reviewException" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- Review exception Modal -->
+    <div class="modal fade" id="reviewException" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content bg-dark" style="background-color: #115e67">
           <div class="modal-header">
@@ -310,22 +310,39 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
+          
           <div class="modal-body">
-            <form id="reviewForm" > 
+            <form id="reviewForm" >
               <div class="form-group">
-                <label for="message-text" class="col-form-label">New Justification:</label>
-                <textarea class="form-control" id="revJustification" name="revJustification" style="color: white; background-color: #333333" maxlength="200" required></textarea>
+                <label for="message-text" class="col-form-label">Would you like to re-new/extend this exception?</label>
+                <!-- Toggle Review -->
+                <!-- Yes -->
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" onclick = "reviewToggle()" type="radio" name="processReview" id="yesToggle" value="option1">
+                  <label class="form-check-label" for="yestoggle">Yes</label>
+                </div>
+                <!-- No -->
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" onclick = "reviewToggle()" type="radio" name="processReview" id="noToggle" value="option2">
+                  <label class="form-check-label" for="inlineRadio2">No</label>
+                </div>
               </div>
-              <!-- Exception Value = resource ref  -->
-              <div class="form-group">
-                <label for="message-text" class="col-form-label">New Review Date:</label>
-                <!-- Code taken from https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date -->
-                <input type="date" id="revDate" name="revDate" value="<?php echo date("Y-m-d")?>" min="<?php echo date("Y-m-d", strtotime("+1 day"))?>" max="<?php echo date("Y-m-d", strtotime("+1 year"))?>">
-              </div>
+              <div id="reviewContainer" style="display: none">
+                <div class="form-group">
+                  <label for="message-text" class="col-form-label">New Justification:</label>
+                  <textarea class="form-control" id="revJustification" name="revJustification" style="color: white; background-color: #333333" maxlength="200" required></textarea>
+                </div>
+                <!-- Exception Value = resource ref  -->
+                <div class="form-group">
+                  <label for="message-text" class="col-form-label">New Review Date:</label>
+                  <!-- Code taken from https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date -->
+                  <input type="date" id="revDate" name="revDate" value="<?php echo date("Y-m-d")?>" min="<?php echo date("Y-m-d", strtotime("+1 day"))?>" max="<?php echo date("Y-m-d", strtotime("+1 year"))?>">
+                </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
                   <input type="button" class="btn btn-outline-warning" data-dismiss="modal" onclick='addReview()' value="Submit">
-              </div> 
+                </div>
+              </div>
             </form>   
           </div>
         </div>

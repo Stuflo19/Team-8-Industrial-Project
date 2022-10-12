@@ -176,3 +176,14 @@ async function addReview()
   refresh();
   return false;
 }
+
+function reviewToggle() {
+  if (document.getElementById('yesToggle').checked) 
+  {
+    document.getElementById('reviewContainer').style.display = 'block';
+  }
+  else
+  {
+    document.getElementById('reviewContainer').style.display= 'none';
+  }
+}
