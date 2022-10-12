@@ -254,10 +254,10 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
                       }   
                       if ($_SESSION['role'] == '1')
                       {
-                        echo ":)";
+                        echo '<script> hide() </script>';
                       }
                       else{
-                        echo '<script> hide() </script>';
+                        echo ":)";
                       } 
                     ?>             
                   </div>
