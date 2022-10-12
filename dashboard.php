@@ -136,6 +136,11 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
               </thead>
               <!-- If Michael Cera becomes a visible collaborator on the site, we have a problem -->
               <tbody id="reviewbody"> 
+              <?php
+                echo '<script>
+                var user_role1 = '. json_encode($_SESSION['role']) .';
+                </script>';
+              ?>
                 <tr>
                   <td>1</td>
                   <td>dh-dc1</td>
@@ -170,6 +175,11 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
               </thead>
               <!-- If Michael Cera becomes a visible collaborator on the site, we have a problem -->
               <tbody id="expiredbody"> 
+                <?php
+                echo '<script>
+                var user_role2 = '. json_encode($_SESSION['role']) .';
+                </script>';
+                ?>
                 <tr>
                   <td>1</td>
                   <td>dh-dc1</td>
@@ -283,7 +293,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
                   </div>
                   <?php
                     $var = "Non-Compliant";
-                    if(strcmp($status_text, $var) == 0 && $non_comp_total > $non_comp_except )
+                    if(strcmp($status_text, $var) == 0 && $non_comp_total > $non_comp_except && $_SESSION['role'] == '1')
                     {
                       echo "<button type='button' class='btn btn-outline-warning float-right m-1' data-toggle='modal' data-target='#newExcModal' id=". $result_rule['id']." name=". $result_rule['id'] . "," . $result_rule['resource_type_id']." onclick='addException(this.name)' >
                       Add Exception
@@ -407,6 +417,11 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
             </thead>
             <!-- Table body populated by Javascript historybutton function -->
             <tbody id ="historybody">
+            <?php
+              echo '<script>
+              var user_role = '. json_encode($_SESSION['role']) .';
+              </script>';
+            ?>
             </tbody>
           </table>
               
