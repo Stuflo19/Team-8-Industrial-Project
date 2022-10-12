@@ -156,10 +156,7 @@
                   </div>
                   
                   <div>
-                    <span class="badge">69</span>
-
-                    <p class = "resource-counter" id="<?php echo 'comp_notification' . $result_rule['id'];?>" > </p>
-                    <p id="<?php echo 'non_comp_notification' . $result_rule['id'];?>" > </p>
+                    <span id="<?php echo 'non_comp_notification' . $result_rule['id'];?>" class="badge"></span>
                   </div>
 
                 </div>
