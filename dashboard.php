@@ -131,12 +131,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
                   <th class="stickyHead" scope="col-lg">Creator</th>
                   <th class="stickyHead" scope="col-lg">Justification</th>
                   <th class="stickyHead" scope="col-lg">Review date</th>
-                  
-                  <th class="stickyHead" scope="col-lg" id="uprev">Review <?php if($_SESSION['role'] == '2')
-                  {
-                    echo '<script> hide(); </script>'
-                  } ?>
-                  </th>
+                  <th class="stickyHead" scope="col-lg" id="uprev" style="display:none;">Review </th>
                 </tr>
               </thead>
               <!-- If Michael Cera becomes a visible collaborator on the site, we have a problem -->
@@ -175,11 +170,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
                   <th class="stickyHead" scope="col-lg">Creator</th>
                   <th class="stickyHead" scope="col-lg">Justification</th>
                   <th class="stickyHead" scope="col-lg">Review date</th>
-                  <th class="stickyHead" scope="col-lg" id = "uprev">Review <?php if($_SESSION['role'] == '2')
-                  {
-                    echo '<script> hide(); </script>'
-                  } ?>
-                  </th>
+                  <th class="stickyHead" scope="col-lg" id = "uprev" style="display:none;">Review </th>
                 </tr>
               </thead>
               <!-- If Michael Cera becomes a visible collaborator on the site, we have a problem -->
