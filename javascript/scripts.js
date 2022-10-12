@@ -98,7 +98,7 @@ function upcomingReviews(exceptions)
       revBtn.appendChild(revIcon);  
         
       //If review date coming up within 30days
-      if(daysBetweenDates < 30) 
+      if(daysBetweenDates < 30 && daysBetweenDates > 0) 
       {  
         numOfUpcoming = numOfUpcoming + 1;
         const tr = document.getElementById('reviewbody').insertRow();
@@ -111,7 +111,7 @@ function upcomingReviews(exceptions)
         tr.insertCell().appendChild(document.createTextNode(exceptions[i]['review_date'].replaceAll('-','/')));
         tr.insertCell().appendChild(revBtn);
       }
-      else if(daysBetweenDates > 0)
+      else if(daysBetweenDates < 0)
       {
         const tr = document.getElementById('expiredbody').insertRow();
 
