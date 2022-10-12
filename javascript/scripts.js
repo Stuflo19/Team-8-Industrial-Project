@@ -13,7 +13,11 @@ function setDate() {
 }
 
 function hide() {
-  document.getElementById("uprev").style.display = 'none';
+  if(user_role3 == "1")
+  {
+    document.getElementById("uprev").style.display = 'none';
+
+  }
 }
 
 function generateGraph(noncompliant, compliant)
