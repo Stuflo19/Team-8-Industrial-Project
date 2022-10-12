@@ -6,7 +6,7 @@ function callAll(x, y, row)
 }
 
 function hide() {
-  document.getElementById("addexep").style.display = 'none';
+  document.getElementById("suspendButton").style.visibility = 'hidden';
 }
 
 function setDate() {
