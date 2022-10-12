@@ -13,7 +13,7 @@ function setDate() {
 }
 
 function hide() {
-  document.getElementById("uprev").style.visibility = 'hidden';
+  document.getElementById("uprev").style.display = 'none';
 }
 
 function generateGraph(noncompliant, compliant)
