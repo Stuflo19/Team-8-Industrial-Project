@@ -231,16 +231,20 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
                           $quer1 = mysqli_query($conn, $quer);
                           $quer2 = mysqli_fetch_array($quer1);
 
-                          if($quer2== NULL || $quer2['suspended'] == 1)
+                          if($quer2== NULL || $quer2['suspended'] == 1 || $quer2['suspended'] == 0)
                         {
-                          $non_comp_total =  $non_comp_total +1;
-                          if($quer2 != NULL && $quer2['suspended'] == 1)
+                          if($quer2 != NULL && $quer2['suspended'] == 1 || $quer2['suspended'] == 0 )
                           {
                             $non_comp_except = $non_comp_except+1;
+                          }  
+                          if($quer2 NULL NULL || $quer2['suspended'] == 0)
+                          {
+                            $non_comp_total =  $non_comp_total +1;
+
+                            $status ="exception-status";
+                            $status_text ="Non-Compliant";
+                            break;
                           }
-                          $status ="exception-status";
-                          $status_text ="Non-Compliant";
-                          break;
                         }
                       }
                     }

@@ -30,7 +30,7 @@
     $addExceptionS="INSERT INTO exception(customer_id, rule_id,last_updated_by, exception_value, justification, review_date, last_updated, suspended) VALUES (".$customer_id.",". $ruleID .",'".$user_id."','" . $exception_value . "','".$justif."', '" . $_POST['newReviewDate'] . "','". $date ."',0 );";
     $insertQ = mysqli_query($conn,$addExceptionS);
 
-    $sql1 = "INSERT INTO `non_compliance_audit` (`non_compliance_id`, `resource_id`, `rule_id`, `user_id`, `action`, `action_dt`) VALUES ('".$non_compliance_id."', '".$resourceID."', '".$ruleID."', '$user_id', 'Exception added (resource -> compliant)', '".$date."') ";   
+    $sql1 = "INSERT INTO `non_compliance_audit` (`non_compliance_id`, `resource_id`, `rule_id`, `user_id`, `action`, `action_dt`) VALUES ('".$non_compliance_id."', '".$resourceID."', '".$ruleID."', '$user_id', 'Exception', '".$date."') ";   
     if (!mysqli_query($conn, $sql1))
         {
             die('Error: ' . mysqli_query());
