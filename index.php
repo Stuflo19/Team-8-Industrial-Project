@@ -221,7 +221,7 @@
               </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
-                  <input type="submit" class="btn btn-outline-warning" onclick='addReview()' value="Submit">
+                  <input type="button" class="btn btn-outline-warning" data-dismiss="modal" onclick='addReview()' value="Submit">
               </div> 
             </form>   
           </div>

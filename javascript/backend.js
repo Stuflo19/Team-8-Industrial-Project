@@ -172,5 +172,6 @@ async function addReview()
   })
   .catch((err) => { console.error(err); });
   
+  refresh();
   return false;
 }
