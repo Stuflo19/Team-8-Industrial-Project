@@ -20,7 +20,7 @@ if(isset($_POST['newJustification']))
         $sql = "UPDATE `exception` SET `customer_id`='$customer_id', `last_updated_by`='$user_id', `justification`='$newJustification',`review_date`='$newReview',`last_updated`='$date' WHERE `id` = $exceptionId";
         mysqli_query($conn, $sql);
 
-        $sql = "INSERT INTO `exception_audit`(`exception_id`, `user_id`, `customer_id`, `rule_id`, `action`, `action_dt`, `old_exception_value`, `new_exception_value`, `old_justification`, `new_justification`, `old_review_date`, `new_review_date`) VALUES ('$exceptionId','$user_id','1','$ruleId','Review','$date','$exceptionValue','$exceptionValue','$oldJustification','$newJustification','$oldReview','$newReview')";
+        $sql = "INSERT INTO `exception_audit`(`exception_id`, `user_id`, `customer_id`, `rule_id`, `action`, `action_dt`, `old_exception_value`, `new_exception_value`, `old_justification`, `new_justification`, `old_review_date`, `new_review_date`) VALUES ('$exceptionId','$user_id','$customer_id','$ruleId','Update','$date','$exceptionValue','$exceptionValue','$oldJustification','$newJustification','$oldReview','$newReview')";
         mysqli_query($conn, $sql);
     
         echo "Success";
