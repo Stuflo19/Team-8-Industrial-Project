@@ -337,11 +337,12 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
               <th scope="col">Suspend</th>
             </thead>
             <!-- Table body populated by Javascript historybutton function -->
-            <?php if($_SESSION['role'] == '1') {
-                echo '<script> hide() </script>';
-              } 
-            ?>
             <tbody id ="historybody">
+            <?php
+              echo '<script>
+              var user_role = '. json_encode($_SESSION['role']) .';
+              </script>';
+            ?>
             </tbody>
           </table>
               
