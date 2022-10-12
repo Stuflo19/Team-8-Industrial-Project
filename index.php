@@ -112,8 +112,8 @@
           <div class = "row mb-2">
             <div class="col-lg">
               <!-- Compliance Rule Card -->
-              <div style="padding-left=50px;" class="card cardColor text-center m-auto">
-              <div style="padding-left=50px;" class="card-body m-1 p-1 d-flex justify-content-between" id="<?php echo 'RuleCard' . $result_rule['id'];?>">
+              <div class="card cardColor text-center m-auto">
+              <div class="card-body m-1 p-1 d-flex justify-content-between" id="<?php echo 'RuleCard' . $result_rule['id'];?>">
                   <p>Rule: <?php echo $result_rule["id"];?></p>
                   
                   <div>
