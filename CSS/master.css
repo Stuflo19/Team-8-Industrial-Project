@@ -193,6 +193,7 @@ table{
   color: white;
   text-align: right;
   font-size: 1rem;
+  position: relative;
   bottom: 30px;
 
 }
