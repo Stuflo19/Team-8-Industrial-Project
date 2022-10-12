@@ -171,21 +171,21 @@ async function generateResources() {
   if(non_comp_counter == 0)
   {
     var comp_badge = document.createElement('span');
-      comp_badge.type = "span";
+      comp_badge.type = 'span';
       comp_badge.id = "<?php echo 'non_comp_notification' . $result_rule['id'];?>";
-      comp_badge.style = "background = green;";
-      comp_badge.className = "badge";
-      document.getElementById("comp_badge").appendChild(comp_badge);
+      comp_badge.style = 'background = green;';
+      comp_badge.className = 'badge';
+      document.getElementById('comp_badge').appendChild(comp_badge);
    
   }
   else
   {
     var non_comp_badge = document.createElement('span');
-    comp_badge.type = "span";
+    comp_badge.type = 'span';
     comp_badge.id = "<?php echo 'non_comp_notification' . $result_rule['id'];?>";
-    comp_badge.style = "background = red;";
-    comp_badge.className = "badge";
-    document.getElementById("comp_badge").appendChild(non_comp_badge);
+    comp_badge.style = 'background = red;';
+    comp_badge.className = 'badge';
+    document.getElementById('comp_badge').appendChild(non_comp_badge);
   }
   console.log(comp_counter);
   document.getElementById('comp_notification' + result_rule.id).innerHTML = comp_counter;
