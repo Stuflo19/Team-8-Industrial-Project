@@ -246,20 +246,12 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
                     </div>
                     <?php
                       $var = "Non-Compliant";
-                      if(strcmp($status_text, $var) == 0 && $non_comp_total > $non_comp_except )
+                      if(strcmp($status_text, $var) == 0 && $non_comp_total > $non_comp_except && $_SESSION['role'] == '1')
                       {
                         echo "<button type='button' class='btn btn-outline-warning float-right m-1' data-toggle='modal' data-target='#newExcModal' id=". $result_rule['id']." name=". $result_rule['id'] . "," . $result_rule['resource_type_id']." onclick='addException(this.name)' >
                         Add Exception
                         </button>";
                       }   
-                      if ($_SESSION['role'] == '1')
-                      {
-                        echo "testing stuff";
-                        echo '<script> hide() </script>';
-                      }
-                      else{
-                        echo ":)";
-                      } 
                     ?>             
                   </div>
                 </div>
