@@ -54,6 +54,7 @@ function upcomingReviews(exceptions)
   var numOfUpcoming = 0;
 
   document.getElementById("reviewbody").innerHTML = "";
+  document.getElementById("expiredbody").innerHTML = "";
 
   for(var i = 0; i < exceptions.length; i++) 
   {
@@ -107,7 +108,19 @@ function upcomingReviews(exceptions)
         tr.insertCell().appendChild(document.createTextNode(exceptions[i]['justification']));
         tr.insertCell().appendChild(document.createTextNode(exceptions[i]['review_date'].replaceAll('-','/')));
         tr.insertCell().appendChild(revBtn);
-      } 
+      }
+      else if(daysBetweenDates > 0)
+      {
+        const tr = document.getElementById('expiredbody').insertRow();
+
+        tr.insertCell().appendChild(document.createTextNode(exceptions[i]['id']));
+        tr.insertCell().appendChild(document.createTextNode(exceptions[i]['exception_value']));
+        tr.insertCell().appendChild(document.createTextNode(exceptions[i]['rule_id']));
+        tr.insertCell().appendChild(document.createTextNode(exceptions[i]['last_updated_by']));
+        tr.insertCell().appendChild(document.createTextNode(exceptions[i]['justification']));
+        tr.insertCell().appendChild(document.createTextNode(exceptions[i]['review_date'].replaceAll('-','/')));
+        tr.insertCell().appendChild(revBtn);
+      }
     }
     if(numOfUpcoming == 0)
     {
