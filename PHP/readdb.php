@@ -64,8 +64,16 @@
     $rules[] = $row;
   }
 
-  $query = mysqli_query($conn,"SELECT * FROM rule");
+  //$query = mysqli_query($conn,"SELECT * FROM rule");
 
+  /* READ TO GET CUSTOMER NAME */
+  $sql = "SELECT * FROM user";
+  $custname = mysqli_query($conn,$sql);
+
+
+  /* READ TO GET USER ROLE */
+  $sql = "SELECT * FROM user";
+  $custrole = mysqli_query($conn,$sql);
 
 
   // Adding to JS vars resource, non_compliance, exception

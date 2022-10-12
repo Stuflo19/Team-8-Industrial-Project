@@ -66,6 +66,7 @@ function upcomingReviews(exceptions)
     // convert ms to days                     hour  min  sec   ms
     const daysBetweenDates = msBetweenDates / (24 * 60 * 60 * 1000);
 
+    //Button to review exceptions
     var revBtn = document.createElement('button');
     revBtn.type = "button";
     revBtn.textContent = "Review ";

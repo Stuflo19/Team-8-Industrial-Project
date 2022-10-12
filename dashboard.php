@@ -1,6 +1,13 @@
+<?php 
+session_start();
+
+if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
 <?php
-  include 'PHP/dbconnect.php';
+  include 'PHP/dbconnectlocal.php';
   include 'PHP/readdb.php';
+  ini_set('display_errors', 1);
+  ini_set('display_startup_errors', 1);
+  error_reporting(E_ALL);
 ?>
 
 <!DOCTYPE html>
@@ -33,11 +40,59 @@
   <nav class="navbar navbar-expand-lg navbar-light">
     <div class="collapse navbar-collapse d-flex justify-content-around" id="navbarNav">
       <ul class="mb-auto pl-0">
-        <li>Username: Customer Name</li>
-        <li>Role: Customer Role</li>
+        <li>Username: <?php echo $_SESSION['username'];?></li>
+        <li>Role: <?php  
+          while ($row = mysqli_fetch_assoc($custrole)){
+            if ($row['id'] == $_SESSION['user_id'])
+            {
+              $_SESSION['role'] = $row['role_id'];
+              break;
+            }
+            else 
+            {
+              echo "Error getting role";
+              break;
+            } 
+          }
+          if($_SESSION['role'] == '1')
+          {
+            echo "Compliance Manager";
+          }
+          elseif($_SESSION['role'] == '2')
+          {
+            echo "Compliance Auditor";
+          }
+          else
+          {
+            echo "Error finding role";
+          }
+          ?> 
+          </li>
       </ul>
       <br>
-      <h1 class="m-auto"> Company Name </h1>
+      <h1 class=m-auto> <?php  
+      while ($row = mysqli_fetch_assoc($custname)){
+        if ($row['id'] == $_SESSION['user_id'])
+        {
+          $_SESSION['customer'] = $row['customer_id'];
+          break;
+        }
+        else 
+        {
+          echo "Error getting customer name";
+          break;
+        } 
+      }
+      if($_SESSION['customer'] == '1')
+      {
+        echo "Brightsolid";
+      }
+      else
+      {
+        echo "Error";
+      }
+      ?>  
+      </h1>
       <button class="btn text-secondary border-bottom-0 border rounded-pill ms-n5" style="margin-right: 10px" onclick=refresh();><i class='fa fa-refresh p-2' style="color:white"></button></i>
       <h2 id="date" style="margin: 0"></h2>
     </div>
@@ -61,6 +116,7 @@
       <div class="col-lg-6 " >
         <div class="row-lg mt-4">
           <h3>Upcoming Reviews for Existing Exceptions</h3>
+          <p>In the next 30 days, these exceptions will be up for review. <br> To easily locate a resource, click the Rule ID to quickly navigate to it</p>
         </div>
           <div class="d-flex align-items-center p-2">
           <table class="table fixed_header" style="color:white">
@@ -113,28 +169,32 @@
             <div class="col-lg">
               <!-- Compliance Rule Card -->
               <div class="card cardColor text-center m-auto">
-                <div class="card-body m-1 p-1">
-                  <p class="card-text pb-1 m-auto"> <?php echo $result_rule["name"];?> </p>
-                  <?php 
-                    $status ="active-status"; // compliant
-                    $status_text ="Compliant";
+                
+                <div class="card-body m-1 p-1 d-flex justify-content-between" id="<?php echo 'RuleCard' . $result_rule['id'];?>">
+                  <p>Rule: <?php echo $result_rule["id"];?></p>
+                  
+                  <div>
+                    <p class="card-text pb-1 m-auto"> <?php echo $result_rule["name"];?> </p>
+                    <?php 
+                      $status ="active-status"; // compliant
+                      $status_text ="Compliant";
 
-                    $non_comp_total =0;
-                    $non_comp_except =0;
+                      $non_comp_total =0;
+                      $non_comp_except =0;
 
-                    foreach($compliant as $result_non_compl)
-                    {
-                      if ($result_rule['id'] == $result_non_compl['rule_id'])
+                      foreach($compliant as $result_non_compl)
                       {
-                        $quer = "SELECT * FROM resource WHERE id=".$result_non_compl['resource_id'];
-                          $quer1 = mysqli_query($conn, $quer);
-                          $quer2 = mysqli_fetch_array($quer1);
+                        if ($result_rule['id'] == $result_non_compl['rule_id'])
+                        {
+                          $quer = "SELECT * FROM resource WHERE id=".$result_non_compl['resource_id'];
+                            $quer1 = mysqli_query($conn, $quer);
+                            $quer2 = mysqli_fetch_array($quer1);
 
-                          $quer = "SELECT * FROM exception WHERE exception_value='".$quer2['resource_ref']."'";
-                          $quer1 = mysqli_query($conn, $quer);
-                          $quer2 = mysqli_fetch_array($quer1);
+                            $quer = "SELECT * FROM exception WHERE exception_value='".$quer2['resource_ref']."'";
+                            $quer1 = mysqli_query($conn, $quer);
+                            $quer2 = mysqli_fetch_array($quer1);
 
-                          if($quer2== NULL || $quer2['suspended'] == 1)
+                            if($quer2== NULL || $quer2['suspended'] == 1)
                           {
                             $non_comp_total =  $non_comp_total +1;
                             if($quer2 != NULL && $quer2['suspended'] == 1)
@@ -145,16 +205,22 @@
                             $status_text ="Non-Compliant";
                             break;
                           }
+                        }
                       }
-                    }
-                  ?>
-                  <div class="<?php echo $status;?>"> <?php echo $status_text;?></div>
+                    ?>
+                    <div class="<?php echo $status;?>"> <?php echo $status_text;?></div>
+                  </div>
+                  
+                  <div>
+                    <span class="badge">69</span>
+                  </div>
+
                 </div>
                   
                 <button class="btn btn-outline-warning m-1" type="button"  data-toggle="collapse" data-target="#Rule<?php echo $result_rule['id'];?>" aria-expanded="false" aria-controls="collapseExample">
                   View details
                 </button>
-                <div class="collapse" id="<?php echo 'Rule' . $result_rule['id'];?>">
+                <div class="collapse" id="<?php echo 'Rule' . $result_rule['id'];?>"> 
                   <div class="card-body">
                     <p id="<?php echo 'Description' . $result_rule['id'];?>"></p>
 
@@ -227,7 +293,7 @@
           </div>
         </div>
       </div>
-    </div>                  
+    </div> 
 
     <!-- Add exception Modal -->
     <div class="modal fade" id="newExcModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -254,13 +320,28 @@
               <!-- Exception Value = resource ref  -->
               <div class="form-group">
                 <label for="message-text" class="col-form-label">Review Date:</label>
-                <!-- Code taken from https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date -->
-                <input type="date" id="newReviewDate" name="newReviewDate" value="<?php echo date("Y-m-d")?>" min="<?php echo date("Y-m-d", strtotime("+1 day"))?>" max="<?php echo date("Y-m-d", strtotime("+1 year"))?>">
+                <input type="radio" onclick="checkCustom()" name="newReviewDate" value="<?php echo date('Y-m-d', strtotime('+1 month'));?>">After 1 month
+                <br>
+                <input type="radio" onclick="checkCustom()" name="newReviewDate" value="<?php echo date("Y-m-d", strtotime("+3 month"));?>">After 3 months              
+                <br>
+                <input type="radio" onclick="checkCustom()" name="newReviewDate" value="<?php echo date("Y-m-d", strtotime("+6 month"))?>">After 6 months
+                <br>
+                <input type="radio" onclick="checkCustom()" name="newReviewDate" value="<?php echo date("Y-m-d", strtotime("+9 month"))?>">After 9 months
+                <br>
+                <input type="radio" onclick="checkCustom()" name="newReviewDate" value="<?php echo date("Y-m-d", strtotime("+1 year"))?>">After 12 months
+                <br>
+                <input type="radio" onclick="checkCustom()" id='custom' name="newReviewDate" value="">Custom
+
+                <div id="addCustom" style="display: none">
+                  <!-- Help from https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date -->
+                  <input type="date" disabled id="customReviewDate" onChange="setNewValue()" name="ReviewDate" value="<?php echo date("Y-m-d")?>" min="<?php echo date("Y-m-d", strtotime("+30 day"))?>" max="<?php echo date("Y-m-d", strtotime("+1 year"))?>"> 
+                </div>
               </div>
+
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
-                  <input type="submit" class="btn btn-outline-warning" onclick='formCompleted()' value="Submit">
-              </div> 
+                  <input type="button" class="btn btn-outline-warning" onclick='formCompleted()' value="Submit">
+                </div> 
             </form>   
           </div>
         </div>
@@ -416,11 +497,40 @@ function formCompleted(){
         method: 'POST',
         body: formattedFormData
     });
-    location.reload();
+    //location.reload();
 
     const data = await response.text();
     console.log(data);
-    //location.reload();
+    location.reload();
   }
 
+  function checkCustom() {
+  if (document.getElementById('custom').checked) {
+    document.getElementById('addCustom').style.display = 'block';
+    document.getElementById('customReviewDate').removeAttribute('disabled');
+
+  }
+  else
+  {
+    document.getElementById('addCustom').style.display= 'none';
+    document.getElementById('customReviewDate').setAttribute('disabled', '');
+
+  }
+}
+//setting radio button's value to be the value chosen on a calendar
+function setNewValue()
+{
+  document.getElementById('custom').value = document.getElementById('customReviewDate').value;
+  console.log(document.getElementById('custom').value);
+}
+
 </script>
+
+<?php
+}
+else
+{
+header("Location: index.php");
+exit();
+}
+?>
