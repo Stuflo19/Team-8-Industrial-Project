@@ -12,6 +12,10 @@ function setDate() {
   document.getElementById("date").innerHTML = "Last Checked: " + today.toDateString() + " " + today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 }
 
+function hide() {
+  document.getElementById("uprev").style.visibility = 'hidden';
+}
+
 function generateGraph(noncompliant, compliant)
 {
   trueComp = compliant - noncompliant
