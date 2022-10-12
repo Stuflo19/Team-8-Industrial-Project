@@ -427,7 +427,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
               <th scope="col" id="uprev2">Suspend <?php
                     echo '<script>
                     var user_role5 = '. json_encode($_SESSION['role']) .';
-                    hide1();
+                    hide2();
                     </script>';
                     ?></th>
             </thead>
