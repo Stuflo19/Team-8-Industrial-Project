@@ -2,14 +2,14 @@
 
 -- e.g. a specific company
 CREATE TABLE customer(
-    id INT(4) NOT NULL,  
+    id INT(4) NOT NULL AUTO_INCREMENT,  
     name VARCHAR(100) NOT NULL, -- e.g. brightsolid
     PRIMARY KEY (id)
 ); 
 
 -- manager or auditor
 CREATE TABLE user_role(
-    id INT(4) NOT NULL,
+    id INT(4) NOT NULL AUTO_INCREMENT,
     role VARCHAR(100) NOT NULL, 
     PRIMARY KEY (id)
 );
@@ -25,7 +25,7 @@ CREATE TABLE user(
 );
 
 CREATE TABLE login(
-    id INT(4) NOT NULL,
+    id INT(4) NOT NULL AUTO_INCREMENT,
     username VARCHAR(50),
     password VARCHAR(50), -- need to be hashed
     user_id VARCHAR(100) NOT NULL,
@@ -34,13 +34,13 @@ CREATE TABLE login(
 );
 
 CREATE TABLE platform(
-    id INT(4) NOT NULL,
+    id INT(4) NOT NULL AUTO_INCREMENT,
     name VARCHAR(50) NOT NULL,
     PRIMARY KEY (id)
 );
 
 CREATE TABLE account (
-    id INT(4) NOT NULL,
+    id INT(4) NOT NULL AUTO_INCREMENT,
     account_ref VARCHAR(50) NOT NULL,
     platorm_id INT(4) NOT NULL,
     customer_id INT(4) NOT NULL,
@@ -50,7 +50,7 @@ CREATE TABLE account (
 );
 
 CREATE TABLE resource_type(
-    id INT(4) NOT NULL,
+    id INT(4) NOT NULL AUTO_INCREMENT,
     name VARCHAR(200) NOT NULL,
     platorm_id INT(4) NOT NULL,
     PRIMARY KEY (id),
@@ -58,7 +58,7 @@ CREATE TABLE resource_type(
 );
 
 CREATE TABLE rule(
-    id INT(4) NOT NULL,
+    id INT(4) NOT NULL AUTO_INCREMENT,
     name VARCHAR(200) NOT NULL,
     resource_type_id INT(4) NOT NULL,
     description VARCHAR(1000),
@@ -68,7 +68,7 @@ CREATE TABLE rule(
 
 
 CREATE TABLE exception (
-    id INT(4) NOT NULL,
+    id INT(4) NOT NULL AUTO_INCREMENT,
     customer_id INT(4) NOT NULL,
     rule_id INT(4) NOT NULL,
     last_updated_by VARCHAR(100) NOT NULL,
@@ -84,7 +84,7 @@ CREATE TABLE exception (
 );
 
 CREATE TABLE resource(
-    id INT(4) NOT NULL,
+    id INT(4) NOT NULL AUTO_INCREMENT,
     resource_ref VARCHAR(1000) NOT NULL,
     account_id INT(4) NOT NULL,
     resource_type_id INT(4) NOT NULL,
@@ -97,7 +97,7 @@ CREATE TABLE resource(
 );
 
 CREATE TABLE non_compliance (
-    id INT(4) NOT NULL,
+    id INT(4) NOT NULL AUTO_INCREMENT,
     resource_id INT(4) NOT NULL,
     rule_id INT(4) NOT NULL,
     PRIMARY KEY (id),
@@ -107,7 +107,7 @@ CREATE TABLE non_compliance (
 
 -- stores new added exceptions
 CREATE TABLE non_compliance_audit (
-    id INT(4) NOT NULL,
+    id INT(4) NOT NULL AUTO_INCREMENT,
     non_compliance_id INT(4) NOT NULL,
     resource_id INT(4) NOT NULL, 
     rule_id INT(4) NOT NULL,
@@ -123,7 +123,7 @@ CREATE TABLE non_compliance_audit (
 
 -- stores history of exceptions of a specific resource
 CREATE TABLE exception_audit(
-    id INT(4) NOT NULL, 
+    id INT(4) NOT NULL AUTO_INCREMENT, 
     exception_id INT(4) NOT NULL,
     user_id VARCHAR(100) NOT NULL,
     customer_id INT(4) NOT NULL,
@@ -196,8 +196,9 @@ VALUES
 INSERT INTO exception (id, customer_id, rule_id, exception_value, justification, review_date, last_updated, last_updated_by, suspended)
 VALUES
     (1,1,4,'bs-quorum-dropbox','Enabled by system','2022-12-12 16:23:59.759 +0000','2022-09-12 17:25:36.091 +0100','system', 0),
-    (3,1,4,'bsol-dev-bakery-assets','Enabled by system','2022-12-12 16:23:59.759 +0000','2022-09-12 17:25:36.091 +0100','system', 0);
+    (2,1,4,'bsol-dev-bakery-assets','Enabled by system','2022-12-12 16:23:59.759 +0000','2022-09-12 17:25:36.091 +0100','system', 0);
 
+ALTER TABLE resource AUTO_INCREMENT = 1128;
 INSERT INTO resource(id,resource_ref, account_id, resource_type_id, resource_name, last_updated, resource_metadata)
 VALUES
     (1128,'i-060476bb31df657e7',1,1,'vault test','2022-09-08 14:18:25.529 +0100','{"AmiLaunchIndex": 0, "ImageId": "ami-0089b31e09ac3fffc", "InstanceId": "i-060476bb31df657e7", "InstanceType": "t2.micro", "KeyName": "pc-dev-keypair01", "LaunchTime": "2021-04-12T15:41:40+00:00", "Monitoring": {"State": "disabled"}, "Placement": {"AvailabilityZone": "eu-west-2a", "GroupName": "", "Tenancy": "default"}, "PrivateDnsName": "ip-10-184-0-18.eu-west-2.compute.internal", "PrivateIpAddress": "10.184.0.18", "ProductCodes": [], "PublicDnsName": "", "State": {"Code": 80, "Name": "stopped"}, "StateTransitionReason": "User initiated (2021-04-12 15:43:14 GMT)", "SubnetId": "subnet-0385927a7d61e8706", "VpcId": "vpc-05da5d22d7bd6f8cf", "Architecture": "x86_64", "BlockDeviceMappings": [{"DeviceName": "/dev/xvda", "Ebs": {"AttachTime": "2020-02-10T21:21:24+00:00", "DeleteOnTermination": true, "Status": "attached", "VolumeId": "vol-0e181efd2ccb65947"}}], "ClientToken": "", "EbsOptimized": false, "EnaSupport": true, "Hypervisor": "xen", "IamInstanceProfile": {"Arn": "arn:aws:iam::011072135518:instance-profile/vaultInstanceProfile", "Id": "AIPAQFE7TMFPMA6DXMOQM"}, "NetworkInterfaces": [{"Attachment": {"AttachTime": "2020-02-10T21:21:23+00:00", "AttachmentId": "eni-attach-0ab8f83f7f6acfb0a", "DeleteOnTermination": true, "DeviceIndex": 0, "Status": "attached", "NetworkCardIndex": 0}, "Description": "", "Groups": [{"GroupName": "launch-wizard-4", "GroupId": "sg-0072d99591e9b5afb"}], "Ipv6Addresses": [], "MacAddress": "06:70:52:26:68:62", "NetworkInterfaceId": "eni-0aa1501647f12ae7f", "OwnerId": "011072135518", "PrivateDnsName": "ip-10-184-0-18.eu-west-2.compute.internal", "PrivateIpAddress": "10.184.0.18", "PrivateIpAddresses": [{"Primary": true, "PrivateDnsName": "ip-10-184-0-18.eu-west-2.compute.internal", "PrivateIpAddress": "10.184.0.18"}], "SourceDestCheck": true, "Status": "in-use", "SubnetId": "subnet-0385927a7d61e8706", "VpcId": "vpc-05da5d22d7bd6f8cf", "InterfaceType": "interface"}], "RootDeviceName": "/dev/xvda", "RootDeviceType": "ebs", "SecurityGroups": [{"GroupName": "launch-wizard-4", "GroupId": "sg-0072d99591e9b5afb"}], "SourceDestCheck": true, "StateReason": {"Code": "Client.UserInitiatedShutdown", "Message": "Client.UserInitiatedShutdown: User initiated shutdown"}, "Tags": [{"Key": "customer", "Value": "brightsolid"}, {"Key": "customer_code", "Value": "16BSOT01"}, {"Key": "project_code", "Value": "08-BSOT-931"}, {"Key": "Name", "Value": "vault test"}, {"Key": "resource_owner", "Value": "109bb604.brightsolid.com@emea.teams.ms"}, {"Key": "c7n:FindingId:ec2-instance-with-invalid-customer", "Value": "eu-west-2/011072135518/10b41698007565e1d396787f129479ce/f2e74d392bf3eaf1359eb8e6c4530568:2020-09-10T16:10:14.602386+00:00"}], "VirtualizationType": "hvm", "CpuOptions": {"CoreCount": 1, "ThreadsPerCore": 1}, "CapacityReservationSpecification": {"CapacityReservationPreference": "open"}, "HibernationOptions": {"Configured": false}, "MetadataOptions": {"State": "applied", "HttpTokens": "optional", "HttpPutResponseHopLimit": 1, "HttpEndpoint": "enabled", "HttpProtocolIpv6": "disabled", "InstanceMetadataTags": "disabled"}, "EnclaveOptions": {"Enabled": false}, "PlatformDetails": "Linux/UNIX", "UsageOperation": "RunInstances", "UsageOperationUpdateTime": "2020-02-10T21:21:23+00:00", "PrivateDnsNameOptions": {}, "MaintenanceOptions": {"AutoRecovery": "default"}}'),
