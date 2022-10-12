@@ -61,7 +61,7 @@ nav {
   position: relative;
 }
 .card {
-  margin: 10px 0px;
+ 
   position: relative;
   width: 100%
 }
@@ -195,7 +195,6 @@ table{
   font-size: 1rem;
   position: relative;
   top: -70px;
-
 }
 
 @media (max-width: 500px) {
