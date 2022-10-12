@@ -155,7 +155,7 @@
            
                   </div>
                   
-                  <div id="<?php echo 'badge_notification' . $result_rule['id'];?>" >
+                  <div id = "comp_badge" >
                  
                   </div>
 
