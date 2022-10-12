@@ -1,11 +1,12 @@
 var currFilter;
 
-async function updatesuspended(exceptionid, suspended) {
+async function updatesuspended(data) {
+  split = data.split(',');
   // fetch statement found from: https://code-boxx.com/call-php-file-from-javascript/ && https://sebhastian.com/call-php-function-from-javascript/ 
-  await fetch("PHP/suspend.php", { mode: 'cors', method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8" }, body: `id=${exceptionid}&suspended=${suspended}` })
+  await fetch("PHP/suspend.php", {mode: 'cors', method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8" }, body: `id=${split[0]}&suspended=${split[1]}&ruleid=${split[2]}` })
     .then(res => res.text())
     .then((txt) => {
-      document.getElementById("suspendButton").value = txt == 1 ? "Unsuspend" : "Suspend";
+      console.log(txt);
     })
     .catch((err) => { console.error(err); });
 
@@ -42,11 +43,11 @@ function historybutton(id) {
       tr.insertCell().appendChild(document.createTextNode(today < review ? review : "EXPIRED"));
       // This is the most painful button you'll see in this project
       var btn = document.createElement('input');
-      btn.type = "button";
+      btn.type = "submit";
       btn.value = exception[i]['suspended'] == 0 ? 'Suspend' : "Unsuspend";
-      btn.id = "suspendButton";
+      btn.id = exception[i]['id'] + "," + exception[i]['suspended'] + "," + exception[i]['rule_id'];
       btn.addEventListener("click", function () {
-        updatesuspended(currRow, currSuspended);
+        updatesuspended(this.id);
       });
       btn.className = "btn btn-outline-warning";
       tr.insertCell().appendChild(btn);
