@@ -194,6 +194,7 @@ table{
   text-align: right;
   font-size: 1rem;
   position: absolute;
+  margin-right: 0px;
 }
 
 @media (max-width: 500px) {
