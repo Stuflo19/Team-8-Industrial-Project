@@ -9,6 +9,27 @@ body {
   background-color: #115e67;
 }
 
+.centerdiv{
+  position: relative;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+}
+
+label, input {
+  font-family: monospace;
+  margin: 5px;
+}
+
+.loginbutton {
+  width: 100%; 
+  border-radius: 25px; 
+  font-family: monospace;
+}
+
 /* Fonts for headings */
 h1{
   font-size: 1.5rem;
@@ -54,6 +75,17 @@ button:hover {
 nav {
   background-color: #f1b434;
   text-align: center;
+}
+
+.badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  padding: 5px 10px;
+  border-radius: 50%;
+  background: red;
+  color: white;
+  font-size: 1rem;
 }
 
 .chart {
@@ -129,6 +161,11 @@ table{
   background-color: #333333;
 }
 
+.form-centre {
+  display: flex;
+  justify-content: center;
+}
+
 #historytable th{
   width: 25%;
 }
@@ -176,17 +213,6 @@ table{
   top: 0;
   padding: 0px;
   border: 0px;
-}
-
-.badge {
-  position: absolute;
-  top: -10px;
-  right: -10px;
-  padding: 5px 10px;
-  border-radius: 50%;
-  background: red;
-  color: white;
-  font-size: 1rem;
 }
 
 @media (max-width: 500px) {
