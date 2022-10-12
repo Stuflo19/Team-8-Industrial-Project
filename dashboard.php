@@ -257,7 +257,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
                       }
                       else
                       {
-                        echo " ";
+                        echo "Compliance auditor";
+                        echo $_SESSION['role'];
                       }
                         
                     ?>                    
