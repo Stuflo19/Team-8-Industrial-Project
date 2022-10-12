@@ -115,73 +115,74 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
       
       <!-- Review Dates -->
       <!-- Upcoming -->
-      <div class="col-lg-6 " >
-        <div class="row-lg mt-4">
-          <h3>Upcoming Reviews for Existing Exceptions</h3>
-          <p>In the next 30 days, these exceptions will be up for review. <br> To easily locate a resource, click the Rule ID to quickly navigate to it</p>
+      <div class="col-lg-6">
+        <div class="row">
+          <div class="row-lg mt-4">
+            <h3>Upcoming Reviews for Existing Exceptions</h3>
+            <p>In the next 30 days, these exceptions will be up for review. <br> To easily locate a resource, click the Rule ID to quickly navigate to it</p>
+          </div>
+          <div class="d-flex align-items-center p-2">
+            <table class="table fixed_header" style="color:white">
+              <thead style="position: sticky; top:0;" class="thead-dark stickyHead">
+                <tr class="stickyHead">
+                  <th class="stickyHead" scope="col-lg">Exception No.</th>
+                  <th class="stickyHead" scope="col-lg">Resource</th>
+                  <th class="stickyHead" scope="col-lg">Rule ID</th>
+                  <th class="stickyHead" scope="col-lg">Creator</th>
+                  <th class="stickyHead" scope="col-lg">Justification</th>
+                  <th class="stickyHead" scope="col-lg">Review date</th>
+                  <th class="stickyHead" scope="col-lg">Review</th>
+                </tr>
+              </thead>
+              <!-- If Michael Cera becomes a visible collaborator on the site, we have a problem -->
+              <tbody id="reviewbody"> 
+                <tr>
+                  <td>1</td>
+                  <td>dh-dc1</td>
+                  <td>4</td>
+                  <td>Michael Cera</td>
+                  <td>The resource would not work</td>
+                  <td>2011/04/25 06:94:20</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-        <div class="d-flex align-items-center p-2">
-          <table class="table fixed_header" style="color:white">
-            <thead style="position: sticky; top:0;" class="thead-dark stickyHead">
-              <tr class="stickyHead">
-                <th class="stickyHead" scope="col-lg">Exception No.</th>
-                <th class="stickyHead" scope="col-lg">Resource</th>
-                <th class="stickyHead" scope="col-lg">Rule ID</th>
-                <th class="stickyHead" scope="col-lg">Creator</th>
-                <th class="stickyHead" scope="col-lg">Justification</th>
-                <th class="stickyHead" scope="col-lg">Review date</th>
-                <th class="stickyHead" scope="col-lg">Review</th>
-              </tr>
-            </thead>
-            <!-- If Michael Cera becomes a visible collaborator on the site, we have a problem -->
-            <tbody id="reviewbody"> 
-              <tr>
-                <td>1</td>
-                <td>dh-dc1</td>
-                <td>4</td>
-                <td>Michael Cera</td>
-                <td>The resource would not work</td>
-                <td>2011/04/25 06:94:20</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
 
-      <!-- Expired -->
-      <div class="col-lg-6 " >
-        <div class="row-lg mt-4">
-          <h3>Expired Reviews</h3>
-          <p>These exceptions have expired without a review. <br> Please determine whether or not these exceptions need renewal</p>
-        </div>
-        <div class="d-flex align-items-center p-2">
-          <table class="table fixed_header" style="color:white">
-            <thead style="position: sticky; top:0;" class="thead-dark stickyHead">
-              <tr class="stickyHead">
-                <th class="stickyHead" scope="col-lg">Exception No.</th>
-                <th class="stickyHead" scope="col-lg">Resource</th>
-                <th class="stickyHead" scope="col-lg">Rule ID</th>
-                <th class="stickyHead" scope="col-lg">Creator</th>
-                <th class="stickyHead" scope="col-lg">Justification</th>
-                <th class="stickyHead" scope="col-lg">Review date</th>
-                <th class="stickyHead" scope="col-lg">Review</th>
-              </tr>
-            </thead>
-            <!-- If Michael Cera becomes a visible collaborator on the site, we have a problem -->
-            <tbody id="expiredbody"> 
-              <tr>
-                <td>1</td>
-                <td>dh-dc1</td>
-                <td>4</td>
-                <td>Michael Cera</td>
-                <td>The resource would not work</td>
-                <td>2011/04/25 06:94:20</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div> 
-    </div>
+        <!-- Expired -->
+        <div class="row">
+          <div class="row-lg mt-4">
+            <h3>Expired Reviews</h3>
+            <p>These exceptions have expired without a review. <br> Please determine whether or not these exceptions need renewal</p>
+          </div>
+          <div class="d-flex align-items-center p-2">
+            <table class="table fixed_header" style="color:white">
+              <thead style="position: sticky; top:0;" class="thead-dark stickyHead">
+                <tr class="stickyHead">
+                  <th class="stickyHead" scope="col-lg">Exception No.</th>
+                  <th class="stickyHead" scope="col-lg">Resource</th>
+                  <th class="stickyHead" scope="col-lg">Rule ID</th>
+                  <th class="stickyHead" scope="col-lg">Creator</th>
+                  <th class="stickyHead" scope="col-lg">Justification</th>
+                  <th class="stickyHead" scope="col-lg">Review date</th>
+                  <th class="stickyHead" scope="col-lg">Review</th>
+                </tr>
+              </thead>
+              <!-- If Michael Cera becomes a visible collaborator on the site, we have a problem -->
+              <tbody id="expiredbody"> 
+                <tr>
+                  <td>1</td>
+                  <td>dh-dc1</td>
+                  <td>4</td>
+                  <td>Michael Cera</td>
+                  <td>The resource would not work</td>
+                  <td>2011/04/25 06:94:20</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div> 
+      </div>
       
       <div class="row">
         <div class="col-lg text-center mt-4">
