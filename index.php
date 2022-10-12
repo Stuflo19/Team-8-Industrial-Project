@@ -114,10 +114,10 @@
               <!-- Compliance Rule Card -->
               <div class="card cardColor text-center m-auto">
               <div class="card-body m-1 p-1 d-flex" id="<?php echo 'RuleCard' . $result_rule['id'];?>">
-                 <div class="p-2 bg-rule flex-fill"><p>Rule: <?php echo $result_rule["id"];?></p></div>
+                 <div class="p-2 bg-rule flex-fill" style = "text-align: left;"><p>Rule: <?php echo $result_rule["id"];?></p></div>
                   
                   <div>
-                  <div class="p-2 bg-card flex-fill"><p class="card-text pb-1 m-auto"> <?php echo $result_rule["name"];?> </p></div>
+                  <div class="p-2 bg-card flex-fill" style = "text-align: centre;"><p class="card-text pb-1 m-auto"> <?php echo $result_rule["name"];?> </p></div>
                     <?php 
                       $status ="active-status"; // compliant
                       $status_text ="Compliant";
@@ -159,7 +159,7 @@
                     <span class="badge">69</span>
 
                     <p class = "resource-counter" id="<?php echo 'comp_notification' . $result_rule['id'];?>" > </p>
-                    <p id="<?php echo 'non_comp_notification' . $result_rule['id'];?>" > </p>
+                    <p id="<?php echo 'non_comp_notification' . $result_rule['id'];?>" style = "text-align: right;"> </p>
                   </div>
 
                 </div>
