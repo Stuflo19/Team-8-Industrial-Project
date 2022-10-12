@@ -183,122 +183,122 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
           </div>
         </div> 
       </div>
+    </div>
+    <div class="row">
+      <div class="col-lg text-center mt-4">
       
-      <div class="row">
-        <div class="col-lg text-center mt-4">
-        
-          <!-- Complaince Rule and Status -->
-          <div class="row m-auto">
-            <h3 class="text-center">Compliance Rules</h3>
-            <div style = "margin-left: auto; margin-right: 0"> 
-              <select name="filter" style="color: white; background-color: #333333" id="filter-list" onchange="filter()">
-                <option value="No Filter">No Filter</option>
-                <option value="Compliant">Compliant</option>
-                <option value="Non-Compliant">Non-Compliant</option>
-              </select>
-            </div>
+        <!-- Complaince Rule and Status -->
+        <div class="row m-auto">
+          <h3 class="text-center">Compliance Rules</h3>
+          <div style = "margin-left: auto; margin-right: 0"> 
+            <select name="filter" style="color: white; background-color: #333333" id="filter-list" onchange="filter()">
+              <option value="No Filter">No Filter</option>
+              <option value="Compliant">Compliant</option>
+              <option value="Non-Compliant">Non-Compliant</option>
+            </select>
           </div>
-          <?php
-            foreach($query as $result_rule)
-            {
-          ?>
-          <div class = "row mb-2">
-            <div class="col-lg">
-              <!-- Compliance Rule Card -->
-              <div class="card cardColor text-center m-auto">
+        </div>
+        <?php
+          foreach($query as $result_rule)
+          {
+        ?>
+        <div class = "row mb-2">
+          <div class="col-lg">
+            <!-- Compliance Rule Card -->
+            <div class="card cardColor text-center m-auto">
+              
+              <div class="card-body m-1 p-1 d-flex justify-content-between" id="<?php echo 'RuleCard' . $result_rule['id'];?>">
+                <p>Rule: <?php echo $result_rule["id"];?></p>
                 
-                <div class="card-body m-1 p-1 d-flex justify-content-between" id="<?php echo 'RuleCard' . $result_rule['id'];?>">
-                  <p>Rule: <?php echo $result_rule["id"];?></p>
-                  
-                  <div>
-                    <p class="card-text pb-1 m-auto"> <?php echo $result_rule["name"];?> </p>
-                    <?php 
-                      $status ="active-status"; // compliant
-                      $status_text ="Compliant";
+                <div>
+                  <p class="card-text pb-1 m-auto"> <?php echo $result_rule["name"];?> </p>
+                  <?php 
+                    $status ="active-status"; // compliant
+                    $status_text ="Compliant";
 
-                      $non_comp_total =0;
-                      $non_comp_except =0;
+                    $non_comp_total =0;
+                    $non_comp_except =0;
 
-                      foreach($compliant as $result_non_compl)
+                    foreach($compliant as $result_non_compl)
+                    {
+                      if ($result_rule['id'] == $result_non_compl['rule_id'])
                       {
-                        if ($result_rule['id'] == $result_non_compl['rule_id'])
+                        $quer = "SELECT * FROM resource WHERE id=".$result_non_compl['resource_id'];
+                          $quer1 = mysqli_query($conn, $quer);
+                          $quer2 = mysqli_fetch_array($quer1);
+
+                          $quer = "SELECT * FROM exception WHERE exception_value='".$quer2['resource_ref']."'";
+                          $quer1 = mysqli_query($conn, $quer);
+                          $quer2 = mysqli_fetch_array($quer1);
+
+                          if($quer2== NULL || $quer2['suspended'] == 1)
                         {
-                          $quer = "SELECT * FROM resource WHERE id=".$result_non_compl['resource_id'];
-                            $quer1 = mysqli_query($conn, $quer);
-                            $quer2 = mysqli_fetch_array($quer1);
-
-                            $quer = "SELECT * FROM exception WHERE exception_value='".$quer2['resource_ref']."'";
-                            $quer1 = mysqli_query($conn, $quer);
-                            $quer2 = mysqli_fetch_array($quer1);
-
-                            if($quer2== NULL || $quer2['suspended'] == 1)
+                          $non_comp_total =  $non_comp_total +1;
+                          if($quer2 != NULL && $quer2['suspended'] == 1)
                           {
-                            $non_comp_total =  $non_comp_total +1;
-                            if($quer2 != NULL && $quer2['suspended'] == 1)
-                            {
-                              $non_comp_except = $non_comp_except+1;
-                            }
-                            $status ="exception-status";
-                            $status_text ="Non-Compliant";
-                            break;
+                            $non_comp_except = $non_comp_except+1;
                           }
+                          $status ="exception-status";
+                          $status_text ="Non-Compliant";
+                          break;
                         }
                       }
-                    ?>
-                    <div class="<?php echo $status;?>"> <?php echo $status_text;?></div>
-                  </div>
-                  
-                  <div>
-                    <span class="badge">69</span>
-                  </div>
-
+                    }
+                  ?>
+                  <div class="<?php echo $status;?>"> <?php echo $status_text;?></div>
                 </div>
-                  
-                <button class="btn btn-outline-warning m-1" type="button"  data-toggle="collapse" data-target="#Rule<?php echo $result_rule['id'];?>" aria-expanded="false" aria-controls="collapseExample">
-                  View details
-                </button>
-                <div class="collapse" id="<?php echo 'Rule' . $result_rule['id'];?>"> 
-                  <div class="card-body">
-                    <p id="<?php echo 'Description' . $result_rule['id'];?>"></p>
+                
+                <div>
+                  <span class="badge">69</span>
+                </div>
 
-                    <table class="table table-striped" style="color:white">
-                      <thead class="thead-dark">
-                        <tr>
-                          <th scope="col" style="width: 40%">Resource</th>
-                          <th scope="col">Status</th>
-                          <th scope="col">Exception</th>
-                          <th scope="col">Suspended</th>
-                          <th scope ="col">History</th>
-                        </tr>
-                      </thead>
-                      <tbody id="<?php echo 'Table' . $result_rule['id'];?>">
-                        <?php
-                          echo '<script>
-                                  var result_rule = '. json_encode($result_rule) .';
-                                  generateResources();
-                                </script>';
-                        ?>
-                      </tbody>
-                    </table>
-                    </div>
-                    <?php
-                      $var = "Non-Compliant";
-                      if(strcmp($status_text, $var) == 0 && $non_comp_total > $non_comp_except )
-                      {
-                        echo "<button type='button' class='btn btn-outline-warning float-right m-1' data-toggle='modal' data-target='#newExcModal' id=". $result_rule['id']." name=". $result_rule['id'] . "," . $result_rule['resource_type_id']." onclick='addException(this.name)' >
-                        Add Exception
-                        </button>";
-                      }
-                        
-                    ?>                    
+              </div>
+                
+              <button class="btn btn-outline-warning m-1" type="button"  data-toggle="collapse" data-target="#Rule<?php echo $result_rule['id'];?>" aria-expanded="false" aria-controls="collapseExample">
+                View details
+              </button>
+              <div class="collapse" id="<?php echo 'Rule' . $result_rule['id'];?>"> 
+                <div class="card-body">
+                  <p id="<?php echo 'Description' . $result_rule['id'];?>"></p>
+
+                  <table class="table table-striped" style="color:white">
+                    <thead class="thead-dark">
+                      <tr>
+                        <th scope="col" style="width: 40%">Resource</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Exception</th>
+                        <th scope="col">Suspended</th>
+                        <th scope ="col">History</th>
+                      </tr>
+                    </thead>
+                    <tbody id="<?php echo 'Table' . $result_rule['id'];?>">
+                      <?php
+                        echo '<script>
+                                var result_rule = '. json_encode($result_rule) .';
+                                generateResources();
+                              </script>';
+                      ?>
+                    </tbody>
+                  </table>
                   </div>
+                  <?php
+                    $var = "Non-Compliant";
+                    if(strcmp($status_text, $var) == 0 && $non_comp_total > $non_comp_except )
+                    {
+                      echo "<button type='button' class='btn btn-outline-warning float-right m-1' data-toggle='modal' data-target='#newExcModal' id=". $result_rule['id']." name=". $result_rule['id'] . "," . $result_rule['resource_type_id']." onclick='addException(this.name)' >
+                      Add Exception
+                      </button>";
+                    }
+                      
+                  ?>                    
                 </div>
               </div>
-              
-          </div>
-          <?php } ?>
+            </div>
+            
         </div>
-      </div>      
+        <?php } ?>
+      </div>
+    </div>      
       
       <!-- Review exception Modal -->
       <div class="modal fade" id="reviewException" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
