@@ -18,9 +18,20 @@
     $resourceID= intval($IDs[0]);
     $exception_value =  $IDs[2];
 
+    $sql2 = "SELECT * FROM non_compliance WHERE resource_id=".$resourceID."";
+    $result = mysqli_query($conn, $sql2);
+    $row = mysqli_fetch_array($result);
+    $non_compliance_id = $row['id'];
+
     
-    $addExceptionS="INSERT INTO exception(id, customer_id, rule_id,last_updated_by, exception_value, justification, review_date, last_updated, suspended) VALUES (".$len_exception. ", 1,". $ruleID .",'system','" . $exception_value . "','".$justif."', '" . $_POST['newReviewDate'] . "','". $date ."',0 );";
+    $addExceptionS="INSERT INTO exception( customer_id, rule_id,last_updated_by, exception_value, justification, review_date, last_updated, suspended) VALUES ( 1,". $ruleID .",'system','" . $exception_value . "','".$justif."', '" . $_POST['newReviewDate'] . "','". $date ."',0 );";
     $insertQ = mysqli_query($conn,$addExceptionS);
+
+    $sql1 = "INSERT INTO `non_compliance_audit` (`non_compliance_id`, `resource_id`, `rule_id`, `user_id`, `action`, `action_dt`) VALUES ('".$non_compliance_id."', '".$resourceID."', '".$ruleID."', 'system', 'Exception added (resource -> compliant)', '".$date."') ";   
+    if (!mysqli_query($conn, $sql1))
+        {
+            die('Error: ' . mysqli_query());
+        }
     
     }
     //$conn->close();
