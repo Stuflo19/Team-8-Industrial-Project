@@ -1,3 +1,5 @@
+var oldData = [];
+
 function callAll(x, y, row)
 {
   setDate();
@@ -52,65 +54,80 @@ function upcomingReviews(exceptions)
   var numOfUpcoming = 0;
 
   document.getElementById("reviewbody").innerHTML = "";
+  document.getElementById("expiredbody").innerHTML = "";
 
   for(var i = 0; i < exceptions.length; i++) 
   {
     const currDate = new Date(); //Todays date
-    var review = new Date(exceptions[i]['review_date']); //Review Date
     
-    const msBetweenDates = review.getTime() - currDate.getTime(); //Calculates time between dates in milliseconds
+    var review = new Date(exceptions[i]['review_date'].replaceAll('-','/'));
+
+    const msBetweenDates = review.getTime() - currDate.getTime();
+    console.log('Current Date: ' + currDate + ' | Review Date: ' + review);
 
     // convert ms to days                     hour  min  sec   ms
     const daysBetweenDates = msBetweenDates / (24 * 60 * 60 * 1000);
-    console.log(daysBetweenDates);
+    console.log('Exception No: ' + exceptions[i].id + ' | Days: ' + daysBetweenDates);
 
     //Button to review exceptions
     var revBtn = document.createElement('button');
     revBtn.type = "button";
     revBtn.textContent = "Review ";
-    revBtn.id = exceptions[i].exception_value + "," + exceptions[i].id;
+    
+    revBtn.id = exceptions[i].exception_value + "," + exceptions[i].id + "," + exceptions[i].rule_id + "," + exceptions[i].justification + "," + exceptions[i].review_date;
     revBtn.addEventListener("click", function () {
-      // Button Click
+      oldData = [];
+      // Button click
+      var ids = this.id.split(',');
+      for (var i = 0; i < ids.length; i++) {
+        oldData.push(ids[i]);
+      }
+      console.log(oldData);
     });
     
-    revBtn.setAttribute('data-toggle', 'modal');
-    revBtn.setAttribute('style', 'justify-content: center; align-items: center;');
-    //btn.setAttribute('data-target', '#reviewModal');
-    revBtn.className = "btn btn-outline-warning historybutton";
-    
-    //Adds exalamtion icon to indicate the review is up and coming
-    var revIcon = document.createElement('i');
-    revIcon.type = "i";
-    revIcon.className = "fa fa-solid fa-circle-exclamation";
-    revIcon.value = "Review";
-
-    //Adds icon into button
-    revBtn.appendChild(revIcon);
-    
-    //If review date coming up within 30days
-    if(daysBetweenDates < 30 && daysBetweenDates > 0) 
-    { 
-      numOfUpcoming = numOfUpcoming + 1;
-      const tr = document.getElementById('reviewbody').insertRow();
+      revBtn.setAttribute('data-toggle', 'modal');
+      revBtn.setAttribute('style', 'justify-content: center; align-items: center;');
+      revBtn.setAttribute('data-target', '#reviewException');
+      revBtn.className = "btn btn-outline-warning historybutton";
       
-      var scrollId = document.createElement('a'); 
-      scrollId.appendChild(document.createTextNode(exceptions[i]['rule_id']));
-      scrollId.setAttribute('href', '#RuleCard' + exceptions[i]['rule_id']);
-      
-      tr.insertCell().appendChild(document.createTextNode(exceptions[i]['id']));
-      tr.insertCell().appendChild(document.createTextNode(exceptions[i]['exception_value']));
-      tr.insertCell().appendChild(scrollId);
-      tr.insertCell().appendChild(document.createTextNode(exceptions[i]['last_updated_by']));
-      tr.insertCell().appendChild(document.createTextNode(exceptions[i]['justification']));
-      tr.insertCell().appendChild(document.createTextNode(exceptions[i]['review_date'].replaceAll('-', '/')));
-      tr.insertCell().appendChild(revBtn);
-    } 
+      var revIcon = document.createElement('i');
+      revIcon.type = "i";
+      revIcon.className = "fa fa-solid fa-circle-exclamation";
+      revIcon.value = "Review";
 
-  }
-  if(numOfUpcoming == 0)
-  {
-    document.getElementById("reviewbody").innerHTML = "There are no upcoming review dates";
-  }
+      revBtn.appendChild(revIcon);  
+        
+      //If review date coming up within 30days
+      if(daysBetweenDates < 30 && daysBetweenDates > 0) 
+      {  
+        numOfUpcoming = numOfUpcoming + 1;
+        const tr = document.getElementById('reviewbody').insertRow();
+
+        tr.insertCell().appendChild(document.createTextNode(exceptions[i]['id']));
+        tr.insertCell().appendChild(document.createTextNode(exceptions[i]['exception_value']));
+        tr.insertCell().appendChild(document.createTextNode(exceptions[i]['rule_id']));
+        tr.insertCell().appendChild(document.createTextNode(exceptions[i]['last_updated_by']));
+        tr.insertCell().appendChild(document.createTextNode(exceptions[i]['justification']));
+        tr.insertCell().appendChild(document.createTextNode(exceptions[i]['review_date'].replaceAll('-','/')));
+        tr.insertCell().appendChild(revBtn);
+      }
+      else if(daysBetweenDates < 0)
+      {
+        const tr = document.getElementById('expiredbody').insertRow();
+
+        tr.insertCell().appendChild(document.createTextNode(exceptions[i]['id']));
+        tr.insertCell().appendChild(document.createTextNode(exceptions[i]['exception_value']));
+        tr.insertCell().appendChild(document.createTextNode(exceptions[i]['rule_id']));
+        tr.insertCell().appendChild(document.createTextNode(exceptions[i]['last_updated_by']));
+        tr.insertCell().appendChild(document.createTextNode(exceptions[i]['justification']));
+        tr.insertCell().appendChild(document.createTextNode(exceptions[i]['review_date'].replaceAll('-','/')));
+        tr.insertCell().appendChild(revBtn);
+      }
+    }
+    if(numOfUpcoming == 0)
+    {
+      document.getElementById("reviewbody").innerHTML = "There are no upcoming review dates";
+    }
 }
   
 
