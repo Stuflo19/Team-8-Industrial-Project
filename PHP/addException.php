@@ -21,7 +21,7 @@
     $customer_id = $_SESSION['customer'];
     $user_id = $_SESSION['user_id'];
     
-    $addExceptionS="INSERT INTO exception(id, customer_id, rule_id,last_updated_by, exception_value, justification, review_date, last_updated, suspended) VALUES (".$len_exception.",'".$customer_id."',". $ruleID .",'".$user_id."','" . $exception_value . "','".$justif."', '" . $_POST['newReviewDate'] . "','". $date ."',0 );";
+    $addExceptionS="INSERT INTO exception(customer_id, rule_id,last_updated_by, exception_value, justification, review_date, last_updated, suspended) VALUES (".$customer_id."',". $ruleID .",'".$user_id."','" . $exception_value . "','".$justif."', '" . $_POST['newReviewDate'] . "','". $date ."',0 );";
     $insertQ = mysqli_query($conn,$addExceptionS);
 
     $sql = "INSERT INTO `exception_audit`(`exception_id`, `user_id`, `customer_id`, `rule_id`, `action`, `action_dt`, `new_exception_value`, `new_justification`, `new_review_date`) VALUES ('$len_exception','$user_id','$customer_id','$ruleID','Create','$date','$exception_value','$justif', '" . $_POST['newReviewDate'] . "')";
