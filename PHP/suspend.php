@@ -19,12 +19,12 @@
         $res = mysqli_query($conn, $sql);
         if($suspended==1)
         {
-            $action="Suspended (resource->noncompliant)";
+            $action="Suspended";
         }
         else{
-            $action="Unsuspended (resource->compliant)";
+            $action="Unsuspended";
         }
-
+        //getting required values for adding a new entry to non_compliant_audit table
         $sql1 = "SELECT * FROM exception WHERE id=$id";
         $result = mysqli_query($conn, $sql1);
         $row = mysqli_fetch_array($result);

@@ -3,7 +3,6 @@
     include 'dbconnect.php';
     include 'readdb.php';
 
-    $len_exception = count($exception1)+1;
     //last_updates = today's day
     $date = date("Y-m-d H:i:sa");
     
@@ -15,7 +14,6 @@
     //echo $IDs;
     $IDs = explode("_",$IDs);
     $ruleID = intval($IDs[1]);
-    //exception_value
     $resourceID= intval($IDs[0]);
     $exception_value =  $IDs[2];
 

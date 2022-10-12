@@ -352,20 +352,20 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
               </div>
               <div class="form-group">
                 <label for="message-text" class="col-form-label">Justification:</label>
-                <textarea class="form-control" id="newJustification" name="newJustification" style="color: white; background-color: #333333" maxlength="200" required></textarea>
+                <input class="form-control" typ="text" id="newJustification" name="newJustification" style="color: white; background-color: #333333" maxlength="200" value="">
               </div>
               <!-- Exception Value = resource ref  -->
               <div class="form-group">
                 <label for="message-text" class="col-form-label">Review Date:</label>
-                <input type="radio" onclick="checkCustom()" name="newReviewDate" value="<?php echo date('Y-m-d', strtotime('+1 month'));?>">After 1 month
+                <input type="radio" onclick="checkCustom()" id="1m" name="newReviewDate" value="<?php echo date('Y-m-d', strtotime('+1 month'));?>" checked>After 1 month
                 <br>
-                <input type="radio" onclick="checkCustom()" name="newReviewDate" value="<?php echo date("Y-m-d", strtotime("+3 month"));?>">After 3 months              
+                <input type="radio" onclick="checkCustom()" id="3m" name="newReviewDate" value="<?php echo date("Y-m-d", strtotime("+3 month"));?>">After 3 months              
                 <br>
-                <input type="radio" onclick="checkCustom()" name="newReviewDate" value="<?php echo date("Y-m-d", strtotime("+6 month"))?>">After 6 months
+                <input type="radio" onclick="checkCustom()" id="6m" name="newReviewDate" value="<?php echo date("Y-m-d", strtotime("+6 month"))?>">After 6 months
                 <br>
-                <input type="radio" onclick="checkCustom()" name="newReviewDate" value="<?php echo date("Y-m-d", strtotime("+9 month"))?>">After 9 months
+                <input type="radio" onclick="checkCustom()" id="9m" name="newReviewDate" value="<?php echo date("Y-m-d", strtotime("+9 month"))?>">After 9 months
                 <br>
-                <input type="radio" onclick="checkCustom()" name="newReviewDate" value="<?php echo date("Y-m-d", strtotime("+1 year"))?>">After 12 months
+                <input type="radio" onclick="checkCustom()" id="12m" name="newReviewDate" value="<?php echo date("Y-m-d", strtotime("+1 year"))?>">After 12 months
                 <br>
                 <input type="radio" onclick="checkCustom()" id='custom' name="newReviewDate" value="">Custom
 
@@ -377,7 +377,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
 
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
-                  <input type="button" class="btn btn-outline-warning" onclick='formCompleted()' value="Submit">
+                  <input type="button" class="btn btn-outline-warning" onclick='checkInputs()' id='submitBtn' value="Submit">
                 </div> 
             </form>   
           </div>
@@ -454,18 +454,21 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
     $_POST = array();
 ?>
 <script>
+
+//Adding non compliant resources to a dropdown  
 function addException(rule_rescourceType){
+  //getting data from tables
   var rows_resource = <?php echo json_encode($resource); ?>;
   var rows_non_compliant = <?php echo json_encode($non_compliant); ?>;
   var rows_except = <?php echo json_encode($exception1); ?>;
   console.log(rule_rescourceType);
   var ruleID = rule_rescourceType.split(",")[0];
-  //var resourceTypeID = rule_rescourceType.split(",")[1];
   var resource_name = "";
   var resource_id = 0;
   var resource_ref = " ";
   //console.log(ruleID);
   //console.log(resourceTypeID);
+  //deleting all options of select
   var select_dropdown = document.querySelector('#resourceList');
   while (select_dropdown.firstChild) 
   {
@@ -519,7 +522,21 @@ function addException(rule_rescourceType){
 
 }
 
+//Checking if Justification field is not empty
+function checkInputs()
+{    
+  //If user did not entered justification
+  if(document.getElementById('newJustification').value.length ==0  )
+  {       
+    document.getElementById("newJustification").style.borderColor = "red";
+  }
+  else{  
+    formCompleted();
+  }
+}
+
 // Code found  at : https://gist.github.com/jesperorb/a6c12f7d4418a167ea4b3454d4f8fb61
+//Sending form data for adding a new exception
 function formCompleted(){
   const form = document.getElementById('form');
   console.log("Enetered1")
@@ -527,21 +544,21 @@ function formCompleted(){
     const formattedFormData = new FormData(form);
     postData(formattedFormData);
   });
-  }
+}
   
-  async function postData(formattedFormData){
-    const response = await fetch('PHP/addException.php',{
-        method: 'POST',
-        body: formattedFormData
-    });
-    //location.reload();
+async function postData(formattedFormData){
+  const response = await fetch('PHP/addException.php',{
+      method: 'POST',
+      body: formattedFormData
+  });
+  //location.reload();
+  const data = await response.text();
+  console.log(data);
+  location.reload();
+}
 
-    const data = await response.text();
-    console.log(data);
-    location.reload();
-  }
-
-  function checkCustom() {
+//Displaying calendar if user chooses to have a custom review date
+function checkCustom() {
   if (document.getElementById('custom').checked) {
     document.getElementById('addCustom').style.display = 'block';
     document.getElementById('customReviewDate').removeAttribute('disabled');
@@ -551,8 +568,8 @@ function formCompleted(){
   {
     document.getElementById('addCustom').style.display= 'none';
     document.getElementById('customReviewDate').setAttribute('disabled', '');
-
   }
+
 }
 //setting radio button's value to be the value chosen on a calendar
 function setNewValue()
@@ -560,8 +577,8 @@ function setNewValue()
   document.getElementById('custom').value = document.getElementById('customReviewDate').value;
   console.log(document.getElementById('custom').value);
 }
-
 </script>
+
 
 <?php
 }
