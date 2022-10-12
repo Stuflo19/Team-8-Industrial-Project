@@ -114,10 +114,10 @@
               <!-- Compliance Rule Card -->
               <div class="card cardColor text-center m-auto">
               <div class="card-body m-1 p-1" id="<?php echo 'RuleCard' . $result_rule['id'];?>">
-                 <div style = "text-align: left;"><p>Rule: <?php echo $result_rule["id"];?></p></div>
+                 <div style = "text-align: left; "><p>Rule: <?php echo $result_rule["id"];?></p></div>
                   
                   <div>
-                  <div style = "text-align: centre; position: relative; top: -20px;"><p class="card-text pb-1 m-auto"> <?php echo $result_rule["name"];?> </p></div>
+                  <div style = "text-align: centre; position: relative; top: -30px;"><p class="card-text pb-1 m-auto"> <?php echo $result_rule["name"];?> </p></div>
                     <?php 
                       $status ="active-status"; // compliant
                       $status_text ="Compliant";
@@ -151,7 +151,7 @@
                         }
                       }
                     ?>
-                    <div class="<?php echo $status;?>"> <?php echo $status_text;?></div>
+                    <div class="<?php echo $status;?>" style: "position: relative; top: -30px;"> <?php echo $status_text;?></div>
            
                   </div>
                   
