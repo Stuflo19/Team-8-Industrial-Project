@@ -195,16 +195,16 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
                             $quer2 = mysqli_fetch_array($quer1);
 
                             if($quer2== NULL || $quer2['suspended'] == 1)
+                          {
+                            $non_comp_total =  $non_comp_total +1;
+                            if($quer2 != NULL && $quer2['suspended'] == 1)
                             {
-                              $non_comp_total =  $non_comp_total +1;
-                              if($quer2['suspended'] == 1)
-                              {
-                                $non_comp_except = $non_comp_except+1;
-                              }
-                              $status ="exception-status";
-                              $status_text ="Non-Compliant";
-                              break;
+                              $non_comp_except = $non_comp_except+1;
                             }
+                            $status ="exception-status";
+                            $status_text ="Non-Compliant";
+                            break;
+                          }
                         }
                       }
                     ?>
@@ -308,7 +308,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
 
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
-                  <input type="submit" class="btn btn-outline-warning" onclick='formCompleted()' value="Submit">
+                  <input type="button" class="btn btn-outline-warning" onclick='formCompleted()' value="Submit">
                 </div> 
             </form>   
           </div>
@@ -465,11 +465,11 @@ function formCompleted(){
         method: 'POST',
         body: formattedFormData
     });
-    location.reload();
+    //location.reload();
 
     const data = await response.text();
     console.log(data);
-    //location.reload();
+    location.reload();
   }
 
   function checkCustom() {
