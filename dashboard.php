@@ -116,7 +116,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
       <!-- Review Dates -->
       <!-- Upcoming -->
       <div class="col-lg-6">
-        <div class="row">
+        <div class="row-lg">
           <div class="row-lg mt-4">
             <h3>Upcoming Reviews for Existing Exceptions</h3>
             <p>In the next 30 days, these exceptions will be up for review. <br> To easily locate a resource, click the Rule ID to quickly navigate to it</p>
@@ -150,7 +150,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
         </div>
 
         <!-- Expired -->
-        <div class="row">
+        <div class="row-lg">
           <div class="row-lg mt-4">
             <h3>Expired Reviews</h3>
             <p>These exceptions have expired without a review. <br> Please determine whether or not these exceptions need renewal</p>
