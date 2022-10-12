@@ -176,7 +176,12 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
                   <th class="stickyHead" scope="col-lg">Creator</th>
                   <th class="stickyHead" scope="col-lg">Justification</th>
                   <th class="stickyHead" scope="col-lg">Review date</th>
-                  <th class="stickyHead" scope="col-lg" id="uprev1">Review </th>
+                  <th class="stickyHead" scope="col-lg" id="uprev1">Review   <?php
+                    echo '<script>
+                    var user_role4 = '. json_encode($_SESSION['role']) .';
+                    hide1();
+                    </script>';
+                    ?></th>
                 </tr>
               </thead>
               <!-- If Michael Cera becomes a visible collaborator on the site, we have a problem -->
@@ -419,7 +424,12 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
               <th scope="col">Created By</th>
               <th scope="col">Justification</th>
               <th scope="col">Review Date</th>
-              <th scope="col" id="uprev2">Suspend</th>
+              <th scope="col" id="uprev2">Suspend <?php
+                    echo '<script>
+                    var user_role5 = '. json_encode($_SESSION['role']) .';
+                    hide1();
+                    </script>';
+                    ?></th>
             </thead>
             <!-- Table body populated by Javascript historybutton function -->
             <tbody id ="historybody">
