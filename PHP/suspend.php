@@ -38,7 +38,7 @@
 
         $date = date("Y-m-d H:i:sa");
 
-        $sql1 = "INSERT INTO `non_compliance_audit` (`non_compliance_id`, `resource_id`, `rule_id`, `user_id`, `action`, `action_dt`) VALUES ('".$non_compliance_id."', '".$resource_id."', '".$rule_id."', 'system', '".$action."', '".$date."') ";   
+        $sql1 = "INSERT INTO `non_compliance_audit` (`non_compliance_id`, `resource_id`, `rule_id`, `user_id`, `action`, `action_dt`) VALUES ('".$non_compliance_id."', '".$resource_id."', '".$rule_id."', '".$_SESSION['user_id']."', '".$action."', '".$date."') ";   
         if (!mysqli_query($conn, $sql1))
         {
           die('Error: ' . mysqli_query());
