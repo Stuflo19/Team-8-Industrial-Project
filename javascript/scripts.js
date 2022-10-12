@@ -13,21 +13,21 @@ function setDate() {
 }
 
 function hide() {
-  if(user_role3 == "1")
+  if(user_role3 == "2")
   {
     document.getElementById("uprev").style.display = 'none';
   }
 }
 
 function hide1() {
-  if(user_role4 == "1")
+  if(user_role4 == "2")
   {
     document.getElementById("uprev1").style.display = 'none';
   }
 }
 
 function hide2() {
-  if(user_role5 == "1")
+  if(user_role5 == "2")
   {
     document.getElementById("uprev2").style.display = 'none';
   }

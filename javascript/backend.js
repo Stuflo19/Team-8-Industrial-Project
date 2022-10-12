@@ -42,7 +42,7 @@ function historybutton(id) {
       tr.insertCell().appendChild(document.createTextNode(exception[i]['justification']));
       tr.insertCell().appendChild(document.createTextNode(today < review ? review : "EXPIRED"));
       // This is the most painful button you'll see in this project
-      if(user_role == "2"){
+      if(user_role == "1"){
         var btn = document.createElement('input');
         btn.type = "button";
         btn.value = exception[i]['suspended'] == 0 ? 'Suspend' : "Unsuspend";
