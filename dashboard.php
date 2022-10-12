@@ -318,12 +318,12 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
                 <!-- Toggle Review -->
                 <!-- Yes -->
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" onclick = "reviewToggle()" type="radio" name="processReview" id="yesToggle" value="option1">
+                  <input class="form-check-input" onclick = "reviewToggle()" type="radio" name="processReview" id="yesToggle">
                   <label class="form-check-label" for="yestoggle">Yes</label>
                 </div>
                 <!-- No -->
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" onclick = "reviewToggle()" type="radio" name="processReview" id="noToggle" value="option2">
+                  <input class="form-check-input" onclick = "reviewToggle()" type="radio" name="processReview" id="noToggle">
                   <label class="form-check-label" for="inlineRadio2">No</label>
                 </div>
               </div>

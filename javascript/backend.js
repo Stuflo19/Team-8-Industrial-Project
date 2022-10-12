@@ -180,10 +180,14 @@ async function addReview()
 function reviewToggle() {
   if (document.getElementById('yesToggle').checked) 
   {
+    console.log('Toggled On');
     document.getElementById('reviewContainer').style.display = 'block';
+    document.getElementById('customReviewDate').removeAttribute('disabled');
   }
   else
   {
-    document.getElementById('reviewContainer').style.display= 'none';
+    console.log('Toggled Off');
+    document.getElementById('addCustom').style.display= 'none';
+    document.getElementById('customReviewDate').setAttribute('disabled', '');
   }
 }
