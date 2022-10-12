@@ -180,7 +180,7 @@ table{
   width: 100%;
   border-collapse: collapse;
   min-height: 25vh;
-  max-height: 50vh;
+  max-height: 50vh; 
   overflow-y: scroll;
   margin: 0px;
 }
@@ -224,7 +224,7 @@ table{
   .historybutton{
     width: 75px;
     height: 20px;
-    font-size: 1rem;
+    font-size: 0.8rem;
   } 
   html {
       font-size: 8px;  
@@ -240,6 +240,7 @@ table{
   .historybutton {
     width: 125px;
     height: 25px;
+    font-size: 0.8rem;
     padding: 0px;
   }
   html {

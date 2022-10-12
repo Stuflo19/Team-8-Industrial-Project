@@ -1,11 +1,12 @@
 var currFilter;
 
-async function updatesuspended(exceptionid, suspended) {
+async function updatesuspended(data) {
+  split = data.split(',');
   // fetch statement found from: https://code-boxx.com/call-php-file-from-javascript/ && https://sebhastian.com/call-php-function-from-javascript/ 
-  await fetch("PHP/suspend.php", { mode: 'cors', method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8" }, body: `id=${exceptionid}&suspended=${suspended}` })
+  await fetch("PHP/suspend.php", {mode: 'cors', method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8" }, body: `id=${split[0]}&suspended=${split[1]}&ruleid=${split[2]}` })
     .then(res => res.text())
     .then((txt) => {
-      document.getElementById("suspendButton").value = txt == 1 ? "Unsuspend" : "Suspend";
+      console.log(txt);
     })
     .catch((err) => { console.error(err); });
 
@@ -160,4 +161,20 @@ function addOption(name, id){
   option.value = id;
 
   return option;
+}
+
+async function addReview()
+{
+  var newJustification = document.getElementById("revJustification").value;
+  var newReviewDate = document.getElementById("revDate").value;
+
+  await fetch("PHP/addReview.php", { mode: 'cors', method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8" }, body: `newJustification=${newJustification}&newReviewDate=${newReviewDate}&exceptionValue=${oldData[0]}&exceptionId=${oldData[1]}&ruleId=${oldData[2]}&oldJustification=${oldData[3]}&oldReview=${oldData[4]}`})
+  .then(res => res.text())
+  .then((txt) => {
+    console.log(txt);
+  })
+  .catch((err) => { console.error(err); });
+  
+  refresh();
+  return false;
 }
