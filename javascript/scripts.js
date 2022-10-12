@@ -109,10 +109,7 @@ function upcomingReviews(exceptions)
         tr.insertCell().appendChild(document.createTextNode(exceptions[i]['last_updated_by']));
         tr.insertCell().appendChild(document.createTextNode(exceptions[i]['justification']));
         tr.insertCell().appendChild(document.createTextNode(exceptions[i]['review_date'].replaceAll('-','/')));
-        if(user_role1 = "1")
-        {
-          tr.insertCell().appendChild(revBtn);
-        }
+        tr.insertCell().appendChild(revBtn);
       }
       else if(daysBetweenDates < 0)
       {
@@ -124,10 +121,7 @@ function upcomingReviews(exceptions)
         tr.insertCell().appendChild(document.createTextNode(exceptions[i]['last_updated_by']));
         tr.insertCell().appendChild(document.createTextNode(exceptions[i]['justification']));
         tr.insertCell().appendChild(document.createTextNode(exceptions[i]['review_date'].replaceAll('-','/')));
-        if(user_role2 = "1")
-        {
-          tr.insertCell().appendChild(revBtn);
-        }
+        tr.insertCell().appendChild(revBtn);
       }
     }
     if(numOfUpcoming == 0)
