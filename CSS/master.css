@@ -61,8 +61,7 @@ nav {
   position: relative;
 }
 .card {
-  margin: 0px;
-  padding-bottom: 0px;
+  margin: 10px 0px;
   position: relative;
   width: 100%
 }
