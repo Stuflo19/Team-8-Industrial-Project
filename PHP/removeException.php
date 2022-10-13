@@ -4,7 +4,6 @@ session_start();
 if(isset($_POST['newJustification1']))
 {
     include 'dbconnect.php';
-    include 'readdb.php';
 
     echo '-----------';
 
