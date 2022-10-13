@@ -182,7 +182,7 @@ async function finalReview()
 {
   var newJustification1 = document.getElementById("revJustification1").value;
 
-  await fetch("PHP/removeException.php", { mode: 'cors', method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8" }, body: `newJustification=${newJustification}&exceptionValue=${oldData[0]}&exceptionId=${oldData[1]}&ruleId=${oldData[2]}&oldJustification=${oldData[3]}&oldReview=${oldData[4]}`})
+  await fetch("PHP/removeException.php", { mode: 'cors', method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8" }, body: `newJustification=${newJustification1}&exceptionValue=${oldData[0]}&exceptionId=${oldData[1]}&ruleId=${oldData[2]}&oldJustification=${oldData[3]}&oldReview=${oldData[4]}`})
   .then(res => res.text())
   .then((txt) => {
     console.log(txt);
