@@ -76,6 +76,9 @@
   $custrole = mysqli_query($conn,$sql);
 
 
+  $sql = "SELECT * FROM customer";
+  $customers = mysqli_query($conn,$sql);
+
   // Adding to JS vars resource, non_compliance, exception
   echo '<Script>
           var resource = '. json_encode($resources) .';

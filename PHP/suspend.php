@@ -52,6 +52,5 @@
     }
 
     //$conn->close();
-    header("../index.php")
-    
+    header("../index.php");
 ?>

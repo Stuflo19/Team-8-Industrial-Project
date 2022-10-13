@@ -12,6 +12,27 @@ function setDate() {
   document.getElementById("date").innerHTML = "Last Checked: " + today.toDateString() + " " + today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 }
 
+function hide() {
+  if(user_role3 == "2")
+  {
+    document.getElementById("uprev").style.display = 'none';
+  }
+}
+
+function hide1() {
+  if(user_role4 == "2")
+  {
+    document.getElementById("uprev1").style.display = 'none';
+  }
+}
+
+function hide2() {
+  if(user_role5 == "2")
+  {
+    document.getElementById("uprev2").style.display = 'none';
+  }
+}
+
 function generateGraph(noncompliant, compliant)
 {
   trueComp = compliant - noncompliant
@@ -109,7 +130,10 @@ function upcomingReviews(exceptions)
         tr.insertCell().appendChild(document.createTextNode(exceptions[i]['last_updated_by']));
         tr.insertCell().appendChild(document.createTextNode(exceptions[i]['justification']));
         tr.insertCell().appendChild(document.createTextNode(exceptions[i]['review_date'].replaceAll('-','/')));
-        tr.insertCell().appendChild(revBtn);
+        if(user_role1 == "1")
+        {
+          tr.insertCell().appendChild(revBtn);
+        }
       }
       else if(daysBetweenDates < 0)
       {
@@ -121,7 +145,10 @@ function upcomingReviews(exceptions)
         tr.insertCell().appendChild(document.createTextNode(exceptions[i]['last_updated_by']));
         tr.insertCell().appendChild(document.createTextNode(exceptions[i]['justification']));
         tr.insertCell().appendChild(document.createTextNode(exceptions[i]['review_date'].replaceAll('-','/')));
-        tr.insertCell().appendChild(revBtn);
+        if(user_role2 == "1")
+        {
+          tr.insertCell().appendChild(revBtn);
+        }
       }
     }
     if(numOfUpcoming == 0)

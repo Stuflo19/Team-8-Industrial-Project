@@ -42,23 +42,19 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
       <ul class="mb-auto pl-0">
         <li>Username: <?php echo $_SESSION['username'];?></li>
         <li>Role: <?php  
-          while ($row = mysqli_fetch_assoc($custrole)){
-            if ($row['id'] == $_SESSION['user_id'])
+          while ($row = mysqli_fetch_array($custrole)){
+            if (strcmp($row['id'], $_SESSION['user_id']) == 0)
             {
               $_SESSION['role'] = $row['role_id'];
               break;
             }
-            else 
-            {
-              echo "Error getting role";
-              break;
-            } 
+            
           }
-          if($_SESSION['role'] == '1')
+          if($_SESSION['role'] == 1)
           {
             echo "Compliance Manager";
           }
-          elseif($_SESSION['role'] == '2')
+          elseif($_SESSION['role'] == 2)
           {
             echo "Compliance Auditor";
           }
@@ -77,19 +73,19 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
           $_SESSION['customer'] = $row['customer_id'];
           break;
         }
-        else 
+      }
+      foreach ($customers as $cust)
+      {
+        if($cust['id'] == $_SESSION['customer'])
         {
-          echo "Error getting customer name";
+          $_SESSION['company_name'] = $cust['name'];
+          echo $cust['name'];
           break;
-        } 
+        }
       }
-      if($_SESSION['customer'] == '1')
+      if($_SESSION['company_name'] == NULL)
       {
-        echo "Brightsolid";
-      }
-      else
-      {
-        echo "Error";
+        echo "Company not found";
       }
       ?>  
       </h1>
@@ -131,11 +127,22 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
                   <th class="stickyHead" scope="col-lg">Creator</th>
                   <th class="stickyHead" scope="col-lg">Justification</th>
                   <th class="stickyHead" scope="col-lg">Review date</th>
-                  <th class="stickyHead" scope="col-lg">Review</th>
+                  <th class="stickyHead" scope="col-lg" id="uprev" >Review  <?php
+                    echo '<script>
+                    var user_role3 = '. json_encode($_SESSION['role']) .';
+                    hide();
+                    </script>';
+                    ?>
+                  </th>
                 </tr>
               </thead>
               <!-- If Michael Cera becomes a visible collaborator on the site, we have a problem -->
               <tbody id="reviewbody"> 
+              <?php
+                echo '<script>
+                var user_role1 = '. json_encode($_SESSION['role']) .';
+                </script>';
+              ?>
                 <tr>
                   <td>1</td>
                   <td>dh-dc1</td>
@@ -165,11 +172,21 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
                   <th class="stickyHead" scope="col-lg">Creator</th>
                   <th class="stickyHead" scope="col-lg">Justification</th>
                   <th class="stickyHead" scope="col-lg">Review date</th>
-                  <th class="stickyHead" scope="col-lg">Review</th>
+                  <th class="stickyHead" scope="col-lg" id="uprev1">Review   <?php
+                    echo '<script>
+                    var user_role4 = '. json_encode($_SESSION['role']) .';
+                    hide1();
+                    </script>';
+                    ?></th>
                 </tr>
               </thead>
               <!-- If Michael Cera becomes a visible collaborator on the site, we have a problem -->
               <tbody id="expiredbody"> 
+                <?php
+                echo '<script>
+                var user_role2 = '. json_encode($_SESSION['role']) .';
+                </script>';
+                ?>
                 <tr>
                   <td>1</td>
                   <td>dh-dc1</td>
@@ -217,6 +234,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
                     $status_text ="Compliant";
 
                     $non_comp_total =0;
+                    $non_comp_except =0;
 
                     foreach($compliant as $result_non_compl)
                     {
@@ -231,15 +249,16 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
                           $quer2 = mysqli_fetch_array($quer1);
 
                           if($quer2== NULL || $quer2['suspended'] == 1)
+                        {
+                          if($quer2== NULL)
                           {
-                            if($quer2== NULL)
-                            {
-                              $non_comp_total =  $non_comp_total +1;
-                            }
+                            $non_comp_total =  $non_comp_total +1;
+                          }
+                          
                           $status ="exception-status";
                           $status_text ="Non-Compliant";
-                          //break;
-                          }
+                          // break;
+                        }
                       }
                     }
                   ?>
@@ -281,9 +300,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
                   </table>
                   </div>
                   <?php
-                
                     $var = "Non-Compliant";
-                    if(strcmp($status_text, $var) == 0 && $non_comp_total != 0 )
+                    if(strcmp($status_text, $var) == 0 && $non_comp_total != 0 && $_SESSION['role'] == 1)
                     {
                       echo "<button type='button' class='btn btn-outline-warning float-right m-1' data-toggle='modal' data-target='#newExcModal' id=". $result_rule['id']." name=". $result_rule['id'] . "," . $result_rule['resource_type_id']." onclick='addException(this.name)' >
                       Add Exception
@@ -403,10 +421,20 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
               <th scope="col">Created By</th>
               <th scope="col">Justification</th>
               <th scope="col">Review Date</th>
-              <th scope="col">Suspend</th>
+              <th scope="col" id="uprev2">Suspend <?php
+                    echo '<script>
+                    var user_role5 = '. json_encode($_SESSION['role']) .';
+                    hide2();
+                    </script>';
+                    ?></th>
             </thead>
             <!-- Table body populated by Javascript historybutton function -->
             <tbody id ="historybody">
+            <?php
+              echo '<script>
+              var user_role = '. json_encode($_SESSION['role']) .';
+              </script>';
+            ?>
             </tbody>
           </table>
               
@@ -454,21 +482,18 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
     $_POST = array();
 ?>
 <script>
-
-//Adding non compliant resources to a dropdown  
 function addException(rule_rescourceType){
-  //getting data from tables
   var rows_resource = <?php echo json_encode($resource); ?>;
   var rows_non_compliant = <?php echo json_encode($non_compliant); ?>;
   var rows_except = <?php echo json_encode($exception1); ?>;
   console.log(rule_rescourceType);
   var ruleID = rule_rescourceType.split(",")[0];
+  //var resourceTypeID = rule_rescourceType.split(",")[1];
   var resource_name = "";
   var resource_id = 0;
   var resource_ref = " ";
   //console.log(ruleID);
   //console.log(resourceTypeID);
-  //deleting all options of select
   var select_dropdown = document.querySelector('#resourceList');
   while (select_dropdown.firstChild) 
   {
@@ -521,7 +546,6 @@ function addException(rule_rescourceType){
   }
 
 }
-
 //Checking if Justification field is not empty
 function checkInputs()
 {    
@@ -533,10 +557,7 @@ function checkInputs()
   else{  
     formCompleted();
   }
-}
-
-// Code found  at : https://gist.github.com/jesperorb/a6c12f7d4418a167ea4b3454d4f8fb61
-//Sending form data for adding a new exception
+}// Code found  at : https://gist.github.com/jesperorb/a6c12f7d4418a167ea4b3454d4f8fb61
 function formCompleted(){
   const form = document.getElementById('form');
   console.log("Enetered1")
@@ -544,21 +565,21 @@ function formCompleted(){
     const formattedFormData = new FormData(form);
     postData(formattedFormData);
   });
-}
+  }
   
-async function postData(formattedFormData){
-  const response = await fetch('PHP/addException.php',{
-      method: 'POST',
-      body: formattedFormData
-  });
-  //location.reload();
-  const data = await response.text();
-  console.log(data);
-  location.reload();
-}
+  async function postData(formattedFormData){
+    const response = await fetch('PHP/addException.php',{
+        method: 'POST',
+        body: formattedFormData
+    });
+    //location.reload();
 
-//Displaying calendar if user chooses to have a custom review date
-function checkCustom() {
+    const data = await response.text();
+    console.log(data);
+    location.reload();
+  }
+
+  function checkCustom() {
   if (document.getElementById('custom').checked) {
     document.getElementById('addCustom').style.display = 'block';
     document.getElementById('customReviewDate').removeAttribute('disabled');
@@ -568,8 +589,8 @@ function checkCustom() {
   {
     document.getElementById('addCustom').style.display= 'none';
     document.getElementById('customReviewDate').setAttribute('disabled', '');
-  }
 
+  }
 }
 //setting radio button's value to be the value chosen on a calendar
 function setNewValue()
@@ -577,8 +598,8 @@ function setNewValue()
   document.getElementById('custom').value = document.getElementById('customReviewDate').value;
   console.log(document.getElementById('custom').value);
 }
-</script>
 
+</script>
 
 <?php
 }

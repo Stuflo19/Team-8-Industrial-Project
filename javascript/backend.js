@@ -42,15 +42,17 @@ function historybutton(id) {
       tr.insertCell().appendChild(document.createTextNode(exception[i]['justification']));
       tr.insertCell().appendChild(document.createTextNode(today < review ? review : "EXPIRED"));
       // This is the most painful button you'll see in this project
-      var btn = document.createElement('input');
-      btn.type = "submit";
-      btn.value = exception[i]['suspended'] == 0 ? 'Suspend' : "Unsuspend";
-      btn.id = exception[i]['id'] + "," + exception[i]['suspended'] + "," + exception[i]['rule_id'];
-      btn.addEventListener("click", function () {
-        updatesuspended(this.id);
-      });
-      btn.className = "btn btn-outline-warning";
-      tr.insertCell().appendChild(btn);
+      if(user_role == "1"){
+        var btn = document.createElement('input');
+        btn.type = "submit";
+        btn.value = exception[i]['suspended'] == 0 ? 'Suspend' : "Unsuspend";
+        btn.id = exception[i]['id'] + "," + exception[i]['suspended'] + "," + exception[i]['rule_id'];
+        btn.addEventListener("click", function () {
+          updatesuspended(this.id);
+        });
+        btn.className = "btn btn-outline-warning";
+        tr.insertCell().appendChild(btn);
+      }
     }
   }
 
