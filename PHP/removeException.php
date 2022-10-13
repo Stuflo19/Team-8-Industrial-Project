@@ -8,6 +8,7 @@ if(isset($_POST['newJustification1']))
     $newJustification = $_POST['newJustification1'];
     $exceptionValue = $_POST['exceptionValue'];
     $exceptionId = $_POST['exceptionId'];
+    
     $oldJustification = $_POST['oldJustification'];
     $oldReview = $_POST['oldReview'];
     $ruleId = $_POST['ruleId'];
@@ -17,6 +18,7 @@ if(isset($_POST['newJustification1']))
     $user_id = $_SESSION['user_id'];
 
     $sql = "DELETE FROM `exception` WHERE `id` = $exceptionId";
+    echo $sql;
     mysqli_query($conn, $sql);
 
     echo "Deleting Exception";
