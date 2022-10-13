@@ -63,11 +63,9 @@ function upcomingReviews(exceptions)
     var review = new Date(exceptions[i]['review_date'].replaceAll('-','/'));
 
     const msBetweenDates = review.getTime() - currDate.getTime();
-    console.log('Current Date: ' + currDate + ' | Review Date: ' + review);
 
     // convert ms to days                     hour  min  sec   ms
     const daysBetweenDates = msBetweenDates / (24 * 60 * 60 * 1000);
-    console.log('Exception No: ' + exceptions[i].id + ' | Days: ' + daysBetweenDates);
 
     //Button to review exceptions
     var revBtn = document.createElement('button');
