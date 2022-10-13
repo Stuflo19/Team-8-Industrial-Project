@@ -178,17 +178,6 @@ table{
   border: 0px;
 }
 
-.badge {
-  position: absolute;
-  top: -10px;
-  right: -10px;
-  padding: 5px 10px;
-  border-radius: 50%;
-  background: red;
-  color: white;
-  font-size: 1rem;
-}
-
 .compliant_dot {
   height: 25px;
   width: 25px;
@@ -214,7 +203,7 @@ table{
   .historybutton{
     width: 75px;
     height: 20px;
-    font-size: 0.5rem;
+    font-size: 0.8rem;
   } 
   html {
       font-size: 8px;  

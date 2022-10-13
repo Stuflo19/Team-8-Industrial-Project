@@ -1,6 +1,14 @@
+<?php 
+session_start();
+
+if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
+
 <?php
   include 'PHP/dbconnect.php';
   include 'PHP/readdb.php';
+  ini_set('display_errors', 1);
+  ini_set('display_startup_errors', 1);
+  error_reporting(E_ALL);
 ?>
 
 <!DOCTYPE html>
@@ -33,11 +41,59 @@
   <nav class="navbar navbar-expand-lg navbar-light">
     <div class="collapse navbar-collapse d-flex justify-content-around" id="navbarNav">
       <ul class="mb-auto pl-0">
-        <li>Username: Customer Name</li>
-        <li>Role: Customer Role</li>
+      <li>Username: <?php echo $_SESSION['username'];?></li>
+        <li>Role: <?php  
+          while ($row = mysqli_fetch_assoc($custrole)){
+            if ($row['id'] == $_SESSION['user_id'])
+            {
+              $_SESSION['role'] = $row['role_id'];
+              break;
+            }
+            else 
+            {
+              echo "Error getting role";
+              break;
+            } 
+          }
+          if($_SESSION['role'] == '1')
+          {
+            echo "Compliance Manager";
+          }
+          elseif($_SESSION['role'] == '2')
+          {
+            echo "Compliance Auditor";
+          }
+          else
+          {
+            echo "Error finding role";
+          }
+          ?> 
+          </li>
       </ul>
       <br>
-      <h1 class="m-auto"> Company Name </h1>
+      <h1 class=m-auto> <?php  
+      while ($row = mysqli_fetch_assoc($custname)){
+        if ($row['id'] == $_SESSION['user_id'])
+        {
+          $_SESSION['customer'] = $row['customer_id'];
+          break;
+        }
+        else 
+        {
+          echo "Error getting customer name";
+          break;
+        } 
+      }
+      if($_SESSION['customer'] == '1')
+      {
+        echo "Brightsolid";
+      }
+      else
+      {
+        echo "Error";
+      }
+      ?>  
+      </h1>
       <button class="btn text-secondary border-bottom-0 border rounded-pill ms-n5" style="margin-right: 10px" onclick=refresh();><i class='fa fa-refresh p-2' style="color:white"></button></i>
       <h2 id="date" style="margin: 0"></h2>
     </div>
@@ -61,6 +117,7 @@
       <div class="col-lg-6 " >
         <div class="row-lg mt-4">
           <h3>Upcoming Reviews for Existing Exceptions</h3>
+          <p>In the next 30 days, these exceptions will be up for review. <br> To easily locate a resource, click the Rule ID to quickly navigate to it</p>
         </div>
           <div class="d-flex align-items-center p-2">
           <table class="table fixed_header" style="color:white">
