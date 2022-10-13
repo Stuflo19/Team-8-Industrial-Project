@@ -7,21 +7,20 @@ if(isset($_POST['newJustification1']))
     echo 'It is set';
 
     $newJustification = $_POST['newJustification1'];
-    echo $newJustification. '<br>'
     $exceptionValue = $_POST['exceptionValue'];
-    echo $exceptionValue. '<br>'
     $exceptionId = $_POST['exceptionId'];
-    echo $exceptionId. '<br>'
     $oldJustification = $_POST['oldJustification'];
-    echo $oldJustification. '<br>'
     $oldReview = $_POST['oldReview'];
-    echo $oldReview. '<br>'
     $ruleId = $_POST['ruleId'];
-    echo $ruleId. '<br>'
     $date = date('y-m-d h:i:s');
     
     $customer_id = $_SESSION['customer'];
     $user_id = $_SESSION['user_id'];
+
+    $sql2 = "DELETE FROM `exception` WHERE id = $exceptionId";
+    mysqli_query($conn, $sql2);
+
+    echo "Deleting Exception";
 
     echo '-------- <br>';
     $sqlFetchID = "SELECT id FROM `resource` WHERE resource_ref=".$exceptionValue."";
@@ -52,10 +51,7 @@ if(isset($_POST['newJustification1']))
 
     echo "Inserting Compliance Audit";
 
-    $sql2 = "DELETE FROM `exception` WHERE id = $exceptionId";
-    mysqli_query($conn, $sql2);
-
-    echo "Deleting Exception";
+    
     
     $conn->close();
 }
