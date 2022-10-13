@@ -24,19 +24,14 @@ CREATE TABLE user(
     FOREIGN KEY (customer_id) REFERENCES customer(id)
 );
 
+
 CREATE TABLE login(
     id INT(4) NOT NULL AUTO_INCREMENT,
-    username VARCHAR(50),
-    password VARCHAR(50), -- need to be hashed
+    username VARCHAR(100),
+    password VARCHAR(250), -- need to be hashed
     user_id VARCHAR(100) NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (user_id) REFERENCES user(id)
-);
-
-CREATE TABLE platform(
-    id INT(4) NOT NULL AUTO_INCREMENT,
-    name VARCHAR(50) NOT NULL,
-    PRIMARY KEY (id)
 );
 
 CREATE TABLE account (
@@ -435,3 +430,15 @@ VALUES
     (21,1330,4),
     (22,1335,4),
     (23,1138,4);
+    
+ 
+INSERT INTO login(username, password, user_id)
+VALUES
+	('testing', 'password123', 'system'),
+	('testing1', '$argon2id$v=19$m=65536,t=4,p=1$VnFIcUY2Z24yak1UN05DVg$EcojyW7OUlyQKXxOCc9oY7GrUFZnSqzLPfx++4TZDs8', 'system');
+CREATE TABLE platform(
+    id INT(4) NOT NULL AUTO_INCREMENT,
+    name VARCHAR(50) NOT NULL,
+    PRIMARY KEY (id)
+);
+
