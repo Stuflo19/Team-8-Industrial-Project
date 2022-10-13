@@ -16,14 +16,6 @@
         $sql = "INSERT INTO `exception_audit`(`exception_id`, `user_id`, `customer_id`, `rule_id`, `action`, `action_dt`) VALUES ('$id','$user_id','$customer_id','$ruleid','$action','$date');";
         mysqli_query($conn, $sql); 
 
-        $res = mysqli_query($conn, $sql);
-        if($suspended==1)
-        {
-            $action="Suspended";
-        }
-        else{
-            $action="Unsuspended";
-        }
         //getting required values for adding a new entry to non_compliant_audit table
         $sql1 = "SELECT * FROM exception WHERE id=$id";
         $result = mysqli_query($conn, $sql1);

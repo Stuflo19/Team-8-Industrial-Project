@@ -5,7 +5,8 @@
 
     //last_updates = today's day
     $date = date("Y-m-d H:i:sa");
-    
+    $len_exception = count($exception1)+1;
+
    if (isset($_POST['newJustification']) || isset($_POST['resourceList']) )
    {
     $justif = $_POST['newJustification'];
