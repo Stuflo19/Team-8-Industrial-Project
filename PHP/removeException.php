@@ -16,7 +16,7 @@ if(isset($_POST['newJustification1']))
     $customer_id = $_SESSION['customer'];
     $user_id = $_SESSION['user_id'];
 
-    $sql = "DELETE FROM `exception` WHERE exception_id = $exceptionId";
+    $sql = "DELETE FROM `exception` WHERE `id` = $exceptionId";
     mysqli_query($conn, $sql);
 
     echo "Deleting Exception";
