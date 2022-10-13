@@ -330,8 +330,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
               <!-- For deactivating an exception -->
               <div id="endReviewContainer"> 
                 <div class="form-group">
-                  <label for="message-text" class="col-form-label">New Justification :</label>
-                  <textarea class="form-control" id="revJustification" name="revJustification" style="color: white; background-color: #333333" maxlength="200" required></textarea>
+                  <label for="message-text" class="col-form-label">New Justification:</label>
+                  <textarea class="form-control" id="revJustification1" name="revJustification1" style="color: white; background-color: #333333" maxlength="200" required></textarea>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
