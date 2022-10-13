@@ -5,7 +5,16 @@ if(isset($_POST['newJustification1']))
 {
     include 'dbconnect.php';
 
-    echo '-----------';
+    $newJustification = $_POST['newJustification1'];
+    $exceptionValue = $_POST['exceptionValue'];
+    $exceptionId = $_POST['exceptionId'];
+    $oldJustification = $_POST['oldJustification'];
+    $oldReview = $_POST['oldReview'];
+    $ruleId = $_POST['ruleId'];
+    $date = date('y-m-d h:i:s');
+    
+    $customer_id = $_SESSION['customer'];
+    $user_id = $_SESSION['user_id'];
 
     $sqlFetchID = "SELECT id FROM `resource` WHERE resource_ref=".$exceptionValue."";
     $result1 = mysqli_query($conn, $sqlFetchID);
@@ -19,16 +28,7 @@ if(isset($_POST['newJustification1']))
 
     echo 'Compliance ID: ' .$non_compliance_id. '';
 
-    $newJustification = $_POST['newJustification1'];
-    $exceptionValue = $_POST['exceptionValue'];
-    $exceptionId = $_POST['exceptionId'];
-    $oldJustification = $_POST['oldJustification'];
-    $oldReview = $_POST['oldReview'];
-    $ruleId = $_POST['ruleId'];
-    $date = date('y-m-d h:i:s');
     
-    $customer_id = $_SESSION['customer'];
-    $user_id = $_SESSION['user_id'];
 
     echo $customer_id;
 
