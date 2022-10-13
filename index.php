@@ -40,7 +40,9 @@
 
     <div class="row">
       <form action="index.php" method="post" class="bg-dark p-3 col" style="border-radius: 25px;">
-
+      <!-- <console class="log"><?php
+      echo 'Argon2id hash: ' . password_hash('password123', PASSWORD_ARGON2ID);
+      ?></console> -->
         <h2 style="color: white; font-weight: bolder">LOGIN:</h2>
 
         <?php if (isset($_GET['error'])) { ?>
@@ -87,14 +89,14 @@
                 //if both fields have data
                 else{
                   //go into database login table and select everything from username and password rows
-                    $sql = "SELECT * FROM login WHERE username='$username' AND password='$password'";
+                    $sql = "SELECT * FROM login WHERE username='$username'";
                     //create a query to database
                     $login = mysqli_query($conn, $sql);
                     //if there is data in a row
                     if (mysqli_num_rows($login) === 1) {
                         $row = mysqli_fetch_assoc($login);
                         //compare the username and password entered to the username and password in database to check for match (if match login)
-                        if ($row['username'] === $username && $row['password'] === $password) {
+                        if ($row['username'] === $username && password_verify($password, $row['password'])) {
                             echo "Logged in! Go to next page";
                             $_SESSION['username'] = $row['username'];
                             $_SESSION['password'] = $row['password'];
@@ -121,7 +123,10 @@
                 exit();
             }
         ?>
+        
+        
       </form>
+      
     </div>
   </div>
 
