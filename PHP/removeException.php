@@ -4,7 +4,6 @@ session_start();
 if(isset($_POST['newJustification1']))
 {
     include 'dbconnect.php';
-    echo 'It is set';
 
     $newJustification = $_POST['newJustification1'];
     $exceptionValue = $_POST['exceptionValue'];
@@ -17,16 +16,11 @@ if(isset($_POST['newJustification1']))
     $customer_id = $_SESSION['customer'];
     $user_id = $_SESSION['user_id'];
 
-    $sql2 = "DELETE FROM `exception` WHERE id = $exceptionId";
-    mysqli_query($conn, $sql2);
-
-    echo "Deleting Exception";
-
-    echo '-------- <br>';
+    echo '--------';
     $sqlFetchID = "SELECT id FROM `resource` WHERE resource_ref=".$exceptionValue."";
-    echo $sqlFetchID. '<br>';
+    echo '--------';
     $result1 = mysqli_query($conn, $sqlFetchID);
-    echo $result1 '<br>';
+    echo '--------';
     $resourceID = mysqli_fetch_array($result1);
 
     echo 'Resource ID: ' .$resourceID. '';
@@ -51,7 +45,10 @@ if(isset($_POST['newJustification1']))
 
     echo "Inserting Compliance Audit";
 
-    
+    $sql2 = "DELETE FROM `exception` WHERE id = $exceptionId";
+    mysqli_query($conn, $sql2);
+
+    echo "Deleting Exception";
     
     $conn->close();
 }
