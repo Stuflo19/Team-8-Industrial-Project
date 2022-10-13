@@ -16,11 +16,14 @@ if(isset($_POST['newJustification1']))
     $customer_id = $_SESSION['customer'];
     $user_id = $_SESSION['user_id'];
 
+    echo '--------';
     $sqlFetchID = "SELECT id FROM `resource` WHERE resource_ref=".$exceptionValue."";
+    echo '--------';
     $result1 = mysqli_query($conn, $sqlFetchID);
-    //$resourceID = mysqli_fetch($result1);
+    echo '--------';
+    $resourceID = mysqli_fetch_array($result1);
 
-    echo 'Resource ID: ' .$result1. '';
+    echo 'Resource ID: ' .$resourceID. '';
 
     $sqlFetchID = "SELECT rule_id FROM `non_compliance` WHERE resource_id=".$resourceID."";
     $result2 = mysqli_query($conn, $sqlFetchID);
