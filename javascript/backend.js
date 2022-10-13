@@ -44,11 +44,11 @@ function historybutton(id) {
       // This is the most painful button you'll see in this project
       if(user_role == "1"){
         var btn = document.createElement('input');
-        btn.type = "button";
+        btn.type = "submit";
         btn.value = exception[i]['suspended'] == 0 ? 'Suspend' : "Unsuspend";
-        btn.id = "suspendButton";
+        btn.id = exception[i]['id'] + "," + exception[i]['suspended'] + "," + exception[i]['rule_id'];
         btn.addEventListener("click", function () {
-          updatesuspended(currRow, currSuspended);
+          updatesuspended(this.id);
         });
         btn.className = "btn btn-outline-warning";
         tr.insertCell().appendChild(btn);
@@ -154,7 +154,8 @@ async function generateResources() {
     }
   }
 }
-// https://www.javascripttutorial.net/javascript-dom/javascript-appendchild/#:~:text=The%20appendChild()%20is%20a,of%20a%20specified%20parent%20node.&text=In%20this%20method%2C%20the%20childNode,()%20returns%20the%20appended%20child.
+//  Code was found on https://www.javascripttutorial.net/javascript-dom/javascript-appendchild/#:~:text=The%20appendChild()%20is%20a,of%20a%20specified%20parent%20node.&text=In%20this%20method%2C%20the%20childNode,()%20returns%20the%20appended%20child.
+// Dynamicaly adding options
 function addOption(name, id){
   let option = document.createElement("option");
   option.text = name;
