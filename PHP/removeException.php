@@ -6,17 +6,19 @@ if(isset($_POST['newJustification1']))
     include 'dbconnect.php';
     include 'readdb.php';
 
+    echo '-----------';
+
     $sqlFetchID = "SELECT id FROM `resource` WHERE resource_ref=".$exceptionValue."";
     $result1 = mysqli_query($conn, $sqlFetchID);
     $resourceID = mysqli_fetch_array($result1);
 
-    echo 'Resource ID: ' .$resourceID.;
+    echo 'Resource ID: ' .$resourceID. '';
 
     $sqlFetchID = "SELECT rule_id FROM `non_compliance` WHERE resource_id=".$resourceID."";
     $result2 = mysqli_query($conn, $sqlFetchID);
     $non_compliance_id = mysqli_fetch_array($result2);
 
-    echo 'Resource ID: ' .$non_compliance_id.;
+    echo 'Compliance ID: ' .$non_compliance_id. '';
 
     $newJustification = $_POST['newJustification'];
     $exceptionValue = $_POST['exceptionValue'];
@@ -28,6 +30,8 @@ if(isset($_POST['newJustification1']))
     
     $customer_id = $_SESSION['customer'];
     $user_id = $_SESSION['user_id'];
+
+    echo $customer_id;
 
     $sql = "INSERT INTO `exception_audit`(`exception_id`, `user_id`, `customer_id`, `rule_id`, `action`, `action_dt`, `old_exception_value`, `old_justification`, `new_justification`, `old_review_date`) VALUES ('$exceptionId','$user_id','$customer_id','$ruleId','Delete','$date', '$exceptionValue', '$oldJustification', '$newJustification', '$oldReview')";
     mysqli_query($conn, $sql);
