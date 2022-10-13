@@ -73,7 +73,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
           break;
         }
       }
-      foreach ($customer as $cust)
+      foreach ($customers as $cust)
       {
         if($cust['id'] == $_SESSION['customer'])
         {
