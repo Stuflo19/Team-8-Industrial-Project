@@ -5,6 +5,7 @@
 // {
 //     include 'dbconnect.php';
 
+//     $newJustification = $_POST['newJustification'];
 //     $exceptionId = $_POST['exceptionId'];
 //     $ruleId = $_POST['ruleId'];
 //     $date = date('y-m-d h:i:s');

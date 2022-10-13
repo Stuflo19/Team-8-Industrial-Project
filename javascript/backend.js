@@ -177,17 +177,32 @@ async function addReview()
   return false;
 }
 
+async function finalReview()
+{
+  var newJustification = document.getElementById("revJustification").value;
+
+  await fetch("PHP/addReview.php", { mode: 'cors', method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8" }, body: `newJustification=${newJustification}&exceptionValue=${oldData[0]}&exceptionId=${oldData[1]}&ruleId=${oldData[2]}&oldJustification=${oldData[3]}&oldReview=${oldData[4]}`})
+  .then(res => res.text())
+  .then((txt) => {
+    console.log(txt);
+  })
+  .catch((err) => { console.error(err); });
+  
+  refresh();
+  return false;
+}
+
 function reviewToggle() {
   if (document.getElementById('yesToggle').checked) 
   {
     console.log('Toggled On');
-    document.getElementById('reviewContainer').style.display = 'block';
-    //document.getElementById('customReviewDate').removeAttribute('disabled');
+    document.getElementById('extendReviewContainer').style.display = 'block';
+    document.getElementById('endReviewContainer').style.display = 'none';
   }
   else
   {
     console.log('Toggled Off');
-    document.getElementById('reviewContainer').style.display= 'none';
-    //document.getElementById('customReviewDate').setAttribute('disabled', '');
+    document.getElementById('extendReviewContainer').style.display= 'none';
+    document.getElementById('endReviewContainer').style.display = 'block';
   }
 }

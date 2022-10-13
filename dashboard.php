@@ -316,18 +316,32 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
               <div class="form-group">
                 <label for="message-text" class="col-form-label">Would you like to re-new/extend this exception?</label>
                 <!-- Toggle Review -->
+                <!-- No -->
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" onclick = "reviewToggle()" type="radio" name="processReview" id="noToggle" checked>
+                  <label class="form-check-label" for="noToggle">No</label>
+                </div>
                 <!-- Yes -->
                 <div class="form-check form-check-inline">
                   <input class="form-check-input" onclick = "reviewToggle()" type="radio" name="processReview" id="yesToggle">
                   <label class="form-check-label" for="yestoggle">Yes</label>
                 </div>
-                <!-- No -->
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" onclick = "reviewToggle()" type="radio" name="processReview" id="noToggle">
-                  <label class="form-check-label" for="inlineRadio2">No</label>
+              </div>
+
+              <!-- For deactivating an exception -->
+              <div id="endReviewContainer" style="display: none"> 
+                <div class="form-group">
+                  <label for="message-text" class="col-form-label">New Justification :</label>
+                  <textarea class="form-control" id="revJustification" name="revJustification" style="color: white; background-color: #333333" maxlength="200" required></textarea>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+                  <input type="button" class="btn btn-outline-warning" data-dismiss="modal" onclick='finalReview()' value="Submit">
                 </div>
               </div>
-              <div id="reviewContainer" style="display: none"> 
+
+              <!-- For extending a review -->
+              <div id="extendReviewContainer" style="display: none"> 
                 <div class="form-group">
                   <label for="message-text" class="col-form-label">New Justification:</label>
                   <textarea class="form-control" id="revJustification" name="revJustification" style="color: white; background-color: #333333" maxlength="200" required></textarea>
