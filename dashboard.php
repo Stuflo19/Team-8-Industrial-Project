@@ -48,11 +48,6 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
               $_SESSION['role'] = $row['role_id'];
               break;
             }
-            else 
-            {
-              echo "Error getting role";
-              break;
-            } 
           }
           if($_SESSION['role'] == '1')
           {
