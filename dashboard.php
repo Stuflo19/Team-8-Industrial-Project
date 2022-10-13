@@ -231,15 +231,15 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
                           $quer2 = mysqli_fetch_array($quer1);
 
                           if($quer2== NULL || $quer2['suspended'] == 1)
-                        {
-                          if($quer2== NULL)
                           {
-                            $non_comp_total =  $non_comp_total +1;
-                          }
+                            if($quer2== NULL)
+                            {
+                              $non_comp_total =  $non_comp_total +1;
+                            }
                           $status ="exception-status";
                           $status_text ="Non-Compliant";
-                          break;
-                        }
+                          //break;
+                          }
                       }
                     }
                   ?>
@@ -280,6 +280,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
                   </table>
                   </div>
                   <?php
+                
                     $var = "Non-Compliant";
                     if(strcmp($status_text, $var) == 0 && $non_comp_total != 0 )
                     {
