@@ -9,9 +9,9 @@ if(isset($_POST['newJustification1']))
 
     $sqlFetchID = "SELECT id FROM `resource` WHERE resource_ref=".$exceptionValue."";
     $result1 = mysqli_query($conn, $sqlFetchID);
-    $resourceID = mysqli_fetch_array($result1);
+    //$resourceID = mysqli_fetch($result1);
 
-    echo 'Resource ID: ' .$resourceID. '';
+    echo 'Resource ID: ' .$result1. '';
 
     $sqlFetchID = "SELECT rule_id FROM `non_compliance` WHERE resource_id=".$resourceID."";
     $result2 = mysqli_query($conn, $sqlFetchID);
