@@ -189,14 +189,6 @@ table{
   font-size: 1rem;
 }
 
-.resource-counter{
-  color: white;
-  text-align: right;
-  font-size: 1rem;
-  padding-top:10px;
-  display: inline-block;
-}
-
 .compliant_dot {
   height: 25px;
   width: 25px;

@@ -163,11 +163,9 @@ async function generateResources() {
   
     
   }
- 
-  console.log(non_comp_counter);
 
+  //getting the amount of compliant and non-compliant resources for each rule
   document.getElementById('non_comp_notification' + result_rule.id).innerHTML = non_comp_counter;
-  console.log(comp_counter);
   document.getElementById('comp_notification' + result_rule.id).innerHTML = comp_counter;
 
 }
