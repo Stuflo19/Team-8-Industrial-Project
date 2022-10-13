@@ -42,18 +42,19 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
       <ul class="mb-auto pl-0">
         <li>Username: <?php echo $_SESSION['username'];?></li>
         <li>Role: <?php  
-          while ($row = mysqli_fetch_assoc($custrole)){
-            if ($row['id'] == $_SESSION['user_id'])
+          while ($row = mysqli_fetch_array($custrole)){
+            if (strcmp($row['id'], $_SESSION['user_id']) == 0)
             {
               $_SESSION['role'] = $row['role_id'];
               break;
             }
+            
           }
-          if($_SESSION['role'] == '1')
+          if($_SESSION['role'] == 1)
           {
             echo "Compliance Manager";
           }
-          elseif($_SESSION['role'] == '2')
+          elseif($_SESSION['role'] == 2)
           {
             echo "Compliance Auditor";
           }
@@ -303,7 +304,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
                   </div>
                   <?php
                     $var = "Non-Compliant";
-                    if(strcmp($status_text, $var) == 0 && $non_comp_total > $non_comp_except && $_SESSION['role'] == '1')
+                    if(strcmp($status_text, $var) == 0 && $non_comp_total != 0 && $_SESSION['role'] == 1)
                     {
                       echo "<button type='button' class='btn btn-outline-warning float-right m-1' data-toggle='modal' data-target='#newExcModal' id=". $result_rule['id']." name=". $result_rule['id'] . "," . $result_rule['resource_type_id']." onclick='addException(this.name)' >
                       Add Exception
