@@ -182,7 +182,7 @@ async function finalReview()
 {
   var newJustification = document.getElementById("revJustification").value;
 
-  await fetch("PHP/addReview.php", { mode: 'cors', method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8" }, body: `newJustification=${newJustification}&exceptionValue=${oldData[0]}&exceptionId=${oldData[1]}&ruleId=${oldData[2]}&oldJustification=${oldData[3]}&oldReview=${oldData[4]}`})
+  await fetch("PHP/removeException.php", { mode: 'cors', method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8" }, body: `newJustification=${newJustification}&exceptionValue=${oldData[0]}&exceptionId=${oldData[1]}&ruleId=${oldData[2]}&oldJustification=${oldData[3]}&oldReview=${oldData[4]}`})
   .then(res => res.text())
   .then((txt) => {
     console.log(txt);
@@ -200,7 +200,7 @@ function reviewToggle() {
     document.getElementById('extendReviewContainer').style.display = 'block';
     document.getElementById('endReviewContainer').style.display = 'none';
   }
-  else
+  else if (document.getElementById('noToggle').checked)
   {
     console.log('Toggled Off');
     document.getElementById('extendReviewContainer').style.display= 'none';
