@@ -34,7 +34,7 @@ if(isset($_POST['newJustification1']))
 
     echo "Inserting Compliance Audit";
 
-    $sql2 = "DELETE FROM exception WHERE id = $exceptionId";
+    $sql2 = "DELETE FROM `exception` WHERE id = $exceptionId";
     mysqli_query($conn, $sql2);
 
     echo "Deleting Exception";
