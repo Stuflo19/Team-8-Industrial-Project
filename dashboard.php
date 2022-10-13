@@ -72,19 +72,19 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
           $_SESSION['customer'] = $row['customer_id'];
           break;
         }
-        else 
+      }
+      foreach ($customer as $cust)
+      {
+        if($cust['id'] == $_SESSION['customer'])
         {
-          echo "Error getting customer name";
+          $_SESSION['company_name'] = $cust['name'];
+          echo $cust['name'];
           break;
-        } 
+        }
       }
-      if($_SESSION['customer'] == '1')
+      if($_SESSION['company_name'] == NULL)
       {
-        echo "Brightsolid";
-      }
-      else
-      {
-        echo "Error";
+        echo "Company not found";
       }
       ?>  
       </h1>
