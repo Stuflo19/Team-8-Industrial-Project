@@ -156,8 +156,8 @@
                   </div>
                   
                   <div >
-                      <span class = "compliant_dot" > </span> <p id = "<?php echo 'comp_counter' . $result_rule['id'];?>" class = "resource-counter"> </p>
-                      <span class = "non_compliant_dot" > </span> <p id = "<?php echo 'comp_counter' . $result_rule['id'];?>" class = "resource-counter"> </p>
+                      <span class = "compliant_dot" > </span> <p id = "<?php echo 'comp_notification' . $result_rule['id'];?>" class = "resource-counter"> </p>
+                      <span class = "non_compliant_dot" > </span> <p id = "<?php echo 'non_comp_notification' . $result_rule['id'];?>" class = "resource-counter"> </p>
                   </div>
 
                 </div>
