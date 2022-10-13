@@ -4,13 +4,20 @@ session_start();
 if(isset($_POST['newJustification1']))
 {
     include 'dbconnect.php';
+    echo 'It is set';
 
     $newJustification = $_POST['newJustification1'];
+    echo $newJustification. '<br>'
     $exceptionValue = $_POST['exceptionValue'];
+    echo $exceptionValue. '<br>'
     $exceptionId = $_POST['exceptionId'];
+    echo $exceptionId. '<br>'
     $oldJustification = $_POST['oldJustification'];
+    echo $oldJustification. '<br>'
     $oldReview = $_POST['oldReview'];
+    echo $oldReview. '<br>'
     $ruleId = $_POST['ruleId'];
+    echo $ruleId. '<br>'
     $date = date('y-m-d h:i:s');
     
     $customer_id = $_SESSION['customer'];
