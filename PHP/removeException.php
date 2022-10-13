@@ -16,11 +16,11 @@ if(isset($_POST['newJustification1']))
     $customer_id = $_SESSION['customer'];
     $user_id = $_SESSION['user_id'];
 
-    echo '--------';
+    echo '-------- <br>';
     $sqlFetchID = "SELECT id FROM `resource` WHERE resource_ref=".$exceptionValue."";
-    echo '--------';
+    echo $sqlFetchID. '<br>';
     $result1 = mysqli_query($conn, $sqlFetchID);
-    echo '--------';
+    echo $result1 '<br>';
     $resourceID = mysqli_fetch_array($result1);
 
     echo 'Resource ID: ' .$resourceID. '';
