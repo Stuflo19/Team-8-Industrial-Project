@@ -328,7 +328,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
               </div>
 
               <!-- For deactivating an exception -->
-              <div id="endReviewContainer" style="display: none"> 
+              <div id="endReviewContainer"> 
                 <div class="form-group">
                   <label for="message-text" class="col-form-label">New Justification :</label>
                   <textarea class="form-control" id="revJustification" name="revJustification" style="color: white; background-color: #333333" maxlength="200" required></textarea>
