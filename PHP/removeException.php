@@ -20,7 +20,7 @@ if(isset($_POST['newJustification1']))
     $sqlFetchID = "SELECT resource_id FROM resource WHERE resource_ref=".$exceptionValue."";
     echo $sqlFetchID;
     $result1 = mysqli_query($conn, $sqlFetchID);
-    echo $result1;
+    echo '--------'. $result1;
     $resourceID = mysqli_fetch_array($result1);
 
     echo 'Resource ID: ' .$resourceID. '';
