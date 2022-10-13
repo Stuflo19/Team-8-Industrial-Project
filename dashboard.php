@@ -257,10 +257,10 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
                             {
                               $non_comp_except = $non_comp_except+1;
                             }
+                          }
                           $status ="exception-status";
                           $status_text ="Non-Compliant";
                           // break;
-                          }
                         }
                       }
                     }
