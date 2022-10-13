@@ -250,15 +250,11 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
 
                           if($quer2== NULL || $quer2['suspended'] == 1)
                         {
-                          $non_comp_total =  $non_comp_total +1;
-                          if($quer2 != NULL && $quer2['suspended'] == 1)
+                          if($quer2== NULL)
                           {
-                            $non_comp_total = $non_comp_total +1;
-                            if($quer2 == NULL)
-                            {
-                              $non_comp_except = $non_comp_except+1;
-                            }
+                            $non_comp_total =  $non_comp_total +1;
                           }
+                          
                           $status ="exception-status";
                           $status_text ="Non-Compliant";
                           // break;
@@ -374,20 +370,20 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
               </div>
               <div class="form-group">
                 <label for="message-text" class="col-form-label">Justification:</label>
-                <textarea class="form-control" id="newJustification" name="newJustification" style="color: white; background-color: #333333" maxlength="200" required></textarea>
+                <input class="form-control" typ="text" id="newJustification" name="newJustification" style="color: white; background-color: #333333" maxlength="200" value="">
               </div>
               <!-- Exception Value = resource ref  -->
               <div class="form-group">
                 <label for="message-text" class="col-form-label">Review Date:</label>
-                <input type="radio" onclick="checkCustom()" name="newReviewDate" value="<?php echo date('Y-m-d', strtotime('+1 month'));?>">After 1 month
+                <input type="radio" onclick="checkCustom()" id="1m" name="newReviewDate" value="<?php echo date('Y-m-d', strtotime('+1 month'));?>" checked>After 1 month
                 <br>
-                <input type="radio" onclick="checkCustom()" name="newReviewDate" value="<?php echo date("Y-m-d", strtotime("+3 month"));?>">After 3 months              
+                <input type="radio" onclick="checkCustom()" id="3m" name="newReviewDate" value="<?php echo date("Y-m-d", strtotime("+3 month"));?>">After 3 months              
                 <br>
-                <input type="radio" onclick="checkCustom()" name="newReviewDate" value="<?php echo date("Y-m-d", strtotime("+6 month"))?>">After 6 months
+                <input type="radio" onclick="checkCustom()" id="6m" name="newReviewDate" value="<?php echo date("Y-m-d", strtotime("+6 month"))?>">After 6 months
                 <br>
-                <input type="radio" onclick="checkCustom()" name="newReviewDate" value="<?php echo date("Y-m-d", strtotime("+9 month"))?>">After 9 months
+                <input type="radio" onclick="checkCustom()" id="9m" name="newReviewDate" value="<?php echo date("Y-m-d", strtotime("+9 month"))?>">After 9 months
                 <br>
-                <input type="radio" onclick="checkCustom()" name="newReviewDate" value="<?php echo date("Y-m-d", strtotime("+1 year"))?>">After 12 months
+                <input type="radio" onclick="checkCustom()" id="12m" name="newReviewDate" value="<?php echo date("Y-m-d", strtotime("+1 year"))?>">After 12 months
                 <br>
                 <input type="radio" onclick="checkCustom()" id='custom' name="newReviewDate" value="">Custom
 
@@ -399,7 +395,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
 
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
-                  <input type="button" class="btn btn-outline-warning" onclick='formCompleted()' value="Submit">
+                  <input type="button" class="btn btn-outline-warning" onclick='checkInputs()' id='submitBtn' value="Submit">
                 </div> 
             </form>   
           </div>
@@ -550,8 +546,18 @@ function addException(rule_rescourceType){
   }
 
 }
-
-// Code found  at : https://gist.github.com/jesperorb/a6c12f7d4418a167ea4b3454d4f8fb61
+//Checking if Justification field is not empty
+function checkInputs()
+{    
+  //If user did not entered justification
+  if(document.getElementById('newJustification').value.length ==0  )
+  {       
+    document.getElementById("newJustification").style.borderColor = "red";
+  }
+  else{  
+    formCompleted();
+  }
+}// Code found  at : https://gist.github.com/jesperorb/a6c12f7d4418a167ea4b3454d4f8fb61
 function formCompleted(){
   const form = document.getElementById('form');
   console.log("Enetered1")

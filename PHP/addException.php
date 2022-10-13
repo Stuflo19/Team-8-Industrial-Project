@@ -38,7 +38,7 @@
             }
     
     }
-    $conn->close();
+    //$conn->close();
     header("..index.php");
  ?>
 

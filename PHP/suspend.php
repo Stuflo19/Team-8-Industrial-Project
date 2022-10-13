@@ -51,6 +51,6 @@
         echo "error transmitting ID";
     }
 
-    $conn->close();
+    //$conn->close();
     header("../index.php");
 ?>
