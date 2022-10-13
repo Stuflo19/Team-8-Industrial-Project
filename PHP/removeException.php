@@ -20,7 +20,7 @@ if(isset($_POST['newJustification1']))
 
     echo 'Compliance ID: ' .$non_compliance_id. '';
 
-    $newJustification = $_POST['newJustification'];
+    $newJustification = $_POST['newJustification1'];
     $exceptionValue = $_POST['exceptionValue'];
     $exceptionId = $_POST['exceptionId'];
     $oldJustification = $_POST['oldJustification'];
