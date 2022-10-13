@@ -196,6 +196,22 @@ table{
   padding-top:10px;
 }
 
+.compliant_dot {
+  height: 25px;
+  width: 25px;
+  background-color: green;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.non_compliant_dot {
+  height: 25px;
+  width: 25px;
+  background-color: red;
+  border-radius: 50%;
+  display: inline-block;
+}
+
 @media (max-width: 500px) {
   .active-status, .exception-status {
     width: 75px;
