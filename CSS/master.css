@@ -258,3 +258,19 @@ input,
 label {
   margin: .4rem 0;
 }
+
+.compliant_dot {
+  height: 25px;
+  width: 25px;
+  background-color: #40b640;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.non_compliant_dot {
+  height: 25px;
+  width: 25px;
+  background-color: #d63030;
+  border-radius: 50%;
+  display: inline-block;
+}

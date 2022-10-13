@@ -74,6 +74,9 @@ async function filter() {
 
 //Function to generate resources inside of rule cards
 async function generateResources() {
+  var non_comp_counter = 0;
+  var comp_counter = 0;
+
   //populate description paragraph
   document.getElementById("Description" + result_rule.id).innerHTML = result_rule.description;
 
@@ -118,7 +121,11 @@ async function generateResources() {
       //Skips the row if a filter is active
       if(currFilter == "Non-Compliant" && checked == false){continue;} 
       if(currFilter == "Compliant" && checked == true){continue;}
-
+      
+       //incrementing display counter
+       if(checked == false){comp_counter++;}
+       if(checked == true){non_comp_counter++;}
+       
       //Creates div for compliance displaying
       var div = document.createElement('Div');
       div.innerHTML = checked ? "Non-Compliant" : "Compliant";
@@ -151,6 +158,9 @@ async function generateResources() {
       tr.insertCell().appendChild(btn);
     }
   }
+  //getting the amount of compliant and non-compliant resources for each rule
+  document.getElementById('non_comp_notification' + result_rule.id).innerHTML = non_comp_counter;
+  document.getElementById('comp_notification' + result_rule.id).innerHTML = comp_counter;
 }
 //  Code was found on https://www.javascripttutorial.net/javascript-dom/javascript-appendchild/#:~:text=The%20appendChild()%20is%20a,of%20a%20specified%20parent%20node.&text=In%20this%20method%2C%20the%20childNode,()%20returns%20the%20appended%20child.
 // Dynamicaly adding options

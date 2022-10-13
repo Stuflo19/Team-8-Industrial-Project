@@ -247,7 +247,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
                 </div>
                 
                 <div>
-                  <span class="badge">69</span>
+                <span id = "<?php echo 'comp_notification' . $result_rule['id'];?>" class = "compliant_dot" > </span> 
+                <span id = "<?php echo 'non_comp_notification' . $result_rule['id'];?>" class = "non_compliant_dot" > </span> 
                 </div>
 
               </div>
