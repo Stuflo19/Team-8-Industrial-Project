@@ -422,9 +422,9 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
           <table class="table table-striped" id="historytable" style="color:white">
             <thead class="thead-dark">
               <th scope="col">Exception ID</th>
-              <th scope="col">Created By</th>
-              <th scope="col">Justification</th>
               <th scope="col">Review Date</th>
+              <th scope="col">Justification</th>
+              <th scope="col">Created By</th>
               <th scope="col" id="uprev2">Suspend <?php
                     echo '<script>
                     var user_role5 = '. json_encode($_SESSION['role']) .';

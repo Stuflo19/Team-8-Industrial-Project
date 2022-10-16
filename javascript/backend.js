@@ -32,15 +32,16 @@ function historybutton(id) {
     if (exception[i]['rule_id'] == ids[1] && exception[i]['exception_value'] == ids[0]) {
       var currentDate = new Date();
       var today = new Date(currentDate.getFullYear() + "/" + (currentDate.getMonth() + 1) + "/" + currentDate.getDate() + " " + currentDate.getUTCHours() + ":" + currentDate.getUTCMinutes());
-      var review = new Date(exception[i]['review_date'].replace('-', '/'));
+      var review = new Date(exception[i]['review_date'].replaceAll('-', '/'));
+      var review_date = review.toUTCString();
       currRow = exception[i]['id'];
       currSuspended = exception[i]['suspended'];
 
       const tr = document.getElementById('historybody').insertRow();
       tr.insertCell().appendChild(document.createTextNode(exception[i]['id']));
-      tr.insertCell().appendChild(document.createTextNode(exception[i]['last_updated_by']));
+      tr.insertCell().appendChild(document.createTextNode(today < review ? review_date : "EXPIRED"));
       tr.insertCell().appendChild(document.createTextNode(exception[i]['justification']));
-      tr.insertCell().appendChild(document.createTextNode(today < review ? review : "EXPIRED"));
+      tr.insertCell().appendChild(document.createTextNode(exception[i]['last_updated_by']));
       // This is the most painful button you'll see in this project
       if(user_role == "1"){
         var btn = document.createElement('input');
@@ -121,10 +122,16 @@ async function generateResources() {
           for(let k = 0; k < exception.length; k++)
           {
             if (result_rule['id'] == exception[k]['rule_id'] && resource[i]['resource_ref'] == exception[k]['exception_value']) {
-              exc_check = true;
-              exception[k]['suspended'] == 0 ? sus_check = false : sus_check = true;
-              checked = exception[k]['suspended'] == 0 ? false : true;
-              break;
+              var excDate = new Date(exception[k]['review_date']);
+              var currDate = new Date();
+
+              if(currDate < excDate)
+              {
+                exc_check = true;
+                exception[k]['suspended'] == 0 ? sus_check = false : sus_check = true;
+                checked = exception[k]['suspended'] == 0 ? false : true;
+                break;
+              }
             }
           }
        }
