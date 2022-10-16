@@ -273,7 +273,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
               </button>
               <div class="collapse" id="<?php echo 'Rule' . $result_rule['id'];?>"> 
                 <div class="card-body">
-                  <label for="filter-list" style="margin-right: 5px; display: inline-flex">Filter:</label>
+                  <label for="filter-list" style="margin-right: 5px; display: inline-flex">Filter by compliance:</label>
                   <select aria-label="Compliance filter" name="filter" style="color: white; background-color: #333333; display: inline-flex" id="<?php echo "filter," .  $result_rule['id'];?>" onchange="filter(this.id)">
                     <option value="No Filter">No Filter</option>
                     <option value="Compliant">Compliant</option>
@@ -454,17 +454,6 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
   <!-- Footer -->
   <footer class="container-fluid page-footer footerDesign">
     <div class="row">
-      <div class="col-lg-4">
-
-        <!-- Store description -->
-        <h6 class="mt-3">Footer Heading 1</h6>
-        <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sit amet leo nunc. Aliquam augue nulla, ullamcorper in fringilla eget, pulvinar id tellus. Vestibulum eros tortor, porttitor a tortor sit amet, consectetur auctor nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Ut lacinia sagittis sapien id cursus.</p>
-      </div>
-
-    </div>
-
-    <div class="row">
-
 
       <div class="col font-italic text-justify mt-2">
 
