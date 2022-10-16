@@ -60,16 +60,18 @@ function historybutton(id) {
 }
 
 //Function to detect a filter change
-async function filter() {
+async function filter(id) {
+  ids = id.split(',');
+
   //gets the selection box and checks is current value
-  var selectBox = document.getElementById("filter-list");
+  var selectBox = document.getElementById(id);
   currFilter = selectBox.options[selectBox.selectedIndex].value;
 
   //loops through all rules and updates their contents
-  for(let i = 0; i < rules.length; i++) {
-    result_rule = rules[i];
+  // for(let i = 0; i < rules.length; i++) {
+    result_rule = rules[ids[1]-1];
     await generateResources();
-  }
+  // }
 
   return false;
 }

@@ -89,7 +89,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
       }
       ?>  
       </h1>
-      <button class="btn text-secondary border-bottom-0 border rounded-pill ms-n5" style="margin-right: 10px" onclick=refresh();><i class='fa fa-refresh p-2' style="color:white"></button></i>
+      <button aria-label="Refresh Button" class="btn text-secondary border-bottom-0 border rounded-pill ms-n5" style="margin-right: 10px" onclick=refresh();><i class='fa fa-refresh p-2' style="color:white"></button></i>
       <h2 id="date" style="margin: 0"></h2>
     </div>
   </nav>
@@ -103,7 +103,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
         <h3>Overall Compliance</h3>
         <!-- Doughnut Chart -->
         <div>
-          <canvas id="myChart" style="max-height: 75vh;"></canvas>
+          <canvas aria-label="Compliance pie chart" id="myChart" style="max-height: 75vh;"></canvas>
         </div>
           
       </div>
@@ -207,12 +207,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
         <!-- Complaince Rule and Status -->
         <div class="row m-auto">
           <h3 class="text-center">Compliance Rules</h3>
-          <div style = "margin-left: auto; margin-right: 0"> 
-            <select name="filter" style="color: white; background-color: #333333" id="filter-list" onchange="filter()">
-              <option value="No Filter">No Filter</option>
-              <option value="Compliant">Compliant</option>
-              <option value="Non-Compliant">Non-Compliant</option>
-            </select>
+          <div style = "margin-left: auto; margin-right: 0; display: inline-flex"> 
+
           </div>
         </div>
         <?php
@@ -266,8 +262,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
                 </div>
                 
                 <div>
-                <span id = "<?php echo 'comp_notification' . $result_rule['id'];?>" class = "compliant_dot" > </span> 
-                <span id = "<?php echo 'non_comp_notification' . $result_rule['id'];?>" class = "non_compliant_dot" > </span> 
+                <span class = "compliant_dot"> <p class="centerspan" id="<?php echo 'comp_notification' . $result_rule['id'];?>"></p> </span> 
+                <span class = "non_compliant_dot" > <p class="centerspan" id = "<?php echo 'non_comp_notification' . $result_rule['id'];?>"></p> </span> 
                 </div>
 
               </div>
@@ -277,7 +273,14 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
               </button>
               <div class="collapse" id="<?php echo 'Rule' . $result_rule['id'];?>"> 
                 <div class="card-body">
-                  <p id="<?php echo 'Description' . $result_rule['id'];?>"></p>
+                  <label for="filter-list" style="margin-right: 5px; display: inline-flex">Filter:</label>
+                  <select aria-label="Compliance filter" name="filter" style="color: white; background-color: #333333; display: inline-flex" id="<?php echo "filter," .  $result_rule['id'];?>" onchange="filter(this.id)">
+                    <option value="No Filter">No Filter</option>
+                    <option value="Compliant">Compliant</option>
+                    <option value="Non-Compliant">Non-Compliant</option>
+                  </select>
+                  
+                  <p class="mt-3" id="<?php echo 'Description' . $result_rule['id'];?>"></p>
 
                   <table class="table table-striped" style="color:white">
                     <thead class="thead-dark">

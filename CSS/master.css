@@ -4,7 +4,7 @@ html {
 }
 
 body {
-  font-family: 'Bahnschrift';
+  font-family: 'Century Gothic';
   color: white;
   background-color: #115e67;
 }
@@ -33,24 +33,24 @@ label, input {
 /* Fonts for headings */
 h1{
   font-size: 1.5rem;
-  font-family: 'Bahnschrift', cursive;
+  font-family: 'Century Gothic', cursive;
   color: #2e2e2e;
 }
 h2{
   font-size: 1rem;
-  font-family: 'Bahnschrift', cursive;
+  font-family: 'Century Gothic', cursive;
   color: #2e2e2e;
 }
 h3, h4 {
   font-size: 1.5rem;
-  font-family: 'Bahnschrift', cursive;
+  font-family: 'Century Gothic', cursive;
   color: white;
   font-weight: bolder;
   padding-left: 1px;
 }
 h5, h6 {
   font-size: 0.5rem;
-  font-family: 'Bahnschrift', cursive;
+  font-family: 'Century Gothic', cursive;
   color: white;
 }
 
@@ -63,7 +63,7 @@ header {
 button {
   background-color: #2e2e2e !important;
   color: white !important;
-  font-family: 'Bahnschrift', cursive;
+  font-family: 'Century Gothic', cursive;
 }
 
 /* Styling for the buttons when hovered on */
@@ -147,7 +147,7 @@ ul{
 
 li{
   font-size: 1rem;
-  font-family: 'Bahnschrift', cursive;
+  font-family: 'Century Gothic', cursive;
   color: #2e2e2e;
   font-weight: bolder;
 }
@@ -219,7 +219,7 @@ table{
   border: 0px;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 700px) {
   .active-status, .exception-status {
     width: 75px;
     height: 12.5px;
@@ -230,16 +230,24 @@ table{
     height: 20px;
     font-size: 0.8rem;
   } 
+  .compliant_dot, .non_compliant_dot {
+    height: 15px;
+    width: 15px;
+  }
   html {
       font-size: 8px;  
   }
 }
 
-@media (min-width: 501px) {
+@media (min-width: 701px) {
   .active-status, .exception-status{
     width: 125px;
     height: 25px;
     line-height: 25px;
+  }
+  .compliant_dot, .non_compliant_dot {
+    height: 25px;
+    width: 25px;
   }
   .historybutton {
     width: 125px;
@@ -279,17 +287,19 @@ label {
 }
 
 .compliant_dot {
-  height: 25px;
-  width: 25px;
   background-color: #40b640;
+  color: black;
   border-radius: 50%;
-  display: inline-block;
+  display: inline-flex;
 }
 
 .non_compliant_dot {
-  height: 25px;
-  width: 25px;
-  background-color: #d63030;
+  color: black;
+  background-color: #e45858;
   border-radius: 50%;
-  display: inline-block;
+  display: inline-flex;
+}
+
+.centerspan {
+  margin: auto;
 }
