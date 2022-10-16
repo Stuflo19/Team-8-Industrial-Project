@@ -59,6 +59,15 @@ function historybutton(id) {
   return false;
 }
 
+async function logout() {
+  await fetch("PHP/logout.php", { mode: 'cors', method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8" }})
+  .then(res => res.text())
+  .catch((err) => { console.error(err); });
+  
+  refresh();
+  return false;
+}
+
 //Function to detect a filter change
 async function filter(id) {
   ids = id.split(',');
