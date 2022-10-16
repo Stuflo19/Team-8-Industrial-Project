@@ -60,6 +60,7 @@ function historybutton(id) {
   return false;
 }
 
+// Fetch function to the 
 async function logout() {
   await fetch("PHP/logout.php", { mode: 'cors', method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8" }})
   .then(res => res.text())
@@ -192,6 +193,7 @@ function addOption(name, id){
   return option;
 }
 
+// Function used to call the add review php file
 async function addReview()
 {
   var newJustification = document.getElementById("revJustification").value;
