@@ -1,11 +1,12 @@
 var currFilter;
 
-async function updatesuspended(exceptionid, suspended) {
+async function updatesuspended(data) {
+  split = data.split(',');
   // fetch statement found from: https://code-boxx.com/call-php-file-from-javascript/ && https://sebhastian.com/call-php-function-from-javascript/ 
-  await fetch("PHP/suspend.php", { mode: 'cors', method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8" }, body: `id=${exceptionid}&suspended=${suspended}` })
+  await fetch("PHP/suspend.php", {mode: 'cors', method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8" }, body: `id=${split[0]}&suspended=${split[1]}&ruleid=${split[2]}` })
     .then(res => res.text())
     .then((txt) => {
-      document.getElementById("suspendButton").value = txt == 1 ? "Unsuspend" : "Suspend";
+      console.log(txt);
     })
     .catch((err) => { console.error(err); });
 
@@ -41,15 +42,17 @@ function historybutton(id) {
       tr.insertCell().appendChild(document.createTextNode(exception[i]['justification']));
       tr.insertCell().appendChild(document.createTextNode(today < review ? review : "EXPIRED"));
       // This is the most painful button you'll see in this project
-      var btn = document.createElement('input');
-      btn.type = "button";
-      btn.value = exception[i]['suspended'] == 0 ? 'Suspend' : "Unsuspend";
-      btn.id = "suspendButton";
-      btn.addEventListener("click", function () {
-        updatesuspended(currRow, currSuspended);
-      });
-      btn.className = "btn btn-outline-warning";
-      tr.insertCell().appendChild(btn);
+      if(user_role == "1"){
+        var btn = document.createElement('input');
+        btn.type = "submit";
+        btn.value = exception[i]['suspended'] == 0 ? 'Suspend' : "Unsuspend";
+        btn.id = exception[i]['id'] + "," + exception[i]['suspended'] + "," + exception[i]['rule_id'];
+        btn.addEventListener("click", function () {
+          updatesuspended(this.id);
+        });
+        btn.className = "btn btn-outline-warning";
+        tr.insertCell().appendChild(btn);
+      }
     }
   }
 
@@ -73,6 +76,9 @@ async function filter() {
 
 //Function to generate resources inside of rule cards
 async function generateResources() {
+  var non_comp_counter = 0;
+  var comp_counter = 0;
+
   //populate description paragraph
   document.getElementById("Description" + result_rule.id).innerHTML = result_rule.description;
 
@@ -117,7 +123,11 @@ async function generateResources() {
       //Skips the row if a filter is active
       if(currFilter == "Non-Compliant" && checked == false){continue;} 
       if(currFilter == "Compliant" && checked == true){continue;}
-
+      
+       //incrementing display counter
+       if(checked == false){comp_counter++;}
+       if(checked == true){non_comp_counter++;}
+       
       //Creates div for compliance displaying
       var div = document.createElement('Div');
       div.innerHTML = checked ? "Non-Compliant" : "Compliant";
@@ -150,12 +160,32 @@ async function generateResources() {
       tr.insertCell().appendChild(btn);
     }
   }
+  //getting the amount of compliant and non-compliant resources for each rule
+  document.getElementById('non_comp_notification' + result_rule.id).innerHTML = non_comp_counter;
+  document.getElementById('comp_notification' + result_rule.id).innerHTML = comp_counter;
 }
-// https://www.javascripttutorial.net/javascript-dom/javascript-appendchild/#:~:text=The%20appendChild()%20is%20a,of%20a%20specified%20parent%20node.&text=In%20this%20method%2C%20the%20childNode,()%20returns%20the%20appended%20child.
+//  Code was found on https://www.javascripttutorial.net/javascript-dom/javascript-appendchild/#:~:text=The%20appendChild()%20is%20a,of%20a%20specified%20parent%20node.&text=In%20this%20method%2C%20the%20childNode,()%20returns%20the%20appended%20child.
+// Dynamicaly adding options
 function addOption(name, id){
   let option = document.createElement("option");
   option.text = name;
   option.value = id;
 
   return option;
+}
+
+async function addReview()
+{
+  var newJustification = document.getElementById("revJustification").value;
+  var newReviewDate = document.getElementById("revDate").value;
+
+  await fetch("PHP/addReview.php", { mode: 'cors', method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8" }, body: `newJustification=${newJustification}&newReviewDate=${newReviewDate}&exceptionValue=${oldData[0]}&exceptionId=${oldData[1]}&ruleId=${oldData[2]}&oldJustification=${oldData[3]}&oldReview=${oldData[4]}`})
+  .then(res => res.text())
+  .then((txt) => {
+    console.log(txt);
+  })
+  .catch((err) => { console.error(err); });
+  
+  refresh();
+  return false;
 }

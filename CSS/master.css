@@ -1,8 +1,33 @@
 /* Font for the page */
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: 'Bahnschrift';
   color: white;
   background-color: #115e67;
+}
+
+.centerdiv{
+  position: relative;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+}
+
+label, input {
+  font-family: monospace;
+  margin: 5px;
+}
+
+.loginbutton {
+  width: 100%; 
+  border-radius: 25px; 
+  font-family: monospace;
 }
 
 /* Fonts for headings */
@@ -54,6 +79,17 @@ button:hover .fa-refresh {
 nav {
   background-color: #f1b434;
   text-align: center;
+}
+
+.badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  padding: 5px 10px;
+  border-radius: 50%;
+  background: red;
+  color: white;
+  font-size: 1rem;
 }
 
 .chart {
@@ -129,6 +165,11 @@ table{
   background-color: #333333;
 }
 
+.form-centre {
+  display: flex;
+  justify-content: center;
+}
+
 #historytable th{
   width: 25%;
 }
@@ -143,7 +184,7 @@ table{
   width: 100%;
   border-collapse: collapse;
   min-height: 25vh;
-  max-height: 50vh;
+  max-height: 50vh; 
   overflow-y: scroll;
   margin: 0px;
 }
@@ -187,7 +228,7 @@ table{
   .historybutton{
     width: 75px;
     height: 20px;
-    font-size: 0.7rem;
+    font-size: 0.8rem;
   } 
   html {
       font-size: 8px;  
@@ -203,6 +244,7 @@ table{
   .historybutton {
     width: 125px;
     height: 25px;
+    font-size: 0.8rem;
     padding: 0px;
   }
   html {
@@ -234,4 +276,20 @@ label {
 input,
 label {
   margin: .4rem 0;
+}
+
+.compliant_dot {
+  height: 25px;
+  width: 25px;
+  background-color: #40b640;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.non_compliant_dot {
+  height: 25px;
+  width: 25px;
+  background-color: #d63030;
+  border-radius: 50%;
+  display: inline-block;
 }
