@@ -1,6 +1,5 @@
 var oldData = [];
 
-// Function to call all the funcitona required on body load
 function callAll(x, y, row)
 {
   setDate();
@@ -8,7 +7,6 @@ function callAll(x, y, row)
   upcomingReviews(row);
 }
 
-// Function to set the date for the "last checked" display
 function setDate() {
   var today = new Date();
   document.getElementById("date").innerHTML = "Last Checked: " + today.toDateString() + " " + today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
@@ -35,7 +33,6 @@ function hide2() {
   }
 }
 
-// Function used to generate the pie chart on the page with relevant compliance data
 function generateGraph(noncompliant, compliant)
 {
   trueComp = compliant - noncompliant
@@ -63,7 +60,6 @@ function generateGraph(noncompliant, compliant)
       const config = {
         type: 'doughnut',
         data: data,
-        labelString: "Hello",
       };
     
       const myChart = new Chart(

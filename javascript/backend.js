@@ -32,16 +32,15 @@ function historybutton(id) {
     if (exception[i]['rule_id'] == ids[1] && exception[i]['exception_value'] == ids[0]) {
       var currentDate = new Date();
       var today = new Date(currentDate.getFullYear() + "/" + (currentDate.getMonth() + 1) + "/" + currentDate.getDate() + " " + currentDate.getUTCHours() + ":" + currentDate.getUTCMinutes());
-      var review = new Date(exception[i]['review_date'].replaceAll('-', '/'));
-      var review_date = review.toUTCString();
+      var review = new Date(exception[i]['review_date'].replace('-', '/'));
       currRow = exception[i]['id'];
       currSuspended = exception[i]['suspended'];
 
       const tr = document.getElementById('historybody').insertRow();
       tr.insertCell().appendChild(document.createTextNode(exception[i]['id']));
-      tr.insertCell().appendChild(document.createTextNode(today < review ? review_date : "EXPIRED"));
-      tr.insertCell().appendChild(document.createTextNode(exception[i]['justification']));
       tr.insertCell().appendChild(document.createTextNode(exception[i]['last_updated_by']));
+      tr.insertCell().appendChild(document.createTextNode(exception[i]['justification']));
+      tr.insertCell().appendChild(document.createTextNode(today < review ? review : "EXPIRED"));
       // This is the most painful button you'll see in this project
       if(user_role == "1"){
         var btn = document.createElement('input');
@@ -60,29 +59,17 @@ function historybutton(id) {
   return false;
 }
 
-// Fetch function to the 
-async function logout() {
-  await fetch("PHP/logout.php", { mode: 'cors', method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8" }})
-  .then(res => res.text())
-  .catch((err) => { console.error(err); });
-  
-  refresh();
-  return false;
-}
-
 //Function to detect a filter change
-async function filter(id) {
-  ids = id.split(',');
-
+async function filter() {
   //gets the selection box and checks is current value
-  var selectBox = document.getElementById(id);
+  var selectBox = document.getElementById("filter-list");
   currFilter = selectBox.options[selectBox.selectedIndex].value;
 
   //loops through all rules and updates their contents
-  // for(let i = 0; i < rules.length; i++) {
-    result_rule = rules[ids[1]-1];
+  for(let i = 0; i < rules.length; i++) {
+    result_rule = rules[i];
     await generateResources();
-  // }
+  }
 
   return false;
 }
@@ -123,16 +110,10 @@ async function generateResources() {
           for(let k = 0; k < exception.length; k++)
           {
             if (result_rule['id'] == exception[k]['rule_id'] && resource[i]['resource_ref'] == exception[k]['exception_value']) {
-              var excDate = new Date(exception[k]['review_date']);
-              var currDate = new Date();
-
-              if(currDate < excDate)
-              {
-                exc_check = true;
-                exception[k]['suspended'] == 0 ? sus_check = false : sus_check = true;
-                checked = exception[k]['suspended'] == 0 ? false : true;
-                break;
-              }
+              exc_check = true;
+              exception[k]['suspended'] == 0 ? sus_check = false : sus_check = true;
+              checked = exception[k]['suspended'] == 0 ? false : true;
+              break;
             }
           }
        }
@@ -193,7 +174,6 @@ function addOption(name, id){
   return option;
 }
 
-// Function used to call the add review php file
 async function addReview()
 {
   var newJustification = document.getElementById("revJustification").value;
