@@ -22,6 +22,8 @@
         $row = mysqli_fetch_array($result);
         $resource_ref = $row['exception_value'];
         $user_id = $row['last_updated_by'];
+        $review_date = $row['review_date'];
+        
 
 
         $sql2 = "SELECT * FROM resource WHERE resource_ref='".$resource_ref."'";
@@ -43,7 +45,7 @@
           die('Error: ' . mysqli_query());
         }
         
-        $sql = "UPDATE exception SET suspended=$suspended WHERE id=$id AND customer_id=$customer_id";
+        $sql = "UPDATE `exception` SET `review_date`='$review_date',`last_updated`='$date',`suspended`=$suspended WHERE `id`=$id AND `customer_id`=$customer_id";
         mysqli_query($conn, $sql);
         echo $suspended;
     }
