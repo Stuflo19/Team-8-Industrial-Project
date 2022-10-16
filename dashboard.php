@@ -1,4 +1,5 @@
 <?php 
+// starting session and reading from database
 session_start();
 
 if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
@@ -39,6 +40,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
   <!-- navigation bar with links -->
   <nav class="navbar navbar-expand-lg navbar-light">
     <div class="collapse navbar-collapse d-flex justify-content-around" id="navbarNav">
+      <!-- List of username, role and logout button -->
       <ul class="mb-auto pl-0">
         <li>Username: <?php echo $_SESSION['username'];?></li>
         <li>Role: <?php  
@@ -64,8 +66,10 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
           }
           ?> 
           </li>
+          <li><button class="ml-1 btn text-secondary border-bottom-0 border rounded-pill ms-n5" onclick=logout()><p style="color:white;" class="m-0 logout">Logout</p></button></li>
       </ul>
       <br>
+      <!-- h1 tag for company name -->
       <h1 class=m-auto> <?php  
       while ($row = mysqli_fetch_assoc($custname)){
         if ($row['id'] == $_SESSION['user_id'])
@@ -89,7 +93,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
       }
       ?>  
       </h1>
-      <button class="btn text-secondary border-bottom-0 border rounded-pill ms-n5" style="margin-right: 10px" onclick=refresh();><i class='fa fa-refresh p-2' style="color:white"></button></i>
+      <button aria-label="Refresh Button" class="btn text-secondary border-bottom-0 border rounded-pill ms-n5" style="margin-right: 10px" onclick=refresh();><i class='fa fa-refresh p-2' style="color:white"></button></i>
       <h2 id="date" style="margin: 0"></h2>
     </div>
   </nav>
@@ -103,7 +107,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
         <h3>Overall Compliance</h3>
         <!-- Doughnut Chart -->
         <div>
-          <canvas id="myChart" style="max-height: 75vh;"></canvas>
+          <canvas aria-label="Compliance pie chart" id="myChart" style="max-height: 75vh;"></canvas>
         </div>
           
       </div>
@@ -118,6 +122,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
             <p>In the next 30 days, these exceptions will be up for review. <br> To easily locate a resource, click the Rule ID to quickly navigate to it</p>
           </div>
           <div class="d-flex align-items-center p-2">
+            <!-- Table to show data for upcoming review dates -->
             <table class="table fixed_header" style="color:white">
               <thead style="position: sticky; top:0;" class="thead-dark stickyHead">
                 <tr class="stickyHead">
@@ -136,7 +141,6 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
                   </th>
                 </tr>
               </thead>
-              <!-- If Michael Cera becomes a visible collaborator on the site, we have a problem -->
               <tbody id="reviewbody"> 
               <?php
                 echo '<script>
@@ -144,12 +148,12 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
                 </script>';
               ?>
                 <tr>
-                  <td>1</td>
-                  <td>dh-dc1</td>
-                  <td>4</td>
-                  <td>Michael Cera</td>
-                  <td>The resource would not work</td>
-                  <td>2011/04/25 06:94:20</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
                 </tr>
               </tbody>
             </table>
@@ -163,6 +167,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
             <p>These exceptions have expired without a review. <br> Please determine whether or not these exceptions need renewal</p>
           </div>
           <div class="d-flex align-items-center p-2">
+            <!-- Table for showing expired review dates -->
             <table class="table fixed_header" style="color:white">
               <thead style="position: sticky; top:0;" class="thead-dark stickyHead">
                 <tr class="stickyHead">
@@ -180,7 +185,6 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
                     ?></th>
                 </tr>
               </thead>
-              <!-- If Michael Cera becomes a visible collaborator on the site, we have a problem -->
               <tbody id="expiredbody"> 
                 <?php
                 echo '<script>
@@ -188,12 +192,12 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
                 </script>';
                 ?>
                 <tr>
-                  <td>1</td>
-                  <td>dh-dc1</td>
-                  <td>4</td>
-                  <td>Michael Cera</td>
-                  <td>The resource would not work</td>
-                  <td>2011/04/25 06:94:20</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
                 </tr>
               </tbody>
             </table>
@@ -207,12 +211,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
         <!-- Complaince Rule and Status -->
         <div class="row m-auto">
           <h3 class="text-center">Compliance Rules</h3>
-          <div style = "margin-left: auto; margin-right: 0"> 
-            <select name="filter" style="color: white; background-color: #333333" id="filter-list" onchange="filter()">
-              <option value="No Filter">No Filter</option>
-              <option value="Compliant">Compliant</option>
-              <option value="Non-Compliant">Non-Compliant</option>
-            </select>
+          <div style = "margin-left: auto; margin-right: 0; display: inline-flex"> 
+
           </div>
         </div>
         <?php
@@ -224,6 +224,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
             <!-- Compliance Rule Card -->
             <div class="card cardColor text-center m-auto">
               
+            <!-- Card that shows rule number, rule name and the number of complaint and non-compliant resources -->
               <div class="card-body m-1 p-1 d-flex justify-content-between" id="<?php echo 'RuleCard' . $result_rule['id'];?>">
                 <p>Rule: <?php echo $result_rule["id"];?></p>
                 
@@ -236,6 +237,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
                     $non_comp_total =0;
                     $non_comp_except =0;
 
+                    // Checks for compliant or non_compliant status
                     foreach($compliant as $result_non_compl)
                     {
                       if ($result_rule['id'] == $result_non_compl['rule_id'])
@@ -265,20 +267,31 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
                   <div class="<?php echo $status;?>"> <?php echo $status_text;?></div>
                 </div>
                 
+                <!-- span tags for the compliant and non-compliant resource notification circles -->
                 <div>
-                <span id = "<?php echo 'comp_notification' . $result_rule['id'];?>" class = "compliant_dot" > </span> 
-                <span id = "<?php echo 'non_comp_notification' . $result_rule['id'];?>" class = "non_compliant_dot" > </span> 
+                <span class = "compliant_dot"> <p class="centerspan" id="<?php echo 'comp_notification' . $result_rule['id'];?>"></p> </span> 
+                <span class = "non_compliant_dot" > <p class="centerspan" id = "<?php echo 'non_comp_notification' . $result_rule['id'];?>"></p> </span> 
                 </div>
 
               </div>
                 
+              <!-- Button that drops down the resources under this rule card -->
               <button class="btn btn-outline-warning m-1" type="button"  data-toggle="collapse" data-target="#Rule<?php echo $result_rule['id'];?>" aria-expanded="false" aria-controls="collapseExample">
                 View details
               </button>
               <div class="collapse" id="<?php echo 'Rule' . $result_rule['id'];?>"> 
                 <div class="card-body">
-                  <p id="<?php echo 'Description' . $result_rule['id'];?>"></p>
-
+                  <!-- Filter to filer by compliance -->
+                  <label for="filter-list" style="margin-right: 5px; display: inline-flex">Filter by compliance:</label>
+                  <select aria-label="Compliance filter" name="filter" style="color: white; background-color: #333333; display: inline-flex" id="<?php echo "filter," .  $result_rule['id'];?>" onchange="filter(this.id)">
+                    <option value="No Filter">No Filter</option>
+                    <option value="Compliant">Compliant</option>
+                    <option value="Non-Compliant">Non-Compliant</option>
+                  </select>
+                  
+                  <p class="mt-3" id="<?php echo 'Description' . $result_rule['id'];?>"></p>
+                  
+                  <!-- Table to show all resources -->
                   <table class="table table-striped" style="color:white">
                     <thead class="thead-dark">
                       <tr>
@@ -290,6 +303,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
                       </tr>
                     </thead>
                     <tbody id="<?php echo 'Table' . $result_rule['id'];?>">
+                      <!-- Calls generate resources to populate all the tables in all the rules-->
                       <?php
                         echo '<script>
                                 var result_rule = '. json_encode($result_rule) .';
@@ -301,6 +315,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
                   </div>
                   <?php
                     $var = "Non-Compliant";
+                    // Shows add exception button if there is non-compliant resources available to have an exception added & user is a manager
                     if(strcmp($status_text, $var) == 0 && $non_comp_total != 0 && $_SESSION['role'] == 1)
                     {
                       echo "<button type='button' class='btn btn-outline-warning float-right m-1' data-toggle='modal' data-target='#newExcModal' id=". $result_rule['id']." name=". $result_rule['id'] . "," . $result_rule['resource_type_id']." onclick='addException(this.name)' >
@@ -418,9 +433,9 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
           <table class="table table-striped" id="historytable" style="color:white">
             <thead class="thead-dark">
               <th scope="col">Exception ID</th>
-              <th scope="col">Created By</th>
-              <th scope="col">Justification</th>
               <th scope="col">Review Date</th>
+              <th scope="col">Justification</th>
+              <th scope="col">Created By</th>
               <th scope="col" id="uprev2">Suspend <?php
                     echo '<script>
                     var user_role5 = '. json_encode($_SESSION['role']) .';
@@ -451,17 +466,6 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
   <!-- Footer -->
   <footer class="container-fluid page-footer footerDesign">
     <div class="row">
-      <div class="col-lg-4">
-
-        <!-- Store description -->
-        <h6 class="mt-3">Footer Heading 1</h6>
-        <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sit amet leo nunc. Aliquam augue nulla, ullamcorper in fringilla eget, pulvinar id tellus. Vestibulum eros tortor, porttitor a tortor sit amet, consectetur auctor nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Ut lacinia sagittis sapien id cursus.</p>
-      </div>
-
-    </div>
-
-    <div class="row">
-
 
       <div class="col font-italic text-justify mt-2">
 
@@ -492,8 +496,6 @@ function addException(rule_rescourceType){
   var resource_name = "";
   var resource_id = 0;
   var resource_ref = " ";
-  //console.log(ruleID);
-  //console.log(resourceTypeID);
   var select_dropdown = document.querySelector('#resourceList');
   while (select_dropdown.firstChild) 
   {
@@ -517,11 +519,8 @@ function addException(rule_rescourceType){
           {
             if(rows_resource[j]['resource_ref'] === rows_except[k]['exception_value'])
             {
-              
-                console.log(rows_resource[j]['resource_name']);
-                non_compl=0;
-                break;
-              
+              non_compl=0;
+              break;          
             }
           } 
           
@@ -530,12 +529,9 @@ function addException(rule_rescourceType){
             resource_name = rows_resource[j]['resource_name'];
             resource_id = rows_resource[j]['id'];
             resource_ref = rows_resource[j]['resource_ref'];
-            console.log(resource_name, ruleID,resource_ref);
 
             var resourceID_ruleID_ref = resource_id+"_"+ruleID+"_"+resource_ref;
             select_dropdown.appendChild(addOption(resource_name, resourceID_ruleID_ref));
-            console.log(resourceID_ruleID_ref);
-
           }
           
           //break;
@@ -567,6 +563,7 @@ function formCompleted(){
   });
   }
   
+  //function used to post the addException data into the addException php file
   async function postData(formattedFormData){
     const response = await fetch('PHP/addException.php',{
         method: 'POST',
@@ -579,6 +576,7 @@ function formCompleted(){
     location.reload();
   }
 
+  // Function used to hide and show the custom review date form element
   function checkCustom() {
   if (document.getElementById('custom').checked) {
     document.getElementById('addCustom').style.display = 'block';
@@ -592,6 +590,7 @@ function formCompleted(){
 
   }
 }
+
 //setting radio button's value to be the value chosen on a calendar
 function setNewValue()
 {
@@ -605,7 +604,7 @@ function setNewValue()
 }
 else
 {
-header("Location: index.php");
-exit();
+  header("Location: index.php");
+  exit();
 }
 ?>
