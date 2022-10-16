@@ -4,7 +4,7 @@ html {
 }
 
 body {
-  font-family: 'Century Gothic';
+  font-family: 'Bahnschrift';
   color: white;
   background-color: #115e67;
 }
@@ -33,24 +33,24 @@ label, input {
 /* Fonts for headings */
 h1{
   font-size: 1.5rem;
-  font-family: 'Century Gothic', cursive;
+  font-family: 'Bahnschrift';
   color: #2e2e2e;
 }
 h2{
   font-size: 1rem;
-  font-family: 'Century Gothic', cursive;
+  font-family: 'Bahnschrift';
   color: #2e2e2e;
 }
 h3, h4 {
   font-size: 1.5rem;
-  font-family: 'Century Gothic', cursive;
+  font-family: 'Bahnschrift';
   color: white;
   font-weight: bolder;
   padding-left: 1px;
 }
 h5, h6 {
   font-size: 0.5rem;
-  font-family: 'Century Gothic', cursive;
+  font-family: 'Bahnschrift';
   color: white;
 }
 
@@ -63,7 +63,7 @@ header {
 button {
   background-color: #2e2e2e !important;
   color: white !important;
-  font-family: 'Century Gothic', cursive;
+  font-family: 'Bahnschrift';
 }
 
 /* Styling for the buttons when hovered on */
@@ -147,7 +147,7 @@ ul{
 
 li{
   font-size: 1rem;
-  font-family: 'Century Gothic', cursive;
+  font-family: 'Bahnschrift';
   color: #2e2e2e;
   font-weight: bolder;
 }
