@@ -76,6 +76,10 @@ button:hover .fa-refresh {
   color: #34252f !important;
 }
 
+button:hover .logout {
+  color: #34252f !important;
+}
+
 nav {
   background-color: #f1b434;
   text-align: center;

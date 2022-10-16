@@ -64,7 +64,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
           }
           ?> 
           </li>
-          <li><button class="ml-1" onclick=logout()>Logout</button></li>
+          <li><button class="ml-1 btn text-secondary border-bottom-0 border rounded-pill ms-n5" onclick=logout()><p style="color:white;" class="m-0 logout">Logout</p></button></li>
       </ul>
       <br>
       <h1 class=m-auto> <?php  
