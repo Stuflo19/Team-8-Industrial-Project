@@ -121,16 +121,16 @@ function upcomingReviews(exceptions)
       revIcon.value = "Review";
 
       revBtn.appendChild(revIcon);  
+
+      var scrollId = document.createElement('a'); 
+      scrollId.appendChild(document.createTextNode(exceptions[i]['rule_id']));
+      scrollId.setAttribute('href', '#RuleCard' + exceptions[i]['rule_id']);
         
       //If review date coming up within 30days
       if(daysBetweenDates < 31 && daysBetweenDates > 0) 
       {  
         numOfUpcoming = numOfUpcoming + 1;
         const tr = document.getElementById('reviewbody').insertRow();
-
-        var scrollId = document.createElement('a'); 
-        scrollId.appendChild(document.createTextNode(exceptions[i]['rule_id']));
-        scrollId.setAttribute('href', '#RuleCard' + exceptions[i]['rule_id']);
 
         tr.insertCell().appendChild(document.createTextNode(exceptions[i]['id']));
         tr.insertCell().appendChild(document.createTextNode(exceptions[i]['exception_value']));
