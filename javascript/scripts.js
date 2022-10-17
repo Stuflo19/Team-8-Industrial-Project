@@ -121,6 +121,11 @@ function upcomingReviews(exceptions)
       revIcon.value = "Review";
 
       revBtn.appendChild(revIcon);  
+
+      var scrollId = document.createElement('a'); 
+      scrollId.appendChild(document.createTextNode(exceptions[i]['rule_id']));
+      scrollId.setAttribute('href', '#RuleCard' + exceptions[i]['rule_id']);
+      scrollId.style = "Color:white; text-decoration:underline";
         
       //If review date coming up within 30days
       if(daysBetweenDates < 31 && daysBetweenDates > 0) 
@@ -130,7 +135,7 @@ function upcomingReviews(exceptions)
 
         tr.insertCell().appendChild(document.createTextNode(exceptions[i]['id']));
         tr.insertCell().appendChild(document.createTextNode(exceptions[i]['exception_value']));
-        tr.insertCell().appendChild(document.createTextNode(exceptions[i]['rule_id']));
+        tr.insertCell().appendChild(scrollId);
         tr.insertCell().appendChild(document.createTextNode(exceptions[i]['last_updated_by']));
         tr.insertCell().appendChild(document.createTextNode(exceptions[i]['justification']));
         tr.insertCell().appendChild(document.createTextNode(exceptions[i]['review_date'].replaceAll('-','/')));
@@ -145,7 +150,7 @@ function upcomingReviews(exceptions)
 
         tr.insertCell().appendChild(document.createTextNode(exceptions[i]['id']));
         tr.insertCell().appendChild(document.createTextNode(exceptions[i]['exception_value']));
-        tr.insertCell().appendChild(document.createTextNode(exceptions[i]['rule_id']));
+        tr.insertCell().appendChild(scrollId);
         tr.insertCell().appendChild(document.createTextNode(exceptions[i]['last_updated_by']));
         tr.insertCell().appendChild(document.createTextNode(exceptions[i]['justification']));
         tr.insertCell().appendChild(document.createTextNode(exceptions[i]['review_date'].replaceAll('-','/')));
