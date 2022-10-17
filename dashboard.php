@@ -350,7 +350,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
                 <input class="form-control" typ="text" id="revJustification" name="revJustification" style="color: white; background-color: #333333" maxlength="200" value ="" >
               </div>
               <!-- Exception Value = resource ref  -->
-              <div class="form-group" id="revDate">
+              <div class="form-group" name="revDate">
                 <label for="message-text" class="col-form-label">Review Date:</label>
                 <input type="radio" onclick="checkCustomRev()" id="1m" name="revDate" value="<?php echo date('Y-m-d', strtotime('+1 month'));?>" checked>After 1 month
                 <br>
@@ -362,7 +362,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
                 <br>
                 <input type="radio" onclick="checkCustomRev()" id="12m" name="revDate" value="<?php echo date("Y-m-d", strtotime("+1 year"))?>">After 12 months
                 <br>
-                <input type="radio" onclick="checkCustomRev()" id='customRev' name="revDate" value="">Custom
+                <input type="radio" onclick="checkCustomRev()" id='customRev' name="revDate" value="<?php echo date("Y-m-d", strtotime("+30 day"))?>">Custom
 
                 <div id="addCustomRev" style="display: none">
                   <!-- Help from https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date -->
@@ -402,7 +402,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
                 <input class="form-control" typ="text" id="newJustification" name="newJustification" style="color: white; background-color: #333333" maxlength="200" value="">
               </div>
               <!-- Exception Value = resource ref  -->
-              <div class="form-group">
+              <div class="form-group" name='DATE'>
                 <label for="message-text" class="col-form-label">Review Date:</label>
                 <input type="radio" onclick="checkCustom()" id="1m" name="newReviewDate" value="<?php echo date('Y-m-d', strtotime('+1 month'));?>" checked>After 1 month
                 <br>
@@ -414,7 +414,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
                 <br>
                 <input type="radio" onclick="checkCustom()" id="12m" name="newReviewDate" value="<?php echo date("Y-m-d", strtotime("+1 year"))?>">After 12 months
                 <br>
-                <input type="radio" onclick="checkCustom()" id='customNew' name="newReviewDate" value="">Custom
+                <input type="radio" onclick="checkCustom()" id='customNew' name="newReviewDate" value="<?php echo date("Y-m-d", strtotime("+30 day"))?>">Custom
 
                 <div id="addCustom" style="display: none">
                   <!-- Help from https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date -->
@@ -558,14 +558,19 @@ function addException(rule_rescourceType){
 }
 //Checking if Justification field is not empty
 function checkInputs()
-{    
+{      
+  console.log(document.querySelector('input[name="DATE"]:checked'));
+
+  var today = <?php echo date("Y-m-d", strtotime("+30 day"));?> ;
   //If user did not entered justification
-  if(document.getElementById('newJustification').value.length ==0  )
+  if(document.getElementById('newJustification').value.length ==0)
   {       
     document.getElementById("newJustification").style.borderColor = "red";
+
   }
   else if(document.getElementById('newJustification').value.length !=0 )
   {  
+    //console.log(document.querySelector('input[name="DATE"]:checked'));
     formCompleted();
   }
  
@@ -618,7 +623,6 @@ function checkCustom() {
   {
     document.getElementById('addCustom').style.display= 'none';
     document.getElementById('customReviewDate').setAttribute('disabled', '');
-
   }
 } 
 
@@ -626,7 +630,7 @@ function checkCustom() {
 function setNewValue()
 {
   document.getElementById('customNew').value = document.getElementById('customReviewDate').value;
-  console.log(document.getElementById('custom').value);
+  console.log(document.getElementById('customNew').value);
 }
 
 function checkCustomRev() {
@@ -654,8 +658,6 @@ async function addReview()
 {
   var newJustification = document.getElementById("revJustification").value;
   var newReviewDate = document.querySelector('input[name="revDate"]:checked').value;
-
-  console.log(newReviewDate);
 
   await fetch("PHP/addReview.php", { mode: 'cors', method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8" }, body: `newJustification=${newJustification}&newReviewDate=${newReviewDate}&exceptionValue=${oldData[0]}&exceptionId=${oldData[1]}&ruleId=${oldData[2]}&oldJustification=${oldData[3]}&oldReview=${oldData[4]}`})
   .then(res => res.text())
