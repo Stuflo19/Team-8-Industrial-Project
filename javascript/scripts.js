@@ -125,6 +125,7 @@ function upcomingReviews(exceptions)
       var scrollId = document.createElement('a'); 
       scrollId.appendChild(document.createTextNode(exceptions[i]['rule_id']));
       scrollId.setAttribute('href', '#RuleCard' + exceptions[i]['rule_id']);
+      scrollId.style = "Color:white; text-decoration:underline";
         
       //If review date coming up within 30days
       if(daysBetweenDates < 31 && daysBetweenDates > 0) 
