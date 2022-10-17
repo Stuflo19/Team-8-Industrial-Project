@@ -128,9 +128,13 @@ function upcomingReviews(exceptions)
         numOfUpcoming = numOfUpcoming + 1;
         const tr = document.getElementById('reviewbody').insertRow();
 
+        var scrollId = document.createElement('a'); 
+        scrollId.appendChild(document.createTextNode(exceptions[i]['rule_id']));
+        scrollId.setAttribute('href', '#RuleCard' + exceptions[i]['rule_id']);
+
         tr.insertCell().appendChild(document.createTextNode(exceptions[i]['id']));
         tr.insertCell().appendChild(document.createTextNode(exceptions[i]['exception_value']));
-        tr.insertCell().appendChild(document.createTextNode(exceptions[i]['rule_id']));
+        tr.insertCell().appendChild(scrollId);
         tr.insertCell().appendChild(document.createTextNode(exceptions[i]['last_updated_by']));
         tr.insertCell().appendChild(document.createTextNode(exceptions[i]['justification']));
         tr.insertCell().appendChild(document.createTextNode(exceptions[i]['review_date'].replaceAll('-','/')));
@@ -145,7 +149,7 @@ function upcomingReviews(exceptions)
 
         tr.insertCell().appendChild(document.createTextNode(exceptions[i]['id']));
         tr.insertCell().appendChild(document.createTextNode(exceptions[i]['exception_value']));
-        tr.insertCell().appendChild(document.createTextNode(exceptions[i]['rule_id']));
+        tr.insertCell().appendChild(scrollId);
         tr.insertCell().appendChild(document.createTextNode(exceptions[i]['last_updated_by']));
         tr.insertCell().appendChild(document.createTextNode(exceptions[i]['justification']));
         tr.insertCell().appendChild(document.createTextNode(exceptions[i]['review_date'].replaceAll('-','/')));
