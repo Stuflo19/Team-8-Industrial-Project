@@ -402,7 +402,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
                 <input class="form-control" typ="text" id="newJustification" name="newJustification" style="color: white; background-color: #333333" maxlength="200" value="">
               </div>
               <!-- Exception Value = resource ref  -->
-              <div class="form-group" name='DATE'>
+              <div class="form-group" >
                 <label for="message-text" class="col-form-label">Review Date:</label>
                 <input type="radio" onclick="checkCustom()" id="1m" name="newReviewDate" value="<?php echo date('Y-m-d', strtotime('+1 month'));?>" checked>After 1 month
                 <br>
@@ -556,25 +556,23 @@ function addException(rule_rescourceType){
   }
 
 }
-//Checking if Justification field is not empty
+//Checking if Justification field is not empty for Adding Exception
 function checkInputs()
 {      
-  console.log(document.querySelector('input[name="DATE"]:checked'));
-
-  var today = <?php echo date("Y-m-d", strtotime("+30 day"));?> ;
   //If user did not entered justification
   if(document.getElementById('newJustification').value.length ==0)
   {       
     document.getElementById("newJustification").style.borderColor = "red";
-
   }
   else if(document.getElementById('newJustification').value.length !=0 )
   {  
     //console.log(document.querySelector('input[name="DATE"]:checked'));
     formCompleted();
   }
+  
  
 }
+//Checking if Justification field is not empty for Reniew
 
 function checkInputsRev()
 {
@@ -585,7 +583,6 @@ function checkInputsRev()
   }
   else if(document.getElementById('revJustification').value.length !=0 )
   {
-    console.log("calling review");
     addReview();
   }
 }
@@ -613,7 +610,7 @@ async function postData(formattedFormData){
   location.reload();
 }
 
-  // Function used to hide and show the custom review date form element
+  // Function used to hide and show the custom review date form element for Adding Exceptions
 function checkCustom() {
   if (document.getElementById('customNew').checked) {
     document.getElementById('addCustom').style.display = 'block';
@@ -626,14 +623,15 @@ function checkCustom() {
   }
 } 
 
-//setting radio button's value to be the value chosen on a calendar
+//setting radio button's value to be the value chosen on a calendar for Adding Exceptions
 function setNewValue()
 {
   document.getElementById('customNew').value = document.getElementById('customReviewDate').value;
   console.log(document.getElementById('customNew').value);
 }
 
-function checkCustomRev() {
+  // Function used to hide and show the custom review date for Review
+  function checkCustomRev() {
   if (document.getElementById('customRev').checked) {
     document.getElementById('addCustomRev').style.display = 'block';
     document.getElementById('customReviewDateRev').removeAttribute('disabled');
@@ -646,7 +644,7 @@ function checkCustomRev() {
   }
 }
 
-//setting radio button's value to be the value chosen on a calendar
+//setting radio button's value to be the value chosen on a calendar for Review
 function setNewValueRev()
 {
   document.getElementById('customRev').value = document.getElementById('customReviewDateRev').value;
