@@ -192,20 +192,3 @@ function addOption(name, id){
 
   return option;
 }
-
-// Function used to call the add review php file
-// async function addReview()
-// {
-//   var newJustification = document.getElementById("revJustification").value;
-//   var newReviewDate = document.getElementById("revDate").value;
-
-//   await fetch("PHP/addReview.php", { mode: 'cors', method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8" }, body: `newJustification=${newJustification}&newReviewDate=${newReviewDate}&exceptionValue=${oldData[0]}&exceptionId=${oldData[1]}&ruleId=${oldData[2]}&oldJustification=${oldData[3]}&oldReview=${oldData[4]}`})
-//   .then(res => res.text())
-//   .then((txt) => {
-//     console.log(txt);
-//   })
-//   .catch((err) => { console.error(err); });
-  
-//   refresh();
-//   return false;
-// }

@@ -366,15 +366,9 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
 
                 <div id="addCustomRev" style="display: none">
                   <!-- Help from https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date -->
-                  <input type="date" disabled id="customReviewDateRev" onChange="setNewValueRev()" name="ReviewDate" value="<?php echo date("Y-m-d")?>" min="<?php echo date("Y-m-d", strtotime("+30 day"))?>" max="<?php echo date("Y-m-d", strtotime("+1 year"))?>"> 
+                  <input type="date" disabled id="customReviewDateRev" onChange="setNewValueRev()" name="ReviewDate" value=<?php echo date("Y-m-d", strtotime("+30 day"))?> min="<?php echo date("Y-m-d", strtotime("+30 day"))?>" max="<?php echo date("Y-m-d", strtotime("+1 year"))?>"> 
                 </div>
               </div>
-
-              <!-- <div class="form-group">
-                <label for="message-text" class="col-form-label">New Review Date:</label> -->
-                <!-- Code taken from https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date -->
-                <!-- <input type="date" id="revDate" name="revDate" value="<?php echo date("Y-m-d")?>" min="<?php echo date("Y-m-d", strtotime("+1 day"))?>" max="<?php echo date("Y-m-d", strtotime("+1 year"))?>">
-              </div> -->
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
                 <input type="button" class="btn btn-outline-warning" id='submitBtnRev' onclick='checkInputsRev()' value="Submit">
@@ -424,7 +418,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
 
                 <div id="addCustom" style="display: none">
                   <!-- Help from https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date -->
-                  <input type="date" disabled id="customReviewDate" onChange="setNewValue()" name="ReviewDate" value="<?php echo date("Y-m-d")?>" min="<?php echo date("Y-m-d", strtotime("+30 day"))?>" max="<?php echo date("Y-m-d", strtotime("+1 year"))?>"> 
+                  <input type="date" disabled id="customReviewDate" onChange="setNewValue()" name="ReviewDate" value="<?php echo date("Y-m-d", strtotime("+30 day"))?>" min="<?php echo date("Y-m-d", strtotime("+30 day"))?>" max="<?php echo date("Y-m-d", strtotime("+1 year"))?>"> 
                 </div>
               </div>
 
@@ -655,6 +649,7 @@ function setNewValueRev()
   console.log(document.getElementById('customRev').value);
 }
 
+// Function used to call the add review php file
 async function addReview()
 {
   var newJustification = document.getElementById("revJustification").value;
