@@ -347,17 +347,37 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
             <form id="reviewForm" > 
               <div class="form-group">
                 <label for="message-text" class="col-form-label">New Justification:</label>
-                <textarea class="form-control" id="revJustification" name="revJustification" style="color: white; background-color: #333333" maxlength="200" required></textarea>
+                <input class="form-control" typ="text" id="revJustification" name="revJustification" style="color: white; background-color: #333333" maxlength="200" value ="" >
               </div>
               <!-- Exception Value = resource ref  -->
-              <div class="form-group">
-                <label for="message-text" class="col-form-label">New Review Date:</label>
-                <!-- Code taken from https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date -->
-                <input type="date" id="revDate" name="revDate" value="<?php echo date("Y-m-d")?>" min="<?php echo date("Y-m-d", strtotime("+1 day"))?>" max="<?php echo date("Y-m-d", strtotime("+1 year"))?>">
+              <div class="form-group" id="revDate">
+                <label for="message-text" class="col-form-label">Review Date:</label>
+                <input type="radio" onclick="checkCustomRev()" id="1m" name="revDate" value="<?php echo date('Y-m-d', strtotime('+1 month'));?>" checked>After 1 month
+                <br>
+                <input type="radio" onclick="checkCustomRev()" id="3m" name="revDate" value="<?php echo date("Y-m-d", strtotime("+3 month"));?>">After 3 months              
+                <br>
+                <input type="radio" onclick="checkCustomRev()" id="6m" name="revDate" value="<?php echo date("Y-m-d", strtotime("+6 month"))?>">After 6 months
+                <br>
+                <input type="radio" onclick="checkCustomRev()" id="9m" name="revDate" value="<?php echo date("Y-m-d", strtotime("+9 month"))?>">After 9 months
+                <br>
+                <input type="radio" onclick="checkCustomRev()" id="12m" name="revDate" value="<?php echo date("Y-m-d", strtotime("+1 year"))?>">After 12 months
+                <br>
+                <input type="radio" onclick="checkCustomRev()" id='customRev' name="revDate" value="">Custom
+
+                <div id="addCustomRev" style="display: none">
+                  <!-- Help from https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date -->
+                  <input type="date" disabled id="customReviewDateRev" onChange="setNewValueRev()" name="ReviewDate" value="<?php echo date("Y-m-d")?>" min="<?php echo date("Y-m-d", strtotime("+30 day"))?>" max="<?php echo date("Y-m-d", strtotime("+1 year"))?>"> 
+                </div>
               </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
-                  <input type="button" class="btn btn-outline-warning" data-dismiss="modal" onclick='addReview()' value="Submit">
+
+              <!-- <div class="form-group">
+                <label for="message-text" class="col-form-label">New Review Date:</label> -->
+                <!-- Code taken from https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date -->
+                <!-- <input type="date" id="revDate" name="revDate" value="<?php echo date("Y-m-d")?>" min="<?php echo date("Y-m-d", strtotime("+1 day"))?>" max="<?php echo date("Y-m-d", strtotime("+1 year"))?>">
+              </div> -->
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+                <input type="button" class="btn btn-outline-warning" id='submitBtnRev' onclick='checkInputsRev()' value="Submit">
               </div> 
             </form>   
           </div>
@@ -400,7 +420,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {?>
                 <br>
                 <input type="radio" onclick="checkCustom()" id="12m" name="newReviewDate" value="<?php echo date("Y-m-d", strtotime("+1 year"))?>">After 12 months
                 <br>
-                <input type="radio" onclick="checkCustom()" id='custom' name="newReviewDate" value="">Custom
+                <input type="radio" onclick="checkCustom()" id='customNew' name="newReviewDate" value="">Custom
 
                 <div id="addCustom" style="display: none">
                   <!-- Help from https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date -->
@@ -550,10 +570,28 @@ function checkInputs()
   {       
     document.getElementById("newJustification").style.borderColor = "red";
   }
-  else{  
+  else if(document.getElementById('newJustification').value.length !=0 )
+  {  
     formCompleted();
   }
-}// Code found  at : https://gist.github.com/jesperorb/a6c12f7d4418a167ea4b3454d4f8fb61
+ 
+}
+
+function checkInputsRev()
+{
+   if(document.getElementById('revJustification').value.length ==0 )
+  {
+    document.getElementById("revJustification").style.borderColor = "red";
+
+  }
+  else if(document.getElementById('revJustification').value.length !=0 )
+  {
+    console.log("calling review");
+    addReview();
+  }
+}
+
+// Code found  at : https://gist.github.com/jesperorb/a6c12f7d4418a167ea4b3454d4f8fb61
 function formCompleted(){
   const form = document.getElementById('form');
   console.log("Enetered1")
@@ -564,24 +602,23 @@ function formCompleted(){
   }
   
   //function used to post the addException data into the addException php file
-  async function postData(formattedFormData){
-    const response = await fetch('PHP/addException.php',{
-        method: 'POST',
-        body: formattedFormData
-    });
-    //location.reload();
+async function postData(formattedFormData){
+  const response = await fetch('PHP/addException.php',{
+      method: 'POST',
+      body: formattedFormData
+  });
+  //location.reload();
 
-    const data = await response.text();
-    console.log(data);
-    location.reload();
-  }
+  const data = await response.text();
+  console.log(data);
+  location.reload();
+}
 
   // Function used to hide and show the custom review date form element
-  function checkCustom() {
-  if (document.getElementById('custom').checked) {
+function checkCustom() {
+  if (document.getElementById('customNew').checked) {
     document.getElementById('addCustom').style.display = 'block';
     document.getElementById('customReviewDate').removeAttribute('disabled');
-
   }
   else
   {
@@ -589,15 +626,52 @@ function formCompleted(){
     document.getElementById('customReviewDate').setAttribute('disabled', '');
 
   }
-}
+} 
 
 //setting radio button's value to be the value chosen on a calendar
 function setNewValue()
 {
-  document.getElementById('custom').value = document.getElementById('customReviewDate').value;
+  document.getElementById('customNew').value = document.getElementById('customReviewDate').value;
   console.log(document.getElementById('custom').value);
 }
 
+function checkCustomRev() {
+  if (document.getElementById('customRev').checked) {
+    document.getElementById('addCustomRev').style.display = 'block';
+    document.getElementById('customReviewDateRev').removeAttribute('disabled');
+  }
+  else
+  {
+    document.getElementById('addCustomRev').style.display= 'none';
+    document.getElementById('customReviewDateRev').setAttribute('disabled', '');
+
+  }
+}
+
+//setting radio button's value to be the value chosen on a calendar
+function setNewValueRev()
+{
+  document.getElementById('customRev').value = document.getElementById('customReviewDateRev').value;
+  console.log(document.getElementById('customRev').value);
+}
+
+async function addReview()
+{
+  var newJustification = document.getElementById("revJustification").value;
+  var newReviewDate = document.querySelector('input[name="revDate"]:checked').value;
+
+  console.log(newReviewDate);
+
+  await fetch("PHP/addReview.php", { mode: 'cors', method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8" }, body: `newJustification=${newJustification}&newReviewDate=${newReviewDate}&exceptionValue=${oldData[0]}&exceptionId=${oldData[1]}&ruleId=${oldData[2]}&oldJustification=${oldData[3]}&oldReview=${oldData[4]}`})
+  .then(res => res.text())
+  .then((txt) => {
+    console.log(txt);
+  })
+  .catch((err) => { console.error(err); });
+  
+  refresh();
+  return false;
+}
 </script>
 
 <?php
